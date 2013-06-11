@@ -1,5 +1,6 @@
 #!/usr/bin/env perl
 
+use YAML;
 use Data::Dumper;
 use Rex -base;
 use Rex::Commands::Virtualization;
@@ -7,9 +8,16 @@ use Rex::Commands::SimpleCheck;
 
 set virtualization => "LibVirt";
 
+
 $::QUIET = 1;
 
+my $yaml = eval { local(@ARGV, $/) = ($ENV{HOME} . "/.build_config"); <>; };
+$yaml .= "\n";
+my $config = Load($yaml);
+
 my $base_vm = $ARGV[0];
+
+Rex::connect(%{ $config });
 
 my $new_vm = "${base_vm}-test";
 
@@ -29,5 +37,7 @@ system "HTEST=$ip prove --formatter TAP::Formatter::JUnit --ext rex -e rex-test"
 vm destroy => $new_vm;
 
 vm delete => $new_vm;
+
+rm "/var/lib/libvirt/images/$new_vm.img";
 
 
