@@ -11,6 +11,8 @@ group test => $ENV{HTEST};
 
 task test => group => test => sub {
 
+   install "dmidecode";
+
    my $dmi = Rex::Inventory::Bios::get();
 
    ok($dmi, "initialize dmi object");
