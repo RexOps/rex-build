@@ -46,7 +46,7 @@ task test => group => test => sub {
 
    if(! is_solaris) {
       cron env => root => delete => 0;
-      @envs = cron env => root => "list";
+      my @envs = cron env => root => "list";
       ok($envs[0]->{name} eq "MYFOO", "env MYFOO");
       ok($envs[0]->{value} eq '"bar"', "env MYFOO value");
     
@@ -61,7 +61,7 @@ task test => group => test => sub {
    cron delete => "root", 0;
 
    if(! is_solaris) {
-      @envs = cron env => root => "list";
+      my @envs = cron env => root => "list";
       ok(scalar @envs == 0, "no envs anymore");
    }
 
