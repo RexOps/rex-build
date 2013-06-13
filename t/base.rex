@@ -9,6 +9,7 @@ group test => $ENV{HTEST};
 
 task test => group => test => sub {
    ok(1==1, "task is running");
+   ok(connection->server eq $ENV{HTEST}, "connected to $ENV{HTEST}");
    done_testing();
 };
 
