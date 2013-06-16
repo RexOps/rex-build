@@ -7,6 +7,10 @@ user $ENV{REXUSER};
 password $ENV{REXPASS};
 pass_auth;
 
+if(exists $ENV{use_sudo}) {
+   sudo -on;
+}
+
 group test => $ENV{HTEST};
 
 task test => group => test => sub {
