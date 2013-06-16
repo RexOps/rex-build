@@ -1,0 +1,8 @@
+=pod
+
+=head3 Rex Build and Test repository
+
+This repository contains all the rex tests running on http://build.rexify.org/.
+
+If you want to help testing Rex drop me a line or join us on irc freenode / #rex.
+
