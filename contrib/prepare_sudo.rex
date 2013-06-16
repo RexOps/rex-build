@@ -20,6 +20,8 @@ task prepare => group => test => sub {
    $yaml .= "\n";
    my $config = Load($yaml);
 
+   install "sudo";
+
    create_group $user;
 
    create_user $user,

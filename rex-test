@@ -23,7 +23,7 @@ $ENV{"PERL5LIB"} = "/tmp/workspace/rex/lib";
 
 for my $file (@ARGV) {
    if($ENV{use_sudo}) {
-      system "perl /tmp/workspace/$ip/rex/bin/rex -f $file prepare_sudo >>/var/log/rex/prepare_sudo.log 2>&1";
+      system "perl /tmp/workspace/$ip/rex/bin/rex -f contrib/prepare_sudo.rex prepare >>/var/log/rex/prepare_sudo.log 2>&1";
       if($? != 0) {
          print STDERR "Error preparing for sudo.\n";
          exit 1;
