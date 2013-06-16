@@ -20,6 +20,9 @@ my $base_vm = $ARGV[0];
 Rex::connect(%{ $config });
 
 my $new_vm = "${base_vm}-test";
+if(exists $ENV{use_sudo}) {
+   $new_vm .= "-sudo";
+}
 
 vm clone => $base_vm  => $new_vm;
 
