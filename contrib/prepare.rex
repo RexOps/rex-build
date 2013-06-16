@@ -22,7 +22,7 @@ task prepare => group => test => sub {
                      default             => [qw/perl/],
                   };
    eval {
-      install $packages;;
+      install $packages;
    };
 };
 
