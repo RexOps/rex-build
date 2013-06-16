@@ -18,7 +18,7 @@ group test => $ENV{HTEST};
 task prepare => group => test => sub {
    # images are absolute minimal
    my $packages = case operating_system, {
-                     qr{centos|redhat}i  => [qw/perl perl-Data-Dumper/],
+                     qr{centos|redhat}i  => [qw/perl openssh-clients perl-Data-Dumper/],
                      default             => [qw/perl/],
                   };
    eval {
