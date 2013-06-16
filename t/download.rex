@@ -17,23 +17,18 @@ group test => $ENV{HTEST};
 
 task "test", group => "test", sub {
 
-   my ($calc_md5);
+   my $remote_md5 = md5('/etc/passwd');
 
-   my $orig_md5 = "991ceda993d8f8f98191e461d7d8cd76";
-
-   download "/root/file.bin", ".";
+   download "/etc/passwd", "./passwd.test";
 
    LOCAL {
-      ok(is_file("file.bin"), "download okay");
-      ok($orig_md5 eq md5("file.bin"), "local md5 okay");
+      ok(is_file("passwd.test"), "download okay");
+      ok($remote_md5 eq md5("passwd.test"), "local md5 okay");
 
-      rm "file.bin";
+      rm "passwd.test";
 
-      ok(! is_file("file.bin"), "delete okay");
+      ok(! is_file("passwd.test"), "delete okay");
    };
-
-   rm "/root/file.bin";
-   ok(! is_file("/root/file.bin"), "remote delete okay");
 
    done_testing();
 };
