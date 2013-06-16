@@ -16,18 +16,7 @@ pass_auth;
 group test => $ENV{HTEST};
 
 task prepare => group => test => sub {
-   install "sudo";
-
-   create_group $user;
-
-   create_user $user,
-      home     => "/home/$user",
-      groups   => [$user],
-      password => $pass;
-
-   file "/etc/sudoers",
-      content => "\%$user	ALL=(ALL:ALL) ALL\n",
-      owner   => "root",
-      mode    => 400;
+   # images are absolute minimal
+   install "perl";
 };
 

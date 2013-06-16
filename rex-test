@@ -9,6 +9,8 @@ use Data::Dumper;
 my $cwd = getcwd();
 my $ip = $ENV{HTEST};
 
+system "rex -f contrib/prepare.rex prepare >>/var/log/rex/prepare.log 2>&1";
+
 if($ENV{use_sudo}) {
    system "rex -f contrib/prepare_sudo.rex prepare >>/var/log/rex/prepare_sudo.log 2>&1";
    if($? != 0) {
