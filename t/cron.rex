@@ -8,6 +8,7 @@ password $ENV{REXPASS};
 pass_auth;
 
 if(exists $ENV{use_sudo}) {
+   sudo_password $ENV{REXPASS};
    sudo -on;
 }
 
