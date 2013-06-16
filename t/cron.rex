@@ -3,8 +3,8 @@ use Rex::Commands::Cron;
 
 use Test::More;
 
-user "root";
-password "box";
+user $ENV{REXUSER};
+password $ENV{REXPASS};
 pass_auth;
 
 group test => $ENV{HTEST};

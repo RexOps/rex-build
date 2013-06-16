@@ -1,8 +1,8 @@
 use Rex -feature => '0.42';
 use Test::More;
 
-user "root";
-password "box";
+user $ENV{REXUSER};
+password $ENV{REXPASS};
 pass_auth;
 
 group test => $ENV{HTEST};

@@ -2,9 +2,34 @@
 
 use strict;
 use warnings;
+use Cwd 'getcwd';
 
 use Data::Dumper;
 
+my $cwd = getcwd();
+my $ip = $ENV{HTEST};
+
+mkdir "/tmp/workspace";
+mkdir "/tmp/workspace/$ip";
+chdir "/tmp/workspace/$ip";
+
+system 'git clone git@github.com:krimdomu/Rex.git rex --branch development >/tmp/out.log 2>&1';
+
+chdir $cwd;
+
+$ENV{"PATH"} = "/bin:/usr/bin:/tmp/workspace/$ip/rex/bin";
+$ENV{"PERLLIB"} = "/tmp/workspace/rex/lib";
+$ENV{"PERL5LIB"} = "/tmp/workspace/rex/lib";
+
 for my $file (@ARGV) {
-   system "rex -qf $file test";
+   if($ENV{use_sudo}) {
+      system "perl /tmp/workspace/$ip/rex/bin/rex -f $file prepare_sudo >>/var/log/rex/prepare_sudo.log 2>&1";
+      if($? != 0) {
+         print STDERR "Error preparing for sudo.\n";
+         exit 1;
+      }
+   }
+   system "perl /tmp/workspace/$ip/rex/bin/rex -qf $file test";
 }
+
+system "rm -rf /tmp/workspace/$ip";

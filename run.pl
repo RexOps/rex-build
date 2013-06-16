@@ -32,7 +32,18 @@ while(! is_port_open($ip, 22)) {
    sleep 1;
 }
 
-system "HTEST=$ip prove --formatter TAP::Formatter::JUnit --ext rex -e rex-test";
+my ($user, $pass);
+
+if(exists $ENV{use_sudo}) {
+   $user = $config->{box}->{sudo}->{user};
+   $pass = $config->{box}->{sudo}->{password};
+}
+else {
+   $user = $config->{box}->{default}->{user};
+   $pass = $config->{box}->{default}->{password};
+}
+
+system "REXUSER=$user REXPASS=$pass HTEST=$ip prove --formatter TAP::Formatter::JUnit --ext rex -e rex-test";
 
 vm destroy => $new_vm;
 
