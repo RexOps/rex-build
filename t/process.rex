@@ -22,12 +22,15 @@ task test => group => test => sub {
 
 #kill($pid, $sig)
    my ($sshd) = grep { $_->{"command"} && $_->{"command"} =~ m/sshd -p 9999/ } ps();
-   kill $sshd->{"pid"};
+   kill $sshd->{"pid"}, 9;
    ($sshd) = grep { $_->{"command"} && $_->{"command"} =~ m/sshd -p 9999/ } ps();
    ok( ! $sshd, "process was killed." );
 
 #killall($name, $sig)
-   
+   my ($crond) = grep { $_->{"command"} && $_->{"command"} =~ m/crond/ } ps();
+   killall $sshd->{"pid"}, 9;
+   ($crond) = grep { $_->{"command"} && $_->{"command"} =~ m/crond/ } ps();
+   ok( ! $crond, "process was killed via killall" );
 
 #nice($pid, $level)
 
@@ -38,7 +41,7 @@ task test => group => test => sub {
    nice $sshpid, $nice;
    run "ps -p  $sshpid -o priority=", sub {
        my ($stdout, $stderr) = @_;
-       ok( $stdout = $nice, "niceness set successfully");
+       ok( $stdout = $nice, "niceness set successfully" );
     };
 
    done_testing();
