@@ -28,7 +28,7 @@ task test => group => test => sub {
 
 #killall($name, $sig)
    my ($crond) = grep { $_->{"command"} && $_->{"command"} =~ m/crond/ } ps();
-   killall $sshd->{"pid"}, 9;
+   killall $crond->{"pid"}, 9;
    ($crond) = grep { $_->{"command"} && $_->{"command"} =~ m/crond/ } ps();
    ok( ! $crond, "process was killed via killall" );
 
