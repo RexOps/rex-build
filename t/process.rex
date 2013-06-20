@@ -1,4 +1,5 @@
 use Rex -feature => '0.42';
+use Data::Dumper;
 use Test::More;
 
 user $ENV{REXUSER};
@@ -21,9 +22,10 @@ task test => group => test => sub {
    ok($list[0]->{"command"} =~ m/init|systemd/, "ps, found init command");
 
 #kill($pid, $sig)
-   my ($sshd1) = grep { $_->{"command"} && $_->{"command"} =~ m/sshd -p 9999/ } ps();
+   my ($sshd1) = grep { $_->{"command"} && $_->{"command"} =~ m/sshd \-p 9999/ } ps();
+   print ($sshd1->{"pid"});
    kill $sshd1->{"pid"}, 9;
-   ($sshd1) = grep { $_->{"command"} && $_->{"command"} =~ m/sshd -p 9999/ } ps();
+   ($sshd1) = grep { $_->{"command"} && $_->{"command"} =~ m/sshd \-p 9999/ } ps();
    ok( ! $sshd1, "process was killed." );
 
 ##killall($name, $sig)
