@@ -15,17 +15,14 @@ group test => $ENV{HTEST};
 
 task test => group => test => sub {
 
-  run "/usr/sbin/sshd -p 9999";
+  run "/usr/sbin/sshd -p 9999 ; sleep 1";
 
 #ps
    my @list = grep { $_->{"pid"} eq "1" } ps();
-   print STDERR Dumper(\@list);
    ok($list[0]->{"command"} =~ m/init|systemd/, "ps, found init command");
 
 #kill($pid, $sig)
    my ($sshd1) = grep { $_->{"command"} && $_->{"command"} =~ m/sshd \-p 9999/ } ps();
-   print STDERR Dumper(\$sshd1);
-   print ($sshd1->{"pid"});
    kill $sshd1->{"pid"}, 9;
    ($sshd1) = grep { $_->{"command"} && $_->{"command"} =~ m/sshd \-p 9999/ } ps();
    ok( ! $sshd1, "process was killed." );
@@ -38,7 +35,7 @@ task test => group => test => sub {
 
 #nice($pid, $level)
 
-   run "/usr/sbin/sshd -p 9998";
+   run "/usr/sbin/sshd -p 9998 ; sleep 1";
    my $nice = 19;
    my ($sshd2) = grep { $_->{"command"} && $_->{"command"} =~ m/sshd -p 9998/ } ps();
    my ($sshpid) = $sshd2->{"pid"};
