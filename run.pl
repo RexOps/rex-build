@@ -47,8 +47,21 @@ else {
    $pass = $config->{box}->{default}->{password};
 }
 
+# run tests from tests directory
 $ENV{PATH} = getcwd() . ":" . $ENV{PATH};
-system "REXUSER=$user REXPASS=$pass HTEST=$ip prove --formatter TAP::Formatter::JUnit --ext rex -e rex-test";
+system "REXUSER=$user REXPASS=$pass HTEST=$ip prove --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests";
+
+
+# run tests from tests.d directory
+opendir(my $dh, "tests.d") or die($!);
+while(my $entry = readdir($dh)) {
+   next if ($entry =~ m/^\./);
+   next if (! -d "tests.d/$entry");
+
+   system "REXUSER=$user REXPASS=$pass HTEST=$ip prove --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.d/$entry";
+}
+closedir($dh);
+
 
 vm destroy => $new_vm;
 
