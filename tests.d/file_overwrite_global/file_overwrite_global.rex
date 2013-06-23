@@ -18,6 +18,7 @@ task "test", group => "test", sub {
 
    Foo::bar();
 
+   done_testing();
 };
 
 1;
