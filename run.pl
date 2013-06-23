@@ -5,6 +5,7 @@ use Data::Dumper;
 use Rex -base;
 use Rex::Commands::Virtualization;
 use Rex::Commands::SimpleCheck;
+use Cwd 'getcwd';
 
 set virtualization => "LibVirt";
 
