@@ -22,7 +22,9 @@ task prepare => group => test => sub {
                      default             => [qw/perl rsync/],
                   };
    eval {
-      install $packages;
+      for my $pkg (@{ $packages }) {
+         install $pkg;
+      }
    };
 };
 
