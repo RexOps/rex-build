@@ -46,6 +46,7 @@ else {
    $pass = $config->{box}->{default}->{password};
 }
 
+$ENV{PATH} = getcwd() . ":" . $ENV{PATH};
 system "REXUSER=$user REXPASS=$pass HTEST=$ip prove --formatter TAP::Formatter::JUnit --ext rex -e rex-test";
 
 vm destroy => $new_vm;

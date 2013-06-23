@@ -27,8 +27,8 @@ system 'git clone git@github.com:krimdomu/Rex.git rex --branch development >/tmp
 chdir $cwd;
 
 $ENV{"PATH"} = "/bin:/usr/bin:/tmp/workspace/$ip/rex/bin";
-$ENV{"PERLLIB"} = "/tmp/workspace/rex/lib";
-$ENV{"PERL5LIB"} = "/tmp/workspace/rex/lib";
+$ENV{"PERLLIB"} = "/tmp/workspace/$ip/rex/lib";
+$ENV{"PERL5LIB"} = "/tmp/workspace/$ip/rex/lib";
 
 for my $file (@ARGV) {
    system "perl /tmp/workspace/$ip/rex/bin/rex -qf $file test";
