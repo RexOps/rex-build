@@ -123,13 +123,13 @@ task test => group => test => sub {
    ok($i3 =~ m/blah/, "file function with content");
 
    file "/tmp/foo.bar4",
-      source => "t/file/test.txt";
+      source => "tests/file/test.txt";
    
    my $i4 = cat "/tmp/foo.bar4";
    ok($i4 =~ m/blub/, "file function with source");
 
    file "/tmp/foo.bar5",
-      source => "$cwd/t/file/test.txt";
+      source => "$cwd/tests/file/test.txt";
 
    my $i5 = cat "/tmp/foo.bar5";
    ok($i5 =~ m/blah/, "file function with source and absolute path");
