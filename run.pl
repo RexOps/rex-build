@@ -49,7 +49,7 @@ else {
 
 # run tests from tests directory
 $ENV{PATH} = getcwd() . ":" . $ENV{PATH};
-system "REXUSER=$user REXPASS=$pass HTEST=$ip prove --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests";
+system "REXUSER=$user REXPASS=$pass HTEST=$ip prove --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests >junit_output_tests.xml";
 
 
 # run tests from tests.d directory
@@ -58,8 +58,8 @@ while(my $entry = readdir($dh)) {
    next if ($entry =~ m/^\./);
    next if (! -d "tests.d/$entry");
 
-   $ENV{PERL5LIB} = "tests.d/$entry/lib:" . $ENV{PERL5LIB};
-   system "REXUSER=$user REXPASS=$pass HTEST=$ip prove --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.d/$entry";
+   $ENV{PERL5LIB} = "tests.d/$entry/lib:" . (exists $ENV{PERL5LIB} ? $ENV{PERL5LIB} : "");
+   system "REXUSER=$user REXPASS=$pass HTEST=$ip prove --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.d/$entry >junit_output_testsd_$entry.xml";
 }
 closedir($dh);
 
