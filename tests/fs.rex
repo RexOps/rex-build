@@ -94,5 +94,5 @@ task test => group => test => sub {
       ok($df->{mounted_on}, "got df mounted on from /dev/sda1");
 
    done_testing();
+   };
 };
-
