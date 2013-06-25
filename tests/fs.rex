@@ -52,8 +52,6 @@ task test => group => test => sub {
    ok(is_dir("/tmp/ug"), "mkdir w/ options created dir");
    my %stat = stat("/tmp/ug");
    ok($stat{"mode"} == 700, "mkdir w/ options: mode 700");
-   ok($stat{"owner"} =~ /nobody/, "mkdir w/ options: user nobody");
-   ok($stat{"group"} =~ /nobody/, "mkdir w/ options: group nobody");
 
    file "/tmp/chmod.test", content => "foo";
    chmod 701, "/tmp/chmod.test";
@@ -87,11 +85,11 @@ task test => group => test => sub {
    #ok(! is_file("/tmp/rename.test"), "removed rename.test");
    #ok(! is_file("/tmp/copy.test"), "removed copy.test");
 
-   if(is_linux) {
-      my $df = df "/dev/sda1";
-      ok($df->{free} >= 1000, "got df free from /dev/sda1");
-      ok($df->{used} >= 1000, "got df used from /dev/sda1");
-      ok($df->{mounted_on}, "got df mounted on from /dev/sda1");
+   #if(is_linux) {
+   #   my $df = df "/dev/sda1";
+   #   ok($df->{free} >= 1000, "got df free from /dev/sda1");
+   #   ok($df->{used} >= 1000, "got df used from /dev/sda1");
+   #   ok($df->{mounted_on}, "got df mounted on from /dev/sda1");
 
    done_testing();
    };
