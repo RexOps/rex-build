@@ -91,6 +91,6 @@ task test => group => test => sub {
    #   ok($df->{used} >= 1000, "got df used from /dev/sda1");
    #   ok($df->{mounted_on}, "got df mounted on from /dev/sda1");
 
-   done_testing();
    };
+   done_testing();
 };
