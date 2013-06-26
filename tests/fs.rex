@@ -1,5 +1,5 @@
 use Rex -feature => '0.42';
-use Test::Simple;
+use Test::More;
 use Rex::Commands::Fs;
 
 user $ENV{REXUSER};
