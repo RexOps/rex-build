@@ -27,7 +27,9 @@ task prepare => group => test => sub {
       }
    };
 
-   # some tests need this group
-   create_group "nobody";
+   eval {
+      # some tests need this group
+      create_group "nobody";
+   };
 };
 
