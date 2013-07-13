@@ -15,6 +15,8 @@ chdir "/tmp/workspace/$rnd";
 
 system 'git clone git@github.com:krimdomu/Rex.git rex --branch development >/tmp/out.log 2>&1';
 
+chdir $cwd;
+
 $ENV{"PATH"} = "/tmp/workspace/$rnd/rex/bin:" . $ENV{PATH};
 $ENV{"PERLLIB"} = "/tmp/workspace/$rnd/rex/lib:" . (exists $ENV{PERLLIB} ? $ENV{PERLLIB} : "");
 $ENV{"PERL5LIB"} = "/tmp/workspace/$rnd/rex/lib:" . (exists $ENV{PERL5LIB} ? $ENV{PERL5LIB} : "");
@@ -29,7 +31,6 @@ if($ENV{use_sudo}) {
    }
 }
 
-chdir $cwd;
 
 for my $file (@ARGV) {
    system "perl /tmp/workspace/$rnd/rex/bin/rex -qf $file test";
