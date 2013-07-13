@@ -9,25 +9,26 @@ use Data::Dumper;
 my $cwd = getcwd();
 my $rnd = get_random(8, 'a' .. 'z');
 
+mkdir "/tmp/workspace";
+mkdir "/tmp/workspace/$rnd";
+chdir "/tmp/workspace/$rnd";
+
+system 'git clone git@github.com:krimdomu/Rex.git rex --branch development >/tmp/out.log 2>&1';
+
 $ENV{"PATH"} = "/tmp/workspace/$rnd/rex/bin:" . $ENV{PATH};
 $ENV{"PERLLIB"} = "/tmp/workspace/$rnd/rex/lib:" . (exists $ENV{PERLLIB} ? $ENV{PERLLIB} : "");
 $ENV{"PERL5LIB"} = "/tmp/workspace/$rnd/rex/lib:" . (exists $ENV{PERL5LIB} ? $ENV{PERL5LIB} : "");
 
-system "rex -f contrib/prepare.rex prepare >>/var/log/rex/prepare.log 2>&1";
+system "perl /tmp/workspace/$rnd/rex/bin/rex -f contrib/prepare.rex prepare >>/var/log/rex/prepare.log 2>&1";
 
 if($ENV{use_sudo}) {
-   system "rex -f contrib/prepare_sudo.rex prepare >>/var/log/rex/prepare_sudo.log 2>&1";
+   system "perl /tmp/workspace/$rnd/rex/bin/rex -f contrib/prepare_sudo.rex prepare >>/var/log/rex/prepare_sudo.log 2>&1";
    if($? != 0) {
       print STDERR "Error preparing for sudo.\n";
       exit 1;
    }
 }
 
-mkdir "/tmp/workspace";
-mkdir "/tmp/workspace/$rnd";
-chdir "/tmp/workspace/$rnd";
-
-system 'git clone git@github.com:krimdomu/Rex.git rex --branch development >/tmp/out.log 2>&1';
 chdir $cwd;
 
 for my $file (@ARGV) {
