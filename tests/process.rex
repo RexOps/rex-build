@@ -1,6 +1,7 @@
 use Rex -feature => '0.42';
 use Data::Dumper;
 use Test::More;
+use Rex::Commands::Gather;
 
 user $ENV{REXUSER};
 password $ENV{REXPASS};
@@ -23,7 +24,7 @@ task test => group => test => sub {
 
 #kill($pid, $sig)
    my ($sshd1) = grep { $_->{"command"} && $_->{"command"} =~ m/sshd \-p 9999/ } ps();
-   kill $sshd1->{"pid"}, 9;
+   kill $sshd1->{"pid"}, -9;
    ($sshd1) = grep { $_->{"command"} && $_->{"command"} =~ m/sshd \-p 9999/ } ps();
    ok( ! $sshd1, "process was killed." );
 
@@ -35,15 +36,20 @@ task test => group => test => sub {
 
 #nice($pid, $level)
 
-   run "/usr/sbin/sshd -p 9998 ; sleep 1";
-   my $nice = 19;
-   my ($sshd2) = grep { $_->{"command"} && $_->{"command"} =~ m/sshd -p 9998/ } ps();
-   my ($sshpid) = $sshd2->{"pid"};
-   nice $sshpid, $nice;
-   run "ps -p  $sshpid -o priority=", sub {
-       my ($stdout, $stderr) = @_;
-       ok( $stdout = $nice, "niceness set successfully" );
-    };
+   unless(is_openwrt) {
+      # run this test not on openwrt. there is no good ps command
+
+      run "/usr/sbin/sshd -p 9998 ; sleep 1";
+      my $nice = 19;
+      my ($sshd2) = grep { $_->{"command"} && $_->{"command"} =~ m/sshd -p 9998/ } ps();
+      my ($sshpid) = $sshd2->{"pid"};
+      nice $sshpid, $nice;
+      run "ps -p  $sshpid -o priority=", sub {
+          my ($stdout, $stderr) = @_;
+          ok( $stdout = $nice, "niceness set successfully" );
+       };
+
+    }
 
    done_testing();
 };
