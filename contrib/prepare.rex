@@ -26,5 +26,8 @@ task prepare => group => test => sub {
          install $pkg;
       }
    };
+
+   # some tests need this group
+   create_group "nobody";
 };
 
