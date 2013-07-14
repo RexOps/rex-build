@@ -18,7 +18,7 @@ task "test", group => "test", sub {
 
    my $file = "/tmp/mode_file.txt";
 
-   file $file, mode => 400, owner => "root", group => "root";
+   file $file, mode => 440, owner => "root", group => "root";
 
    my %pre_stat = stat $file;
 
