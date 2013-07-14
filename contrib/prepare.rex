@@ -1,3 +1,5 @@
+# vim: set syn=perl:
+
 use Rex -feature => '0.42';
 use Rex::Commands::User;
 use YAML;
@@ -30,6 +32,10 @@ task prepare => group => test => sub {
    eval {
       # some tests need this group
       create_group "nobody";
+
+      # some tests need a user
+      create_user "nobody",
+         groups => ["nobody"];
    };
 };
 

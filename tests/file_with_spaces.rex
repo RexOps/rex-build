@@ -22,8 +22,8 @@ group test => $ENV{HTEST};
 desc "test";
 task "test", group => "test", sub {
 
-   my $uid = get_uid "jan";
-   my $gid = get_gid "jan";
+   my $uid = get_uid "nobody";
+   my $gid = get_gid "nobody";
 
    file "/tmp/file with space.txt",
       content => "file with space\nin it\n",
@@ -39,7 +39,7 @@ task "test", group => "test", sub {
    my %stat = stat "/tmp/file with space.txt";
    ok($stat{uid} == 0, "file owner is root");
    ok($stat{mode} == 644, "file mode is 644");
-   chown "jan", "/tmp/file with space.txt";
+   chown "nobody", "/tmp/file with space.txt";
    chmod 700, "/tmp/file with space.txt";
    %stat = ();
    %stat = stat "/tmp/file with space.txt";
@@ -95,14 +95,14 @@ task "test", group => "test", sub {
    ok($c =~ m/blah with space/, "file() - dir and file with space (blah-copy)");
    $c = "";
 
-   chown "jan", "/tmp/blah-copy/blah with space.txt";
+   chown "nobody", "/tmp/blah-copy/blah with space.txt";
    %stat = ();
    %stat = stat "/tmp/blah-copy/blah with space.txt";
    ok($stat{uid} == $uid, "chown() - blah with space.txt");
    ok($stat{gid} == 0, "chown() - blah with space.txt (gid == 0)");
    %stat = ();
 
-   chown "jan", "/tmp/blah-copy/*";
+   chown "nobody", "/tmp/blah-copy/*";
    %stat = stat "/tmp/blah-copy/blah.txt";
    ok($stat{uid} == $uid, "chown() - blah.txt");
    ok($stat{gid} == 0, "chown() - blah.txt (gid == 0)");
@@ -113,13 +113,13 @@ task "test", group => "test", sub {
    ok($stat{gid} == 0, "chown() - blah with space2.txt (gid == 0)");
    %stat = ();
 
-   chgrp "jan", "/tmp/blah-copy/blah with space.txt";
+   chgrp "nobody", "/tmp/blah-copy/blah with space.txt";
    %stat = ();
    %stat = stat "/tmp/blah-copy/blah with space.txt";
    ok($stat{gid} == $gid, "chgrp() - blah with space.txt (gid == $gid)");
    %stat = ();
 
-   chgrp "jan", "/tmp/blah-copy/*";
+   chgrp "nobody", "/tmp/blah-copy/*";
    %stat = stat "/tmp/blah-copy/blah.txt";
    ok($stat{gid} == $gid, "chgrp() - blah.txt (gid == $gid)");
    %stat = ();
