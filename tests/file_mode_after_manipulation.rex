@@ -16,23 +16,27 @@ group test => $ENV{HTEST};
 desc "test";
 task "test", group => "test", sub {
 
-   my %pre_stat = stat "/etc/sudoers";
+   my $file = "/tmp/mode_file.txt";
 
-   append_if_no_such_line "/etc/sudoers", "jan  ALL=(ALL:ALL) ALL", qr{^jan};
+   file $file, mode => 400, owner => "root";
 
-   my $sudoers = cat "/etc/sudoers";
+   my %pre_stat = stat $file;
+
+   append_if_no_such_line $file, "jan  ALL=(ALL:ALL) ALL", qr{^jan};
+
+   my $sudoers = cat $file;
    ok($sudoers =~ m/^jan/gm, "found jan in sudoers");
 
-   my %post_stat = stat "/etc/sudoers";
+   my %post_stat = stat $file;
 
    ok($pre_stat{mode}  == $post_stat{mode}, "mode after append_if_no_such_line is the same");
    ok($pre_stat{uid} == $post_stat{uid}, "owner after append_if_no_such_line is the same");
    ok($pre_stat{gid} == $post_stat{gid}, "group after append_if_no_such_line is the same");
 
-   delete_lines_matching "/etc/sudoers" => qr{^jan};
+   delete_lines_matching $file => qr{^jan};
 
    %post_stat = ();
-   %post_stat = stat "/etc/sudoers";
+   %post_stat = stat $file;
 
    ok($pre_stat{mode}  == $post_stat{mode}, "mode after delete_lines_matching is the same");
    ok($pre_stat{uid} == $post_stat{uid}, "owner after delete_lines_matching is the same");
