@@ -34,6 +34,7 @@ task "test", group => "test", sub {
       qr{SuSE}i   => 'apache2',
       qr{CentOS}i => 'httpd',
       qr{Fedora}i => 'httpd',
+      qr{Redhat}i => 'httpd',
       qr{Ubuntu}i => 'apache2',
       qr{Debian}i => 'apache2',
    };
@@ -42,6 +43,7 @@ task "test", group => "test", sub {
       qr{SuSE}i   => 'apache2',
       qr{CentOS}i => 'httpd',
       qr{Fedora}i => 'httpd',
+      qr{Redhat}i => 'httpd',
       qr{Ubuntu}i => 'apache2',
       qr{Debian}i => 'apache2',
    };
