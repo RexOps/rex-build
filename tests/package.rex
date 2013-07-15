@@ -43,7 +43,9 @@ task "test", group => "test", sub {
    };
    ok($ok == 1, "update package db");
 
-   install $to_install;
+   eval {
+      install $to_install;
+   };
 
    ok(! $@ && $pkg->is_installed($to_install), "installed $to_install");
 
