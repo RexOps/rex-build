@@ -37,5 +37,7 @@ task prepare => group => test => sub {
       create_user "nobody",
          groups => ["nobody"];
    };
+
+   run "echo 127.0.2.1 \$(hostname) >>/etc/hosts";
 };
 
