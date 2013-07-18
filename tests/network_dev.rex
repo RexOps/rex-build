@@ -27,7 +27,7 @@ task "test", group => "test", sub {
    ok(scalar (grep { m/eth|em|e1000/ } @devs) >= 1, "count of devs ok");
    my ($g_dev) = grep { m/\Q$dev\E/ } @{ $net->{networkdevices} };
    ok($g_dev eq $dev, "found $dev");
-   ok($net->{networkconfiguration}->{$dev}->{ip} =~ m/^192\.168\.122\./, "found ip of $dev");
+   ok($net->{networkconfiguration}->{$dev}->{ip} =~ m/^192\.168\.112\./, "found ip of $dev");
 
    done_testing();
 };
