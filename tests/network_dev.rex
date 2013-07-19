@@ -7,21 +7,7 @@ use Data::Dumper;
 use Test::More;
 use Rex::Hardware::Network;
 
-user $ENV{REXUSER};
-password $ENV{REXPASS};
-pass_auth;
-
-if(exists $ENV{use_sudo}) {
-   sudo_password $ENV{REXPASS};
-   sudo -on;
-}
-
-if(exists $ENV{openssh}) {
-   set connection => 'OpenSSH';
-   Rex::Config->set_openssh_opt(StrictHostKeyChecking => "no");
-}
-
-group test => $ENV{HTEST};
+do "auth.conf";
 
 task "test", group => "test", sub {
    my $net = Rex::Hardware::Network->get;

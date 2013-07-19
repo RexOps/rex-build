@@ -5,17 +5,7 @@ use Rex::Commands::User;
 use Data::Dumper;
 use Test::More;
 
-user $ENV{REXUSER};
-password $ENV{REXPASS};
-pass_auth;
-
-if(exists $ENV{use_sudo}) {
-   sudo_password $ENV{REXPASS};
-   sudo -on;
-}
-
-group test => $ENV{HTEST};
-
+do "auth.conf";
 
 desc "test";
 task "test", group => "test", sub {

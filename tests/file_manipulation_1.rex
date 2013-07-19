@@ -6,21 +6,7 @@ use Rex::Commands::Fs;
 use Rex::Commands::User;
 use Test::More;
 
-user $ENV{REXUSER};
-password $ENV{REXPASS};
-pass_auth;
-
-if(exists $ENV{use_sudo}) {
-   sudo_password $ENV{REXPASS};
-   sudo -on;
-}
-
-group test => $ENV{HTEST};
-
-if(exists $ENV{openssh}) {
-   set connection => 'OpenSSH';
-   Rex::Config->set_openssh_opt(StrictHostKeyChecking => "no");
-}
+do "auth.conf";
 
 desc "test";
 task "test", group => "test", sub {
