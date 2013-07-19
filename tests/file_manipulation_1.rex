@@ -19,6 +19,7 @@ group test => $ENV{HTEST};
 
 if(exists $ENV{openssh}) {
    set connection => 'OpenSSH';
+   $Rex::Interface::Connection::OpenSSH::DISABLE_STRICT_HOST_CHECKING = 1;
 }
 
 desc "test";

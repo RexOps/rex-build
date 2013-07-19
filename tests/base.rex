@@ -14,11 +14,13 @@ if(exists $ENV{use_sudo}) {
 
 if(exists $ENV{openssh}) {
    set connection => 'OpenSSH';
+   $Rex::Interface::Connection::OpenSSH::DISABLE_STRICT_HOST_CHECKING = 1;
 }
 
 group test => $ENV{HTEST};
 
 task test => group => test => sub {
+
    ok(1==1, "task is running");
    ok(connection->server eq $ENV{HTEST}, "connected to $ENV{HTEST}");
 
