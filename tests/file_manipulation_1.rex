@@ -19,7 +19,7 @@ group test => $ENV{HTEST};
 
 if(exists $ENV{openssh}) {
    set connection => 'OpenSSH';
-   $Rex::Interface::Connection::OpenSSH::DISABLE_STRICT_HOST_CHECKING = 1;
+   Rex::Config->set_openssh_opt(StrictHostKeyChecking => "no");
 }
 
 desc "test";
