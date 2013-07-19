@@ -1,3 +1,5 @@
+# vim: set syn=perl:
+
 use Rex -feature => '0.42';
 use Test::More;
 
@@ -8,6 +10,10 @@ pass_auth;
 if(exists $ENV{use_sudo}) {
    sudo_password $ENV{REXPASS};
    sudo -on;
+}
+
+if(exists $ENV{openssh}) {
+   set connection => 'OpenSSH';
 }
 
 group test => $ENV{HTEST};

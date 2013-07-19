@@ -14,6 +14,10 @@ if(exists $ENV{use_sudo}) {
    sudo -on;
 }
 
+if(exists $ENV{openssh}) {
+   set connection => 'OpenSSH';
+}
+
 group test => $ENV{HTEST};
 
 

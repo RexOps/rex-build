@@ -17,7 +17,9 @@ if(exists $ENV{use_sudo}) {
 
 group test => $ENV{HTEST};
 
-
+if(exists $ENV{openssh}) {
+   set connection => 'OpenSSH';
+}
 
 desc "test";
 task "test", group => "test", sub {
