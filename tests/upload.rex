@@ -5,6 +5,8 @@ use Test::More;
 
 do "auth.conf";
 
+task test => group => test => sub {
+
    LOCAL {
       download "http://rex.linux-files.org/test/file.bin";
    };
