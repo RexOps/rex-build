@@ -35,7 +35,7 @@ task "bar", sub {
 
    ok(is_file("$base_dir/sync/subdir/listen"), "sync - subdir/listen");
    $content = cat("$base_dir/sync/subdir/listen");
-   ok($content =~ m/Listen 10\.211\.55/, "sync - template ipaddress");
+   ok($content =~ m/Listen \d+\.\d+\.\d+\.\d+/, "sync - template ipaddress");
    $content = undef;
 
    ok(is_file("$base_dir/sync/baz.txt"), "sync - baz.txt");
