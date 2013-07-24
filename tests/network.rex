@@ -19,12 +19,12 @@ task "test", group => "test", sub {
    #print Dumper(\@netstat);
    my @tcp_connections = grep { $_->{"proto"} eq "tcp" } netstat;
 
-   if(is_linux) {
-      my ($ssh) = grep { $_->{command} =~ /^sshd/ } @tcp_connections;
+   if(is_openwrt) {
+      my ($ssh) = grep { $_->{command} =~ /dropbear/ } @tcp_connections;
       ok($ssh, "found sshd");
    }
-   elsif(is_openwrt) {
-      my ($ssh) = grep { $_->{command} =~ /dropbear/ } @tcp_connections;
+   elsif(is_linux) {
+      my ($ssh) = grep { $_->{command} =~ /^sshd/ } @tcp_connections;
       ok($ssh, "found sshd");
    }
    else {
