@@ -10,6 +10,12 @@ do "auth.conf";
 desc "Load Kernel Module";
 task "test", group => "test", sub {
 
+   if(is_openwrt) {
+      ok(1==1, "not testend on openwrt");
+      done_testing();
+      return;
+   }
+
    if(operating_system_is("SunOS")) {
 
       kmod load => "strmod/tun";

@@ -27,9 +27,11 @@ task "test", group => "test", sub {
    ok(defined $hw{Kernel}->{kernelversion}, "Got kernel version");
    ok(defined $hw{Kernel}->{architecture}, "Got kernel architecture");
 
-   ok($hw{Swap}->{total} > 1, "Got total swap");
-   ok($hw{Swap}->{used} >= 0, "Got used swap");
-   ok($hw{Swap}->{free} >= 100, "Got free swap");
+   if(!is_openwrt) {
+      ok($hw{Swap}->{total} > 1, "Got total swap");
+      ok($hw{Swap}->{used} >= 0, "Got used swap");
+      ok($hw{Swap}->{free} >= 100, "Got free swap");
+   }
 
    done_testing();
 };

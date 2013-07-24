@@ -13,7 +13,7 @@ task "test", group => "test", sub {
    run "ls -l /";
    $s = last_command_output;
    ok($s !~ m/load/i, "Old output is not there anymore");
-   ok($s =~ m/boot/, "found boot folder");
+   ok($s =~ m/etc/, "found boot folder");
 
    done_testing();
 };

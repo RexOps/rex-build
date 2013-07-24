@@ -23,6 +23,7 @@ task "test", group => "test", sub {
       qr{Mageia}i => "vim-enhanced",
       qr{Debian}i => "vim",
       qr{Ubuntu}i => "vim",
+      default     => "vim",
    };
 
    my $ok = 0;
