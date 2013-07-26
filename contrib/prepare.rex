@@ -39,5 +39,7 @@ task prepare => group => test => sub {
    };
 
    run "echo 127.0.2.1 \$(hostname) >>/etc/hosts";
+
+   mkdir "/tmp2";
 };
 

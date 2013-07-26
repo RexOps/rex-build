@@ -64,6 +64,8 @@ while(my $entry = readdir($dh)) {
 closedir($dh);
 
 
+system "REXUSER=$user REXPASS=$pass HTEST=$ip prove --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.post.d >junit_output_tests_post_d.xml";
+
 vm destroy => $new_vm;
 
 vm delete => $new_vm;
