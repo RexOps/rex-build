@@ -10,6 +10,11 @@ task test => group => test => sub {
    my @files = grep { m/\.tmp$/ } list_files(Rex::Config->get_tmp_dir);
    ok(scalar(@files) == 0, "tmp_dir is empty");
 
+   for my $file (@files) {
+      print STDERR "========= $file ========\n";
+      print STDERR cat(Rex::Config->get_tmp_dir . "/$file");
+   }
+
    done_testing();
 };
 
