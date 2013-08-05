@@ -57,6 +57,44 @@ task test => group => test => sub {
    $fhr->close;
    ok($content[-1] eq "Test99", "append_if_no_such_lines");
 
+   append_if_no_such_line "/tmp/test.txt",
+      line => "#include /etc/sudoers.d/*.conf",
+      regexp => qr{^#include /etc/sudoers.d/*.conf$};
+
+   $fhr = file_read "/tmp/test.txt";
+   @content = $fhr->read_all;
+   $fhr->close;
+   ok($content[-1] eq "#include /etc/sudoers.d/*.conf", "append_if_no_such_lines - with path, ^ and \$ in regexp");
+
+
+   # something with quotes
+   append_if_no_such_line "/tmp/test.txt",
+      line => 'this is with "quotes", checked?',
+      regexp => qr{this is with "quotes", checked\?};
+   $fhr = file_read "/tmp/test.txt";
+   @content = $fhr->read_all;
+   $fhr->close;
+   ok($content[-1] eq 'this is with "quotes", checked?', "append_if_no_such_lines - with quotes");
+
+
+   append_if_no_such_line "/tmp/test.txt",
+      line => "#include /etc/sudoers.d/*.conf";
+   $fhr = file_read "/tmp/test.txt";
+   @content = $fhr->read_all;
+   $fhr->close;
+   ok($content[-1] ne "#include /etc/sudoers.d/*.conf", "append_if_no_such_lines - try to add second #include line, should not appear");
+
+
+   append_if_no_such_line "/tmp/test.txt",
+      line => "#include /etc/sudoers.d/*.conf",
+      regexp => qr{^#include /etc/sudoers.d/*.conf$};
+
+   $fhr = file_read "/tmp/test.txt";
+   @content = $fhr->read_all;
+   $fhr->close;
+   ok($content[-1] ne "#include /etc/sudoers.d/*.conf", "append_if_no_such_lines - try to add second #include line, should not appear, with regexp");
+
+
    # don't add something
    append_if_no_such_line "/tmp/test.txt", "Test100", qr{Test};
 
