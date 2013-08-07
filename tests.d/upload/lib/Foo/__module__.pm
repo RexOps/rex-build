@@ -6,7 +6,7 @@ use Data::Dumper;
 
 task "bar", sub {
 
-	my $orig_md5 = "5f363e0e58a95f06cbe9bbc662c5dfb6";
+	my $orig_md5 = "03430403033031b0ae20c72dfaf6162e";
 
 	upload "files/file.bin", "/tmp";
 
