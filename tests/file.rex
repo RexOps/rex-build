@@ -101,7 +101,7 @@ task test => group => test => sub {
    $fhr = file_read "/tmp/test.txt";
    @content = $fhr->read_all;
    $fhr->close;
-   ok($content[-1] eq "Test99", "append_if_no_such_line with regex");
+   ok($content[-1] ne "Test100", "append_if_no_such_line with regex");
 
    my $changed = 0;
    append_if_no_such_line "/tmp/test.txt", "change", qr{change}, 
