@@ -1,6 +1,7 @@
 package Foo;
 
 use Rex -base;
+use Rex::Commands::MD5;
 use Test::More;
 use Data::Dumper;
 
