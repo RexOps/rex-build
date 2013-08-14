@@ -95,6 +95,35 @@ task test => group => test => sub {
    ok($content[-1] ne "#include /etc/sudoers.d/*.conf", "append_if_no_such_lines - try to add second #include line, should not appear, with regexp");
 
 
+   # some crazy chars
+   append_if_no_such_line "/tmp/test.txt",
+      line => "\\.-~'[a-z]\$ foo {1} \%\&()?",
+      regexp => qr/^\\\.\-\~'\[a\-z\]\$ foo \{1\} \%\&\(\)\?$/i;
+
+   $fhr = file_read "/tmp/test.txt";
+   @content = $fhr->read_all;
+   $fhr->close;
+   ok($content[-1] eq "\\.-~'[a-z]\$ foo {1} %&()?", "append_if_no_such_lines - try to add crazy things");
+
+   # some crazy chars with q
+   append_if_no_such_line "/tmp/test.txt",
+      line => q/this "is" some 'things' with quotes and $other chars .\/5+'#?"~'`  `ls` $sfdkj/;
+
+   $fhr = file_read "/tmp/test.txt";
+   @content = $fhr->read_all;
+   $fhr->close;
+   ok($content[-1] eq q/this "is" some 'things' with quotes and $other chars .\/5+'#?"~'`  `ls` $sfdkj/, "append_if_no_such_lines - adding things with q//");
+
+   # again to verify that it is not doubled, some crazy chars with q
+   append_if_no_such_line "/tmp/test.txt",
+      line => q/this "is" some 'things' with quotes and $other chars .\/5+'#?"~'`  `ls` $sfdkj/;
+
+   $fhr = file_read "/tmp/test.txt";
+   @content = $fhr->read_all;
+   $fhr->close;
+   ok($content[-1] eq q/this "is" some 'things' with quotes and $other chars .\/5+'#?"~'`  `ls` $sfdkj/, "append_if_no_such_lines - adding things with q// - 2nd time");
+   ok($content[-2] ne q/this "is" some 'things' with quotes and $other chars .\/5+'#?"~'`  `ls` $sfdkj/, "append_if_no_such_lines - adding things with q// - not doubled");
+
    # don't add something
    append_if_no_such_line "/tmp/test.txt", "Test100", qr{Test};
 

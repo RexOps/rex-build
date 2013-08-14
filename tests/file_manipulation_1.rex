@@ -53,6 +53,51 @@ foobar";
 
    unlink "/tmp/foo-file.txt";
 
+   file "/tmp/test-sed.txt",
+      content => "this is a sed test file\nthese are just some lines\n0505\n0606\n0707\n'foo'\n/etc/passwd\n\"baz\"\n{klonk}\nfoo bar\n\\.-~'[a-z]\$ foo {1} /with/some/slashes \%\&()?\n|.-\\~'[a-z]\$ bar {2} /with/more/slashes \%\&()?\n";
+
+   sed qr/fo{2} bar/, q/fjdif jf "lfkdfdf'skdlffdf'dkfldsf" "c df  [df-r]' \/dkfj sfd \\ +* ~ $foo/, "/tmp/test-sed.txt";
+   $content = cat "/tmp/test-sed.txt";
+   ok($content =~ m/fjdif jf "lfkdfdf'skdlffdf'dkfldsf" "c df  \[df\-r\]' \/dkfj sfd \\ \+\* ~ \$foo/, "sed replaced foo bar with special chars");
+
+   sed qr/^\\\.\-\~'\[a\-z\]\$ foo \{1\} \/with\/some\/slashes/, "got replaced", "/tmp/test-sed.txt";
+   $content = cat "/tmp/test-sed.txt";
+   ok($content =~ m/got replaced/, "sed replaced strange chars");
+
+   sed qr/^\|\.\-\\\~'\[a\-z\]\$ BAR \{2\} \/with\/more\/slashes/i, "got another replace", "/tmp/test-sed.txt";
+   $content = cat "/tmp/test-sed.txt";
+   ok($content =~ m/got another replace/, "sed replaced strange chars");
+
+   my @lines = split(/\n/, $content);
+   ok($lines[-1] =~ m/^got another replace/, "last line was successfully replaced");
+   ok($lines[-2] =~ m/^got replaced/, "second last line was successfully replaced");
+   ok($lines[-4] =~ m/^\{klonk\}/, "fourth last line untouched");
+
+   sed qr{0606}, "6666", "/tmp/test-sed.txt";
+   $content = cat "/tmp/test-sed.txt";
+   ok($content =~ m/6666/, "sed replaced 0606");
+
+   sed qr{'foo'}, "'bar'", "/tmp/test-sed.txt";
+   $content = cat "/tmp/test-sed.txt";
+   ok($content =~ m/'bar'/, "sed replaced 'foo'");
+
+   sed qr{/etc/passwd}, "/etc/shadow", "/tmp/test-sed.txt";
+   $content = cat "/tmp/test-sed.txt";
+   ok($content =~ m/\/etc\/shadow/, "sed replaced /etc/passwd");
+
+   sed qr{"baz"}, '"boooooz"', "/tmp/test-sed.txt";
+   $content = cat "/tmp/test-sed.txt";
+   ok($content =~ m/"boooooz"/, "sed replaced baz");
+
+   sed qr/{klonk}/, '{plonk}', "/tmp/test-sed.txt";
+   $content = cat "/tmp/test-sed.txt";
+   ok($content =~ m/{plonk}/, "sed replaced {klonk}");
+
+   sed qr/{klonk}/, '{plonk}', "/tmp/test-sed.txt";
+   $content = cat "/tmp/test-sed.txt";
+   ok($content =~ m/{plonk}/, "sed replaced {klonk}");
+
+
    done_testing();
 
 };
