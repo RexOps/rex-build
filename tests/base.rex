@@ -11,7 +11,7 @@ task test => group => test => sub {
    ok(connection->server eq $ENV{HTEST}, "connected to $ENV{HTEST}");
 
    my $out = run "id";
-   ok($out =~ /uid=0\(root\) gid=0\(root\)/, "logged in as root");
+   ok($out =~ /uid=0\(root\) gid=0\((root|wheel)\)/, "logged in as root");
 
    done_testing();
 };
