@@ -21,21 +21,23 @@ task "test", group => "test", sub {
    }
 
    my $package = case operating_system, {
-      qr{SuSE}i   => 'apache2',
-      qr{CentOS}i => 'httpd',
-      qr{Fedora}i => 'httpd',
-      qr{Redhat}i => 'httpd',
-      qr{Ubuntu}i => 'apache2',
-      qr{Debian}i => 'apache2',
+      qr{SuSE}i    => 'apache2',
+      qr{CentOS}i  => 'httpd',
+      qr{Fedora}i  => 'httpd',
+      qr{Redhat}i  => 'httpd',
+      qr{Ubuntu}i  => 'apache2',
+      qr{Debian}i  => 'apache2',
+      qr{FreeBSD}i => 'apache22',
    };
 
    my $service = case operating_system, {
-      qr{SuSE}i   => 'apache2',
-      qr{CentOS}i => 'httpd',
-      qr{Fedora}i => 'httpd',
-      qr{Redhat}i => 'httpd',
-      qr{Ubuntu}i => 'apache2',
-      qr{Debian}i => 'apache2',
+      qr{SuSE}i    => 'apache2',
+      qr{CentOS}i  => 'httpd',
+      qr{Fedora}i  => 'httpd',
+      qr{Redhat}i  => 'httpd',
+      qr{Ubuntu}i  => 'apache2',
+      qr{Debian}i  => 'apache2',
+      qr{FreeBSD}i => 'apache22',
    };
 
    install $package;

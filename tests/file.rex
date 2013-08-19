@@ -59,7 +59,7 @@ task test => group => test => sub {
 
    append_if_no_such_line "/tmp/test.txt",
       line => "#include /etc/sudoers.d/*.conf",
-      regexp => qr{^#include /etc/sudoers.d/*.conf$};
+      regexp => qr{^#include /etc/sudoers.d/\*\.conf$};
 
    $fhr = file_read "/tmp/test.txt";
    @content = $fhr->read_all;
@@ -87,7 +87,7 @@ task test => group => test => sub {
 
    append_if_no_such_line "/tmp/test.txt",
       line => "#include /etc/sudoers.d/*.conf",
-      regexp => qr{^#include /etc/sudoers.d/*.conf$};
+      regexp => qr{^#include /etc/sudoers.d/\*\.conf$};
 
    $fhr = file_read "/tmp/test.txt";
    @content = $fhr->read_all;

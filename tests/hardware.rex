@@ -15,7 +15,7 @@ task "test", group => "test", sub {
 
    ok(@{$hw{Network}->{networkdevices}} ~~ m/(eth0|em0|e1000g0)/, "Found $1");
    my $dev = $1;
-   ok($hw{Network}->{networkconfiguration}->{"$dev"}->{"ip"} =~ m/^192\./, "Got IP for $dev");
+   ok($hw{Network}->{networkconfiguration}->{"$dev"}->{"ip"} =~ m/^(192|10)\./, "Got IP for $dev");
    ok($hw{Network}->{networkconfiguration}->{"$dev"}->{"netmask"} =~ m/255\.|ff/, "Got Netmask for $dev");
    ok($hw{Network}->{networkconfiguration}->{"$dev"}->{"mac"} =~ m/^(00:|0:|52:)/, "Got MAC for $dev");
 
