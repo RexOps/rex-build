@@ -38,7 +38,7 @@ task prepare => group => test => sub {
          groups => ["nobody"];
    };
 
-   run "echo 127.0.2.1 \$(hostname) >>/etc/hosts";
+   run "echo 127.0.2.1 `hostname` >>/etc/hosts";
 
    mkdir "/tmp2";
 };

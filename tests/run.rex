@@ -29,7 +29,7 @@ task test => group => test => sub {
       ok($okcwd eq "/etc", "OK: executed in /etc directory via cwd");
 
       my $badcwd = run "pwd", cwd => "/dfdfjhdfj";
-      ok($badcwd !~ m/^\// && $? != 0, "OK: error changing directory, \$? != 0");
+      ok($badcwd =~ m/No such file/ && $? != 0, "OK: error changing directory, \$? != 0");
 
    }
    else {

@@ -22,6 +22,9 @@ task "test", group => "test", sub {
       mkdir "/users";
    }
 
+   create_group "users";
+   ok(get_gid("users") > 1, "created group users");
+
    my %user = get_user("root");
    ok(get_uid("root") == 0, "get root");
    ok($user{name} eq "root", "get root name");
