@@ -22,6 +22,7 @@ task prepare => group => test => sub {
    my $packages = case operating_system, {
                      qr{centos|redhat}i  => [qw/perl openssh-clients perl-Data-Dumper rsync/],
                      default             => [qw/perl rsync/],
+                     qr{freebsd}i        => [qw/perl rsync dmidecode/],
                   };
    eval {
       for my $pkg (@{ $packages }) {
