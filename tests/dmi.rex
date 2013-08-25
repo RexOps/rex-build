@@ -8,7 +8,14 @@ do "auth.conf";
 
 task test => group => test => sub {
 
-   install "dmidecode";
+   my $package = case operating_system, {
+      qr{SuSE}i    => 'pmtools',
+      default      => 'dmidecode',
+   };
+
+   eval {
+      install $package;
+   };
 
    my $dmi = Rex::Inventory::Bios::get();
 

@@ -17,7 +17,7 @@ task "test", group => "test", sub {
    
    my $pkg = Rex::Pkg->get;
    my $to_install = case operating_system, {
-      qr{SuSE}i   => "vim-enhanced",
+      qr{SuSE}i   => "vim",
       qr{CentOS}i => "vim-enhanced",
       qr{Redhat}i => "vim-enhanced",
       qr{Mageia}i => "vim-enhanced",
