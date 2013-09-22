@@ -55,7 +55,7 @@ task test => group => test => sub {
    my $and = run 'touch /tmp/fufufufu && touch /tmp/fofofofo';
    ok(is_file("/tmp/fofofofo"), 'OK: AND chaining works');
 
-   my $check_0 = run 'grep sdfsdf /etc/passwd';
+   my $check_0 = run 'grep -c sdfsdf /etc/passwd';
    ok($check_0 eq "0", "got 0 as answer");
 
 
