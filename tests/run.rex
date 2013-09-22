@@ -48,12 +48,15 @@ task test => group => test => sub {
 
    }
 
-      my $or = run 'touch /bla/foo/baz/file || touch /tmp/fafafafa';
-      ok(is_file("/tmp/fafafafa"), 'OK: OR chaining works');
+   my $or = run 'touch /bla/foo/baz/file || touch /tmp/fafafafa';
+   ok(is_file("/tmp/fafafafa"), 'OK: OR chaining works');
 
 
-      my $and = run 'touch /tmp/fufufufu && touch /tmp/fofofofo';
-      ok(is_file("/tmp/fofofofo"), 'OK: AND chaining works');
+   my $and = run 'touch /tmp/fufufufu && touch /tmp/fofofofo';
+   ok(is_file("/tmp/fofofofo"), 'OK: AND chaining works');
+
+   my $check_0 = run 'grep sdfsdf /etc/passwd';
+   ok($check_0 eq "0", "got 0 as answer");
 
 
    done_testing();
