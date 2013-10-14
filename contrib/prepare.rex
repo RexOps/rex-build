@@ -26,6 +26,7 @@ task prepare => group => test => sub {
                      qr{centos|redhat}i  => [qw/perl openssh-clients perl-Data-Dumper rsync/],
                      default             => [qw/perl rsync/],
                      qr{freebsd}i        => [qw/perl rsync dmidecode/],
+                     qr{openwrt}i        => [qw/perl rsync perlbase-bytes perlbase-data perlbase-digest perlbase-essential perlbase-xsloader/],
                   };
    eval {
       for my $pkg (@{ $packages }) {
