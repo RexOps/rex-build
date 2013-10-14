@@ -22,17 +22,17 @@ task prepare => group => test => sub {
 
    update_package_db if is_openwrt;
 
-   my $packages = case operating_system, {
-                     qr{centos|redhat}i  => [qw/perl openssh-clients perl-Data-Dumper rsync/],
-                     default             => [qw/perl rsync/],
-                     qr{freebsd}i        => [qw/perl rsync dmidecode/],
-                     qr{openwrt}i        => [qw/perl rsync perlbase-bytes perlbase-data perlbase-digest perlbase-essential perlbase-xsloader/],
-                  };
-   eval {
-      for my $pkg (@{ $packages }) {
-         install $pkg;
-      }
+   my @packages = qw/perl rsync/;
+
+   my $additional_packages = case operating_system, {
+      qr{centos|redhat}i  => [qw/openssh-clients perl-Data-Dumper/],
+      qr{freebsd}i        => [qw/dmidecode/],
+      qr{openwrt}i        => [qw/perlbase-bytes perlbase-data perlbase-digest perlbase-essential perlbase-xsloader/],
    };
+
+   push @packages, @{ $additional_packages };
+
+   eval { install \@packages; };
 
    eval {
       # some tests need this group
