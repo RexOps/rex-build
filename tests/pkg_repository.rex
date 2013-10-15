@@ -31,10 +31,11 @@ task test => group => test => sub {
       #},
       #Redhat => {
       #},
-      #OpenWrt => {
-      #},
+      OpenWrt => {
+         url      => 'http://downloads.openwrt.org/snapshots/trunk/ar71xx/packages/',
+      },
    };
-      
+
 
    if(! exists ($repo_options->{$op}) ) {
       print STDERR "no test for $op yet.\n";
