@@ -10,12 +10,6 @@ do "auth.conf";
 desc "Load Kernel Module";
 task "test", group => "test", sub {
 
-   if(is_openwrt) {
-      ok(1==1, "not testend on openwrt");
-      done_testing();
-      return;
-   }
-
    if(operating_system_is("SunOS")) {
 
       kmod load => "strmod/tun";
@@ -36,6 +30,18 @@ task "test", group => "test", sub {
       kmod unload => "scc";
       @mods = run "kldstat | grep scc";
       ok(scalar(@mods) == 0, "unloaded scc");
+   } elsif (is_openwrt) {
+      my $kmod = "ppp_async";
+
+      kmod unload => $kmod;
+
+      my @mods = run "lsmod | grep $kmod";
+      ok(scalar(@mods) == 0, "unloaded $kmod");
+
+      kmod load => $kmod;
+
+      @mods = run "lsmod | grep $kmod";
+      ok(scalar(@mods) >= 1, "loaded $kmod");
    }
    else {
 
@@ -57,4 +63,3 @@ task "test", group => "test", sub {
    done_testing();
 
 };
-
