@@ -9,7 +9,7 @@ use Test::More;
 
 do "auth.conf";
 
-service_provider_for SunOS => "svcadm";                                       
+service_provider_for SunOS => "svcadm";
 
 desc "Get Hardware Information";
 task "test", group => "test", sub {
@@ -53,4 +53,3 @@ task "test", group => "test", sub {
 
    done_testing();
 };
-
