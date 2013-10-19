@@ -20,7 +20,9 @@ group test => $ENV{HTEST};
 task prepare => group => test => sub {
    # images are absolute minimal
 
-   update_package_db if is_openwrt;
+   eval { # just update the package db, if it fails it doesn't matter
+      update_package_db;
+   };
 
    my @packages = qw/perl rsync/;
 
