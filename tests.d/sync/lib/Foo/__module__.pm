@@ -16,7 +16,7 @@ task "bar", sub {
 
    mkdir $base_dir;
    mkdir "$base_dir/sync";
-   sync_up "files/", "$base_dir/sync";
+   sync_up "files/foo/", "$base_dir/sync";
 
    ok(is_file("$base_dir/sync/bar.txt"), "sync - bar.txt");
    my $content = cat("$base_dir/sync/bar.txt");
