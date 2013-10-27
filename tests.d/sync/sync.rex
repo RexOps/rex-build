@@ -15,9 +15,9 @@ task "test", group => "test", sub {
            on_change => sub {
                my (@changed_files) = @_;
 
-               my ($found1) = grep { $_ eq "file1.txt" } @changed_files;
-               my ($found2) = grep { $_ eq "file2.txt" } @changed_files;
-               my ($found3) = grep { $_ eq "file3.txt" } @changed_files;
+               my ($found1) = grep { $_ =~ /file1.txt/ } @changed_files;
+               my ($found2) = grep { $_ =~ /file2.txt/ } @changed_files;
+               my ($found3) = grep { $_ =~ /file3.txt/ } @changed_files;
 
                ok($found1, "file1.txt was changed");
                ok($found2, "file2.txt was changed");
@@ -28,9 +28,9 @@ task "test", group => "test", sub {
            on_change => sub {
                my (@changed_files) = @_;
 
-               my ($found1) = grep { $_ eq "file1.txt" } @changed_files;
-               my ($found2) = grep { $_ eq "file2.txt" } @changed_files;
-               my ($found3) = grep { $_ eq "file3.txt" } @changed_files;
+               my ($found1) = grep { $_ =~ /file1.txt/ } @changed_files;
+               my ($found2) = grep { $_ =~ /file2.txt/ } @changed_files;
+               my ($found3) = grep { $_ =~ /file3.txt/ } @changed_files;
 
                ok(! $found1, "file1.txt was not changed");
                ok(! $found2, "file2.txt was not changed");
