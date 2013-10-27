@@ -70,6 +70,8 @@ vm destroy => $new_vm;
 
 vm delete => $new_vm;
 
-rm "/var/lib/libvirt/images/$new_vm.img";
+#rm "/var/lib/libvirt/images/$new_vm.img";
+# fix for #6
+run "virsh vol-delete --pool default $new_vm.img";
 
 
