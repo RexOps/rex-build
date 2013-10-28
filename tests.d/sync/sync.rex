@@ -59,7 +59,7 @@ task "test", group => "test", sub {
    $on_changed_called = 0;
 
    my $ds = "/tmp/etc-" . connection->server;
-   sync_down $ds, "tmp",
+   sync_down "/tmp/etc", $ds,
       on_change => sub {
          my (@changed_files) = @_;
          $on_changed_called = 1;
