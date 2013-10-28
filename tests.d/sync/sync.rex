@@ -39,8 +39,9 @@ task "test", group => "test", sub {
    ok($on_changed_called == 0, "on_change was not called (sync_up)");
    $on_changed_called = 0;
 
-   LOCAL { mkdir "tmp"; };
-   sync_down "/tmp/etc", "tmp",
+   my $ds = "/tmp/etc-" . connection->server;
+   LOCAL { mkdir $ds; };
+   sync_down "/tmp/etc", $ds,
       on_change => sub {
          my (@changed_files) = @_;
 
@@ -58,7 +59,6 @@ task "test", group => "test", sub {
    ok($on_changed_called, "on_change was called (sync_down)");
    $on_changed_called = 0;
 
-   my $ds = "/tmp/etc-" . connection->server;
    sync_down "/tmp/etc", $ds,
       on_change => sub {
          my (@changed_files) = @_;
