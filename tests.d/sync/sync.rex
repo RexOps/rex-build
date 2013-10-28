@@ -58,7 +58,8 @@ task "test", group => "test", sub {
    ok($on_changed_called, "on_change was called (sync_down)");
    $on_changed_called = 0;
 
-   sync_down "/tmp/etc", "tmp",
+   my $ds = "/tmp/etc-" . connection->server;
+   sync_down $ds, "tmp",
       on_change => sub {
          my (@changed_files) = @_;
          $on_changed_called = 1;
@@ -66,6 +67,8 @@ task "test", group => "test", sub {
 
    ok($on_changed_called == 0, "on_change was not called (sync_down)");
    $on_changed_called = 0;
+
+   rmdir $ds;
 
 
    done_testing();
