@@ -17,7 +17,7 @@ task test => group => test => sub {
    ok($stdout eq $test_string, 'sayformat %h: %s');
 
    sayformat '[%D](%p) %h: %s';
-   my ($stdout) = capture {
+   ($stdout) = capture {
       say "hello world";
    };
 
