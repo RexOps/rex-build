@@ -22,6 +22,8 @@ task "test", group => "test", sub {
       ok(! is_file("passwd.test"), "delete okay");
    };
 
+   download "/etc/passwd", "./passwd.test";
+
    done_testing();
 };
 

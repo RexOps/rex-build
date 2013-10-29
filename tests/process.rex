@@ -51,6 +51,11 @@ task test => group => test => sub {
 
     }
 
+   # issue: 175
+   my @ps = ps("command","ni");
+   ok(exists $ps[0]->{command}, "ps out: command exists");
+   ok(exists $ps[0]->{ni}, "ps out: ni exists");
+
    done_testing();
 };
 
