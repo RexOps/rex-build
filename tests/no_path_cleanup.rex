@@ -1,5 +1,5 @@
 # vim: set syn=perl:
-use Rex -feature => '0.42', 'source_profile';
+use Rex -feature => ['0.42', 'no_path_cleanup'];
 
 use Rex::Commands::MD5;
 use Data::Dumper;
