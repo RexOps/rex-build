@@ -2,11 +2,11 @@
 use Rex -feature => 0.42;
 use Test::More;
 
-#do "auth.conf";
+do "auth.conf";
 
 require Foo;
 
-task "test", sub {
+task "test", group => "test", sub {
    Foo::setup();
 
    ok(get("NEEDED") == 1, "need_test had ran");
