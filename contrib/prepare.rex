@@ -48,6 +48,9 @@ task prepare => group => test => sub {
 
    run "echo 127.0.2.1 `uname -n` >>/etc/hosts";
 
+   file "/root/.profile",
+      content => "export MYFOO='MYBAR'\n";
+
    mkdir "/tmp2";
 };
 
