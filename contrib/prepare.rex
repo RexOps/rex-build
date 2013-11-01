@@ -51,6 +51,11 @@ task prepare => group => test => sub {
    file "/root/.profile",
       content => "export MYFOO='MYBAR'\nexport PATH=/bin\n";
 
+   # for csh
+   file "/root/.login",
+      content => "set MYFOO='MYBAR'\nset PATH=/bin\n";
+
+
    mkdir "/tmp2";
 };
 
