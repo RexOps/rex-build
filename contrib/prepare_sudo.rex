@@ -28,6 +28,6 @@ task prepare => group => test => sub {
    file "/etc/sudoers",
       content => "\%$user	ALL=(ALL:ALL) ALL\n",
       owner   => "root",
-      mode    => 400;
+      mode    => 440;
 };
 
