@@ -16,6 +16,9 @@ task test => group => test => sub {
    my $esc = run 'echo \$"FOO"';
    ok($esc =~ m/\$FOO/, "OK: Shell escape");
 
+   my $path = run 'echo $PATH', path => '/tmp';
+   ok($path eq "/tmp", "used custom path");
+
 
    if(is_freebsd) {
 
