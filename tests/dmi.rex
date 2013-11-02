@@ -9,7 +9,7 @@ do "auth.conf";
 task test => group => test => sub {
 
    my $package = case operating_system, {
-      qr{SuSE}i    => 'pmtools',
+      qr{SuSE}i    => ['pmtools', 'dmidecode'],
       default      => 'dmidecode',
    };
 
