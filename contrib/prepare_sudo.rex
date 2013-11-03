@@ -25,8 +25,9 @@ task prepare => group => test => sub {
       groups   => [$user],
       password => $pass;
 
+   # need to set_home / always_set_home so that sudo find the right home directory
    file "/etc/sudoers",
-      content => "\%$user	ALL=(ALL:ALL) ALL\n",
+      content => "Defaults set_home, always_set_home\n\%$user	ALL=(ALL:ALL) ALL\n",
       owner   => "root",
       mode    => 440;
 };
