@@ -1,0 +1,238 @@
+################################################################################
+# Disclaimer: This file is heavyly work-in-progress
+################################################################################
+#
+# Build script to build packages for the (R)?ex repository.
+# It should be possible to build "all kind" of packages with this script
+# At first deb and rpm.
+#
+# ------------------------------------------------------------------------------
+#
+# Usage:
+#
+# rex bundle --build=buildfile.yaml
+#
+# ------------------------------------------------------------------------------
+# vim: set syn=perl:
+
+use Rex -feature => '0.42';
+use Rex::Transaction;
+use Test::More;
+use YAML;
+use Rex::Commands::Rsync;
+use Data::Dumper;
+use IO::All;
+use Rex::Helper::Path;
+
+do "auth.conf";
+
+################################################################################
+# read build configuration
+################################################################################
+my $yaml = eval { local(@ARGV, $/) = ($ENV{HOME} . "/.build_config"); <>; };
+$yaml .= "\n";
+my $config = Load($yaml);
+
+my $pid = $$;
+
+
+################################################################################
+# some helper functions
+################################################################################
+
+sub run_or_die;
+sub parse_template;
+sub load_and_parse_yaml;
+
+
+################################################################################
+# the tasks
+################################################################################
+
+task prepare => group => test => sub {
+
+   my $param = shift;
+
+
+################################################################################
+# create build file out of generic description file
+# build files can be: spec (rpm), debian build instruction directory
+################################################################################
+
+   my $op = operating_system;
+   my $upload_tarball_dir = $config->{build}->{source_directory}->{lc($op)};
+   my $content;
+
+   mkdir "/root/build";
+   mkdir $config->{build}->{source_directory}->{lc($op)};
+
+   LOCAL {
+      if(! is_file($param->{build})) {
+         Rex::Logger::info("Can't find build-file: $param->{build}", "error");
+         die "Can't find build-file: $param->{build}";
+      }
+
+      $content = io($param->{build})->slurp;    # io() always reads local files, but for better visibility it is in a LOCAL {} block.
+      $content .= "\n"; # append a new line, because some editors just throw the last line away.
+
+      mkdir ".build.$pid";
+   };
+
+   my $default_build_file = Load($content);
+   my $double_parsed_build_file = load_and_parse_yaml($content);
+   my $buildroot = "/tmp/build-$double_parsed_build_file->{name}-$pid";
+   mkdir $buildroot;
+
+
+   file "/root/build/" . $double_parsed_build_file->{name} . ".spec",
+      content => parse_template("templates/spec.tpl", 
+                        buildroot  => $buildroot,
+                        os         => $op,
+                        data       => $default_build_file,
+                        sourceroot => $upload_tarball_dir, %{ $default_build_file }),
+      owner   => "root",
+      group   => "root",
+      mode    => 640;
+
+################################################################################
+# register repositories, to use for build dependencies
+################################################################################
+
+   repository add => "rex", %{ $config->{repo}->{add}->{lc($op)} }
+      if(exists $config->{repo}->{add}->{lc($op)});
+
+   eval { update_package_db; };
+
+################################################################################
+# install build dependencies
+################################################################################
+
+   install $double_parsed_build_file->{requires}->{lc($op)}->{build};
+
+   # install some additional packages that are needed for the build
+   my $add_pkgs = case $op, {
+      qr{centos|redhat}i => ["ntp", "rpm-build", "expect", "gcc", "make", "automake", "autoconf", "bison", "flex", "m4"],
+      default            => ["ntpd", "expect", "gcc", "make", "automake", "autoconf", "bison", "flex", "m4"],
+   };
+
+   install $add_pkgs;
+
+################################################################################
+# download tarball from website
+################################################################################
+   LOCAL {
+      download $double_parsed_build_file->{source}, ".build.$pid/";
+   };
+
+################################################################################
+# upload source tarball
+################################################################################
+
+
+   sync_up ".build.$pid/", $upload_tarball_dir;
+   sync_up $config->{build}->{files} . "/" . lc($op), "/root";
+
+   run_or_die "ntpdate pool.ntp.org";
+
+   file "/tmp/build",
+      content => template("expect/" . lc($op) . ".expect", buildroot => $buildroot, %{ $config->{build}->{gnupg} }),
+      mode    => 755;
+};
+
+
+task build => group => test => sub {
+
+   my $op    = operating_system;
+   my $arch  = run "uname -i";
+
+   my @out   = split(/\n/, run_or_die("/tmp/build /root/build/rex.spec"));
+   my @files = grep { m/^Wrote: (.*)$/ && ($_ = $1); } @out;
+
+
+   my ($src_file) = grep { m/\.src\.rpm/ } @files;
+   my ($pkg_file) = grep { m/\.$arch\.rpm/ } @files;
+
+   mkdir ".packages.$pid/" . lc($op);
+   #download $src_file, ".packages.$pid/";
+   download $pkg_file, ".packages.$pid/";
+
+   io(".build.$pid/arch.txt") < $arch;
+   io(".build.$pid/op.txt")   < $op;
+};
+
+task clean => sub {
+   rmdir ".build.$pid";
+   rmdir ".packages.$pid";
+};
+
+task publish => $config->{repo}->{server} => sub {
+   my ($op, $arch);
+
+   LOCAL {
+      $op   = cat ".build.$pid/op.txt";
+      $arch = cat ".build.$pid/arch.txt";
+      chomp $op;
+      chomp $arch;
+   };
+
+   my $repo_path = $config->{repo}->{lc($op)}->{$arch}->{path};
+   Rex::Logger::info("Uploading to: $repo_path");
+   sync_up ".packages.$pid/", $repo_path;
+};
+
+
+task bundle => sub {
+
+   transaction {
+      do_task [qw/
+         prepare
+         build
+         publish
+         clean
+      /];
+   };
+
+};
+
+auth for => "publish",
+   user => $config->{repo}->{user},
+   password => $config->{repo}->{password};
+
+
+sub parse_template {
+   my ($file, @data) = @_;
+
+   my $t = Rex::Template->new;
+   my $content = io(get_file_path($file))->slurp;
+
+   my $pre_parse = $t->parse($content, { @data });
+   return $t->parse($pre_parse, { @data });
+}
+
+sub run_or_die {
+   my ($cmd) = @_;
+
+   my $output = run $cmd;
+   say $output;
+
+   if($? != 0) {
+      Rex::Logger::info("Error running command: $cmd", "error");
+      die("Error running command: $cmd");
+   }
+
+   return $output;
+}
+
+sub load_and_parse_yaml {
+   my ($content) = @_;
+
+   my $pre_yaml = Load($content);
+   $pre_yaml->{buildroot} = "";
+   $pre_yaml->{sourceroot} = "";
+
+   my $t = Rex::Template->new;
+
+   return Load($t->parse($content, $pre_yaml));
+}
+
+1;
