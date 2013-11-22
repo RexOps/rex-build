@@ -18,31 +18,13 @@
 use Rex -feature => '0.42';
 use Rex::Transaction;
 use Test::More;
-use YAML;
-use Rex::Commands::Rsync;
 use Data::Dumper;
 use IO::All;
-use Rex::Helper::Path;
+use PkgBuilder;
 
 do "auth.conf";
 
-################################################################################
-# read build configuration
-################################################################################
-my $yaml = eval { local(@ARGV, $/) = ($ENV{HOME} . "/.build_config"); <>; };
-$yaml .= "\n";
-my $config = Load($yaml);
-
 my $pid = $$;
-
-
-################################################################################
-# some helper functions
-################################################################################
-
-sub run_or_die;
-sub parse_template;
-sub load_and_parse_yaml;
 
 
 ################################################################################
@@ -59,27 +41,16 @@ task prepare => group => test => sub {
 # build files can be: spec (rpm), debian build instruction directory
 ################################################################################
 
-   my $op = operating_system;
-   my $upload_tarball_dir = $config->{build}->{source_directory}->{lc($op)};
+   my $op = get_os_name;
+
+   my $upload_tarball_dir = config->{build}->{source_directory}->{lc($op)};
    my $content;
 
+   my ($default_build_file, $double_parsed_build_file) = build_config($param->{build});
+
    mkdir "/root/build";
-   mkdir $config->{build}->{source_directory}->{lc($op)};
+   mkdir config->{build}->{source_directory}->{lc($op)};
 
-   LOCAL {
-      if(! is_file($param->{build})) {
-         Rex::Logger::info("Can't find build-file: $param->{build}", "error");
-         die "Can't find build-file: $param->{build}";
-      }
-
-      $content = io($param->{build})->slurp;    # io() always reads local files, but for better visibility it is in a LOCAL {} block.
-      $content .= "\n"; # append a new line, because some editors just throw the last line away.
-
-      mkdir ".build.$pid";
-   };
-
-   my $default_build_file = Load($content);
-   my $double_parsed_build_file = load_and_parse_yaml($content);
    my $buildroot = "/tmp/build-$double_parsed_build_file->{name}-$pid";
    mkdir $buildroot;
 
@@ -98,8 +69,8 @@ task prepare => group => test => sub {
 # register repositories, to use for build dependencies
 ################################################################################
 
-   repository add => "rex", %{ $config->{repo}->{add}->{lc($op)} }
-      if(exists $config->{repo}->{add}->{lc($op)});
+   repository add => "rex", %{ config->{repo}->{add}->{lc($op)} }
+      if(exists config->{repo}->{add}->{lc($op)});
 
    eval { update_package_db; };
 
@@ -130,57 +101,82 @@ task prepare => group => test => sub {
 
 
    sync_up ".build.$pid/", $upload_tarball_dir;
-   sync_up $config->{build}->{files} . "/" . lc($op), "/root";
+   sync_up config->{build}->{files} . "/" . lc($op), "/root";
 
    run_or_die "ntpdate pool.ntp.org";
 
    file "/tmp/build",
-      content => template("expect/" . lc($op) . ".expect", buildroot => $buildroot, %{ $config->{build}->{gnupg} }),
+      content => template("expect/" . lc($op) . ".expect", buildroot => $buildroot, %{ config->{build}->{gnupg} }),
       mode    => 755;
 };
 
 
+################################################################################
+# build the package
+################################################################################
 task build => group => test => sub {
 
-   my $op    = operating_system;
-   my $arch  = run "uname -i";
+   my $param = shift;
+   my $op    = get_os_name;
+   my $ver   = get_os_release;
+   my $arch  = get_os_arch;
 
-   my @out   = split(/\n/, run_or_die("/tmp/build /root/build/rex.spec"));
+   my ($default_build_file, $double_parsed_build_file) = build_config($param->{build});
+
+   my @out   = split(/\n/, run_or_die("/tmp/build /root/build/$double_parsed_build_file->{name}.spec"));
    my @files = grep { m/^Wrote: (.*)$/ && ($_ = $1); } @out;
 
 
    my ($src_file) = grep { m/\.src\.rpm/ } @files;
    my ($pkg_file) = grep { m/\.$arch\.rpm/ } @files;
 
-   mkdir ".packages.$pid/" . lc($op);
+   LOCAL {
+      mkdir ".packages.$pid/" . lc($op);
+   };
    #download $src_file, ".packages.$pid/";
    download $pkg_file, ".packages.$pid/";
-
-   io(".build.$pid/arch.txt") < $arch;
-   io(".build.$pid/op.txt")   < $op;
 };
 
+################################################################################
+# do some cleanup after build
+# throw away some temporary directories and files
+################################################################################
 task clean => sub {
    rmdir ".build.$pid";
    rmdir ".packages.$pid";
 };
 
-task publish => $config->{repo}->{server} => sub {
-   my ($op, $arch);
+################################################################################
+# publish the new package to the package server
+################################################################################
+task publish => config->{repo}->{server} => sub {
+   my $op   = get_os_name;
+   my $ver  = get_os_release;
+   my $arch = get_os_arch;
 
-   LOCAL {
-      $op   = cat ".build.$pid/op.txt";
-      $arch = cat ".build.$pid/arch.txt";
-      chomp $op;
-      chomp $arch;
-   };
+   my $repo_name = config->{repo}->{name};
+   my $repo_path = config->{repo}->{doc_root} . "/$op/$ver/$repo_name/$arch";
 
-   my $repo_path = $config->{repo}->{lc($op)}->{$arch}->{path};
-   Rex::Logger::info("Uploading to: $repo_path");
+   mkdir $repo_path,
+      owner => "www-data",
+      group => "www-data",
+      mode  => 755;
+
+   Rex::Logger::info("Uploading to: $repo_path ...");
    sync_up ".packages.$pid/", $repo_path;
+
+   Rex::Logger::info("Creating repository data files ...");
+   run_or_die "cd $repo_path ; rm repodata/repomd.xml.asc ; createrepo .";
+
+   my $key = config->{repo}->{sign}->{lc($op)}->{key};
+   Rex::Logger::info("Signing repository with key: $key ...");
+   run_or_die "cd $repo_path ; gpg --default-key $key -a --batch --passphrase " . config->{build}->{gnupg}->{pass} . " --detach-sign repodata/repomd.xml";
 };
 
 
+################################################################################
+# run everything in a transaction
+################################################################################
 task bundle => sub {
 
    transaction {
@@ -194,45 +190,40 @@ task bundle => sub {
 
 };
 
+################################################################################
+# prepare repository server
+################################################################################
+task prepare_repo_server => config->{repo}->{server} => sub {
+   install [qw/
+      gnupg
+      createrepo
+      apache2
+   /];
+
+   file "/root/gnupg.keys",
+      source => config->{build}->{files} . "/gnupg.keys",
+      mode   => 600;
+
+   run "gpg --import < /root/gnupg.keys";
+
+   unlink "/root/gnupg.keys";
+};
+
+################################################################################
+# special authentication for repository server
+################################################################################
 auth for => "publish",
-   user => $config->{repo}->{user},
-   password => $config->{repo}->{password};
+   user => config->{repo}->{user},
+   password => config->{repo}->{password};
+
+auth for => "prepare_repo_server",
+   user => config->{repo}->{user},
+   password => config->{repo}->{password};
 
 
-sub parse_template {
-   my ($file, @data) = @_;
 
-   my $t = Rex::Template->new;
-   my $content = io(get_file_path($file))->slurp;
 
-   my $pre_parse = $t->parse($content, { @data });
-   return $t->parse($pre_parse, { @data });
-}
-
-sub run_or_die {
-   my ($cmd) = @_;
-
-   my $output = run $cmd;
-   say $output;
-
-   if($? != 0) {
-      Rex::Logger::info("Error running command: $cmd", "error");
-      die("Error running command: $cmd");
-   }
-
-   return $output;
-}
-
-sub load_and_parse_yaml {
-   my ($content) = @_;
-
-   my $pre_yaml = Load($content);
-   $pre_yaml->{buildroot} = "";
-   $pre_yaml->{sourceroot} = "";
-
-   my $t = Rex::Template->new;
-
-   return Load($t->parse($content, $pre_yaml));
-}
-
-1;
+################################################################################
+# the end
+################################################################################
+"The End";
