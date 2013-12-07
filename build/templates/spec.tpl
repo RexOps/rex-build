@@ -3,7 +3,7 @@ Version:        <%= $data->{version} %>
 Release:        <%= $data->{release} %>
 Summary:        <%= $data->{summary} %>
 
-Group:          <%= $data->{group} %>
+Group:          <%= $data->{group}->{lc($os)} %>
 License:        <%= $data->{license} %>
 Source:         <%= $data->{source} %>
 BuildRoot:      <%= $buildroot %>
@@ -11,8 +11,9 @@ BuildRoot:      <%= $buildroot %>
 <% for my $req (@{ $data->{requires}->{lc($os)}->{build} }) { %>
 BuildRequires:  <%= $req %><% } %>
 
+<% if(exists $data->{requires}->{lc($os)}->{runtime}) { %>
 <% for my $req (@{ $data->{requires}->{lc($os)}->{runtime} }) { %>
-Requires:  <%= $req %><% } %>
+Requires:  <%= $req %><% } %><% } %>
 
 %description
 <%= $data->{description} %>

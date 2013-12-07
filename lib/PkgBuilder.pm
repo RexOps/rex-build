@@ -22,11 +22,22 @@ use vars qw(@EXPORT);
    run_or_die
    parse_template load_and_parse_yaml build_config
    config
-   get_os_name get_os_release get_os_arch);
+   get_os_name get_os_release get_os_arch
+   create_build_files
+   sync_time);
 
 my $pid = $$;
 
 my $config;
+
+my %ubuntu_version_map = (
+   "1004" => "lucid",
+   "1204" => "precise",
+   "1210" => "quantal",
+   "1304" => "raring",
+   "1310" => "saucy",
+   "1404" => "trusty",
+);
 
 sub config {
    if(defined $config) { return $config; }
@@ -50,7 +61,7 @@ sub parse_template {
 sub run_or_die {
    my ($cmd) = @_;
 
-   my $output = run $cmd;
+   my $output = run "LC_ALL=C $cmd";
    say $output;
 
    if($? != 0) {
@@ -138,8 +149,15 @@ sub get_os_release {
 
    if(defined $rel) { return $rel; }
 
-   $rel = substr(operating_system_version(), 0, 1);
-   chomp $rel;
+   if(lc(get_os_name) eq "ubuntu") {
+      my $ver = operating_system_version();
+      $rel = $ubuntu_version_map{$ver};
+   }
+   else {
+      $rel = substr(operating_system_version(), 0, 1);
+      chomp $rel;
+   }
+
    io(".build.$pid/rel.txt") < $rel;
 
    return $rel;
@@ -168,6 +186,127 @@ sub get_os_arch {
    io(".build.$pid/arch.txt") < $arch;
 
    return $arch;
+}
+
+sub create_build_files {
+
+   my $param = shift;
+
+   my $op = get_os_name;
+
+   my $upload_tarball_dir = config->{build}->{source_directory}->{lc($op)};
+   my ($default_build_file, $double_parsed_build_file) = build_config($param->{build});
+
+   mkdir "/root/build";
+   mkdir config->{build}->{source_directory}->{lc($op)}
+      if(exists config->{build}->{source_directory}->{lc($op)});
+
+   if($op =~ m/centos/i) {
+      my $buildroot = "/tmp/build-$double_parsed_build_file->{name}-$pid";
+      mkdir $buildroot;
+
+      file "/root/build/" . $double_parsed_build_file->{name} . ".spec",
+         content => parse_template("templates/spec.tpl", 
+                           buildroot  => $buildroot,
+                           os         => $op,
+                           data       => $default_build_file,
+                           sourceroot => $upload_tarball_dir, %{ $default_build_file }),
+         owner   => "root",
+         group   => "root",
+         mode    => 640;
+
+   }
+
+   elsif($op =~ m/ubuntu/i) {
+
+      my $buildroot = "/root/build/debian/$double_parsed_build_file->{name}";
+
+      mkdir "/root/build/debian";
+      file "/root/build/debian/control",
+         content => parse_template("templates/control.tpl",
+                           buildroot  => $buildroot,
+                           os         => $op,
+                           data       => $default_build_file,
+                           sourceroot => $upload_tarball_dir, %{ $default_build_file }),
+         owner   => "root",
+         group   => "root",
+         mode    => 640;
+
+      file "/root/build/debian/changelog",
+         content => parse_template("templates/changelog.tpl",
+                           buildroot  => $buildroot,
+                           os         => $op,
+                           data       => $default_build_file,
+                           sourceroot => $upload_tarball_dir, %{ $default_build_file }),
+         owner   => "root",
+         group   => "root",
+         mode    => 640;
+
+      file "/root/build/debian/rules",
+         content => parse_template("templates/rules.tpl",
+                           buildroot  => $buildroot,
+                           os         => $op,
+                           data       => $default_build_file,
+                           sourceroot => $upload_tarball_dir, %{ $default_build_file }),
+         owner   => "root",
+         group   => "root",
+         mode    => 640;
+
+      file "/root/build/debian/configure.sh",
+         content => parse_template("templates/configure.sh.tpl",
+                           buildroot  => $buildroot,
+                           os         => $op,
+                           data       => $default_build_file,
+                           sourceroot => $upload_tarball_dir, %{ $default_build_file }),
+         owner   => "root",
+         group   => "root",
+         mode    => 755;
+
+      file "/root/build/debian/make.sh",
+         content => parse_template("templates/make.sh.tpl",
+                           buildroot  => $buildroot,
+                           os         => $op,
+                           data       => $default_build_file,
+                           sourceroot => $upload_tarball_dir, %{ $default_build_file }),
+         owner   => "root",
+         group   => "root",
+         mode    => 755;
+
+      file "/root/build/debian/install.sh",
+         content => parse_template("templates/install.sh.tpl",
+                           buildroot  => $buildroot,
+                           os         => $op,
+                           data       => $default_build_file,
+                           sourceroot => $upload_tarball_dir, %{ $default_build_file }),
+         owner   => "root",
+         group   => "root",
+         mode    => 755;
+
+      file "/root/build/debian/clean.sh",
+         content => parse_template("templates/clean.sh.tpl",
+                           buildroot  => $buildroot,
+                           os         => $op,
+                           data       => $default_build_file,
+                           sourceroot => $upload_tarball_dir, %{ $default_build_file }),
+         owner   => "root",
+         group   => "root",
+         mode    => 755;
+
+      file "/root/build/debian/compat", content => "7\n";
+   }
+
+}
+
+sub sync_time {
+   my $op = get_os_name;
+
+   print ">>$op\n";
+
+   if($op =~ m/ubuntu/i) {
+      service ntp => "stop";
+   }
+
+   run_or_die "ntpdate pool.ntp.org";
 }
 
 1;

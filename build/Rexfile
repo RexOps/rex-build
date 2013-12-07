@@ -35,35 +35,11 @@ task prepare => group => test => sub {
 
    my $param = shift;
 
+   my $op   = get_os_name;
+   my $arch = get_os_arch;
 
-################################################################################
-# create build file out of generic description file
-# build files can be: spec (rpm), debian build instruction directory
-################################################################################
-
-   my $op = get_os_name;
-
-   my $upload_tarball_dir = config->{build}->{source_directory}->{lc($op)};
-   my $content;
 
    my ($default_build_file, $double_parsed_build_file) = build_config($param->{build});
-
-   mkdir "/root/build";
-   mkdir config->{build}->{source_directory}->{lc($op)};
-
-   my $buildroot = "/tmp/build-$double_parsed_build_file->{name}-$pid";
-   mkdir $buildroot;
-
-
-   file "/root/build/" . $double_parsed_build_file->{name} . ".spec",
-      content => parse_template("templates/spec.tpl", 
-                        buildroot  => $buildroot,
-                        os         => $op,
-                        data       => $default_build_file,
-                        sourceroot => $upload_tarball_dir, %{ $default_build_file }),
-      owner   => "root",
-      group   => "root",
-      mode    => 640;
 
 ################################################################################
 # register repositories, to use for build dependencies
@@ -83,7 +59,7 @@ task prepare => group => test => sub {
    # install some additional packages that are needed for the build
    my $add_pkgs = case $op, {
       qr{centos|redhat}i => ["ntp", "rpm-build", "expect", "gcc", "make", "automake", "autoconf", "bison", "flex", "m4"],
-      default            => ["ntpd", "expect", "gcc", "make", "automake", "autoconf", "bison", "flex", "m4"],
+      default            => ["ntpdate", "expect", "gcc", "make", "automake", "autoconf", "bison", "flex", "m4"],
    };
 
    install $add_pkgs;
@@ -100,14 +76,42 @@ task prepare => group => test => sub {
 ################################################################################
 
 
+   my $upload_tarball_dir = config->{build}->{source_directory}->{lc($op)};
+   mkdir $upload_tarball_dir;
+
+   if($op =~ m/centos/i) {
+      mkdir "$upload_tarball_dir/../BUILD";
+      mkdir "$upload_tarball_dir/../RPMS";
+      mkdir "$upload_tarball_dir/../RPMS/$arch";
+      mkdir "$upload_tarball_dir/../SPECS";
+      mkdir "$upload_tarball_dir/../SRPMS";
+   }
+
    sync_up ".build.$pid/", $upload_tarball_dir;
    sync_up config->{build}->{files} . "/" . lc($op), "/root";
 
-   run_or_die "ntpdate pool.ntp.org";
+   sync_time;
 
+   my $buildroot = "/tmp/build-$double_parsed_build_file->{name}-$pid";
    file "/tmp/build",
       content => template("expect/" . lc($op) . ".expect", buildroot => $buildroot, %{ config->{build}->{gnupg} }),
       mode    => 755;
+
+################################################################################
+# create build file out of generic description file
+# build files can be: spec (rpm), debian build instruction directory
+################################################################################
+
+   create_build_files($param);
+
+################################################################################
+# also prepare for package signing / needed for example by 
+# debian and ubuntu
+################################################################################
+   if(lc($op) eq "ubuntu" || lc($op) eq "debian") {
+      prepare_repo_server();
+   }
+
 };
 
 
@@ -123,12 +127,28 @@ task build => group => test => sub {
 
    my ($default_build_file, $double_parsed_build_file) = build_config($param->{build});
 
-   my @out   = split(/\n/, run_or_die("/tmp/build /root/build/$double_parsed_build_file->{name}.spec"));
+   my $spec_file = "/root/build/$double_parsed_build_file->{name}.spec";
+   my @out;
+   if(is_file($spec_file)) {
+      @out = split(/\n/, run_or_die("/tmp/build $spec_file"));
+   }
+   else {
+      @out = split(/\n/, run_or_die("cd /root/build ; /tmp/build"));
+   }
+
+# dpkg-deb: building package `libssh2' in `../libssh2_1.4.2_amd64.deb'.
    my @files = grep { m/^Wrote: (.*)$/ && ($_ = $1); } @out;
 
+   my ($src_file, $pkg_file);
+   if(@files) {
+      ($src_file) = grep { m/\.src\.rpm/ } @files;
+      ($pkg_file) = grep { m/\.$arch\.rpm/ } @files;
+   }
 
-   my ($src_file) = grep { m/\.src\.rpm/ } @files;
-   my ($pkg_file) = grep { m/\.$arch\.rpm/ } @files;
+   @files = grep { m/^dpkg-deb: building package `.*?' in `(.*?)'.$/ && ($_ = $1); } @out;
+   if(@files) {
+      $pkg_file = "/root/build/$files[0]";
+   }
 
    LOCAL {
       mkdir ".packages.$pid/" . lc($op);
@@ -165,12 +185,14 @@ task publish => config->{repo}->{server} => sub {
    Rex::Logger::info("Uploading to: $repo_path ...");
    sync_up ".packages.$pid/", $repo_path;
 
-   Rex::Logger::info("Creating repository data files ...");
-   run_or_die "cd $repo_path ; rm repodata/repomd.xml.asc ; createrepo .";
+   if(lc($op) eq "centos") {
+      Rex::Logger::info("Creating repository data files ...");
+      run_or_die "cd $repo_path ; rm repodata/repomd.xml.asc ; createrepo .";
 
-   my $key = config->{repo}->{sign}->{lc($op)}->{key};
-   Rex::Logger::info("Signing repository with key: $key ...");
-   run_or_die "cd $repo_path ; gpg --default-key $key -a --batch --passphrase " . config->{build}->{gnupg}->{pass} . " --detach-sign repodata/repomd.xml";
+      my $key = config->{repo}->{sign}->{lc($op)}->{key};
+      Rex::Logger::info("Signing repository with key: $key ...");
+      run_or_die "cd $repo_path ; gpg --default-key $key -a --batch --passphrase " . config->{build}->{gnupg}->{pass} . " --detach-sign repodata/repomd.xml";
+   }
 };
 
 
