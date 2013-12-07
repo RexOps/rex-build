@@ -174,24 +174,71 @@ task publish => config->{repo}->{server} => sub {
    my $ver  = get_os_release;
    my $arch = get_os_arch;
 
-   my $repo_name = config->{repo}->{name};
-   my $repo_path = config->{repo}->{doc_root} . "/$op/$ver/$repo_name/$arch";
-
-   mkdir $repo_path,
-      owner => "www-data",
-      group => "www-data",
-      mode  => 755;
-
-   Rex::Logger::info("Uploading to: $repo_path ...");
-   sync_up ".packages.$pid/", $repo_path;
-
    if(lc($op) eq "centos") {
+      my $repo_name = config->{repo}->{name};
+      my $repo_path = config->{repo}->{doc_root} . "/$op/$ver/$repo_name/$arch";
+
+      mkdir $repo_path,
+         owner => "www-data",
+         group => "www-data",
+         mode  => 755;
+
+      Rex::Logger::info("Uploading to: $repo_path ...");
+      sync_up ".packages.$pid/", $repo_path;
+
       Rex::Logger::info("Creating repository data files ...");
       run_or_die "cd $repo_path ; rm repodata/repomd.xml.asc ; createrepo .";
 
       my $key = config->{repo}->{sign}->{lc($op)}->{key};
       Rex::Logger::info("Signing repository with key: $key ...");
       run_or_die "cd $repo_path ; gpg --default-key $key -a --batch --passphrase " . config->{build}->{gnupg}->{pass} . " --detach-sign repodata/repomd.xml";
+   }
+
+   if(lc($op) eq "ubuntu" || lc($op) eq "debian") {
+
+      if($arch eq "x86_64") { # rewrite arch for debian/ubuntu
+         $arch = "amd64";
+      }
+
+      my $repo_name = config->{repo}->{name};
+      my $repo_path = config->{repo}->{doc_root} . "/" . lc($op) . "/pool/$ver/$repo_name";
+      my $dist_path = config->{repo}->{doc_root} . "/" . lc($op) . "/dists/$ver/$repo_name/binary-$arch";
+
+      mkdir $repo_path,
+         owner => "www-data",
+         group => "www-data",
+         mode  => 755;
+
+      mkdir $dist_path,
+         owner => "www-data",
+         group => "www-data",
+         mode  => 755;
+
+      Rex::Logger::info("Uploading to: $repo_path ...");
+      sync_up ".packages.$pid/", $repo_path;
+
+      file "/root/aptgenerate.$ver.conf",
+         content => template("templates/aptgenerate.conf.tpl", dist => $ver);
+
+      file "/root/aptftp.$ver.conf",
+         content => template("templates/aptftp.conf.tpl", dist => $ver);
+
+      my $doc_root = config->{repo}->{doc_root} . "/" . lc($op);
+      run "apt-ftparchive generate -c=/root/aptftp.$ver.conf /root/aptgenerate.$ver.conf",   cwd => $doc_root;
+      run "apt-ftparchive release -c=/root/aptftp.$ver.conf dists/$ver >dists/$ver/Release", cwd => $doc_root;
+
+      rm "$doc_root/dists/$ver/Release.gpg";
+
+      file "/root/sign_release",
+         content => template("expect/" . lc($op) . ".sign_release.expect", dist => $ver, %{ config->{build}->{gnupg} }),
+         owner   => "root",
+         group   => "root",
+         mode    => 755;
+
+      run "/root/sign_release", cwd => $doc_root;
+
+      rm "$doc_root/packages-i386.db";
+      rm "$doc_root/packages-amd64.db";
    }
 };
 
