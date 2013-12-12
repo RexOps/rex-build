@@ -16,6 +16,9 @@ my $yaml = eval { local(@ARGV, $/) = ($ENV{HOME} . "/.build_config"); <>; };
 $yaml .= "\n";
 my $config = Load($yaml);
 
+
+chdir "..";
+
 my $base_vm = $ARGV[0];
 my $build_file = $ARGV[1];
 
@@ -50,7 +53,6 @@ my ($user, $pass);
 $user = $config->{box}->{default}->{user};
 $pass = $config->{box}->{default}->{password};
 
-chdir "..";
 
 system "REXUSER=$user REXPASS=$pass HTEST=$ip rex -f build/Rexfile -c bundle --build=$build_file";
 
