@@ -54,12 +54,12 @@ $pass = $config->{box}->{default}->{password};
 print "Running: REXUSER=$user REXPASS=$pass HTEST=$ip rex -f build/Rexfile -c bundle --build=$build_file\n";
 system "REXUSER=$user REXPASS=$pass HTEST=$ip rex -f build/Rexfile -c bundle --build=$build_file";
 
-#vm destroy => $new_vm;
+vm destroy => $new_vm;
 
-#vm delete => $new_vm;
+vm delete => $new_vm;
 
 #rm "/var/lib/libvirt/images/$new_vm.img";
 # fix for #6
-#run "virsh vol-delete --pool default $new_vm.img";
+run "virsh vol-delete --pool default $new_vm.img";
 
 
