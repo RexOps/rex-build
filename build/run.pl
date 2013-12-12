@@ -45,12 +45,7 @@ while(! is_port_open($ip, 22)) {
    sleep 1;
 }
 
-my ($user, $pass);
-
-$user = $config->{box}->{default}->{user};
-$pass = $config->{box}->{default}->{password};
-
-
+print "Running: REXUSER=$user REXPASS=$pass HTEST=$ip rex -f build/Rexfile -c bundle --build=$build_file\n";
 system "REXUSER=$user REXPASS=$pass HTEST=$ip rex -f build/Rexfile -c bundle --build=$build_file";
 
 #vm destroy => $new_vm;
