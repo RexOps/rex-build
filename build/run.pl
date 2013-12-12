@@ -32,10 +32,7 @@ if(! $build_file || ! -f $build_file) {
 
 Rex::connect(%{ $config });
 
-my $new_vm = "${base_vm}-test";
-if(exists $ENV{use_sudo}) {
-   $new_vm .= "-sudo";
-}
+my $new_vm = "${base_vm}-build";
 
 vm clone => $base_vm  => $new_vm;
 
