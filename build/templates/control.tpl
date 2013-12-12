@@ -1,4 +1,4 @@
-Source: <%= $data->{name} %>
+Source: <%= $data->{name}->{lc($os)} %>
 Section: <%= $data->{group}->{lc($os)} %>
 Priority: <%= $data->{priority} %>
 Maintainer: <%= $data->{maintainer} %>
@@ -6,7 +6,7 @@ Build-Depends: <%= join(",\n         ", @{ $data->{requires}->{lc($os)}->{build}
 Standards-Version: 3.9.1
 Homepage: <%= $data->{homepage} %>
 
-Package: <%= $data->{name} %>
+Package: <%= $data->{name}->{lc($os)} %>
 Architecture: <%= $data->{arch}->{lc($os)} %>
 Depends: <%= join(",\n         ", @{ $data->{requires}->{lc($os)}->{runtime} }) %>
 Description: <%= $data->{summary} %>

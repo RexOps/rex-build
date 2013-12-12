@@ -17,6 +17,15 @@ $yaml .= "\n";
 my $config = Load($yaml);
 
 my $base_vm = $ARGV[0];
+my $build_file = $ARGV[1];
+
+if(! $base_vm) {
+   die("No base vm given");
+}
+
+if(! $build_file || ! -f $build_file) {
+   die("No (valid) build file given");
+}
 
 Rex::connect(%{ $config });
 
@@ -41,7 +50,9 @@ my ($user, $pass);
 $user = $config->{box}->{default}->{user};
 $pass = $config->{box}->{default}->{password};
 
-system "REXUSER=$user REXPASS=$pass HTEST=$ip rex -c build";
+chdir "..";
+
+system "REXUSER=$user REXPASS=$pass HTEST=$ip rex -f build/Rexfile -c bundle --build=$build_file";
 
 vm destroy => $new_vm;
 

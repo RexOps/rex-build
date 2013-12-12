@@ -196,16 +196,17 @@ sub create_build_files {
 
    my $upload_tarball_dir = config->{build}->{source_directory}->{lc($op)};
    my ($default_build_file, $double_parsed_build_file) = build_config($param->{build});
+   my $pkg_name = $double_parsed_build_file->{name}->{lc($op)};
 
    mkdir "/root/build";
    mkdir config->{build}->{source_directory}->{lc($op)}
       if(exists config->{build}->{source_directory}->{lc($op)});
 
    if($op =~ m/centos/i) {
-      my $buildroot = "/tmp/build-$double_parsed_build_file->{name}-$pid";
+      my $buildroot = "/tmp/build-$pkg_name-$pid";
       mkdir $buildroot;
 
-      file "/root/build/" . $double_parsed_build_file->{name} . ".spec",
+      file "/root/build/$pkg_name.spec",
          content => parse_template("templates/spec.tpl", 
                            buildroot  => $buildroot,
                            os         => $op,
@@ -219,7 +220,7 @@ sub create_build_files {
 
    elsif($op =~ m/ubuntu/i) {
 
-      my $buildroot = "/root/build/debian/$double_parsed_build_file->{name}";
+      my $buildroot = "/root/build/debian/$pkg_name";
 
       mkdir "/root/build/debian";
       file "/root/build/debian/control",

@@ -1,4 +1,4 @@
-Name:           <%= $data->{name} %>
+Name:           <%= $data->{name}->{lc($os)} %>
 Version:        <%= $data->{version} %>
 Release:        <%= $data->{release} %>
 Summary:        <%= $data->{summary} %>

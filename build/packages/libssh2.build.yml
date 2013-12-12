@@ -1,5 +1,8 @@
 # basic informations
-name: libssh2
+name:
+   centos: libssh2
+   ubuntu: libssh2-1
+realname: libssh2
 version: 1.4.2
 release: 1
 epoch: 1
@@ -41,8 +44,8 @@ requires:
 
 # build instructions
 configure: |
-   tar xzf <%= $sourceroot %>/<%= $name %>-<%= $version %>.tar.gz
-   cd <%= $name %>-<%= $version %>
+   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+   cd <%= $realname %>-<%= $version %>
      
    for i in ChangeLog NEWS ; do
       iconv --from=ISO-8859-1 --to=UTF-8 $i > new
@@ -52,13 +55,13 @@ configure: |
    ./configure --disable-static --enable-shared --prefix=/usr --with-libssl-prefix=/
 
 make: |
-   cd <%= $name %>-<%= $version %>
+   cd <%= $realname %>-<%= $version %>
    make
 
 install: |
    rm -rf <%= $buildroot %>
       
-   cd <%= $name %>-<%= $version %>
+   cd <%= $realname %>-<%= $version %>
    make install DESTDIR=<%= $buildroot %> INSTALL="install -p"
    find <%= $buildroot %> -name '*.la' -exec rm -f '{}' +
      
@@ -66,6 +69,11 @@ install: |
    ( cd example && make clean )
    find example/ -type d -name .deps -exec rm -rf {} +
    find example/ -type f '(' -name '*.am' -o -name '*.in' ')' -exec rm -v {} +
+      
+   rm -rf <%= $buildroot %>/usr/include
+   rm -rf <%= $buildroot %>/usr/share
+   rm -rf <%= $buildroot %>/usr/lib/pkgconfig
+   rm -f <%= $buildroot %>/usr/lib/libssh2.so
 
 clean: |
    rm -rf <%= $buildroot %>
@@ -75,5 +83,5 @@ post: |
 
 files:
    package:
-      - /usr
+      - /usr/lib/*.so.*
 
