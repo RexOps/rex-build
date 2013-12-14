@@ -71,6 +71,7 @@ install: |
    find example/ -type f '(' -name '*.am' -o -name '*.in' ')' -exec rm -v {} +
       
    rm -rf <%= $buildroot %>/usr/share
+   rm -rf <%= $buildroot %>/usr/lib/*.so.*
 
 clean: |
    rm -rf <%= $buildroot %>
