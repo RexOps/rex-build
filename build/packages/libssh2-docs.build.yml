@@ -1,0 +1,85 @@
+# basic informations
+name:
+   centos: libssh2-docs
+   ubuntu: libssh2-1-docs
+realname: libssh2
+version: 1.4.2
+release: 1
+epoch: 1
+summary: A library implementing the SSH2 protocol (documentation)
+group:
+   centos: System Environment/Libraries
+   ubuntu: libs
+license: BSD
+homepage: http://www.libssh2.org
+source: http://libssh2.org/download/libssh2-<%= $version %>.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+   centos: x86_64
+   ubuntu: amd64
+description: |
+   A library implementing the SSH2 protocol
+
+# requirements
+requires:
+   centos:
+      build:
+         - openssl-devel
+         - zlib-devel
+         - make
+         - gcc
+      runtime:
+         - pkgconfig
+   ubuntu:
+      build:
+         - debhelper
+         - autotools-dev
+         - automake
+         - libtool
+         - libssl-dev
+         - zlib1g-dev
+      runtime:
+         - libssl1.0.0
+
+# build instructions
+configure: |
+   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+   cd <%= $realname %>-<%= $version %>
+     
+   for i in ChangeLog NEWS ; do
+      iconv --from=ISO-8859-1 --to=UTF-8 $i > new
+      mv new $i
+   done
+    
+   ./configure --disable-static --enable-shared --prefix=/usr --with-libssl-prefix=/
+
+make: |
+   cd <%= $realname %>-<%= $version %>
+   make
+
+install: |
+   rm -rf <%= $buildroot %>
+      
+   cd <%= $realname %>-<%= $version %>
+   make install DESTDIR=<%= $buildroot %> INSTALL="install -p"
+   find <%= $buildroot %> -name '*.la' -exec rm -f '{}' +
+     
+   # clean things up a bit for packaging
+   ( cd example && make clean )
+   find example/ -type d -name .deps -exec rm -rf {} +
+   find example/ -type f '(' -name '*.am' -o -name '*.in' ')' -exec rm -v {} +
+      
+   rm -rf <%= $buildroot %>/usr/include
+   rm -rf <%= $buildroot %>/usr/lib
+
+clean: |
+   rm -rf <%= $buildroot %>
+
+post: |
+   /sbin/ldconfig
+
+files:
+   package:
+      - /usr/share/man
+
