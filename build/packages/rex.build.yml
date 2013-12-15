@@ -1,0 +1,108 @@
+# basic informations
+name:
+   centos: rex
+realname: Rex
+version: 0.43.7
+release: 1
+epoch: 1
+summary: Rex is a tool to ease the execution of commands on multiple remote servers.
+group:
+   centos: Utilities/System
+license: Apache 2
+homepage: http://rexify.org/
+source: http://cpan.metacpan.org/authors/id/J/JF/JFRIED/Rex-0.43.7.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+   centos: x86_64
+description: |
+   Rex is a tool to ease the execution of commands on multiple remote
+   servers. You can define small tasks, chain tasks to batches, link
+   them with servers or server groups, and execute them easily in
+   your terminal.
+
+# requirements
+requires:
+   centos:
+      5:
+         build:
+            - openssl-devel
+            - zlib-devel
+            - make
+            - gcc
+            - perl
+            - perl-Net-SSH2
+            - perl-Expect
+            - perl-DBI
+            - perl-libwww-perl
+            - perl-XML-Simple
+            - perl-Digest-HMAC
+            - perl-YAML
+            - perl-String-Escape
+         runtime:
+            - pkgconfig
+            - perl
+            - perl-Net-SSH2
+            - perl-Expect
+            - perl-DBI
+            - perl-libwww-perl
+            - perl-XML-Simple
+            - perl-Digest-HMAC
+            - perl-YAML
+            - perl-String-Escape
+ 
+      6:
+         build:
+            - openssl-devel
+            - zlib-devel
+            - make
+            - gcc
+            - perl
+            - perl-devel
+            - perl-Net-SSH2
+            - perl-Expect
+            - perl-DBI
+            - perl-libwww-perl
+            - perl-XML-Simple
+            - perl-Digest-HMAC
+            - perl-YAML
+            - perl-String-Escape
+ 
+         runtime:
+            - pkgconfig
+            - perl
+            - perl-Net-SSH2
+            - perl-Expect
+            - perl-DBI
+            - perl-libwww-perl
+            - perl-XML-Simple
+            - perl-Digest-HMAC
+            - perl-YAML
+            - perl-String-Escape
+ 
+
+# build instructions
+configure: |
+   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+   cd <%= $realname %>-<%= $version %>
+     
+   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+   cd <%= $realname %>-<%= $version %>
+   make
+
+install: |
+   rm -rf <%= $buildroot %>
+      
+   cd <%= $realname %>-<%= $version %>
+   make pure_install
+   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+   rm -rf <%= $buildroot %>
+
+files:
+   package:
+      - /usr
+
