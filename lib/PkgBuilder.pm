@@ -301,7 +301,7 @@ sub create_build_files {
 sub sync_time {
    my $op = get_os_name;
 
-   print ">>$op\n";
+   Rex::Logger::info("Syncing time...");
 
    if($op =~ m/ubuntu/i) {
       service ntp => "stop";

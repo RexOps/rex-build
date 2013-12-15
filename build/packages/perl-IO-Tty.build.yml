@@ -21,16 +21,28 @@ description: |
 # requirements
 requires:
    centos:
-      build:
-         - openssl-devel
-         - zlib-devel
-         - make
-         - gcc
-         - perl
-         - perl-devel
-      runtime:
-         - pkgconfig
-         - perl
+      5:
+         build:
+            - openssl-devel
+            - zlib-devel
+            - make
+            - gcc
+            - perl
+         runtime:
+            - pkgconfig
+            - perl
+
+      6:
+         build:
+            - openssl-devel
+            - zlib-devel
+            - make
+            - gcc
+            - perl
+            - perl-devel
+         runtime:
+            - pkgconfig
+            - perl
 
 # build instructions
 configure: |

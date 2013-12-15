@@ -37,6 +37,7 @@ task prepare => group => test => sub {
 
    my $op   = get_os_name;
    my $arch = get_os_arch;
+   my $ver  = get_os_release;
 
 
    my ($default_build_file, $double_parsed_build_file) = build_config($param->{build});
@@ -58,7 +59,21 @@ task prepare => group => test => sub {
 
    Rex::Logger::info("Installing basic dependencies.");
 
-   install $double_parsed_build_file->{requires}->{lc($op)}->{build};
+   my $pkg_build_dep;
+
+   if(exists $double_parsed_build_file->{requires}->{lc($op)}->{$ver}->{build}) {
+      $pkg_build_dep = $double_parsed_build_file->{requires}->{lc($op)}->{$ver}->{build};
+   }
+
+   elsif(exists $double_parsed_build_file->{requires}->{lc($op)}->{build}) {
+      $pkg_build_dep = $double_parsed_build_file->{requires}->{lc($op)}->{build};
+   }
+
+   else {
+      Rex::Logger::info("No build dependencies found.");
+   }
+
+   install $pkg_build_dep if($pkg_build_dep);
 
    # install some additional packages that are needed for the build
    my $add_pkgs = case $op, {
