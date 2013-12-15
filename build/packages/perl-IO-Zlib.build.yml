@@ -28,9 +28,11 @@ requires:
             - make
             - gcc
             - perl
+            - perl-IO-Compress-Zlib
          runtime:
             - pkgconfig
             - perl
+            - perl-IO-Compress-Zlib
 
       6:
          build:
@@ -40,9 +42,11 @@ requires:
             - gcc
             - perl
             - perl-devel
+            - perl-IO-Compress-Zlib
          runtime:
             - pkgconfig
             - perl
+            - perl-IO-Compress-Zlib
 
 # build instructions
 configure: |
