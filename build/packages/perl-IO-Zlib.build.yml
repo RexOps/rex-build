@@ -34,20 +34,6 @@ requires:
             - perl
             - perl-IO-Compress-Zlib
 
-      6:
-         build:
-            - openssl-devel
-            - zlib-devel
-            - make
-            - gcc
-            - perl
-            - perl-devel
-            - perl-IO-Compress-Zlib
-         runtime:
-            - pkgconfig
-            - perl
-            - perl-IO-Compress-Zlib
-
 # build instructions
 configure: |
    tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
