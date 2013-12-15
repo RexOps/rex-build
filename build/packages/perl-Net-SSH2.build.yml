@@ -29,7 +29,7 @@ requires:
             - gcc
             - perl
             - libssh2
-            - libssh2-dev
+            - libssh2-devel
          runtime:
             - pkgconfig
             - libssh2
@@ -44,7 +44,7 @@ requires:
             - perl
             - perl-devel
             - libssh2
-            - libssh2-dev
+            - libssh2-devel
          runtime:
             - pkgconfig
             - perl
