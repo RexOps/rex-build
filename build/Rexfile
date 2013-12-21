@@ -51,7 +51,7 @@ task prepare => group => test => sub {
    repository add => "rex", %{ config->{repo}->{add}->{lc($op)} }
       if(exists config->{repo}->{add}->{lc($op)});
 
-   if(is_debian || is_ubuntu) {
+   if(is_debian) {
       run "wget -O - http://rex.linux-files.org/DPKG-GPG-KEY-REXIFY-REPO | apt-key add -";
    }
    else {
