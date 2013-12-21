@@ -27,16 +27,15 @@ requires:
             - gcc
             - perl
             - perl-ExtUtils-CBuilder
-            - perl-ExtUtils-MakeMaker
          runtime:
             - perl
-            - perl-ExtUtils-MakeMaker
             - perl-ExtUtils-CBuilder
 
 # build instructions
 configure: |
    tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
    cd <%= $realname %>-<%= $version %>
+   sed -ie "s/'ExtUtils::MakeMaker' => '6.46'/'ExtUtils::MakeMaker' => '0'/g" Makefile.PL
      
    perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
 
