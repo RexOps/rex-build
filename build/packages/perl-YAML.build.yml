@@ -28,7 +28,6 @@ requires:
             - perl
             - perl-Test-Base
          runtime:
-            - pkgconfig
             - perl
 
 # build instructions
