@@ -28,6 +28,7 @@ requires:
             - make
             - gcc
             - perl
+            - perl-Test-Base
          runtime:
             - pkgconfig
             - perl
