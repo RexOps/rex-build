@@ -36,6 +36,7 @@ configure: |
    tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
    cd <%= $realname %>-<%= $version %>
    sed -ie "s/'ExtUtils::MakeMaker' => '6.46'/'ExtUtils::MakeMaker' => '0'/g" Makefile.PL
+   sed -ie "s/use ExtUtils::MakeMaker 6.46/use ExtUtils::MakeMaker/g" Makefile.PL
      
    perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
 
