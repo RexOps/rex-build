@@ -1,0 +1,58 @@
+# basic informations
+name:
+   centos: perl-Params-Check
+realname: Params-Check
+version: 0.38
+release: 1
+epoch: 1
+summary: Params::Check - A generic input parsing/checking mechanism.
+group:
+   centos: System Environment/Libraries
+license: Artistic
+homepage: https://metacpan.org/pod/Params::Check
+source: http://cpan.metacpan.org/authors/id/B/BI/BINGOS/Params-Check-0.38.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+   centos: x86_64
+description: |
+   Params::Check - A generic input parsing/checking mechanism
+
+# requirements
+requires:
+   centos:
+      5:
+         build:
+            - make
+            - gcc
+            - perl
+            - perl-Locale-Maketext-Simple
+         runtime:
+            - perl
+            - perl-Locale-Maketext-Simple
+
+# build instructions
+configure: |
+   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+   cd <%= $realname %>-<%= $version %>
+     
+   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+   cd <%= $realname %>-<%= $version %>
+   make
+
+install: |
+   rm -rf <%= $buildroot %>
+      
+   cd <%= $realname %>-<%= $version %>
+   make pure_install
+   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+   rm -rf <%= $buildroot %>
+
+files:
+   package:
+      - /usr
+
