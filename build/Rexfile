@@ -51,6 +51,18 @@ task prepare => group => test => sub {
    repository add => "rex", %{ config->{repo}->{add}->{lc($op)} }
       if(exists config->{repo}->{add}->{lc($op)});
 
+   if(is_debian || is_ubuntu) {
+      run "wget -O - http://rex.linux-files.org/DPKG-GPG-KEY-REXIFY-REPO | apt-key add -";
+   }
+   else {
+      if(lc($op) eq "centos" && $ver =~ m/^5/) {
+         run "rpm --import http://rex.linux-files.org/RPM-GPG-KEY-REXIFY-REPO.CENTOS5";
+      }
+      else {
+         run "rpm --import http://rex.linux-files.org/RPM-GPG-KEY-REXIFY-REPO.CENTOS6";
+      }
+   }
+
    eval { update_package_db; };
 
 ################################################################################
