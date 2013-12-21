@@ -8,6 +8,10 @@ License:        <%= $data->{license} %>
 Source:         <%= $data->{source} %>
 BuildRoot:      <%= $buildroot %>
 
+if(exists $data->{no_auto_scan)) {
+AutoReqProv: no
+}
+
 <% for my $req (@{ $data->{requires}->{lc($os)}->{build} }) { %>
 BuildRequires:  <%= $req %><% } %>
 
