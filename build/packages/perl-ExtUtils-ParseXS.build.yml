@@ -27,8 +27,10 @@ requires:
             - gcc
             - perl
             - perl-ExtUtils-CBuilder
+            - perl-ExtUtils-MakeMaker
          runtime:
             - perl
+            - perl-ExtUtils-MakeMaker
             - perl-ExtUtils-CBuilder
 
 # build instructions
