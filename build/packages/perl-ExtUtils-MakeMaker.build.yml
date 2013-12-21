@@ -34,7 +34,7 @@ configure: |
    tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
    cd <%= $realname %>-<%= $version %>
      
-   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr/local
 
 make: |
    cd <%= $realname %>-<%= $version %>
@@ -52,5 +52,5 @@ clean: |
 
 files:
    package:
-      - /usr
+      - /usr/local
 
