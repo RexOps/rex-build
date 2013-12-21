@@ -1,22 +1,22 @@
 # basic informations
 name:
-   centos: perl-Spiffy
-realname: Spiffy
-version: 0.31
+   centos: perl-Test-Base
+realname: Test-Base
+version: 0.60
 release: 1
 epoch: 1
-summary: Spiffy - Spiffy Perl Interface Framework For You
+summary: Test::Base - A Data Driven Testing Framework
 group:
    centos: System Environment/Libraries
 license: Artistic 1 & GPL 1
-homepage: https://metacpan.org/pod/Spiffy
-source: http://cpan.metacpan.org/authors/id/I/IN/INGY/Spiffy-0.31.tar.gz
+homepage: https://metacpan.org/pod/Test::Base
+source: http://cpan.metacpan.org/authors/id/I/IN/INGY/Test-Base-0.60.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 arch:
    centos: x86_64
 description: |
-   Spiffy - Spiffy Perl Interface Framework For You
+   Test::Base - A Data Driven Testing Framework
 
 # requirements
 requires:
@@ -26,8 +26,10 @@ requires:
             - make
             - gcc
             - perl
+            - perl-Spiffy
          runtime:
             - perl
+            - perl-Spiffy
 
 
 # build instructions
