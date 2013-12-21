@@ -23,8 +23,6 @@ requires:
    centos:
       5:
          build:
-            - openssl-devel
-            - zlib-devel
             - make
             - gcc
             - perl
