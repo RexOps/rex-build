@@ -31,6 +31,7 @@ requires:
             - perl-Module-Metadata
             - perl-Locale-Maketext-Simple
             - perl-Params-Check
+            - perl-version
          runtime:
             - perl
             - perl-Module-CoreList
@@ -38,6 +39,7 @@ requires:
             - perl-Module-Metadata
             - perl-Locale-Maketext-Simple
             - perl-Params-Check
+            - perl-version
 
 # build instructions
 configure: |
