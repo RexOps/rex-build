@@ -1,0 +1,70 @@
+# basic informations
+name:
+   centos: perl-Expect
+realname: Expect
+version: 1.21
+release: 1
+epoch: 1
+summary: Expect.pm - Expect for Perl
+group:
+   centos: System Environment/Libraries
+license: Artistic
+homepage: http://search.cpan.org/~rgiersig/Expect-1.21/Expect.pod
+source: http://cpan.metacpan.org/authors/id/R/RG/RGIERSIG/Expect-1.21.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+   centos: x86_64
+description: |
+   Expect.pm - Expect for Perl
+
+# requirements
+requires:
+   centos:
+      5:
+         build:
+            - make
+            - gcc
+            - perl
+            - perl-IO-Tty
+         runtime:
+            - perl
+            - perl-IO-Tty
+
+      6:
+         build:
+            - make
+            - gcc
+            - perl
+            - perl-IO-Tty
+         runtime:
+            - perl
+            - perl-IO-Tty
+
+
+
+# build instructions
+configure: |
+   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+   cd <%= $realname %>-<%= $version %>
+     
+   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+   cd <%= $realname %>-<%= $version %>
+   make
+
+install: |
+   rm -rf <%= $buildroot %>
+      
+   cd <%= $realname %>-<%= $version %>
+   make pure_install
+   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+   rm -rf <%= $buildroot %>
+
+files:
+   package:
+      - /usr
+
