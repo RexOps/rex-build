@@ -37,6 +37,7 @@ requires:
             - gcc
             - perl
             - perl-IO-Tty
+            - perl-devel
          runtime:
             - perl
             - perl-IO-Tty
