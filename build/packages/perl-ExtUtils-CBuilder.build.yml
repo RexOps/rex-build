@@ -1,0 +1,60 @@
+# basic informations
+name:
+   centos: perl-ExtUtils-CBuilder
+realname: ExtUtils-CBuilder
+version: 0.280212
+release: 1
+epoch: 1
+summary: ExtUtils::CBuilder - Compile and link C code for Perl modules
+group:
+   centos: System Environment/Libraries
+license: Artistic
+homepage: https://metacpan.org/pod/ExtUtils::CBuilder
+source: http://cpan.metacpan.org/authors/id/A/AM/AMBS/ExtUtils/ExtUtils-CBuilder-0.280212.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+   centos: x86_64
+description: |
+   ExtUtils::CBuilder - Compile and link C code for Perl modules
+
+# requirements
+requires:
+   centos:
+      5:
+         build:
+            - make
+            - gcc
+            - perl
+            - perl-IPC-Cmd
+            - perl-Perl-OSType
+         runtime:
+            - perl
+            - perl-IPC-Cmd
+            - perl-Perl-OSType
+
+# build instructions
+configure: |
+   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+   cd <%= $realname %>-<%= $version %>
+     
+   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+   cd <%= $realname %>-<%= $version %>
+   make
+
+install: |
+   rm -rf <%= $buildroot %>
+      
+   cd <%= $realname %>-<%= $version %>
+   make pure_install
+   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+   rm -rf <%= $buildroot %>
+
+files:
+   package:
+      - /usr
+
