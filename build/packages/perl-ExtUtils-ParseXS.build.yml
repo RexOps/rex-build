@@ -50,8 +50,8 @@ install: |
    cd <%= $realname %>-<%= $version %>
    make pure_install
    find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
-   rm <%= $buildroot %>/usr/bin/xsubpp
-   rm <%= $buildroot %>/usr/share/man/man1/xsubpp.1.gz
+   mkdir -p <%= $buildroot %>/usr/local/bin
+   mv <%= $buildroot %>/usr/bin/xsubpp <%= $buildroot %>/usr/local/bin
 
 clean: |
    rm -rf <%= $buildroot %>
