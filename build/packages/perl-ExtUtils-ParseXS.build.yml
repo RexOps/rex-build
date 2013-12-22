@@ -51,6 +51,7 @@ install: |
    make pure_install
    find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
    mkdir -p <%= $buildroot %>/usr/local/bin
+   rm <%= $buildroot %>/usr/share/man/man1/xsubpp.1
    mv <%= $buildroot %>/usr/bin/xsubpp <%= $buildroot %>/usr/local/bin
 
 clean: |
