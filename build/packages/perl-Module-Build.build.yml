@@ -28,7 +28,6 @@ requires:
             - perl
             - perl-CPAN-Meta
             - perl-ExtUtils-CBuilder
-            - perl-ExtUtils-Install
             - perl-ExtUtils-Manifest
             - perl-ExtUtils-ParseXS
             - perl-Module-Metadata
@@ -38,7 +37,6 @@ requires:
             - perl
             - perl-CPAN-Meta
             - perl-ExtUtils-CBuilder
-            - perl-ExtUtils-Install
             - perl-ExtUtils-Manifest
             - perl-ExtUtils-ParseXS
             - perl-Module-Metadata
