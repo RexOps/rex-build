@@ -40,7 +40,6 @@ requires:
             - perl-YAML
             - perl-String-Escape
          runtime:
-            - pkgconfig
             - perl
             - perl-Net-SSH2
             - perl-Expect
@@ -69,7 +68,6 @@ requires:
             - perl-String-Escape
  
          runtime:
-            - pkgconfig
             - perl
             - perl-Net-SSH2
             - perl-Expect
