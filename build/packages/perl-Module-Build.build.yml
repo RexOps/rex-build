@@ -33,6 +33,7 @@ requires:
             - perl-Perl-OSType
             - perl-CPAN-Meta-YAML
             - perl-Parse-CPAN-Meta
+            - perl-JSON-PP
             - perl-version
          runtime:
             - perl
@@ -44,6 +45,7 @@ requires:
             - perl-version
             - perl-CPAN-Meta-YAML
             - perl-Parse-CPAN-Meta
+            - perl-JSON-PP
 
 # build instructions
 configure: |
