@@ -50,8 +50,8 @@ configure: |
    tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
    cd <%= $realname %>-<%= $version %>
      
-   sed -ie "s/'Test::Harness'         => 3.16/'Test::Harness'         => 0/g" Makefile.PL
-   sed -ie "s/'Pod::Man'              => 2.17/'Pod::Man'              => 0/g" Makefile.PL
+   sed -ie "s/'Test::Harness'         => 3.16/'Test::Harness'         => 0/g" Build.PL
+   sed -ie "s/'Pod::Man'              => 2.17/'Pod::Man'              => 0/g" Build.PL
      
    perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
 
