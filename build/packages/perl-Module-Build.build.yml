@@ -1,0 +1,72 @@
+# basic informations
+name:
+   centos: perl-Module-Build
+realname: Module-Build
+version: 0.4203
+release: 1
+epoch: 1
+summary: Module::Build - Build and install Perl modules
+group:
+   centos: System Environment/Libraries
+license: Artistic
+homepage: https://metacpan.org/release/Module-Build
+source: http://cpan.metacpan.org/authors/id/L/LE/LEONT/Module-Build-0.4203.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+   centos: x86_64
+description: |
+   Module::Build - Build and install Perl modules
+
+# requirements
+requires:
+   centos:
+      5:
+         build:
+            - make
+            - gcc
+            - perl
+            - perl-CPAN-Meta
+            - perl-ExtUtils-CBuilder
+            - perl-ExtUtils-Install
+            - perl-ExtUtils-Manifest
+            - perl-ExtUtils-ParseXS
+            - perl-Module-Metadata
+            - perl-Perl-OSType
+            - perl-version
+         runtime:
+            - perl
+            - perl-CPAN-Meta
+            - perl-ExtUtils-CBuilder
+            - perl-ExtUtils-Install
+            - perl-ExtUtils-Manifest
+            - perl-ExtUtils-ParseXS
+            - perl-Module-Metadata
+            - perl-Perl-OSType
+            - perl-version
+
+# build instructions
+configure: |
+   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+   cd <%= $realname %>-<%= $version %>
+     
+   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+   cd <%= $realname %>-<%= $version %>
+   make
+
+install: |
+   rm -rf <%= $buildroot %>
+      
+   cd <%= $realname %>-<%= $version %>
+   make pure_install
+   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+   rm -rf <%= $buildroot %>
+
+files:
+   package:
+      - /usr
+
