@@ -1,0 +1,56 @@
+# basic informations
+name:
+   centos: perl-CPAN-Meta-Requirements
+realname: CPAN-Meta-Requirements
+version: 2.125
+release: 1
+epoch: 1
+summary: CPAN::Meta::Requirements - a set of version requirements for a CPAN dist
+group:
+   centos: System Environment/Libraries
+license: Artistic
+homepage: https://metacpan.org/pod/CPAN::Meta::Requirements
+source: http://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN/CPAN-Meta-Requirements-2.125.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+   centos: x86_64
+description: |
+   CPAN::Meta::Requirements - a set of version requirements for a CPAN dist
+
+# requirements
+requires:
+   centos:
+      5:
+         build:
+            - make
+            - gcc
+            - perl
+         runtime:
+            - perl
+
+# build instructions
+configure: |
+   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+   cd <%= $realname %>-<%= $version %>
+     
+   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+   cd <%= $realname %>-<%= $version %>
+   make
+
+install: |
+   rm -rf <%= $buildroot %>
+      
+   cd <%= $realname %>-<%= $version %>
+   make pure_install
+   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+   rm -rf <%= $buildroot %>
+
+files:
+   package:
+      - /usr
+
