@@ -1,0 +1,56 @@
+# basic informations
+name:
+   centos: perl-ExtUtils-Install
+realname: ExtUtils-Install
+version: 1.54
+release: 1
+epoch: 1
+summary: ExtUtils::Install - install files from here to there
+group:
+   centos: System Environment/Libraries
+license: unknown
+homepage: https://metacpan.org/pod/ExtUtils::Install
+source: http://cpan.metacpan.org/authors/id/Y/YV/YVES/ExtUtils-Install-1.54.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+   centos: x86_64
+description: |
+   ExtUtils::Install - install files from here to there
+
+# requirements
+requires:
+   centos:
+      5:
+         build:
+            - make
+            - gcc
+            - perl
+         runtime:
+            - perl
+
+# build instructions
+configure: |
+   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+   cd <%= $realname %>-<%= $version %>
+     
+   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+   cd <%= $realname %>-<%= $version %>
+   make
+
+install: |
+   rm -rf <%= $buildroot %>
+      
+   cd <%= $realname %>-<%= $version %>
+   make pure_install
+   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+   rm -rf <%= $buildroot %>
+
+files:
+   package:
+      - /usr
+
