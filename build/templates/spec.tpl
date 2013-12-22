@@ -12,11 +12,11 @@ BuildRoot:      <%= $buildroot %>
 AutoReqProv: no
 <% } %>
 
-<% for my $req (@{ $data->{requires}->{lc($os)}->{build} }) { %>
+<% for my $req (@{ $data->{requires}->{lc($os)}->{$rel}->{build} }) { %>
 BuildRequires:  <%= $req %><% } %>
 
-<% if(exists $data->{requires}->{lc($os)}->{runtime}) { %>
-<% for my $req (@{ $data->{requires}->{lc($os)}->{runtime} }) { %>
+<% if(exists $data->{requires}->{lc($os)}->{$rel}->{runtime}) { %>
+<% for my $req (@{ $data->{requires}->{lc($os)}->{$rel}->{runtime} }) { %>
 Requires:  <%= $req %><% } %><% } %>
 
 %description

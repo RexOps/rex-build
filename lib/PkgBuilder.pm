@@ -193,6 +193,7 @@ sub create_build_files {
    my $param = shift;
 
    my $op = get_os_name;
+   my $rel = get_os_release;
 
    my $upload_tarball_dir = config->{build}->{source_directory}->{lc($op)};
    my ($default_build_file, $double_parsed_build_file) = build_config($param->{build});
@@ -210,6 +211,7 @@ sub create_build_files {
          content => parse_template("templates/spec.tpl", 
                            buildroot  => $buildroot,
                            os         => $op,
+                           rel        => $rel,
                            data       => $default_build_file,
                            sourceroot => $upload_tarball_dir, %{ $default_build_file }),
          owner   => "root",
