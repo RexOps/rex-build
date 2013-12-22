@@ -2,7 +2,7 @@
 name:
    centos: perl-File-Remove
 realname: File-Remove
-version: 1.52
+version: 1.42
 release: 1
 epoch: 1
 summary: File::Remove - Remove files and directories
@@ -10,7 +10,7 @@ group:
    centos: System Environment/Libraries
 license: Artistic
 homepage: https://metacpan.org/pod/File::Remove
-source: http://cpan.metacpan.org/authors/id/A/AD/ADAMK/File-Remove-1.52.tar.gz
+source: http://cpan.metacpan.org/authors/id/A/AD/ADAMK/File-Remove-1.42.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 arch:
