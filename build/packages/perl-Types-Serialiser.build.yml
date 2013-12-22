@@ -1,7 +1,7 @@
 # basic informations
 name:
-   centos: perl-Types-Serializer
-realname: Types-Serializer
+   centos: perl-Types-Serialiser
+realname: Types-Serialiser
 version: 1.0
 release: 1
 epoch: 1
