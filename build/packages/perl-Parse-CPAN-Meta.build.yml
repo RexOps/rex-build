@@ -1,0 +1,62 @@
+# basic informations
+name:
+   centos: perl-Parse-CPAN-Meta
+realname: Parse-CPAN-Meta
+version: 1.4409
+release: 1
+epoch: 1
+summary: Parse::CPAN::Meta - Parse META.yml and META.json CPAN metadata files
+group:
+   centos: System Environment/Libraries
+license: Artistic
+homepage: https://metacpan.org/pod/Parse::CPAN::Meta
+source: http://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN/Parse-CPAN-Meta-1.4409.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+   centos: x86_64
+description: |
+   Parse::CPAN::Meta - Parse META.yml and META.json CPAN metadata files
+
+# requirements
+requires:
+   centos:
+      5:
+         build:
+            - make
+            - gcc
+            - perl
+            - perl-CPAN-Meta-YAML
+            - perl-JSON-PP
+         runtime:
+            - perl
+            - perl-CPAN-Meta-YAML
+            - perl-JSON-PP
+
+# build instructions
+configure: |
+   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+   cd <%= $realname %>-<%= $version %>
+   sed -ie 's/"ExtUtils::MakeMaker" => "6.30"/"ExtUtils::MakeMaker" => "0"/g' Makefile.PL
+   sed -ie "s/use ExtUtils::MakeMaker 6.30/use ExtUtils::MakeMaker/g" Makefile.PL
+     
+   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+   cd <%= $realname %>-<%= $version %>
+   make
+
+install: |
+   rm -rf <%= $buildroot %>
+      
+   cd <%= $realname %>-<%= $version %>
+   make pure_install
+   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+   rm -rf <%= $buildroot %>
+
+files:
+   package:
+      - /usr
+
