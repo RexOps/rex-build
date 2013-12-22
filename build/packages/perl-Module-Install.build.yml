@@ -29,7 +29,6 @@ requires:
             - gcc
             - perl
             - perl-Archive-Tar
-            - perl-ExtUtils-Install
             - perl-ExtUtils-ParseXS
             - perl-File-Remove
             - perl-JSON
@@ -44,7 +43,6 @@ requires:
             - pkgconfig
             - perl
             - perl-Archive-Tar
-            - perl-ExtUtils-Install
             - perl-ExtUtils-ParseXS
             - perl-File-Remove
             - perl-JSON
