@@ -13,6 +13,7 @@ homepage: https://metacpan.org/pod/YAML
 source: http://cpan.metacpan.org/authors/id/I/IN/INGY/YAML-0.88.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
+no_auto_scan: true
 arch:
    centos: x86_64
 description: |
@@ -27,6 +28,7 @@ requires:
             - gcc
             - perl
             - perl-Test-Base
+            - perl-Module-Install
          runtime:
             - perl
 
