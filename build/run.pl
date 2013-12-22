@@ -34,6 +34,10 @@ Rex::connect(%{ $config });
 
 my $new_vm = "${base_vm}-build-$$";
 
+@SIG{qw( INT TERM HUP )} = sub {
+   remove_vm($new_vm);
+};
+
 vm clone => $base_vm  => $new_vm;
 
 vm start => $new_vm;
@@ -55,12 +59,18 @@ print "Running: REXUSER=$user REXPASS=$pass HTEST=$ip rex -f build/Rexfile -c bu
 system "REXUSER=$user REXPASS=$pass HTEST=$ip rex -f build/Rexfile -c bundle --build=$build_file";
 my $exit_code = $?;
 
-vm destroy => $new_vm;
-
-vm delete => $new_vm;
-
-#rm "/var/lib/libvirt/images/$new_vm.img";
-# fix for #6
-run "virsh vol-delete --pool default $new_vm.img";
+remove_vm($new_vm);
 
 exit $exit_code;
+
+sub remove_vm {
+   my ($name) = @_;
+
+   vm destroy => $name;
+
+   vm delete => $name;
+
+   #rm "/var/lib/libvirt/images/$new_vm.img";
+   # fix for #6
+   run "virsh vol-delete --pool default $name.img";
+}
