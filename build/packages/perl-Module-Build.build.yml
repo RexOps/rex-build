@@ -31,6 +31,8 @@ requires:
             - perl-ExtUtils-ParseXS
             - perl-Module-Metadata
             - perl-Perl-OSType
+            - perl-CPAN-Meta-YAML
+            - perl-Parse-CPAN-Meta
             - perl-version
          runtime:
             - perl
@@ -40,11 +42,16 @@ requires:
             - perl-Module-Metadata
             - perl-Perl-OSType
             - perl-version
+            - perl-CPAN-Meta-YAML
+            - perl-Parse-CPAN-Meta
 
 # build instructions
 configure: |
    tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
    cd <%= $realname %>-<%= $version %>
+     
+   sed -ie "s/'Test::Harness'         => 3.16/'Test::Harness'         => 0/g" Makefile.PL
+   sed -ie "s/'Pod::Man'              => 2.17/'Pod::Man'              => 0/g" Makefile.PL
      
    perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
 
