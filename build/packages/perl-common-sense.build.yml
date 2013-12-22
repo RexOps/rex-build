@@ -29,6 +29,16 @@ requires:
          runtime:
             - perl
 
+      6:
+         build:
+            - make
+            - gcc
+            - perl
+            - perl-devel
+         runtime:
+            - perl
+
+
 # build instructions
 configure: |
    tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
