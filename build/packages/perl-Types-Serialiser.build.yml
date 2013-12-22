@@ -31,6 +31,18 @@ requires:
             - perl
             - perl-common-sense
 
+      6:
+         build:
+            - make
+            - gcc
+            - perl
+            - perl-devel
+            - perl-common-sense
+         runtime:
+            - perl
+            - perl-common-sense
+
+
 # build instructions
 configure: |
    tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
