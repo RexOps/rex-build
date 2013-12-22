@@ -2,7 +2,7 @@
 name:
    centos: perl-CPAN-Meta
 realname: CPAN-Meta
-version: 2.133380
+version: 2.120921
 release: 1
 epoch: 1
 summary: CPAN::Meta - the distribution metadata for a CPAN dist
