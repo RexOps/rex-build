@@ -44,4 +44,13 @@ Requires:  <%= $req %><% } %><% } %>
 <% for my $file (@{ $data->{files}->{package} }) { %>
 <%= $file %><% } %>
 
+<% if(exists $data->{pre}) { %>
+%pre
+<%= $data->{pre} %>
+<% } %>
+
+<% if(exists $data->{post}) { %>
+%post
+<%= $data->{post} %>
+<% } %>
 
