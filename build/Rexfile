@@ -67,7 +67,7 @@ task prepare => group => test => sub {
       die("Error registering gpg key.");
    }
 
-   eval { update_package_db; };
+   eval { update_package_db; } or do { repository remove => "rex"; };
 
 ################################################################################
 # install build dependencies
