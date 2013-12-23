@@ -16,7 +16,7 @@
 # vim: set syn=perl:
 
 use Rex -feature => ['0.42', 'exit_status'];
-use Rex::Transaction;
+#use Rex::Transaction;
 use Test::More;
 use Data::Dumper;
 use IO::All;
@@ -297,14 +297,14 @@ task publish => config->{repo}->{server} => sub {
 ################################################################################
 task bundle => sub {
 
-   transaction {
+#   transaction {
       do_task [qw/
          prepare
          build
          publish
          clean
       /];
-   };
+#   };
 
 };
 
