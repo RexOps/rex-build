@@ -309,7 +309,7 @@ sub sync_time {
       service ntp => "stop";
    }
 
-   run_or_die "ntpdate pool.ntp.org";
+   eval { run_or_die "ntpdate pool.ntp.org"; 1; } or do { sleep 2; run_or_die "ntpdate pool.ntp.org"; };
 }
 
 1;
