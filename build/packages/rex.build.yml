@@ -39,7 +39,6 @@ requires:
             - libexpect-perl
             - libdbi-perl
             - libwww-perl
-            - liblwp-protocol-https-perl
             - libxml-simple-perl
             - libdigest-hmac-perl
             - libyaml-perl
@@ -52,7 +51,6 @@ requires:
             - libexpect-perl
             - libdbi-perl
             - libwww-perl
-            - liblwp-protocol-https-perl
             - libxml-simple-perl
             - libdigest-hmac-perl
             - libyaml-perl
