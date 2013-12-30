@@ -58,7 +58,7 @@ requires:
             - libjson-xs-perl
 
 
-      wheezy:
+      wheezy: *depwheezy
          build:
             - build-essential
             - debhelper
@@ -139,6 +139,13 @@ requires:
             - perl-YAML
             - perl-String-Escape
  
+
+   ubuntu:
+      lucid: &depwheezy
+      precise: &depwheezy
+      quantal: &depwheezy
+      raring: &depwheezy
+      saucy: &depwheezy
 
 # build instructions
 configure: |
