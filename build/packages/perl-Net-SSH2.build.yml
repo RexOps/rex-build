@@ -1,7 +1,7 @@
 # basic informations
 name:
    centos: perl-Net-SSH2
-   debian: perl-Net-SSH2
+   debian: libnet-ssh2-perl
 realname: Net-SSH2
 version: 0.53
 release: 1
