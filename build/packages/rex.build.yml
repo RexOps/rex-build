@@ -1,6 +1,8 @@
 # basic informations
 name:
    centos: rex
+   debian: rex
+   ubuntu: rex
 realname: Rex
 version: 0.43.7
 release: 1
@@ -8,14 +10,14 @@ epoch: 1
 summary: Rex is a tool to ease the execution of commands on multiple remote servers.
 group:
    centos: Utilities/System
+   debian: admin
+   ubuntu: admin
 license: Apache 2
 homepage: http://rexify.org/
 source: http://cpan.metacpan.org/authors/id/J/JF/JFRIED/Rex-0.43.7.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 no_auto_scan: true
-arch:
-   centos: x86_64
 description: |
    Rex is a tool to ease the execution of commands on multiple remote
    servers. You can define small tasks, chain tasks to batches, link
@@ -24,13 +26,41 @@ description: |
 
 # requirements
 requires:
+   debian:
+      wheezy:
+         build:
+            - build-essential
+            - debhelper
+            - perl
+            - libperl-dev
+            - perl-modules
+            - make
+            - libnet-ssh2-perl
+            - libexpect-perl
+            - libdbi-perl
+            - libwww-perl
+            - liblwp-protocol-https-perl
+            - libxml-simple-perl
+            - libdigest-hmac-perl
+            - libyaml-perl
+            - libstring-escape-perl
+         runtime:
+            - perl
+            - perl-modules
+            - libnet-ssh2-perl
+            - libexpect-perl
+            - libdbi-perl
+            - libwww-perl
+            - liblwp-protocol-https-perl
+            - libxml-simple-perl
+            - libdigest-hmac-perl
+            - libyaml-perl
+            - libstring-escape-perl
+
    centos:
       5:
          build:
-            - openssl-devel
-            - zlib-devel
             - make
-            - gcc
             - perl
             - perl-Net-SSH2
             - perl-Expect
@@ -53,10 +83,7 @@ requires:
  
       6:
          build:
-            - openssl-devel
-            - zlib-devel
             - make
-            - gcc
             - perl
             - perl-devel
             - perl-Net-SSH2
