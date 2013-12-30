@@ -27,6 +27,39 @@ description: |
 # requirements
 requires:
    debian:
+      squeeze:
+         build:
+            - build-essential
+            - debhelper
+            - perl
+            - libperl-dev
+            - perl-modules
+            - make
+            - libnet-ssh2-perl
+            - libexpect-perl
+            - libdbi-perl
+            - libwww-perl
+            - liblwp-protocol-https-perl
+            - libxml-simple-perl
+            - libdigest-hmac-perl
+            - libyaml-perl
+            - libstring-escape-perl
+            - libjson-xs-perl
+         runtime:
+            - perl
+            - perl-modules
+            - libnet-ssh2-perl
+            - libexpect-perl
+            - libdbi-perl
+            - libwww-perl
+            - liblwp-protocol-https-perl
+            - libxml-simple-perl
+            - libdigest-hmac-perl
+            - libyaml-perl
+            - libstring-escape-perl
+            - libjson-xs-perl
+
+
       wheezy:
          build:
             - build-essential
