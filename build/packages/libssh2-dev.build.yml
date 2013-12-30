@@ -11,6 +11,7 @@ summary: A library implementing the SSH2 protocol (development files)
 group:
    centos: System Environment/Libraries
    ubuntu: libs
+   debian: libs
 license: BSD
 homepage: http://www.libssh2.org
 source: http://libssh2.org/download/libssh2-<%= $version %>.tar.gz
