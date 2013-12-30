@@ -42,7 +42,7 @@ requires:
          - libssl1.0.0
 
    debian:
-      squeeze:
+      squeeze: *depsqueeze
          build:
             - debhelper
             - autotools-dev
@@ -52,6 +52,19 @@ requires:
             - zlib1g-dev
          runtime:
             - libssl0.9.8
+
+   ubuntu:
+      lucid: &depsqueeze
+      precise:
+          build:
+            - debhelper
+            - autotools-dev
+            - automake
+            - libtool
+            - libssl-dev
+            - zlib1g-dev
+         runtime:
+            - libssl1.0.0
 
 
 # build instructions
