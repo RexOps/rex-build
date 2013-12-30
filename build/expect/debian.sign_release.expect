@@ -1,0 +1,6 @@
+#!/usr/bin/expect --
+set timeout 360
+spawn gpg -u EB1E3473 -bao dists/<%= $dist %>/Release.gpg dists/<%= $dist %>/Release
+expect "Enter passphrase: "
+send "<%= $pass %>\r"
+expect eof

@@ -1,0 +1,8 @@
+#!/usr/bin/expect --
+set timeout 360
+spawn dpkg-buildpackage -kEB1E3473 -rfakeroot
+expect "Enter passphrase: "
+send "<%= $pass %>\r"
+expect "Enter passphrase: "
+send "<%= $pass %>\r"
+expect eof

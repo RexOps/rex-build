@@ -31,6 +31,17 @@ my $pid = $$;
 # the tasks
 ################################################################################
 
+task info => group => test => sub {
+
+   my $op   = get_os_name;
+   my $arch = get_os_arch;
+   my $ver  = get_os_release;
+
+   say "op> $op";
+   say "arch> $arch";
+   say "ver> $ver";
+};
+
 task prepare => group => test => sub {
 
    my $param = shift;
@@ -312,11 +323,13 @@ task bundle => sub {
 # prepare repository server
 ################################################################################
 task prepare_repo_server => config->{repo}->{server} => sub {
-   install [qw/
-      gnupg
-      createrepo
-      apache2
-   /];
+   eval {
+      install [qw/
+         gnupg
+         createrepo
+         apache2
+      /];
+   };
 
    file "/root/gnupg.keys",
       source => config->{build}->{files} . "/gnupg.keys",

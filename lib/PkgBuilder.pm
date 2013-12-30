@@ -30,6 +30,12 @@ my $pid = $$;
 
 my $config;
 
+
+my %debian_version_map = (
+   "7" => "wheezy",
+   "6" => "squeeze",
+);
+
 my %ubuntu_version_map = (
    "1004" => "lucid",
    "1204" => "precise",
@@ -151,7 +157,12 @@ sub get_os_release {
 
    if(lc(get_os_name) eq "ubuntu") {
       my $ver = operating_system_version();
-      $rel = $ubuntu_version_map{$ver};
+      $rel = (exists $ubuntu_version_map{$ver} ? $ubuntu_version_map{$ver} : $ver);
+   }
+   elsif(lc(get_os_name) eq "debian") {
+      my $ver = operating_system_version();
+      $ver = substr($ver, 0, 1);
+      $rel = (exists $debian_version_map{$ver} ? $debian_version_map{$ver} : $ver);
    }
    else {
       $rel = substr(operating_system_version(), 0, 1);
@@ -182,6 +193,11 @@ sub get_os_arch {
    if(defined $arch) { return $arch; }
 
    $arch  = run "uname -i";
+
+   if($arch eq "unknown") {
+      $arch = run "uname -m";
+   }
+
    chomp $arch;
    io(".build.$pid/arch.txt") < $arch;
 
@@ -194,6 +210,15 @@ sub create_build_files {
 
    my $op = get_os_name;
    my $rel = get_os_release;
+   my $arch = get_os_arch;
+
+   if(lc($op) eq "ubuntu" || lc($op) eq "debian") {
+
+      if($arch eq "x86_64") { # rewrite arch for debian/ubuntu
+         $arch = "amd64";
+      }
+
+   }
 
    my $upload_tarball_dir = config->{build}->{source_directory}->{lc($op)};
    my ($default_build_file, $double_parsed_build_file) = build_config($param->{build});
@@ -212,6 +237,7 @@ sub create_build_files {
                            buildroot  => $buildroot,
                            os         => $op,
                            rel        => $rel,
+                           arch       => $arch,
                            data       => $default_build_file,
                            sourceroot => $upload_tarball_dir, %{ $default_build_file }),
          owner   => "root",
@@ -220,7 +246,7 @@ sub create_build_files {
 
    }
 
-   elsif($op =~ m/ubuntu/i) {
+   elsif($op =~ m/ubuntu/i || $op =~ m/debian/i) {
 
       my $buildroot = "/root/build/debian/$pkg_name";
 
@@ -229,6 +255,8 @@ sub create_build_files {
          content => parse_template("templates/control.tpl",
                            buildroot  => $buildroot,
                            os         => $op,
+                           arch       => $arch,
+                           rel        => $rel,
                            data       => $default_build_file,
                            sourceroot => $upload_tarball_dir, %{ $default_build_file }),
          owner   => "root",
