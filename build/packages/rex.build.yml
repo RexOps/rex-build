@@ -44,6 +44,7 @@ requires:
             - libdigest-hmac-perl
             - libyaml-perl
             - libstring-escape-perl
+            - libjson-xs-perl
          runtime:
             - perl
             - perl-modules
@@ -56,6 +57,7 @@ requires:
             - libdigest-hmac-perl
             - libyaml-perl
             - libstring-escape-perl
+            - libjson-xs-perl
 
    centos:
       5:

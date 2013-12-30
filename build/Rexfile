@@ -260,6 +260,10 @@ task publish => config->{repo}->{server} => sub {
          $arch = "amd64";
       }
 
+      if($arch eq "i686") { # rewrite arch for debian/ubuntu
+         $arch = "i386";
+      }
+
       my $repo_name = config->{repo}->{name};
       my $repo_path = config->{repo}->{doc_root} . "/" . lc($op) . "/pool/$ver/$repo_name";
       my $dist_path = config->{repo}->{doc_root} . "/" . lc($op) . "/dists/$ver/$repo_name/binary-$arch";

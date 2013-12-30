@@ -218,6 +218,10 @@ sub create_build_files {
          $arch = "amd64";
       }
 
+      if($arch eq "i686") { # rewrite arch for debian/ubuntu
+         $arch = "i386";
+      }
+
    }
 
    my $upload_tarball_dir = config->{build}->{source_directory}->{lc($op)};
