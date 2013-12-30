@@ -59,7 +59,7 @@ task prepare => group => test => sub {
 
    Rex::Logger::info("Registering some repositories");
 
-   repository add => "rex", %{ config->{repo}->{add}->{lc($op)} }
+   repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{lc($op)} }
       if(exists config->{repo}->{add}->{lc($op)});
 
    if(is_debian) {
