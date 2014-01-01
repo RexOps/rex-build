@@ -28,7 +28,7 @@ description: |
 requires:
    debian:
       squeeze:
-         build:
+         build: &depsqueeze
             - build-essential
             - debhelper
             - perl
@@ -141,7 +141,7 @@ requires:
  
 
    ubuntu:
-      lucid: *depwheezy
+      lucid: *depsqueeze
       precise: *depwheezy
       quantal: *depwheezy
       raring: *depwheezy
