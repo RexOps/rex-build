@@ -114,7 +114,7 @@ requires:
             - perl-YAML
             - perl-String-Escape
  
-      6:
+      6: &depcentos6
          build:
             - make
             - perl
@@ -146,6 +146,12 @@ requires:
       quantal: *depwheezy
       raring: *depwheezy
       saucy: *depwheezy
+
+   fedora:
+      18: &depcentos6
+      19: &depcentos6
+      20: &depcentos6
+         
 
 # build instructions
 configure: |
