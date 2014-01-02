@@ -60,7 +60,9 @@ task prepare => group => test => sub {
 
    # create a swap file
    run "fallocate -l 200M /swap.img";
-   run "mkswap /swap.img ; chmod 600 /swap.img";
-   run "swapon /swap.img";
+   if($? == 0) {
+      run "mkswap /swap.img ; chmod 600 /swap.img";
+      run "swapon /swap.img";
+   }
 };
 
