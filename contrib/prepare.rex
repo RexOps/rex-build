@@ -57,5 +57,10 @@ task prepare => group => test => sub {
 
 
    mkdir "/tmp2";
+
+   # create a swap file
+   run "fallocate -l 200M /swap.img";
+   run "mkswap /swap.img ; chmod 600 /swap.img";
+   run "swapon /swap.img";
 };
 
