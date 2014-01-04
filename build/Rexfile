@@ -212,6 +212,21 @@ task build => group => test => sub {
       $pkg_file = "/root/build/$files[0]";
    }
 
+   if(!@files) {
+      my $file = "/root/rpmbuild/RPMS/" 
+                     . $arch 
+                     . "/" 
+                     . $double_parsed_build_file->{lc($op)}->{name} 
+                     . "-" 
+                     . $double_parsed_build_file->{version} 
+                     . "-" 
+                     . $double_parsed_build_file->{release} 
+                     . ".$arch.rpm";
+      if(is_file($file)) {
+         $pkg_file = $file;
+      }
+   }
+
    LOCAL {
       mkdir ".packages.$pid/" . lc($op);
    };
