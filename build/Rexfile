@@ -113,7 +113,7 @@ task prepare => group => test => sub {
    if(is_redhat) {
       Rex::Logger::info("Installing some Fedora dependencies...");
       eval { install "perl-ExtUtils-MakeMaker"; };
-      eval { install "rpm-sign"; };
+      eval { install "rpm-sign"; };
    }
 
 ################################################################################
