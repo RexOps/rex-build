@@ -152,6 +152,11 @@ requires:
       19: &depcentos6
       20: &depcentos6
          
+   redhat:
+      18: &depcentos6
+      19: &depcentos6
+      20: &depcentos6
+ 
 
 # build instructions
 configure: |
