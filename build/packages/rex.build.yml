@@ -152,14 +152,39 @@ requires:
       saucy: *depwheezy
 
    fedora:
-      18: &depcentos6
-      19: &depcentos6
-      20: &depcentos6
+      18: &depfedora18
+         build:
+            - make
+            - perl
+            - perl-devel
+            - perl-Net-SSH2
+            - perl-Expect
+            - perl-DBI
+            - perl-libwww-perl
+            - perl-XML-Simple
+            - perl-Digest-HMAC
+            - perl-YAML
+            - perl-String-Escape
+            - perl-ExtUtils-MakeMaker
+ 
+         runtime:
+            - perl
+            - perl-Net-SSH2
+            - perl-Expect
+            - perl-DBI
+            - perl-libwww-perl
+            - perl-XML-Simple
+            - perl-Digest-HMAC
+            - perl-YAML
+            - perl-String-Escape
+ 
+      19: *depfedora18
+      20: *depfedora18
          
    redhat:
-      18: &depcentos6
-      19: &depcentos6
-      20: &depcentos6
+      18: *depfedora18
+      19: *depfedora18
+      20: *depfedora18
  
 
 # build instructions
