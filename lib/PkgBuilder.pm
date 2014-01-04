@@ -232,7 +232,7 @@ sub create_build_files {
    mkdir config->{build}->{source_directory}->{lc($op)}
       if(exists config->{build}->{source_directory}->{lc($op)});
 
-   if($op =~ m/centos/i) {
+   if($op =~ m/centos|fedora/i) {
       my $buildroot = "/tmp/build-$pkg_name-$pid";
       mkdir $buildroot;
 
