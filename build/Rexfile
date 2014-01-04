@@ -234,6 +234,26 @@ task build => group => test => sub {
          $pkg_file = $file;
          Rex::Logger::info("   Found file: $file");
       }
+
+      if($arch eq "i386") {
+         $file = "/root/rpmbuild/RPMS/" 
+                        . $arch 
+                        . "/" 
+                        . $double_parsed_build_file->{name}->{lc($op)}
+                        . "-" 
+                        . $double_parsed_build_file->{version} 
+                        . "-" 
+                        . $double_parsed_build_file->{release} 
+                        . ".i686.rpm";
+
+         Rex::Logger::info("   Trying with: $file");
+         if(is_file($file)) {
+            $pkg_file = $file;
+            Rex::Logger::info("   Found file: $file");
+         }
+
+
+      }
    }
 
    LOCAL {
