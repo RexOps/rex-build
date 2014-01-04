@@ -3,6 +3,8 @@ name:
    centos: rex
    debian: rex
    ubuntu: rex
+   fedora: rex
+   redhat: rex
 realname: Rex
 version: 0.43.7
 release: 1
@@ -12,6 +14,8 @@ group:
    centos: Utilities/System
    debian: admin
    ubuntu: admin
+   redhat: admin
+   fedora: admin
 license: Apache 2
 homepage: http://rexify.org/
 source: http://cpan.metacpan.org/authors/id/J/JF/JFRIED/Rex-0.43.7.tar.gz
