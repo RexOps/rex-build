@@ -237,7 +237,7 @@ task build => group => test => sub {
 
       if($arch eq "i386") {
          $file = "/root/rpmbuild/RPMS/" 
-                        . $arch 
+                        . "i686"
                         . "/" 
                         . $double_parsed_build_file->{name}->{lc($op)}
                         . "-" 
