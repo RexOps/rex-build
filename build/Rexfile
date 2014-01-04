@@ -139,9 +139,14 @@ task prepare => group => test => sub {
       mkdir "$upload_tarball_dir/../RPMS/$arch";
       mkdir "$upload_tarball_dir/../SPECS";
       mkdir "$upload_tarball_dir/../SRPMS";
+
+      rmdir "/root/.local";
    }
 
+   Rex::Logger::info("Uploading: .build.$pid -> $upload_tarball_dir");
    sync_up ".build.$pid/", $upload_tarball_dir;
+
+   Rex::Logger::info("Uploading: " . config->{build}->{files} . "/" lc($op) . " -> /root");
    sync_up config->{build}->{files} . "/" . lc($op), "/root";
 
    sync_time;
