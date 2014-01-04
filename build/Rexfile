@@ -217,7 +217,7 @@ task build => group => test => sub {
       my $file = "/root/rpmbuild/RPMS/" 
                      . $arch 
                      . "/" 
-                     . $double_parsed_build_file->{lc($op)}->{name} 
+                     . $double_parsed_build_file->{name}->{lc($op)}
                      . "-" 
                      . $double_parsed_build_file->{version} 
                      . "-" 
