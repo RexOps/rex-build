@@ -213,6 +213,7 @@ task build => group => test => sub {
    }
 
    if(!@files) {
+      Rex::Logger::info("Didn't find package file in output...");
       my $file = "/root/rpmbuild/RPMS/" 
                      . $arch 
                      . "/" 
@@ -222,8 +223,11 @@ task build => group => test => sub {
                      . "-" 
                      . $double_parsed_build_file->{release} 
                      . ".$arch.rpm";
+
+      Rex::Logger::info("   Trying with: $file");
       if(is_file($file)) {
          $pkg_file = $file;
+         Rex::Logger::info("   Found file: $file");
       }
    }
 
