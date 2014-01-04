@@ -131,11 +131,11 @@ sub get_os_name {
    if(defined $op) { return $op; }
 
    if(is_file("/etc/fedora-release")) {
-      return "Fedora";
+      $op = "Fedora";
    }
 
 
-   $op = operating_system;
+   $op ||= operating_system;
    chomp $op;
    io(".build.$pid/op.txt") < $op;
 
