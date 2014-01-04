@@ -314,6 +314,7 @@ task bundle => sub {
 
 #   transaction {
       do_task [qw/
+         info
          prepare
          build
          publish
