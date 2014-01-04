@@ -165,8 +165,7 @@ sub get_os_release {
       $rel = (exists $debian_version_map{$ver} ? $debian_version_map{$ver} : $ver);
    }
    else {
-      $rel = substr(operating_system_version(), 0, 1);
-      chomp $rel;
+      ($rel) = split(/\./, operating_system_version());
    }
 
    io(".build.$pid/rel.txt") < $rel;
