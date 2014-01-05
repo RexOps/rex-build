@@ -134,7 +134,7 @@ task prepare => group => test => sub {
    my $upload_tarball_dir = config->{build}->{source_directory}->{lc($op)};
    mkdir $upload_tarball_dir;
 
-   if($op =~ m/centos|redhat|fedora/i) {
+   if($op =~ m/centos|redhat|fedora|suse/i) {
       mkdir "$upload_tarball_dir/../BUILD";
       mkdir "$upload_tarball_dir/../RPMS";
       mkdir "$upload_tarball_dir/../RPMS/$arch";
@@ -285,7 +285,7 @@ task publish => config->{repo}->{server} => sub {
 
    Rex::Logger::info("Publishing package to repository server");
    
-   if($op =~ m/centos|redhat|fedora/i) {
+   if($op =~ m/centos|redhat|fedora|suse/i) {
       my $repo_name = config->{repo}->{name};
       my $repo_path = config->{repo}->{doc_root} . "/$op/$ver/$repo_name/$arch";
 
