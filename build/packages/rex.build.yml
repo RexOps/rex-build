@@ -5,6 +5,7 @@ name:
    ubuntu: rex
    fedora: rex
    redhat: rex
+   suse: rex
 realname: Rex
 version: 0.43.7
 release: 1
@@ -16,6 +17,7 @@ group:
    ubuntu: admin
    redhat: admin
    fedora: admin
+   suse: admin
 license: Apache 2
 homepage: http://rexify.org/
 source: http://cpan.metacpan.org/authors/id/J/JF/JFRIED/Rex-0.43.7.tar.gz
@@ -107,6 +109,7 @@ requires:
             - perl-Digest-HMAC
             - perl-YAML
             - perl-String-Escape
+            - perl-JSON-XS
          runtime:
             - perl
             - perl-Net-SSH2
@@ -117,6 +120,7 @@ requires:
             - perl-Digest-HMAC
             - perl-YAML
             - perl-String-Escape
+            - perl-JSON-XS
  
       6: &depcentos6
          build:
@@ -131,6 +135,7 @@ requires:
             - perl-Digest-HMAC
             - perl-YAML
             - perl-String-Escape
+            - perl-JSON-XS
  
          runtime:
             - perl
@@ -142,6 +147,7 @@ requires:
             - perl-Digest-HMAC
             - perl-YAML
             - perl-String-Escape
+            - perl-JSON-XS
  
 
    ubuntu:
@@ -166,6 +172,7 @@ requires:
             - perl-YAML
             - perl-String-Escape
             - perl-ExtUtils-MakeMaker
+            - perl-JSON-XS
  
          runtime:
             - perl
@@ -177,6 +184,7 @@ requires:
             - perl-Digest-HMAC
             - perl-YAML
             - perl-String-Escape
+            - perl-JSON-XS
  
       19: *depfedora18
       20: *depfedora18
@@ -185,7 +193,33 @@ requires:
       18: *depfedora18
       19: *depfedora18
       20: *depfedora18
- 
+
+   suse:
+      13.1:
+         build:
+            - make
+            - perl
+            - perl-Net-SSH2
+            - perl-Expect
+            - perl-DBI
+            - perl-libwww-perl
+            - perl-XML-Simple
+            - perl-Digest-HMAC
+            - perl-YAML
+            - perl-String-Escape
+            - perl-JSON-XS
+         runtime:
+            - perl
+            - perl-Net-SSH2
+            - perl-Expect
+            - perl-DBI
+            - perl-libwww-perl
+            - perl-XML-Simple
+            - perl-Digest-HMAC
+            - perl-YAML
+            - perl-String-Escape
+            - perl-JSON-XS
+
 
 # build instructions
 configure: |
