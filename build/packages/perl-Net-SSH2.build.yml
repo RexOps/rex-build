@@ -3,6 +3,7 @@ name:
    centos: perl-Net-SSH2
    debian: libnet-ssh2-perl
    ubuntu: libnet-ssh2-perl
+   suse: perl-Net-SSH2
 realname: Net-SSH2
 version: 0.53
 release: 1
@@ -12,6 +13,7 @@ group:
    centos: System Environment/Libraries
    debian: libs
    ubuntu: libs
+   suse: libs
 license: Artistic
 homepage: https://metacpan.org/pod/Net::SSH2
 source: http://cpan.metacpan.org/authors/id/R/RK/RKITOVER/Net-SSH2-0.53.tar.gz
@@ -95,6 +97,22 @@ requires:
             - libssl1.0.0
             - libssh2-1
 
+   suse:
+      131:
+         build:
+            - make
+            - automake
+            - autoconf
+            - libopenssl-devel
+            - libssh2-1
+            - libssh2-devel
+            - zlib-devel
+            - libz1
+            - libtool
+         runtime:
+            - libz1
+            - libssh2-1
+            - libopenssl1_0_0
 
 # build instructions
 configure: |
