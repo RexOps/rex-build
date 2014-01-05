@@ -98,7 +98,7 @@ requires:
             - libssh2-1
 
    suse:
-      131:
+      13.1:
          build:
             - make
             - automake
