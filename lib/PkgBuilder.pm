@@ -170,7 +170,7 @@ sub get_os_release {
       $rel = (exists $debian_version_map{$ver} ? $debian_version_map{$ver} : $ver);
    }
    elsif(lc(get_os_name) eq "suse") {
-      my ($raw_ver) = grep { m/^VERSION/ } run("cat /etc/SuSE-release"));
+      my ($raw_ver) = grep { m/^VERSION/ } run("cat /etc/SuSE-release");
       chomp $raw_ver;
       my ($key, $_ver) = split(/ = /. $raw_ver);
       $rel = $_ver;
