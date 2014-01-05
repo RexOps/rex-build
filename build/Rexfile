@@ -219,8 +219,9 @@ task build => group => test => sub {
    }
 
    if(!@files) {
+      my $upload_tarball_dir = config->{build}->{source_directory}->{lc($op)};
       Rex::Logger::info("Didn't find package file in output...");
-      my $file = "/root/rpmbuild/RPMS/" 
+      my $file = "$upload_tarball_dir/../RPMS/"
                      . $arch 
                      . "/" 
                      . $double_parsed_build_file->{name}->{lc($op)}
@@ -238,7 +239,7 @@ task build => group => test => sub {
 
       if($arch eq "i386") {
          for my $_a (qw/i586 i686/) {
-            $file = "/root/rpmbuild/RPMS/" 
+            $file = "$upload_tarball_dir/../RPMS/"
                            . $_a
                            . "/" 
                            . $double_parsed_build_file->{name}->{lc($op)}
