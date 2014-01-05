@@ -105,6 +105,7 @@ task prepare => group => test => sub {
    # install some additional packages that are needed for the build
    my $add_pkgs = case $op, {
       qr{centos|redhat|fedora}i => ["ntp", "rpm-build", "expect", "gcc", "make", "automake", "autoconf", "bison", "flex", "m4", "openssh-clients"],
+      qr{suse}i          => ["ntp", "rpm-build", "expect", "gcc", "make", "automake", "autoconf", "bison", "flex", "m4"],
       default            => ["ntpdate", "expect", "gcc", "make", "automake", "autoconf", "bison", "flex", "m4"],
    };
 
@@ -236,23 +237,23 @@ task build => group => test => sub {
       }
 
       if($arch eq "i386") {
-         $file = "/root/rpmbuild/RPMS/" 
-                        . "i686"
-                        . "/" 
-                        . $double_parsed_build_file->{name}->{lc($op)}
-                        . "-" 
-                        . $double_parsed_build_file->{version} 
-                        . "-" 
-                        . $double_parsed_build_file->{release} 
-                        . ".i686.rpm";
+         for my $_a (qw/i586 i686/) {
+            $file = "/root/rpmbuild/RPMS/" 
+                           . $_a
+                           . "/" 
+                           . $double_parsed_build_file->{name}->{lc($op)}
+                           . "-" 
+                           . $double_parsed_build_file->{version} 
+                           . "-" 
+                           . $double_parsed_build_file->{release} 
+                           . ".$_a.rpm";
 
-         Rex::Logger::info("   Trying with: $file");
-         if(is_file($file)) {
-            $pkg_file = $file;
-            Rex::Logger::info("   Found file: $file");
+            Rex::Logger::info("   Trying with: $file");
+            if(is_file($file)) {
+               $pkg_file = $file;
+               Rex::Logger::info("   Found file: $file");
+            }
          }
-
-
       }
    }
 

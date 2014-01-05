@@ -169,6 +169,12 @@ sub get_os_release {
       $ver = substr($ver, 0, 1);
       $rel = (exists $debian_version_map{$ver} ? $debian_version_map{$ver} : $ver);
    }
+   elsif(lc(get_os_name) eq "suse") {
+      my ($raw_ver) = grep { m/^VERSION/ } split(/\n/, cat("/etc/SuSE-release"));
+      chomp $raw_ver;
+      my ($key, $_ver) = split(/ = /. $raw_ver);
+      $rel = $_ver;
+   }
    else {
       ($rel) = split(/\./, operating_system_version());
    }
@@ -236,7 +242,7 @@ sub create_build_files {
    mkdir config->{build}->{source_directory}->{lc($op)}
       if(exists config->{build}->{source_directory}->{lc($op)});
 
-   if($op =~ m/centos|fedora|redhat/i) {
+   if($op =~ m/centos|fedora|redhat|suse/i) {
       my $buildroot = "/tmp/build-$pkg_name-$pid";
       mkdir $buildroot;
 
