@@ -345,13 +345,14 @@ sub create_build_files {
 sub sync_time {
    my $op = get_os_name;
 
-   Rex::Logger::info("Syncing time...");
 
    if($op =~ m/ubuntu/i) {
       service ntp => "stop";
    }
 
    for (1..10) {
+      Rex::Logger::info("Syncing time...");
+
       run "ntpdate pool.ntp.org";
       if($? == 0) {
          return;
