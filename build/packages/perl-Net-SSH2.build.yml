@@ -130,6 +130,8 @@ requires:
                - lib64zlib-devel
                - lib64zlib1
                - libtool
+               - perl
+               - perl-devel
             runtime:
                - lib64openssl1.0.0
                - lib64ssh2_1
@@ -148,6 +150,8 @@ requires:
                - libzlib-devel
                - libzlib1
                - libtool
+               - perl
+               - perl-devel
             runtime:
                - libopenssl1.0.0
                - libssh2_1
