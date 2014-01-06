@@ -237,12 +237,17 @@ task build => group => test => sub {
    if(!@files) {
       my $upload_tarball_dir = config->{build}->{source_directory}->{lc($op)};
       Rex::Logger::info("Didn't find package file in output...");
+      my $version = $double_parsed_build_file->{version};
+      if(exists $double_parsed_build_file->{pkgversion}->{lc($op)}) {
+         $version = $double_parsed_build_file->{pkgversion}->{lc($op)};
+      }
+
       my $file = "$upload_tarball_dir/../RPMS/"
                      . $arch 
                      . "/" 
                      . $double_parsed_build_file->{name}->{lc($op)}
                      . "-" 
-                     . $double_parsed_build_file->{version} 
+                     . $version
                      . "-" 
                      . $double_parsed_build_file->{release} 
                      . ".$arch.rpm";
@@ -260,7 +265,7 @@ task build => group => test => sub {
                            . "/" 
                            . $double_parsed_build_file->{name}->{lc($op)}
                            . "-" 
-                           . $double_parsed_build_file->{version} 
+                           . $version
                            . "-" 
                            . $double_parsed_build_file->{release} 
                            . ".$_a.rpm";

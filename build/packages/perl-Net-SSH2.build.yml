@@ -7,15 +7,17 @@ name:
    mageia: perl-Net-SSH2
 realname: Net-SSH2
 version: 0.53
+pkgversion:
+   mageia: 0.530.0
 release: 1
 epoch: 1
 summary: Net::SSH2 - Support for the SSH 2 protocol via libssh2.
 group:
-   centos: System Environment/Libraries
+   centos: Development/Perl
    debian: libs
    ubuntu: libs
-   suse: libs
-   mageia: libs
+   suse: Development/Perl
+   mageia: Development/Perl
 license: Artistic
 homepage: https://metacpan.org/pod/Net::SSH2
 source: http://cpan.metacpan.org/authors/id/R/RK/RKITOVER/Net-SSH2-0.53.tar.gz

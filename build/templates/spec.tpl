@@ -1,5 +1,5 @@
 Name:           <%= $data->{name}->{lc($os)} %>
-Version:        <%= $data->{version} %>
+Version:        <%= $data->{pkgversion}->{lc($os)} || $data->{version} %>
 Release:        <%= $data->{release} %>
 Summary:        <%= $data->{summary} %>
 
