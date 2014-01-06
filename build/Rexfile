@@ -115,7 +115,7 @@ task prepare => group => test => sub {
 
    # install some additional packages that are needed for the build
    my $add_pkgs = case $op, {
-      qr{centos|redhat|fedora}i => ["ntp", "rpm-build", "expect", "gcc", "make", "automake", "autoconf", "bison", "flex", "m4", "openssh-clients"],
+      qr{centos|redhat|fedora|mageia}i => ["ntp", "rpm-build", "expect", "gcc", "make", "automake", "autoconf", "bison", "flex", "m4", "openssh-clients"],
       qr{suse}i          => ["ntp", "rpm-build", "expect", "gcc", "make", "automake", "autoconf", "bison", "flex", "m4"],
       default            => ["ntpdate", "expect", "gcc", "make", "automake", "autoconf", "bison", "flex", "m4"],
    };
@@ -145,7 +145,7 @@ task prepare => group => test => sub {
    my $upload_tarball_dir = config->{build}->{source_directory}->{lc($op)};
    mkdir $upload_tarball_dir;
 
-   if($op =~ m/centos|redhat|fedora|suse/i) {
+   if($op =~ m/centos|redhat|fedora|suse|mageia/i) {
       mkdir "$upload_tarball_dir/../BUILD";
       mkdir "$upload_tarball_dir/../RPMS";
       mkdir "$upload_tarball_dir/../RPMS/$arch";
@@ -297,7 +297,7 @@ task publish => config->{repo}->{server} => sub {
 
    Rex::Logger::info("Publishing package to repository server");
    
-   if($op =~ m/centos|redhat|fedora|suse/i) {
+   if($op =~ m/centos|redhat|fedora|suse|mageia/i) {
       my $repo_name = config->{repo}->{name};
       my $repo_path = config->{repo}->{doc_root} . "/$op/$ver/$repo_name/$arch";
 
@@ -310,7 +310,13 @@ task publish => config->{repo}->{server} => sub {
       sync_up ".packages.$pid/", $repo_path;
 
       Rex::Logger::info("Creating repository data files ...");
-      run_or_die "cd $repo_path ; rm repodata/repomd.xml.asc ; createrepo .";
+
+      if(is_mageia($op)) {
+         run_or_die "cd $repo_path ; genhdlist2 --xml-info .";
+      }
+      else {
+         run_or_die "cd $repo_path ; rm repodata/repomd.xml.asc ; createrepo .";
+      }
 
       my $key = config->{repo}->{sign}->{lc($op)}->{key};
       Rex::Logger::info("Signing repository with key: $key ...");
