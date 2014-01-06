@@ -176,7 +176,7 @@ sub get_os_release {
       $rel = $_ver;
    }
    else {
-      ($rel) = split(/\./, operating_system_version());
+      $rel = substr(operating_system_version(), 0, 1);
    }
 
    io(".build.$pid/rel.txt") < $rel;
