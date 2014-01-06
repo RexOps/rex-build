@@ -10,7 +10,7 @@ use strict;
 use warnings;
 
 
-use Rex -base;
+use Rex -feature => ['0.42', 'exit_status'];
 use Rex::Helper::Path;
 use YAML;
 use IO::All;
@@ -360,7 +360,8 @@ sub sync_time {
       sleep 1;
    }
 
-   die "Error syning time.";
+   Rex::Logger::info("Failed syning time... ", "warn");
+#   die "Error syning time.";
 }
 
 1;
