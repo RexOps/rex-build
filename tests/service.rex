@@ -23,6 +23,7 @@ task "test", group => "test", sub {
       qr{Debian}i  => 'apache2',
       qr{FreeBSD}i => 'apache22',
       qr{OpenWrt}i => 'uhttpd',
+      qr{Mageia}i  => 'apache',
    };
 
    my $service = case operating_system, {
@@ -34,6 +35,7 @@ task "test", group => "test", sub {
       qr{Debian}i  => 'apache2',
       qr{FreeBSD}i => 'apache22',
       qr{OpenWrt}i => 'uhttpd',
+      qr{Mageia}i  => 'httpd',
    };
 
    install $package;
