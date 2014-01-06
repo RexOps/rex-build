@@ -4,6 +4,7 @@ name:
    debian: libnet-ssh2-perl
    ubuntu: libnet-ssh2-perl
    suse: perl-Net-SSH2
+   mageia: perl-Net-SSH2
 realname: Net-SSH2
 version: 0.53
 release: 1
@@ -14,6 +15,7 @@ group:
    debian: libs
    ubuntu: libs
    suse: libs
+   mageia: libs
 license: Artistic
 homepage: https://metacpan.org/pod/Net::SSH2
 source: http://cpan.metacpan.org/authors/id/R/RK/RKITOVER/Net-SSH2-0.53.tar.gz
@@ -116,21 +118,40 @@ requires:
 
    mageia:
       3:
-         build:
-            - make
-            - automake
-            - autoconf
-            - libopenssl1.0.0
-            - libopenssl-devel
-            - libssh2-devel
-            - libssh2_1
-            - libzlib-devel
-            - libzlib1
-            - libtool
-         runtime:
-            - libopenssl1.0.0
-            - libssh2_1
-            - libzlib1
+         x86_64:
+            build:
+               - make
+               - automake
+               - autoconf
+               - lib64openssl1.0.0
+               - lib64openssl-devel
+               - lib64ssh2-devel
+               - lib64ssh2_1
+               - lib64zlib-devel
+               - lib64zlib1
+               - libtool
+            runtime:
+               - lib64openssl1.0.0
+               - lib64ssh2_1
+               - lib64zlib1
+
+
+         i686:
+            build:
+               - make
+               - automake
+               - autoconf
+               - libopenssl1.0.0
+               - libopenssl-devel
+               - libssh2-devel
+               - libssh2_1
+               - libzlib-devel
+               - libzlib1
+               - libtool
+            runtime:
+               - libopenssl1.0.0
+               - libssh2_1
+               - libzlib1
 
 
 # build instructions
