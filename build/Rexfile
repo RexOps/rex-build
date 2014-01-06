@@ -63,13 +63,22 @@ task prepare => group => test => sub {
       && exists config->{repo}->{add}->{lc($op)}->{$ver}
       && exists config->{repo}->{add}->{lc($op)}->{$ver}->{$arch}) {
 
-      repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{lc($op)}->{$ver}->{$arch} };
+      eval {
+         repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{lc($op)}->{$ver}->{$arch} }; 
+      } or do {
+         repository remove => "rex";
+      };
+
 
    }
    else {
 
-      repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{lc($op)} }
-         if(exists config->{repo}->{add}->{lc($op)});
+      eval {
+         repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{lc($op)} }
+            if(exists config->{repo}->{add}->{lc($op)});
+      } or do {
+         repository remove => "rex";
+      };
 
    }
 
