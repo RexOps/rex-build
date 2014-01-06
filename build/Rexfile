@@ -119,7 +119,7 @@ task prepare => group => test => sub {
 
    # install some additional packages that are needed for the build
    my $add_pkgs = case $op, {
-      qr{centos|redhat|fedora|mageia}i => ["ntp", "rpm-build", "expect", "gcc", "make", "automake", "autoconf", "bison", "flex", "m4", "openssh-clients"],
+      qr{centos|redhat|fedora}i => ["ntp", "rpm-build", "expect", "gcc", "make", "automake", "autoconf", "bison", "flex", "m4", "openssh-clients"],
       qr{mageia}i => ["ntp", "rpm-build", "expect", "gcc", "make", "automake", "autoconf", "bison", "flex", "m4", "openssh-clients", "gnupg", "rpm-sign"],
       qr{suse}i          => ["ntp", "rpm-build", "expect", "gcc", "make", "automake", "autoconf", "bison", "flex", "m4"],
       default            => ["ntpdate", "expect", "gcc", "make", "automake", "autoconf", "bison", "flex", "m4"],
