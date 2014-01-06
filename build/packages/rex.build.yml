@@ -6,6 +6,7 @@ name:
    fedora: rex
    redhat: rex
    suse: rex
+   mageia: rex
 realname: Rex
 version: 0.43.7
 release: 1
@@ -18,6 +19,7 @@ group:
    redhat: admin
    fedora: admin
    suse: admin
+   mageia: admin
 license: Apache 2
 homepage: http://rexify.org/
 source: http://cpan.metacpan.org/authors/id/J/JF/JFRIED/Rex-0.43.7.tar.gz
@@ -195,7 +197,7 @@ requires:
       20: *depfedora18
 
    suse:
-      13.1:
+      13.1: &depsuse13
          build:
             - make
             - perl
@@ -220,6 +222,8 @@ requires:
             - perl-String-Escape
             - perl-JSON-XS
 
+   mageia:
+      3: *depsuse13
 
 # build instructions
 configure: |
