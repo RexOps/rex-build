@@ -114,6 +114,25 @@ requires:
             - libssh2-1
             - libopenssl1_0_0
 
+   mageia:
+      3:
+         build:
+            - make
+            - automake
+            - autoconf
+            - libopenssl1.0.0
+            - libopenssl-devel
+            - libssh2-devel
+            - libssh2_1
+            - libzlib-devel
+            - libzlib1
+            - libtool
+         runtime:
+            - libopenssl1.0.0
+            - libssh2_1
+            - libzlib1
+
+
 # build instructions
 configure: |
    tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
