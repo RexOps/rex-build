@@ -321,11 +321,12 @@ task publish => config->{repo}->{server} => sub {
       }
       else {
          run_or_die "cd $repo_path ; rm repodata/repomd.xml.asc ; createrepo .";
+
+         my $key = config->{repo}->{sign}->{lc($op)}->{key};
+         Rex::Logger::info("Signing repository with key: $key ...");
+         run_or_die "cd $repo_path ; gpg --default-key $key -a --batch --passphrase " . config->{build}->{gnupg}->{pass} . " --detach-sign repodata/repomd.xml";
       }
 
-      my $key = config->{repo}->{sign}->{lc($op)}->{key};
-      Rex::Logger::info("Signing repository with key: $key ...");
-      run_or_die "cd $repo_path ; gpg --default-key $key -a --batch --passphrase " . config->{build}->{gnupg}->{pass} . " --detach-sign repodata/repomd.xml";
    }
 
    if(lc($op) eq "ubuntu" || lc($op) eq "debian") {
