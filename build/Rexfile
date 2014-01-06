@@ -99,7 +99,11 @@ task prepare => group => test => sub {
 
    my $pkg_build_dep;
 
-   if(exists $double_parsed_build_file->{requires}->{lc($op)}->{$ver}->{build}) {
+   if(exists $double_parsed_build_file->{requires}->{lc($op)}->{$ver}->{$arch}->{build}) {
+      $pkg_build_dep = $double_parsed_build_file->{requires}->{lc($op)}->{$ver}->{$arch}->{build};
+   }
+
+   elsif(exists $double_parsed_build_file->{requires}->{lc($op)}->{$ver}->{build}) {
       $pkg_build_dep = $double_parsed_build_file->{requires}->{lc($op)}->{$ver}->{build};
    }
 
