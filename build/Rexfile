@@ -253,8 +253,8 @@ task build => group => test => sub {
          Rex::Logger::info("   Found file: $file");
       }
 
-      if($arch eq "i386") {
-         for my $_a (qw/i586 i686/) {
+      if($arch =~ m/i[3456]86/) {
+         for my $_a (qw/i386 i486 i586 i686/) {
             $file = "$upload_tarball_dir/../RPMS/"
                            . $_a
                            . "/" 
