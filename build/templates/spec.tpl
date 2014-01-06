@@ -22,7 +22,7 @@ BuildRequires:  <%= $req %><% } %>
 <% if(exists $data->{requires}->{lc($os)}->{$rel}->{runtime}) { %>
 
 <% for my $req (@{ $data->{requires}->{lc($os)}->{$rel}->{runtime} }) { %>
-Requires:  <%= $req %><% } %><% } %>
+Requires:  <%= $req %><% } %>
 
 <% } %>
 
@@ -36,7 +36,7 @@ BuildRequires:  <%= $req %><% } %>
 <% if(exists $data->{requires}->{lc($os)}->{$rel}->{$arch}->{runtime}) { %>
 
 <% for my $req (@{ $data->{requires}->{lc($os)}->{$rel}->{$arch}->{runtime} }) { %>
-Requires:  <%= $req %><% } %><% } %>
+Requires:  <%= $req %><% } %>
 
 <% } %>
 
