@@ -351,7 +351,15 @@ sub sync_time {
       service ntp => "stop";
    }
 
-   eval { run_or_die "ntpdate pool.ntp.org"; 1; } or do { sleep 2; run_or_die "ntpdate pool.ntp.org"; };
+   for (1..10) {
+      run "ntpdate pool.ntp.org";
+      if($? == 0) {
+         return;
+      }
+      sleep 1;
+   }
+
+   die "Error syning time.";
 }
 
 1;

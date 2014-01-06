@@ -65,6 +65,7 @@ task prepare => group => test => sub {
 
       eval {
          repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{lc($op)}->{$ver}->{$arch} }; 
+         1;
       } or do {
          repository remove => "rex";
       };
@@ -76,6 +77,7 @@ task prepare => group => test => sub {
       eval {
          repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{lc($op)} }
             if(exists config->{repo}->{add}->{lc($op)});
+         1;
       } or do {
          repository remove => "rex";
       };
