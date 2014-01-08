@@ -63,13 +63,24 @@ task prepare => group => test => sub {
       && exists config->{repo}->{add}->{lc($op)}->{$ver}
       && exists config->{repo}->{add}->{lc($op)}->{$ver}->{$arch}) {
 
-      eval {
-         repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{lc($op)}->{$ver}->{$arch} }; 
-         1;
-      } or do {
-         eval { repository remove => "rex"; };
-      };
+      if(is_mageia) {
+         my $url = config->{repo}->{add}->{lc($op)}->{$ver}->{$arch}->{url};
+         my $line = "rex $url {\n   key-ids: 16547F8C\n}\n";
+         cp "/etc/urpmi/urpmi.cfg", "/etc/urpmi/urpmi.cfg.rex.bak";
+         append_if_no_such_line "/etc/urpmi/urpmi.cfg",
+            line   => $line,
+            regexp => qr/rex $url/;
+      }
+      else {
 
+         eval {
+            repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{lc($op)}->{$ver}->{$arch} }; 
+            1;
+         } or do {
+            eval { repository remove => "rex"; };
+         };
+
+      }
 
    }
    else {
