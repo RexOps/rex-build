@@ -35,8 +35,8 @@ description: |
 # requirements
 requires:
    debian:
-      squeeze:
-         build: &depsqueeze
+      squeeze: &depsqueeze
+         build: 
             - build-essential
             - debhelper
             - perl
