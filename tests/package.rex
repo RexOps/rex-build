@@ -20,6 +20,7 @@ task "test", group => "test", sub {
       qr{SuSE}i   => "vim",
       qr{CentOS}i => "vim-enhanced",
       qr{Redhat}i => "vim-enhanced",
+      qr{Fedora}i => "vim-enhanced",
       qr{Mageia}i => "vim-enhanced",
       qr{Debian}i => "vim",
       qr{Ubuntu}i => "vim",
