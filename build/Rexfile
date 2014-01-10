@@ -457,6 +457,11 @@ task archive => config->{repo}->{server} => sub {
    LOCAL {
       Rex::Logger::info("Cloning Rex repository...");
 
+      if(-d "rex") {
+         Rex::Logger::info("Cleaning up...");
+         rmdir "rex";
+      }
+
       run 'git clone git@github.com:krimdomu/Rex.git rex --branch development >/tmp/out.log 2>&1';
       run 'cd rex; perl Makefile.PL && make && make dist && cd ..';
       ($pkg) = glob('rex/*.tar.gz');
@@ -474,15 +479,9 @@ task archive => config->{repo}->{server} => sub {
       upload $pkg, doc_root . "/source";
    }
    else {
-      rmdir "rex";
       Rex::Logger::info("No package found.", "error");
       die("No package found.");
    }
-
-   LOCAL {
-      Rex::Logger::info("Cleaning up...");
-      rmdir "rex";
-   };
 
 };
 

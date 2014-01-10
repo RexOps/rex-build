@@ -22,7 +22,7 @@ group:
    mageia: admin
 license: Apache 2
 homepage: http://rexify.org/
-source: http://cpan.metacpan.org/authors/id/J/JF/JFRIED/Rex-0.43.7.tar.gz
+source: http://nightly.rex.linux-files.org/source/Rex-0.43.99.10.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 no_auto_scan: true
