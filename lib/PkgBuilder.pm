@@ -24,6 +24,7 @@ use vars qw(@EXPORT);
    config
    get_os_name get_os_release get_os_arch
    create_build_files
+   doc_root
    sync_time);
 
 my $pid = $$;
@@ -362,6 +363,11 @@ sub sync_time {
 
    Rex::Logger::info("Failed syning time... ", "warn");
 #   die "Error syning time.";
+}
+
+sub doc_root {
+   my $env = $ENV{BUILD_ENV} || "live";
+   return config()->{repo}->{doc_root}->{$env};
 }
 
 1;

@@ -331,7 +331,7 @@ task publish => config->{repo}->{server} => sub {
    
    if($op =~ m/centos|redhat|fedora|suse|mageia/i) {
       my $repo_name = config->{repo}->{name};
-      my $repo_path = config->{repo}->{doc_root} . "/$op/$ver/$repo_name/$arch";
+      my $repo_path = doc_root . "/$op/$ver/$repo_name/$arch";
 
       mkdir $repo_path,
          owner => "www-data",
@@ -367,8 +367,8 @@ task publish => config->{repo}->{server} => sub {
       }
 
       my $repo_name = config->{repo}->{name};
-      my $repo_path = config->{repo}->{doc_root} . "/" . lc($op) . "/pool/$ver/$repo_name";
-      my $dist_path = config->{repo}->{doc_root} . "/" . lc($op) . "/dists/$ver/$repo_name/binary-$arch";
+      my $repo_path = doc_root . "/" . lc($op) . "/pool/$ver/$repo_name";
+      my $dist_path = doc_root . "/" . lc($op) . "/dists/$ver/$repo_name/binary-$arch";
 
       mkdir $repo_path,
          owner => "www-data",
@@ -389,7 +389,7 @@ task publish => config->{repo}->{server} => sub {
       file "/root/aptftp.$ver.conf",
          content => template("templates/aptftp.conf.tpl", dist => $ver);
 
-      my $doc_root = config->{repo}->{doc_root} . "/" . lc($op);
+      my $doc_root = doc_root . "/" . lc($op);
       run "apt-ftparchive generate -c=/root/aptftp.$ver.conf /root/aptgenerate.$ver.conf",   cwd => $doc_root;
       run "apt-ftparchive release -c=/root/aptftp.$ver.conf dists/$ver >dists/$ver/Release", cwd => $doc_root;
 
@@ -466,12 +466,12 @@ task archive => config->{repo}->{server} => sub {
    };
 
    if($pkg) {
-      mkdir config->{repo}->{doc_root} . "/source",
+      mkdir doc_root . "/source",
          owner => "www-data",
          group => "www-data";
 
-      Rex::Logger::info("Uploading $pkg to ". config->{repo}->{doc_root} . "/source");
-      upload $pkg, config->{repo}->{doc_root} . "/source";
+      Rex::Logger::info("Uploading $pkg to ". doc_root . "/source");
+      upload $pkg, doc_root . "/source";
    }
    else {
       rmdir "rex";
