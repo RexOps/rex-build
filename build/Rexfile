@@ -447,6 +447,25 @@ task prepare_repo_server => config->{repo}->{server} => sub {
    unlink "/root/gnupg.keys";
 };
 
+
+################################################################################
+# build tar.gz archive
+################################################################################
+task archive => config->{repo}->{server} => sub {
+   LOCAL {
+      Rex::Logger::info("Cloning Rex repository...");
+
+      run 'git clone git@github.com:krimdomu/Rex.git rex --branch development >/tmp/out.log 2>&1';
+      run 'cd rex; perl Makefile.PL && make && make dist && cd ..';
+      my ($file) = glob('rex/*.tar.gz');
+
+      Rex::Logger::info("Found package file: $file");
+
+      Rex::Logger::info("Cleaning up...");
+      rmdir "rex";
+   };
+};
+
 ################################################################################
 # special authentication for repository server
 ################################################################################
@@ -458,7 +477,9 @@ auth for => "prepare_repo_server",
    user => config->{repo}->{user},
    password => config->{repo}->{password};
 
-
+auth for => "archive",
+   user => config->{repo}->{user},
+   password => config->{repo}->{password};
 
 
 ################################################################################
