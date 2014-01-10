@@ -30,19 +30,9 @@ requires:
          - gcc
       runtime:
          - pkgconfig
-   ubuntu:
-      build:
-         - debhelper
-         - autotools-dev
-         - automake
-         - libtool
-         - libssl-dev
-         - zlib1g-dev
-      runtime:
-         - libssl1.0.0
 
    debian:
-      squeeze:
+      squeeze: &depsqueeze
          build:
             - debhelper
             - autotools-dev
@@ -53,6 +43,7 @@ requires:
          runtime:
             - libssl0.9.8
 
+   ubuntu: *depsqueeze
 
 # build instructions
 configure: |
