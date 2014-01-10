@@ -452,18 +452,32 @@ task prepare_repo_server => config->{repo}->{server} => sub {
 # build tar.gz archive
 ################################################################################
 task archive => config->{repo}->{server} => sub {
+   my $pkg;
+
    LOCAL {
       Rex::Logger::info("Cloning Rex repository...");
 
       run 'git clone git@github.com:krimdomu/Rex.git rex --branch development >/tmp/out.log 2>&1';
       run 'cd rex; perl Makefile.PL && make && make dist && cd ..';
-      my ($file) = glob('rex/*.tar.gz');
+      ($pkg) = glob('rex/*.tar.gz');
 
-      Rex::Logger::info("Found package file: $file");
+      Rex::Logger::info("Found package file: $pkg");
 
       Rex::Logger::info("Cleaning up...");
       rmdir "rex";
    };
+
+   if($pkg) {
+      mkdir config->{repo}->{doc_root} . "/source",
+         owner => "www-data",
+         group => "www-data";
+
+      upload $pkg, config->{repo}->{doc_root} . "/source";
+   }
+   else {
+      Rex::Logger::info("No package found.", "error");
+      die("No package found.");
+   }
 };
 
 ################################################################################
