@@ -463,8 +463,6 @@ task archive => config->{repo}->{server} => sub {
 
       Rex::Logger::info("Found package file: $pkg");
 
-      Rex::Logger::info("Cleaning up...");
-      rmdir "rex";
    };
 
    if($pkg) {
@@ -472,12 +470,20 @@ task archive => config->{repo}->{server} => sub {
          owner => "www-data",
          group => "www-data";
 
+      Rex::Logger::info("Uploading $pkg to ". config->{repo}->{doc_root} . "/source");
       upload $pkg, config->{repo}->{doc_root} . "/source";
    }
    else {
+      rmdir "rex";
       Rex::Logger::info("No package found.", "error");
       die("No package found.");
    }
+
+   LOCAL {
+      Rex::Logger::info("Cleaning up...");
+      rmdir "rex";
+   };
+
 };
 
 ################################################################################
