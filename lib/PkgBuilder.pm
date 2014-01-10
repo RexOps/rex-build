@@ -369,7 +369,7 @@ sub doc_root {
    my $env = $ENV{BUILD_ENV} || "live";
 
    if(-f "/nightly") {
-      return "nightly";
+      $env = "nightly";
    }
 
    return config()->{repo}->{doc_root}->{$env};
