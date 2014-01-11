@@ -52,6 +52,7 @@ requires:
             - libyaml-perl
             - libstring-escape-perl
             - libjson-xs-perl
+            - liblist-moreutils-perl
          runtime:
             - perl
             - perl-modules
@@ -64,6 +65,7 @@ requires:
             - libyaml-perl
             - libstring-escape-perl
             - libjson-xs-perl
+            - liblist-moreutils-perl
 
 
       wheezy: &depwheezy
@@ -84,6 +86,7 @@ requires:
             - libyaml-perl
             - libstring-escape-perl
             - libjson-xs-perl
+            - liblist-moreutils-perl
          runtime:
             - perl
             - perl-modules
@@ -97,6 +100,7 @@ requires:
             - libyaml-perl
             - libstring-escape-perl
             - libjson-xs-perl
+            - liblist-moreutils-perl
 
    centos:
       5:
@@ -112,6 +116,7 @@ requires:
             - perl-YAML
             - perl-String-Escape
             - perl-JSON-XS
+            - perl-List-MoreUtils
          runtime:
             - perl
             - perl-Net-SSH2
@@ -123,6 +128,7 @@ requires:
             - perl-YAML
             - perl-String-Escape
             - perl-JSON-XS
+            - perl-List-MoreUtils
  
       6: &depcentos6
          build:
@@ -138,6 +144,7 @@ requires:
             - perl-YAML
             - perl-String-Escape
             - perl-JSON-XS
+            - perl-List-MoreUtils
  
          runtime:
             - perl
@@ -150,6 +157,7 @@ requires:
             - perl-YAML
             - perl-String-Escape
             - perl-JSON-XS
+            - perl-List-MoreUtils
  
 
    ubuntu:
@@ -175,6 +183,7 @@ requires:
             - perl-String-Escape
             - perl-ExtUtils-MakeMaker
             - perl-JSON-XS
+            - perl-List-MoreUtils
  
          runtime:
             - perl
@@ -187,6 +196,7 @@ requires:
             - perl-YAML
             - perl-String-Escape
             - perl-JSON-XS
+            - perl-List-MoreUtils
  
       19: *depfedora18
       20: *depfedora18
@@ -210,6 +220,7 @@ requires:
             - perl-YAML
             - perl-String-Escape
             - perl-JSON-XS
+            - perl-List-MoreUtils
          runtime:
             - perl
             - perl-Net-SSH2
@@ -221,6 +232,7 @@ requires:
             - perl-YAML
             - perl-String-Escape
             - perl-JSON-XS
+            - perl-List-MoreUtils
 
    mageia:
       3: *depsuse13
