@@ -53,6 +53,25 @@ task test => group => test => sub {
 
    ok($ok == 1, "repository added");
 
+   $ok = 1;
+
+   if(is_debian) {
+      run "wget -O - http://rex.linux-files.org/DPKG-GPG-KEY-REXIFY-REPO | apt-key add -";
+   }
+   else {
+      if(lc($op) eq "centos" && $ver =~ m/^5/) {
+         run "rpm --import http://rex.linux-files.org/RPM-GPG-KEY-REXIFY-REPO.CENTOS5";
+      }
+      else {
+         run "rpm --import http://rex.linux-files.org/RPM-GPG-KEY-REXIFY-REPO.CENTOS6";
+      }
+   }
+
+   if($? != 0) {
+      $ok = 0;
+   }
+   ok($ok == 1, "added gpg key");
+
    eval {
       $ok = 0;
       update_package_db();
