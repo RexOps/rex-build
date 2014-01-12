@@ -50,6 +50,9 @@ task prepare => group => test => sub {
    my $arch = get_os_arch;
    my $ver  = get_os_release;
 
+   say "op> $op";
+   say "arch> $arch";
+   say "ver> $ver";
 
    my ($default_build_file, $double_parsed_build_file) = build_config($param->{build});
 
@@ -225,6 +228,9 @@ task build => group => test => sub {
    my $ver   = get_os_release;
    my $arch  = get_os_arch;
 
+   say "op> $op";
+   say "arch> $arch";
+   say "ver> $ver";
 
    my ($default_build_file, $double_parsed_build_file) = build_config($param->{build});
 
@@ -326,6 +332,10 @@ task publish => config->{repo}->{server} => sub {
    my $op   = get_os_name;
    my $ver  = get_os_release;
    my $arch = get_os_arch;
+
+   say "op> $op";
+   say "arch> $arch";
+   say "ver> $ver";
 
    Rex::Logger::info("Publishing package to repository server");
    
