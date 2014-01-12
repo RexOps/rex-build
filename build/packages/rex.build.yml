@@ -145,6 +145,7 @@ requires:
             - perl-String-Escape
             - perl-JSON-XS
             - perl-List-MoreUtils
+            - perl-Time-HiRes
  
          runtime:
             - perl
@@ -158,6 +159,7 @@ requires:
             - perl-String-Escape
             - perl-JSON-XS
             - perl-List-MoreUtils
+            - perl-Time-HiRes
  
 
    ubuntu:
