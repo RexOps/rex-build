@@ -177,7 +177,7 @@ sub get_os_release {
       $rel = $_ver;
    }
    elsif(lc(get_os_name) eq "fedora") {
-      return operating_system_version();
+      $rel = operating_system_version();
    }
    else {
       $rel = substr(operating_system_version(), 0, 1);
