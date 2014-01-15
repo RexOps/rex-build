@@ -263,4 +263,11 @@ clean: |
 files:
    package:
       - /usr
+   fedora:
+      doc:
+         - META.yml 
+         - %{_mandir}/*
+      package:
+         - %{_bindir}/*
+         - %{perl_vendorlib}/*
 
