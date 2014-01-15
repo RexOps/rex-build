@@ -265,7 +265,6 @@ files:
       - /usr
    fedora:
       doc:
-         - META.yml 
          - %{_mandir}/*
       package:
          - %{_bindir}/*
