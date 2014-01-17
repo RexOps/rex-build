@@ -63,18 +63,22 @@ Requires:  <%= $req %><% } %>
 <% if(! exists $data->{files}->{lc($os)}) { %>
 <% for my $doc (@{ $data->{files}->{doc} }) { %>
 %doc <%= $doc %><% } %>
-<% } %>
+<% } else { %>
 
 <% for my $doc (@{ $data->{files}->{lc($os)}->{doc} }) { %>
 %doc <%= $doc %><% } %>
 
+<% } %>
+
 <% if(! exists $data->{files}->{lc($os)}) { %>
 <% for my $file (@{ $data->{files}->{package} }) { %>
 <%= $file %><% } %>
-<% } %>
+<% } else { %>
 
 <% for my $file (@{ $data->{files}->{lc($os)}->{package} }) { %>
 <%= $file %><% } %>
+
+<% } %>
 
 <% if(exists $data->{pre}) { %>
 %pre
