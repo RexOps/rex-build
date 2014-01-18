@@ -19,6 +19,7 @@ task "test", group => "test", sub {
    my ($g_dev) = grep { m/\Q$dev\E/ } @{ $net->{networkdevices} };
    ok($g_dev eq $dev, "found $dev");
    ok($net->{networkconfiguration}->{$dev}->{ip} =~ m/^192\.168\.112\./, "found ip of $dev");
+   ok($net->{networkconfiguration}->{$dev}->{netmask} =~ m/^255.\.255\.255\./, "found netmask of $dev");
 
    done_testing();
 };
