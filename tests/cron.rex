@@ -16,9 +16,18 @@ task test => group => test => sub {
       command => "/bin/ls /",
    };
 
+   cron add => "root", {
+      minute => "5,10,15",
+      hour   => "1,3,5,7",
+      command => "/bin/ls /",
+   };
+
+
    my @crons = cron list => "root";
    #print Dumper(@crons);
    ok($crons[0]->{"command"} eq "/bin/ls /", "Added cron");
+
+   ok(scalar(@crons) == 1, "no duplicated cron job");
 
    if(! is_solaris) {
       cron env => root => add => {
