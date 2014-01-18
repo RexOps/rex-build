@@ -2,6 +2,7 @@
 
 use Rex -feature => '0.42';
 use Rex::Commands::User;
+use Rex::Hardware::Network;
 use YAML;
 
 my $yaml = eval { local(@ARGV, $/) = ($ENV{HOME} . "/.build_config"); <>; };
@@ -64,5 +65,14 @@ task prepare => group => test => sub {
       run "mkswap /swap.img ; chmod 600 /swap.img";
       run "swapon /swap.img";
    }
+
+   my $net = Rex::Hardware::Network->get;
+
+   my @devs = @{ $net->{networkdevices} };
+   ok(@{$net->{networkdevices}} ~~ m/(eth0|em0|e1000g0)/, "Found $1");
+   my $dev = $1;
+ 
+   # create alias eth device
+   run "ifconfig $dev:1 1.2.3.4 netmask 255.255.255.255";
 };
 

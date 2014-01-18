@@ -21,6 +21,9 @@ task "test", group => "test", sub {
    ok($net->{networkconfiguration}->{$dev}->{ip} =~ m/^192\.168\.112\./, "found ip of $dev");
    ok($net->{networkconfiguration}->{$dev}->{netmask} =~ m/^255.\.255\.255\./, "found netmask of $dev");
 
+   ok($net->{networkconfiguration}->{"$dev:1"}->{ip} eq "1.2.3.4", "found ip of $dev:1");
+   ok($net->{networkconfiguration}->{"$dev:1"}->{netmask} eq "255.255.255.255", "found netmask of $dev:1");
+
    done_testing();
 };
 
