@@ -193,6 +193,13 @@ task test => group => test => sub {
    my $i5 = cat "/tmp/foo.bar5";
    ok($i5 =~ m/blah/, "file function with source and absolute path");
 
+   file "/tmp/sed.multiline.replace", content => "this is\na small\ntest\n";
+   sed qr/a small\ntest/, "replaced", "/tmp/sed.multiline.replace",
+      multiline => TRUE;
+
+   my $smr = cat "/tmp/sed.multiline.replace";
+   ok($smr eq "this is\nreplaced\n", "sed multiline replace");
+
    done_testing();
 };
 
