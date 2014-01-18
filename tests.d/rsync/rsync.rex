@@ -14,6 +14,8 @@ task "test", group => "test", sub {
 
    ok($stat{uid} == 6000, "/tmp/etc/my.cnf owner");
    ok($stat{gid} == 6000, "/tmp/etc/my.cnf group");
+
+   done_testing();
 };
 
 auth for => test => user => "rsync.user", password => "rsync.pw";
