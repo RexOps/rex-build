@@ -12,6 +12,8 @@ task "setup", sub {
 
    needs main "need_test";
 
+   needs "need_test2";
+
 };
 
 1;
