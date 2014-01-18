@@ -45,6 +45,15 @@ task prepare => group => test => sub {
       # some tests need a user
       create_user "nobody",
          groups => ["nobody"];
+
+      create_group "rsync.user",
+         gid => 6000;
+
+      create_user "rsync.user",
+         uid      => 6000,
+         password => "rsync.pw",
+         groups   => ["rsync.user"];
+
    };
 
    run "echo 127.0.2.1 `uname -n` >>/etc/hosts";
