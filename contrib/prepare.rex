@@ -78,8 +78,9 @@ task prepare => group => test => sub {
    my $net = Rex::Hardware::Network->get;
 
    my @devs = @{ $net->{networkdevices} };
-   @{$net->{networkdevices}} ~~ m/(eth0|em0|e1000g0)/;
-   my $dev = $1;
+   my ($dev) = @{$net->{networkdevices}} ~~ m/(eth0|em0|e1000g0)/;
+
+   Rex::Logger::info("Creating alias: $dev:1");
  
    # create alias eth device
    run "ifconfig $dev:1 1.2.3.4 netmask 255.255.255.255";
