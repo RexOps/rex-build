@@ -25,7 +25,7 @@ task "test", group => "test", sub {
 
    LOCAL {
       my $content = cat "/tmp/$pid/backup/$server/etc/test.file";
-      ok($content eq "foo", "backup done");
+      ok($content eq "foo\n", "backup done");
    };
 
    done_testing();
