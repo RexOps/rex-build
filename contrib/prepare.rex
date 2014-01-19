@@ -3,6 +3,7 @@
 use Rex -feature => '0.42';
 use Rex::Commands::User;
 use Rex::Hardware::Network;
+use List::Util qw/first/;
 use YAML;
 
 my $yaml = eval { local(@ARGV, $/) = ($ENV{HOME} . "/.build_config"); <>; };
@@ -78,7 +79,7 @@ task prepare => group => test => sub {
    my $net = Rex::Hardware::Network->get;
 
    my @devs = @{ $net->{networkdevices} };
-   my ($dev) = @{$net->{networkdevices}} ~~ m/(eth0|em0|e1000g0)/;
+   my $dev = first { $_ =~ m/(eth0|em0|e1000g0)/ } @{$net->{networkdevices}};
 
    Rex::Logger::info("Creating alias: $dev:1");
  
