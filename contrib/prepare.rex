@@ -78,7 +78,7 @@ task prepare => group => test => sub {
    my $net = Rex::Hardware::Network->get;
 
    my @devs = @{ $net->{networkdevices} };
-   ok(@{$net->{networkdevices}} ~~ m/(eth0|em0|e1000g0)/, "Found $1");
+   @{$net->{networkdevices}} ~~ m/(eth0|em0|e1000g0)/;
    my $dev = $1;
  
    # create alias eth device
