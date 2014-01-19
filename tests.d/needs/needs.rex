@@ -10,7 +10,7 @@ task "test", group => "test", sub {
    Foo::setup();
 
    ok(get("NEEDED") == 1, "need_test had ran");
-   ok(get("NEEDED2") == 2, "need_test2 had ran - needs without main package");
+   ok(get("NEEDED2") == 1, "need_test2 had ran - needs in same ackage");
 
    done_testing();
 };
@@ -21,8 +21,3 @@ task "need_test", sub {
 
 };
 
-task "need_test2", sub {
-
-   set NEEDED2 => 1;
-
-};

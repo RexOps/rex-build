@@ -16,4 +16,11 @@ task "setup", sub {
 
 };
 
+
+task "need_test2", sub {
+
+   set NEEDED2 => 1;
+
+};
+
 1;
