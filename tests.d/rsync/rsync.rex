@@ -8,7 +8,7 @@ do "auth.conf";
 task "test", group => "test", sub {
 
    mkdir "/tmp/etc";
-   sync "files/etc", "/tmp/etc";
+   sync "files/etc/", "/tmp/etc/";
 
    my %stat = stat "/tmp/etc/my.cnf";
 
