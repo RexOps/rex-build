@@ -5,6 +5,8 @@ use Test::More;
 
 do "auth.conf";
 
+timeout 15;
+
 task "test", group => "test", sub {
 
    mkdir "/tmp/etc";
