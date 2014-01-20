@@ -34,6 +34,7 @@ task test => group => test => sub {
 
    if(is_suse) {
       # strange failure on suse for update_package_db()
+      done_testing();
       return;
    }
 
