@@ -7,7 +7,7 @@ use Rex::Pkg;
 do "auth.conf";
 
 set rex_internals => {
-   read_buffer_size => 2000,
+   read_buffer_size => 1000,
 };
 
 task test => group => test => sub {
