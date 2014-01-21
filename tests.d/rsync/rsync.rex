@@ -17,13 +17,13 @@ task "test", group => "test", sub {
       return;
    }
 
-   mkdir "/tmp/etc";
-   sync "files/etc/", "/tmp/etc/";
+   mkdir "/tmp/etc2", owner => "rsync.user";
+   sync "files/etc/", "/tmp/etc2/";
 
-   my %stat = stat "/tmp/etc/my.cnf";
+   my %stat = stat "/tmp/etc2/my.cnf";
 
-   ok($stat{uid} == 6000, "/tmp/etc/my.cnf owner");
-   ok($stat{gid} == 6000, "/tmp/etc/my.cnf group");
+   ok($stat{uid} == 6000, "/tmp/etc2/my.cnf owner");
+   ok($stat{gid} == 6000, "/tmp/etc2/my.cnf group");
 
    done_testing();
 };
