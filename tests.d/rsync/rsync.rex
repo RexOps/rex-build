@@ -10,14 +10,7 @@ timeout 15;
 
 task "test", group => "test", sub {
 
-   if(is_openwrt) {
-      # strange failure on suse for update_package_db()
-      ok(1==1, "no openwrt test");
-      done_testing();
-      return;
-   }
-
-   mkdir "/tmp/etc2", owner => "rsync.user";
+   mkdir "/tmp/etc2", owner => "rsync_user";
    sync "files/etc/", "/tmp/etc2/";
 
    my %stat = stat "/tmp/etc2/my.cnf";
@@ -28,5 +21,5 @@ task "test", group => "test", sub {
    done_testing();
 };
 
-auth for => test => user => "rsync.user", password => "rsync.pw", sudo_password => "rsync.pw";
+auth for => test => user => "rsync_user", password => "rsync.pw", sudo_password => "rsync.pw";
 

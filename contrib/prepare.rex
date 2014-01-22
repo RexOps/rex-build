@@ -47,13 +47,19 @@ task prepare => group => test => sub {
       create_user "nobody",
          groups => ["nobody"];
 
-      create_group "rsync.user",
+      create_group "rsync_user",
          gid => 6000;
 
-      create_user "rsync.user",
+      create_user "rsync_user",
          uid      => 6000,
          password => "rsync.pw",
-         groups   => ["rsync.user"];
+         groups   => ["rsync_user"];
+
+      if( is_openwrt()) {
+	     mkdir "/home/rsync_user";
+	     create_user "rsync_user",
+            shell => "/bin/ash";
+      }
 
    };
 
