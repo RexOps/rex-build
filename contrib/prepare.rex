@@ -32,6 +32,7 @@ task prepare => group => test => sub {
       qr{centos|redhat}i  => [qw/openssh-clients/],
       qr{freebsd}i        => [qw/dmidecode/],
       qr{openwrt}i        => [qw/perlbase-bytes perlbase-digest perlbase-essential perlbase-file perlbase-xsloader shadow-groupadd shadow-groupdel shadow-groupmod shadow-useradd shadow-userdel shadow-usermod swap-utils/],
+      qr{debian|ubuntu}i  => [qw/rsync/],
       default             => [],
    };
 
@@ -53,6 +54,7 @@ task prepare => group => test => sub {
       create_user "rsync_user",
          uid      => 6000,
          password => "rsync.pw",
+         home     => "/home/rsync_user",
          groups   => ["rsync_user"];
 
       if( is_openwrt()) {
