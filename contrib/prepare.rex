@@ -92,6 +92,11 @@ task prepare => group => test => sub {
    Rex::Logger::info("Creating alias: $dev:1");
  
    # create alias eth device
-   run "ifconfig $dev:1 1.2.3.4 netmask 255.255.255.255";
+   if(is_freebsd) {
+      run "ifconfig $dev 1.2.3.4 netmask 255.255.255.255 alias";
+   }
+   else {
+      run "ifconfig $dev:1 1.2.3.4 netmask 255.255.255.255";
+   }
 };
 
