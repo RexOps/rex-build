@@ -23,8 +23,8 @@ task "test", group => "test", sub {
    ok($net->{networkconfiguration}->{$dev}->{netmask} =~ m/^255\.255\.255\./, "found netmask of $dev");
 
    if(is_freebsd) {
-      return;
       done_testing();
+      return;
    }
 
    ok($net->{networkconfiguration}->{"$dev:1"}->{ip} eq "1.2.3.4", "found ip of $dev:1");

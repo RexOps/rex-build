@@ -10,13 +10,13 @@ timeout 15;
 
 task "test", group => "test", sub {
 
-   mkdir "/tmp/etc2", owner => "rsync_user";
-   sync "files/etc/", "/tmp/etc2/";
+   mkdir "/home/rsync_user/etc2", owner => "rsync_user";
+   sync "files/etc/", "/home/rsync_user/etc2/";
 
-   my %stat = stat "/tmp/etc2/my.cnf";
+   my %stat = stat "/home/rsync_user/etc2/my.cnf";
 
-   ok($stat{uid} == 6000, "/tmp/etc2/my.cnf owner");
-   ok($stat{gid} == 6000, "/tmp/etc2/my.cnf group");
+   ok($stat{uid} == 6000, "/home/rsync_user/etc/my.cnf owner");
+   ok($stat{gid} == 6000, "/home/rsync_user/etc2/my.cnf group");
 
    done_testing();
 };
