@@ -21,5 +21,5 @@ task "test", group => "test", sub {
    done_testing();
 };
 
-auth for => test => user => "rsync_user", password => "rsync.pw", sudo_password => "rsync.pw";
+auth for => test => user => "rsync_user", password => "rsync.pw", sudo_password => "rsync.pw", pass_auth => TRUE;
 
