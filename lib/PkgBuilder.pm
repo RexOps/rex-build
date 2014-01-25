@@ -371,7 +371,7 @@ sub sync_time {
 sub doc_root {
    my $env = $ENV{BUILD_ENV} || "live";
 
-   if(-f "/nightly") {
+   if(-f "/nightly" && ! exists $ENV{BUILD_ENV}) {
       $env = "nightly";
    }
 
