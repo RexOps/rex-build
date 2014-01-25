@@ -25,6 +25,7 @@ use vars qw(@EXPORT);
    get_os_name get_os_release get_os_arch
    create_build_files
    doc_root
+   get_build_env
    sync_time);
 
 my $pid = $$;
@@ -369,6 +370,11 @@ sub sync_time {
 }
 
 sub doc_root {
+   my $env = get_build_env();
+   return config()->{repo}->{doc_root}->{$env};
+}
+
+sub get_build_env {
    my $env = $ENV{BUILD_ENV} || "live";
 
    if(-f "/nightly" && ! exists $ENV{BUILD_ENV}) {
@@ -379,7 +385,7 @@ sub doc_root {
       $env = "prelive";
    }
 
-   return config()->{repo}->{doc_root}->{$env};
+   return $env;
 }
 
 1;

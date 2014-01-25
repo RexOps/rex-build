@@ -62,12 +62,12 @@ task prepare => group => test => sub {
 
    Rex::Logger::info("Registering some repositories");
 
-   if(exists config->{repo}->{add}->{lc($op)}
-      && exists config->{repo}->{add}->{lc($op)}->{$ver}
-      && exists config->{repo}->{add}->{lc($op)}->{$ver}->{$arch}) {
+   if(exists config->{repo}->{add}->{get_build_env()}->{lc($op)}
+      && exists config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}
+      && exists config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}->{$arch}) {
 
       if(is_mageia) {
-         my $url = config->{repo}->{add}->{lc($op)}->{$ver}->{$arch}->{url};
+         my $url = config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}->{$arch}->{url};
          my $line = "rex $url {\n   key-ids: 16547F8C\n}\n";
          cp "/etc/urpmi/urpmi.cfg", "/etc/urpmi/urpmi.cfg.rex.bak";
          append_if_no_such_line "/etc/urpmi/urpmi.cfg",
@@ -77,7 +77,7 @@ task prepare => group => test => sub {
       else {
 
          eval {
-            repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{lc($op)}->{$ver}->{$arch} }; 
+            repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}->{$arch} }; 
             1;
          } or do {
             eval { repository remove => "rex"; };
@@ -89,8 +89,8 @@ task prepare => group => test => sub {
    else {
 
       eval {
-         repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{lc($op)} }
-            if(exists config->{repo}->{add}->{lc($op)});
+         repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{get_build_env()}->{lc($op)} }
+            if(exists config->{repo}->{add}->{get_build_env()}->{lc($op)});
          1;
       } or do {
          eval { repository remove => "rex"; };

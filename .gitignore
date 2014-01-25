@@ -20,3 +20,4 @@ doc/bootstrap.pod
 doc/html
 *.rex.lock
 junit*.xml
+*.lock
