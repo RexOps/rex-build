@@ -375,6 +375,10 @@ sub doc_root {
       $env = "nightly";
    }
 
+   if(-f "/prelive" && ! exists $ENV{BUILD_ENV}) {
+      $env = "prelive";
+   }
+
    return config()->{repo}->{doc_root}->{$env};
 }
 
