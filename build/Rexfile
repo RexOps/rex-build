@@ -40,6 +40,7 @@ task info => group => test => sub {
    say "op> $op";
    say "arch> $arch";
    say "ver> $ver";
+   say "environment> " . get_build_env();
 };
 
 task prepare => group => test => sub {
