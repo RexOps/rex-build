@@ -385,6 +385,10 @@ sub get_build_env {
       $env = "prelive";
    }
 
+   if(-f "/live" && ! exists $ENV{BUILD_ENV}) {
+      $env = "live";
+   }
+
    return $env;
 }
 
