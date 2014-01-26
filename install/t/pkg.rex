@@ -14,12 +14,14 @@ task test => group => test => sub {
    my $arch = get_os_arch;
    my $ver  = get_os_release;
 
-   if(exists config->{repo}->{add}->{lc($op)}
-      && exists config->{repo}->{add}->{lc($op)}->{$ver}
-      && exists config->{repo}->{add}->{lc($op)}->{$ver}->{$arch}) {
+   if(exists config->{repo}->{add}->{get_build_env()}->{lc($op)}
+      && exists config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}
+      && exists config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}->{$arch}) {
+
+      say Dumper(config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}->{$arch});
 
       if(is_mageia) {
-         my $url = config->{repo}->{add}->{lc($op)}->{$ver}->{$arch}->{url};
+         my $url = config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}->{$arch}->{url};
          my $line = "rex $url {\n   key-ids: 16547F8C\n}\n";
          cp "/etc/urpmi/urpmi.cfg", "/etc/urpmi/urpmi.cfg.rex.bak";
          append_if_no_such_line "/etc/urpmi/urpmi.cfg",
@@ -30,8 +32,9 @@ task test => group => test => sub {
       else {
 
          eval {
-            repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{lc($op)}->{$ver}->{$arch} }; 
+            repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}->{$arch} }; 
             $ok = 1;
+            1;
          } or do {
             eval { repository remove => "rex"; };
          };
@@ -41,9 +44,10 @@ task test => group => test => sub {
    }
    else {
 
+      say Dumper(config->{repo}->{add}->{get_build_env()}->{lc($op)});
       eval {
-         repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{lc($op)} }
-            if(exists config->{repo}->{add}->{lc($op)});
+         repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{get_build_env()}->{lc($op)} }
+            if(exists config->{repo}->{add}->{get_build_env()}->{lc($op)});
          $ok = 1;
       } or do {
          eval { repository remove => "rex"; };
@@ -88,7 +92,7 @@ task test => group => test => sub {
 
    my $out = run "rex -v";
    ok($? == 0, "run rex");
-   ok($out =~ m/\d+\.\d+\.\d+/, "got version");
+   ok($out =~ m/(\d+\.\d+\.\d+)/, "got version ($1)");
 
    done_testing();
 };
