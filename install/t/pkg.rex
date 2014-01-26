@@ -4,6 +4,7 @@ use Rex -feature => '0.42';
 use lib "../lib";
 use PkgBuilder;
 use Test::More;
+use Data::Dumper;
 
 do "../auth.conf";
 
