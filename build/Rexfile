@@ -67,6 +67,8 @@ task prepare => group => test => sub {
       && exists config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}
       && exists config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}->{$arch}) {
 
+      say Dumper(config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}->{$arch});
+
       if(is_mageia) {
          my $url = config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}->{$arch}->{url};
          my $line = "rex $url {\n   key-ids: 16547F8C\n}\n";
@@ -89,6 +91,7 @@ task prepare => group => test => sub {
    }
    else {
 
+      say Dumper(config->{repo}->{add}->{get_build_env()}->{lc($op)});
       eval {
          repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{get_build_env()}->{lc($op)} }
             if(exists config->{repo}->{add}->{get_build_env()}->{lc($op)});
