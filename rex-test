@@ -9,11 +9,6 @@ use Data::Dumper;
 my $cwd = getcwd();
 my $rnd = get_random(8, 'a' .. 'z');
 
-my $virgin = 1;
-if(is_dir("/tmp/workspace/$rnd")) {
-   $virgin = 0;
-}
-
 mkdir "/tmp/workspace";
 mkdir "/tmp/workspace/$rnd";
 chdir "/tmp/workspace/$rnd";
@@ -26,18 +21,16 @@ $ENV{"PATH"} = "/tmp/workspace/$rnd/rex/bin:" . $ENV{PATH};
 $ENV{"PERLLIB"} = "/tmp/workspace/$rnd/rex/lib:" . (exists $ENV{PERLLIB} ? $ENV{PERLLIB} : "");
 $ENV{"PERL5LIB"} = "/tmp/workspace/$rnd/rex/lib:" . (exists $ENV{PERL5LIB} ? $ENV{PERL5LIB} : "");
 
-# only run prepare task once
-if($virgin) {
-   system "perl /tmp/workspace/$rnd/rex/bin/rex -f contrib/prepare.rex prepare >>/var/log/rex/prepare.log 2>&1";
+system "perl /tmp/workspace/$rnd/rex/bin/rex -f contrib/prepare.rex prepare >>/var/log/rex/prepare.log 2>&1";
 
-   if($ENV{use_sudo}) {
-      system "perl /tmp/workspace/$rnd/rex/bin/rex -f contrib/prepare_sudo.rex prepare >>/var/log/rex/prepare_sudo.log 2>&1";
-      if($? != 0) {
-         print STDERR "Error preparing for sudo.\n";
-         exit 1;
-      }
+if($ENV{use_sudo}) {
+   system "perl /tmp/workspace/$rnd/rex/bin/rex -f contrib/prepare_sudo.rex prepare >>/var/log/rex/prepare_sudo.log 2>&1";
+   if($? != 0) {
+      print STDERR "Error preparing for sudo.\n";
+      exit 1;
    }
 }
+
 
 for my $file (@ARGV) {
    system "perl /tmp/workspace/$rnd/rex/bin/rex -qf $file test";
