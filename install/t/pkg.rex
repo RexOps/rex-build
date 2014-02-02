@@ -93,7 +93,8 @@ task test => group => test => sub {
 
    my $out = run "rex -v";
    ok($? == 0, "run rex");
-   ok($out =~ m/(\d+\.\d+\.\d+)/, "got version ($1)");
+   my ($name, $version) = split(/ /, $out);
+   ok($version =~ m/\d+\.\d+\.\d+/, "got version ($version)");
 
    done_testing();
 };
