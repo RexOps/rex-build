@@ -42,6 +42,9 @@ task prepare => group => test => sub {
    eval { install \@packages; };
 
    eval {
+      # ensure that /home exists
+	   mkdir "/home";
+
       # some tests need this group
       create_group "nobody";
 
@@ -52,6 +55,7 @@ task prepare => group => test => sub {
       create_group "rsync_user",
          gid => 6000;
 
+
       create_user "rsync_user",
          uid      => 6000,
          password => "rsync.pw",
@@ -59,7 +63,6 @@ task prepare => group => test => sub {
          groups   => ["rsync_user"];
 
       if( is_openwrt()) {
-	     mkdir "/home/rsync_user";
 	     create_user "rsync_user",
             shell => "/bin/ash";
       }
