@@ -94,6 +94,8 @@ LOCAL {
 
 
    system "WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST=$ip prove --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.post.d >junit_output_tests_post_d.xml";
+
+   system "rm -rf /tmp/workspace/$rnd";
 };
 
 vm destroy => $new_vm;
@@ -104,7 +106,6 @@ vm delete => $new_vm;
 # fix for #6
 run "virsh vol-delete --pool default $new_vm.img";
 
-system "rm -rf /tmp/workspace/$rnd";
 
 sub get_random {
    my $count = shift;
