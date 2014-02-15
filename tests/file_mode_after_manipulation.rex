@@ -34,6 +34,24 @@ task "test", group => "test", sub {
    ok($pre_stat{uid} == $post_stat{uid}, "owner after delete_lines_matching is the same");
    ok($pre_stat{gid} == $post_stat{gid}, "group after delete_lines_matching is the same");
 
+   file "/tmp/sed.permission.test",
+      content => "foobar\n",
+      owner   => "nobody",
+      group   => "nobody",
+      mode    => 666;
+
+   my %pre_sed_stat = stat "/tmp/sed.permission.test";
+
+   sed qr{foobar}, "bazbazbumm", "/tmp/sed.permission.test";
+
+   my $new_c = cat "/tmp/sed.permission.test";
+   ok($new_c =~ m/bazbazbumm/m, "got right content after sed");
+
+   my %post_sed_stat = stat "/tmp/sed.permission.test";
+   ok($pre_sed_stat{mode} == $post_sed_stat{mode}, "mode after sed is the same");
+   ok($pre_sed_stat{uid} == $post_sed_stat{uid}, "uid after sed is the same");
+   ok($pre_sed_stat{gid} == $post_sed_stat{gid}, "gid after sed is the same");
+
    done_testing();
 
 };
