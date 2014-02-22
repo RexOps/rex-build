@@ -57,12 +57,10 @@ LOCAL {
    mkdir "/tmp/workspace/$rnd";
    chdir "/tmp/workspace/$rnd";
 
+   my $branch = 'development';
    if(-f "/branch") {
-      my $branch = eval { local(@ARGV, $/) = ('/branch'); <>; };
+      $branch = eval { local(@ARGV, $/) = ('/branch'); <>; };
       $branch =~ s/[\r\n]//gms;
-   }
-   else {
-      $branch = 'development';
    }
 
    system "git clone git\@github.com:krimdomu/Rex.git rex --branch $branch >/var/log/rex/checkout.log 2>&1";
