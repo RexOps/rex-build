@@ -57,7 +57,13 @@ LOCAL {
    mkdir "/tmp/workspace/$rnd";
    chdir "/tmp/workspace/$rnd";
 
-   system 'git clone git@github.com:krimdomu/Rex.git rex --branch development >/tmp/out.log 2>&1';
+   my $branch = 'development';
+   if(-f "/branch") {
+      $branch = eval { local(@ARGV, $/) = ('/branch'); <>; };
+      $branch =~ s/[\r\n]//gms;
+   }
+
+   system "git clone git\@github.com:krimdomu/Rex.git rex --branch $branch >/var/log/rex/checkout.log 2>&1";
 
    chdir $cwd;
 
