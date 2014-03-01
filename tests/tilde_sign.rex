@@ -57,6 +57,9 @@ task "test", group => "test", sub {
       ok(! is_file("~/test.file"), "local test.file removed, test with tilde");
    };
 
+   mkdir "~rsync_user/foo";
+   ok(is_dir("/home/rsync_user/foo"), "created foo folder inside rsync_user \$HOME");
+
    done_testing();
 };
 
