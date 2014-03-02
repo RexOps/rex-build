@@ -34,7 +34,7 @@ task prepare => group => test => sub {
       qr{openwrt}i        => [qw/perlbase-bytes perlbase-digest perlbase-essential perlbase-file perlbase-xsloader shadow-groupadd shadow-groupdel shadow-groupmod shadow-useradd shadow-userdel shadow-usermod swap-utils/],
       qr{debian|ubuntu}i  => [qw/rsync/],
       qr{suse}i           => [qw/lsb-release/],
-      qr{fedora}i         => [qw/perl openssh-clients/],
+      qr{fedora}i         => [qw/perl openssh-clients which/],
       default             => [],
    };
 
