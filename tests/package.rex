@@ -27,11 +27,11 @@ task "test", group => "test", sub {
       default     => "vim",
    };
 
-   if(is_fedora) {
-      eval {
-         remove package => "vim-minimal";   # newer fedora 20 packages give a conflict.
-      };
-   }
+   #if(is_fedora) {
+   #   eval {
+   #      remove package => "vim-minimal";   # newer fedora 20 packages give a conflict.
+   #   };
+   #}
 
    my $ok = 0;
 

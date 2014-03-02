@@ -32,6 +32,12 @@ task test => group => test => sub {
 
    my $ok = 0;
 
+   #if(is_fedora) {
+   #   eval {
+   #      remove package => "vim-minimal";   # newer fedora 20 packages give a conflict.
+   #   };
+   #}
+
    if(is_suse) {
       # strange failure on suse for update_package_db()
       done_testing();
