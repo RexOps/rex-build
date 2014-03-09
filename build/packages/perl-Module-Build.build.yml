@@ -1,79 +1,79 @@
 # basic informations
 name:
-   centos: perl-Module-Build
+  centos: perl-Module-Build
 realname: Module-Build
 version: 0.4203
 release: 1
 epoch: 1
 summary: Module::Build - Build and install Perl modules
 group:
-   centos: System Environment/Libraries
+  centos: System Environment/Libraries
 license: Artistic
 homepage: https://metacpan.org/release/Module-Build
 source: http://cpan.metacpan.org/authors/id/L/LE/LEONT/Module-Build-0.4203.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 arch:
-   centos: x86_64
+  centos: x86_64
 description: |
-   Module::Build - Build and install Perl modules
+  Module::Build - Build and install Perl modules
 
 # requirements
 requires:
-   centos:
-      5:
-         build:
-            - make
-            - gcc
-            - perl
-            - perl-CPAN-Meta
-            - perl-ExtUtils-CBuilder
-            - perl-ExtUtils-ParseXS
-            - perl-Module-Metadata
-            - perl-Perl-OSType
-            - perl-CPAN-Meta-YAML
-            - perl-Parse-CPAN-Meta
-            - perl-JSON-PP
-            - perl-version
-         runtime:
-            - perl
-            - perl-CPAN-Meta
-            - perl-ExtUtils-CBuilder
-            - perl-ExtUtils-ParseXS
-            - perl-Module-Metadata
-            - perl-Perl-OSType
-            - perl-version
-            - perl-CPAN-Meta-YAML
-            - perl-Parse-CPAN-Meta
-            - perl-JSON-PP
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-CPAN-Meta
+        - perl-ExtUtils-CBuilder
+        - perl-ExtUtils-ParseXS
+        - perl-Module-Metadata
+        - perl-Perl-OSType
+        - perl-CPAN-Meta-YAML
+        - perl-Parse-CPAN-Meta
+        - perl-JSON-PP
+        - perl-version
+      runtime:
+        - perl
+        - perl-CPAN-Meta
+        - perl-ExtUtils-CBuilder
+        - perl-ExtUtils-ParseXS
+        - perl-Module-Metadata
+        - perl-Perl-OSType
+        - perl-version
+        - perl-CPAN-Meta-YAML
+        - perl-Parse-CPAN-Meta
+        - perl-JSON-PP
 
 # build instructions
 configure: |
-   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
-   cd <%= $realname %>-<%= $version %>
-     
-   sed -ie "s/'Test::Harness'         => 3.16/'Test::Harness'         => 0/g" Build.PL
-   sed -ie "s/'Pod::Man'              => 2.17/'Pod::Man'              => 0/g" Build.PL
-   sed -ie "s/'ExtUtils::Install'     => 1.54/'ExtUtils::Install'     => 0/g" Build.PL
-   sed -ie "s/'ExtUtils::Installed'   => 1.999/'ExtUtils::Installed'   => 0/g" Build.PL
-     
-   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+    
+  sed -ie "s/'Test::Harness'      => 3.16/'Test::Harness'      => 0/g" Build.PL
+  sed -ie "s/'Pod::Man'          => 2.17/'Pod::Man'          => 0/g" Build.PL
+  sed -ie "s/'ExtUtils::Install'    => 1.54/'ExtUtils::Install'    => 0/g" Build.PL
+  sed -ie "s/'ExtUtils::Installed'  => 1.999/'ExtUtils::Installed'  => 0/g" Build.PL
+    
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
 
 make: |
-   cd <%= $realname %>-<%= $version %>
-   make
+  cd <%= $realname %>-<%= $version %>
+  make
 
 install: |
-   rm -rf <%= $buildroot %>
-      
-   cd <%= $realname %>-<%= $version %>
-   make pure_install
-   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+  rm -rf <%= $buildroot %>
+    
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
 
 clean: |
-   rm -rf <%= $buildroot %>
+  rm -rf <%= $buildroot %>
 
 files:
-   package:
-      - /usr
+  package:
+    - /usr
 

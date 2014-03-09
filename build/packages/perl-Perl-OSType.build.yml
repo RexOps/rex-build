@@ -1,56 +1,56 @@
 # basic informations
 name:
-   centos: perl-Perl-OSType
+  centos: perl-Perl-OSType
 realname: Perl-OSType
 version: 1.006
 release: 1
 epoch: 1
 summary: Perl::OSType - Map Perl operating system names to generic types
 group:
-   centos: System Environment/Libraries
+  centos: System Environment/Libraries
 license: Artistic
 homepage: https://metacpan.org/pod/Perl::OSType
 source: http://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN/Perl-OSType-1.006.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 arch:
-   centos: x86_64
+  centos: x86_64
 description: |
-   Perl::OSType - Map Perl operating system names to generic types
+  Perl::OSType - Map Perl operating system names to generic types
 
 # requirements
 requires:
-   centos:
-      5:
-         build:
-            - make
-            - gcc
-            - perl
-         runtime:
-            - perl
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+      runtime:
+        - perl
 
 # build instructions
 configure: |
-   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
-   cd <%= $realname %>-<%= $version %>
-     
-   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+    
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
 
 make: |
-   cd <%= $realname %>-<%= $version %>
-   make
+  cd <%= $realname %>-<%= $version %>
+  make
 
 install: |
-   rm -rf <%= $buildroot %>
-      
-   cd <%= $realname %>-<%= $version %>
-   make pure_install
-   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+  rm -rf <%= $buildroot %>
+    
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
 
 clean: |
-   rm -rf <%= $buildroot %>
+  rm -rf <%= $buildroot %>
 
 files:
-   package:
-      - /usr
+  package:
+    - /usr
 

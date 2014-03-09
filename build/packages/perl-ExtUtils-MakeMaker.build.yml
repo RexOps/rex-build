@@ -1,56 +1,56 @@
 # basic informations
 name:
-   centos: perl-ExtUtils-MakeMaker
+  centos: perl-ExtUtils-MakeMaker
 realname: ExtUtils-MakeMaker
 version: 6.84
 release: 1
 epoch: 1
 summary: ExtUtils::MakeMaker - Create a module Makefile
 group:
-   centos: System Environment/Libraries
+  centos: System Environment/Libraries
 license: Artistic
 homepage: https://metacpan.org/pod/ExtUtils::MakeMaker
 source: http://cpan.metacpan.org/authors/id/B/BI/BINGOS/ExtUtils-MakeMaker-6.84.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 arch:
-   centos: x86_64
+  centos: x86_64
 description: |
-   ExtUtils::MakeMaker - Create a module Makefile
+  ExtUtils::MakeMaker - Create a module Makefile
 
 # requirements
 requires:
-   centos:
-      5:
-         build:
-            - make
-            - gcc
-            - perl
-         runtime:
-            - perl
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+      runtime:
+        - perl
 
 # build instructions
 configure: |
-   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
-   cd <%= $realname %>-<%= $version %>
-     
-   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr/local
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+    
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr/local
 
 make: |
-   cd <%= $realname %>-<%= $version %>
-   make
+  cd <%= $realname %>-<%= $version %>
+  make
 
 install: |
-   rm -rf <%= $buildroot %>
-      
-   cd <%= $realname %>-<%= $version %>
-   make pure_install
-   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+  rm -rf <%= $buildroot %>
+    
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
 
 clean: |
-   rm -rf <%= $buildroot %>
+  rm -rf <%= $buildroot %>
 
 files:
-   package:
-      - /usr/local
+  package:
+    - /usr/local
 

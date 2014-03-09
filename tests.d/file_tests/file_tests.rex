@@ -8,9 +8,9 @@ require Foo;
 
 task "test", group => "test", sub {
 
-   Foo::bar();
+  Foo::bar();
 
-   done_testing();
+  done_testing();
 
 };
 

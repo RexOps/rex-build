@@ -1,56 +1,56 @@
 # basic informations
 name:
-   centos: perl-Module-Load
+  centos: perl-Module-Load
 realname: Module-Load
 version: 0.24
 release: 1
 epoch: 1
 summary: Module::Load - runtime require of both modules and files
 group:
-   centos: System Environment/Libraries
+  centos: System Environment/Libraries
 license: Artistic
 homepage: https://metacpan.org/pod/Module::Load
 source: http://cpan.metacpan.org/authors/id/B/BI/BINGOS/Module-Load-0.24.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 arch:
-   centos: x86_64
+  centos: x86_64
 description: |
-   Module::Load - runtime require of both modules and files
+  Module::Load - runtime require of both modules and files
 
 # requirements
 requires:
-   centos:
-      5:
-         build:
-            - make
-            - gcc
-            - perl
-         runtime:
-            - perl
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+      runtime:
+        - perl
 
 # build instructions
 configure: |
-   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
-   cd <%= $realname %>-<%= $version %>
-     
-   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+    
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
 
 make: |
-   cd <%= $realname %>-<%= $version %>
-   make
+  cd <%= $realname %>-<%= $version %>
+  make
 
 install: |
-   rm -rf <%= $buildroot %>
-      
-   cd <%= $realname %>-<%= $version %>
-   make pure_install
-   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+  rm -rf <%= $buildroot %>
+    
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
 
 clean: |
-   rm -rf <%= $buildroot %>
+  rm -rf <%= $buildroot %>
 
 files:
-   package:
-      - /usr
+  package:
+    - /usr
 

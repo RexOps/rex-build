@@ -9,54 +9,54 @@ license: BSD
 homepage: http://www.libssh2.org
 source: http://libssh2.org/download/libssh2-<%= $version %>.tar.gz
 description: |
-   A library implementing the SSH2 protocol
+  A library implementing the SSH2 protocol
 
 # requirements
 requires:
-   centos:
-      build:
-         - openssl-devel
-         - zlib-devel
-         - make
-         - gcc
-      runtime:
-         - pkgconfig
+  centos:
+    build:
+      - openssl-devel
+      - zlib-devel
+      - make
+      - gcc
+    runtime:
+      - pkgconfig
 
 # build instructions
 configure: |
-   tar xzf <%= $sourceroot %>/<%= $name %>-<%= $version %>.tar.gz
-   cd <%= $name %>-<%= $version %>
-     
-   for i in ChangeLog NEWS ; do
-      iconv --from=ISO-8859-1 --to=UTF-8 $i > new
-      mv new $i
-   done
+  tar xzf <%= $sourceroot %>/<%= $name %>-<%= $version %>.tar.gz
+  cd <%= $name %>-<%= $version %>
     
-   ./configure --disable-static --enable-shared --prefix=/usr
+  for i in ChangeLog NEWS ; do
+    iconv --from=ISO-8859-1 --to=UTF-8 $i > new
+    mv new $i
+  done
+   
+  ./configure --disable-static --enable-shared --prefix=/usr
 
 make: |
-   cd <%= $name %>-<%= $version %>
-   make
+  cd <%= $name %>-<%= $version %>
+  make
 
 install: |
-   rm -rf <%= $buildroot %>
-      
-   cd <%= $name %>-<%= $version %>
-   make install DESTDIR=<%= $buildroot %> INSTALL="install -p"
-   find <%= $buildroot %> -name '*.la' -exec rm -f '{}' +
-     
-   # clean things up a bit for packaging
-   ( cd example && make clean )
-   find example/ -type d -name .deps -exec rm -rf {} +
-   find example/ -type f '(' -name '*.am' -o -name '*.in' ')' -exec rm -v {} +
+  rm -rf <%= $buildroot %>
+    
+  cd <%= $name %>-<%= $version %>
+  make install DESTDIR=<%= $buildroot %> INSTALL="install -p"
+  find <%= $buildroot %> -name '*.la' -exec rm -f '{}' +
+    
+  # clean things up a bit for packaging
+  ( cd example && make clean )
+  find example/ -type d -name .deps -exec rm -rf {} +
+  find example/ -type f '(' -name '*.am' -o -name '*.in' ')' -exec rm -v {} +
 
 clean: |
-   rm -rf <%= $buildroot %>
+  rm -rf <%= $buildroot %>
 
 post: |
-   /sbin/ldconfig
+  /sbin/ldconfig
 
 files:
-   package:
-      - /usr
+  package:
+    - /usr
 

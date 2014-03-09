@@ -13,21 +13,21 @@ set backup_location => "/tmp/$pid/backup/%h";
 
 task "test", group => "test", sub {
 
-   LOCAL {
-      mkdir "/tmp/$pid/backup";
-   };
+  LOCAL {
+    mkdir "/tmp/$pid/backup";
+  };
 
-   file "/etc/test.file", content => "foo";
+  file "/etc/test.file", content => "foo";
 
-   file "/etc/test.file", content => "bar";
+  file "/etc/test.file", content => "bar";
 
-   my $server = connection->server;
+  my $server = connection->server;
 
-   LOCAL {
-      my $content = cat "/tmp/$pid/backup/$server/etc/test.file";
-      ok($content eq "foo\n", "backup done");
-   };
+  LOCAL {
+    my $content = cat "/tmp/$pid/backup/$server/etc/test.file";
+    ok($content eq "foo\n", "backup done");
+  };
 
-   done_testing();
+  done_testing();
 };
 

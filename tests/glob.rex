@@ -7,11 +7,11 @@ do "auth.conf";
 
 task "test", group => "test", sub {
 
-   my @c = grep { is_file($_) } glob ("/etc/p*");
+  my @c = grep { is_file($_) } glob ("/etc/p*");
 
-   ok("/etc/passwd" ~~ @c, "found /etc/passwd");
+  ok("/etc/passwd" ~~ @c, "found /etc/passwd");
 
-   done_testing();
+  done_testing();
 };
 
 

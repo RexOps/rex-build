@@ -30,7 +30,7 @@ my $vminfo = vm guestinfo => $new_vm;
 my $ip = $vminfo->{network}->[0]->{ip};
 
 while(! is_port_open($ip, 22)) {
-   sleep 1;
+  sleep 1;
 }
 
 my ($user, $pass);

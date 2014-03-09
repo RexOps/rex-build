@@ -11,10 +11,10 @@ require Foo::Bar::Gee;
 
 task "test", group => "test", sub {
 
-   Foo::bar();
-   Foo::Bar::Gee::test();
+  Foo::bar();
+  Foo::Bar::Gee::test();
 
-   done_testing();
+  done_testing();
 
 };
 

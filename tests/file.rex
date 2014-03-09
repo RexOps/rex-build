@@ -9,199 +9,199 @@ my $cwd = getcwd;
 
 task test => group => test => sub {
 
-   my $fh = file_write "/tmp/test.txt";
-   $fh->write("Test\n");
-   $fh->close;
+  my $fh = file_write "/tmp/test.txt";
+  $fh->write("Test\n");
+  $fh->close;
 
-   ok(is_file("/tmp/test.txt"), "/tmp/test.txt exists");
+  ok(is_file("/tmp/test.txt"), "/tmp/test.txt exists");
 
-   my $fhr = file_read "/tmp/test.txt";
-   my @content = $fhr->read_all;
-   $fh->close;
-   ok($content[0] eq "Test", "content is ok");
-   my $fha = file_append "/tmp/test.txt";
-   $fha->write("Hello Jan\n");
-   $fha->write("Blah\n");
-   $fha->close;
+  my $fhr = file_read "/tmp/test.txt";
+  my @content = $fhr->read_all;
+  $fh->close;
+  ok($content[0] eq "Test", "content is ok");
+  my $fha = file_append "/tmp/test.txt";
+  $fha->write("Hello Jan\n");
+  $fha->write("Blah\n");
+  $fha->close;
 
-   $fhr = file_read "/tmp/test.txt";
-   @content = $fhr->read_all;
-   $fhr->close;
+  $fhr = file_read "/tmp/test.txt";
+  @content = $fhr->read_all;
+  $fhr->close;
 
-   ok($content[1] eq "Hello Jan", "content check 2");
+  ok($content[1] eq "Hello Jan", "content check 2");
 
-   eval {
-      delete_lines_matching "/tmp/test.txt" => "Jan";
-   };
+  eval {
+    delete_lines_matching "/tmp/test.txt" => "Jan";
+  };
 
-   ok(! $@, "delete_lines_matching eval...");
+  ok(! $@, "delete_lines_matching eval...");
 
-   $fhr = file_read "/tmp/test.txt";
-   @content = $fhr->read_all;
-   $fhr->close;
+  $fhr = file_read "/tmp/test.txt";
+  @content = $fhr->read_all;
+  $fhr->close;
 
-   ok($content[1] eq "Blah", "delete_lines_matching (string)");
+  ok($content[1] eq "Blah", "delete_lines_matching (string)");
 
-   delete_lines_matching "/tmp/test.txt" => qr{blah}i;
+  delete_lines_matching "/tmp/test.txt" => qr{blah}i;
 
-   $fhr = file_read "/tmp/test.txt";
-   @content = $fhr->read_all;
-   $fhr->close;
+  $fhr = file_read "/tmp/test.txt";
+  @content = $fhr->read_all;
+  $fhr->close;
 
-   ok(scalar(@content) == 1, "delete_lines_matching (regex)");
+  ok(scalar(@content) == 1, "delete_lines_matching (regex)");
 
-   append_if_no_such_line "/tmp/test.txt", "Test99", qr{Test99};
+  append_if_no_such_line "/tmp/test.txt", "Test99", qr{Test99};
 
-   $fhr = file_read "/tmp/test.txt";
-   @content = $fhr->read_all;
-   $fhr->close;
-   ok($content[-1] eq "Test99", "append_if_no_such_lines");
+  $fhr = file_read "/tmp/test.txt";
+  @content = $fhr->read_all;
+  $fhr->close;
+  ok($content[-1] eq "Test99", "append_if_no_such_lines");
 
-   append_if_no_such_line "/tmp/test.txt",
-      line => "#include /etc/sudoers.d/*.conf",
-      regexp => qr{^#include /etc/sudoers.d/\*\.conf$};
+  append_if_no_such_line "/tmp/test.txt",
+    line => "#include /etc/sudoers.d/*.conf",
+    regexp => qr{^#include /etc/sudoers.d/\*\.conf$};
 
-   $fhr = file_read "/tmp/test.txt";
-   @content = $fhr->read_all;
-   $fhr->close;
-   ok($content[-1] eq "#include /etc/sudoers.d/*.conf", "append_if_no_such_lines - with path, ^ and \$ in regexp");
-
-
-   # something with quotes
-   append_if_no_such_line "/tmp/test.txt",
-      line => 'this is with "quotes", checked?',
-      regexp => qr{this is with "quotes", checked\?};
-   $fhr = file_read "/tmp/test.txt";
-   @content = $fhr->read_all;
-   $fhr->close;
-   ok($content[-1] eq 'this is with "quotes", checked?', "append_if_no_such_lines - with quotes");
+  $fhr = file_read "/tmp/test.txt";
+  @content = $fhr->read_all;
+  $fhr->close;
+  ok($content[-1] eq "#include /etc/sudoers.d/*.conf", "append_if_no_such_lines - with path, ^ and \$ in regexp");
 
 
-   append_if_no_such_line "/tmp/test.txt",
-      line => "#include /etc/sudoers.d/*.conf";
-   $fhr = file_read "/tmp/test.txt";
-   @content = $fhr->read_all;
-   $fhr->close;
-   ok($content[-1] ne "#include /etc/sudoers.d/*.conf", "append_if_no_such_lines - try to add second #include line, should not appear");
+  # something with quotes
+  append_if_no_such_line "/tmp/test.txt",
+    line => 'this is with "quotes", checked?',
+    regexp => qr{this is with "quotes", checked\?};
+  $fhr = file_read "/tmp/test.txt";
+  @content = $fhr->read_all;
+  $fhr->close;
+  ok($content[-1] eq 'this is with "quotes", checked?', "append_if_no_such_lines - with quotes");
 
 
-   append_if_no_such_line "/tmp/test.txt",
-      line => "#include /etc/sudoers.d/*.conf",
-      regexp => qr{^#include /etc/sudoers.d/\*\.conf$};
-
-   $fhr = file_read "/tmp/test.txt";
-   @content = $fhr->read_all;
-   $fhr->close;
-   ok($content[-1] ne "#include /etc/sudoers.d/*.conf", "append_if_no_such_lines - try to add second #include line, should not appear, with regexp");
+  append_if_no_such_line "/tmp/test.txt",
+    line => "#include /etc/sudoers.d/*.conf";
+  $fhr = file_read "/tmp/test.txt";
+  @content = $fhr->read_all;
+  $fhr->close;
+  ok($content[-1] ne "#include /etc/sudoers.d/*.conf", "append_if_no_such_lines - try to add second #include line, should not appear");
 
 
-   # some crazy chars
-   append_if_no_such_line "/tmp/test.txt",
-      line => "\\.-~'[a-z]\$ foo {1} \%\&()?",
-      regexp => qr/^\\\.\-\~'\[a\-z\]\$ foo \{1\} \%\&\(\)\?$/i;
+  append_if_no_such_line "/tmp/test.txt",
+    line => "#include /etc/sudoers.d/*.conf",
+    regexp => qr{^#include /etc/sudoers.d/\*\.conf$};
 
-   $fhr = file_read "/tmp/test.txt";
-   @content = $fhr->read_all;
-   $fhr->close;
-   ok($content[-1] eq "\\.-~'[a-z]\$ foo {1} %&()?", "append_if_no_such_lines - try to add crazy things");
+  $fhr = file_read "/tmp/test.txt";
+  @content = $fhr->read_all;
+  $fhr->close;
+  ok($content[-1] ne "#include /etc/sudoers.d/*.conf", "append_if_no_such_lines - try to add second #include line, should not appear, with regexp");
 
-   # some crazy chars with q
-   append_if_no_such_line "/tmp/test.txt",
-      line => q/this "is" some 'things' with quotes and $other chars .\/5+'#?"~'`  `ls` $sfdkj/;
 
-   $fhr = file_read "/tmp/test.txt";
-   @content = $fhr->read_all;
-   $fhr->close;
-   ok($content[-1] eq q/this "is" some 'things' with quotes and $other chars .\/5+'#?"~'`  `ls` $sfdkj/, "append_if_no_such_lines - adding things with q//");
+  # some crazy chars
+  append_if_no_such_line "/tmp/test.txt",
+    line => "\\.-~'[a-z]\$ foo {1} \%\&()?",
+    regexp => qr/^\\\.\-\~'\[a\-z\]\$ foo \{1\} \%\&\(\)\?$/i;
 
-   # again to verify that it is not doubled, some crazy chars with q
-   append_if_no_such_line "/tmp/test.txt",
-      line => q/this "is" some 'things' with quotes and $other chars .\/5+'#?"~'`  `ls` $sfdkj/;
+  $fhr = file_read "/tmp/test.txt";
+  @content = $fhr->read_all;
+  $fhr->close;
+  ok($content[-1] eq "\\.-~'[a-z]\$ foo {1} %&()?", "append_if_no_such_lines - try to add crazy things");
 
-   $fhr = file_read "/tmp/test.txt";
-   @content = $fhr->read_all;
-   $fhr->close;
-   ok($content[-1] eq q/this "is" some 'things' with quotes and $other chars .\/5+'#?"~'`  `ls` $sfdkj/, "append_if_no_such_lines - adding things with q// - 2nd time");
-   ok($content[-2] ne q/this "is" some 'things' with quotes and $other chars .\/5+'#?"~'`  `ls` $sfdkj/, "append_if_no_such_lines - adding things with q// - not doubled");
+  # some crazy chars with q
+  append_if_no_such_line "/tmp/test.txt",
+    line => q/this "is" some 'things' with quotes and $other chars .\/5+'#?"~'`  `ls` $sfdkj/;
 
-   # don't add something
-   append_if_no_such_line "/tmp/test.txt", "Test100", qr{Test};
+  $fhr = file_read "/tmp/test.txt";
+  @content = $fhr->read_all;
+  $fhr->close;
+  ok($content[-1] eq q/this "is" some 'things' with quotes and $other chars .\/5+'#?"~'`  `ls` $sfdkj/, "append_if_no_such_lines - adding things with q//");
 
-   $fhr = file_read "/tmp/test.txt";
-   @content = $fhr->read_all;
-   $fhr->close;
-   ok($content[-1] ne "Test100", "append_if_no_such_line with regex");
+  # again to verify that it is not doubled, some crazy chars with q
+  append_if_no_such_line "/tmp/test.txt",
+    line => q/this "is" some 'things' with quotes and $other chars .\/5+'#?"~'`  `ls` $sfdkj/;
 
-   my $changed = 0;
-   append_if_no_such_line "/tmp/test.txt", "change", qr{change}, 
-      on_change => sub {
-         $changed = 1;
-      };
+  $fhr = file_read "/tmp/test.txt";
+  @content = $fhr->read_all;
+  $fhr->close;
+  ok($content[-1] eq q/this "is" some 'things' with quotes and $other chars .\/5+'#?"~'`  `ls` $sfdkj/, "append_if_no_such_lines - adding things with q// - 2nd time");
+  ok($content[-2] ne q/this "is" some 'things' with quotes and $other chars .\/5+'#?"~'`  `ls` $sfdkj/, "append_if_no_such_lines - adding things with q// - not doubled");
 
-   ok($changed == 1, "something was changed in the file");
+  # don't add something
+  append_if_no_such_line "/tmp/test.txt", "Test100", qr{Test};
 
-   append_if_no_such_line "/tmp/test.txt", "change", qr{change}, 
-      on_change => sub {
-         $changed = 0;
-      };
+  $fhr = file_read "/tmp/test.txt";
+  @content = $fhr->read_all;
+  $fhr->close;
+  ok($content[-1] ne "Test100", "append_if_no_such_line with regex");
 
-   ok($changed == 1, "nothing was changed in the file");
+  my $changed = 0;
+  append_if_no_such_line "/tmp/test.txt", "change", qr{change}, 
+    on_change => sub {
+      $changed = 1;
+    };
 
-   unlink "/tmp/test.txt";
-   ok(!is_file("/tmp/test.txt"), "file deleted");
+  ok($changed == 1, "something was changed in the file");
 
-   file "/tmp/foo.bar",
-      source => "/etc/passwd";
+  append_if_no_such_line "/tmp/test.txt", "change", qr{change}, 
+    on_change => sub {
+      $changed = 0;
+    };
 
-   ok(is_file("/tmp/foo.bar"), "/tmp/foo.bar exists");  
-   ok(!is_dir("/tmp/foo.bar"), "/tmp/foo.bar exists and is not a dir");  
+  ok($changed == 1, "nothing was changed in the file");
 
-   my $i = cat "/tmp/foo.bar";
-   ok($i =~ m/root/m, "/tmp/foo.bar has content");
+  unlink "/tmp/test.txt";
+  ok(!is_file("/tmp/test.txt"), "file deleted");
 
-   rm "/tmp/foo.bar";
-   ok(!is_file("/tmp/foo.bar"), "/tmp/foo.bar deleted");
+  file "/tmp/foo.bar",
+    source => "/etc/passwd";
 
-   file "/tmp/foo.bar2",
-      content => template("file/test.tpl");
+  ok(is_file("/tmp/foo.bar"), "/tmp/foo.bar exists");  
+  ok(!is_dir("/tmp/foo.bar"), "/tmp/foo.bar exists and is not a dir");  
 
-   ok(is_file("/tmp/foo.bar2"), "/tmp/foo.bar2 exists");
+  my $i = cat "/tmp/foo.bar";
+  ok($i =~ m/root/m, "/tmp/foo.bar has content");
 
-   my $i2 = cat "/tmp/foo.bar2";
-   ok($i2 =~ m/\@array/m, "found \@array");
-   ok($i2 =~ m/\%heho/m, "found \%heho");
-   ok($i2 =~ m/\$bla/m, "found \$bla");
+  rm "/tmp/foo.bar";
+  ok(!is_file("/tmp/foo.bar"), "/tmp/foo.bar deleted");
 
-   unlink "/tmp/foo.bar2";
-   ok(!is_file("/tmp/foo.bar2"), "file removed");
+  file "/tmp/foo.bar2",
+    content => template("file/test.tpl");
 
-   file "/tmp/foo.bar3",
-      content => "blah";
+  ok(is_file("/tmp/foo.bar2"), "/tmp/foo.bar2 exists");
 
-   my $i3 = cat "/tmp/foo.bar3";
-   ok($i3 =~ m/blah/, "file function with content");
+  my $i2 = cat "/tmp/foo.bar2";
+  ok($i2 =~ m/\@array/m, "found \@array");
+  ok($i2 =~ m/\%heho/m, "found \%heho");
+  ok($i2 =~ m/\$bla/m, "found \$bla");
 
-   file "/tmp/foo.bar4",
-      source => "tests/file/test.txt";
-   
-   my $i4 = cat "/tmp/foo.bar4";
-   ok($i4 =~ m/blub/, "file function with source");
+  unlink "/tmp/foo.bar2";
+  ok(!is_file("/tmp/foo.bar2"), "file removed");
 
-   file "/tmp/foo.bar5",
-      source => "$cwd/tests/file/test.txt";
+  file "/tmp/foo.bar3",
+    content => "blah";
 
-   my $i5 = cat "/tmp/foo.bar5";
-   ok($i5 =~ m/blah/, "file function with source and absolute path");
+  my $i3 = cat "/tmp/foo.bar3";
+  ok($i3 =~ m/blah/, "file function with content");
 
-   file "/tmp/sed.multiline.replace", content => "this is\na small\ntest\n";
-   sed qr/a small\ntest/, "replaced", "/tmp/sed.multiline.replace",
-      multiline => TRUE;
+  file "/tmp/foo.bar4",
+    source => "tests/file/test.txt";
+  
+  my $i4 = cat "/tmp/foo.bar4";
+  ok($i4 =~ m/blub/, "file function with source");
 
-   my $smr = cat "/tmp/sed.multiline.replace";
-   ok($smr eq "this is\nreplaced\n", "sed multiline replace");
+  file "/tmp/foo.bar5",
+    source => "$cwd/tests/file/test.txt";
 
-   
+  my $i5 = cat "/tmp/foo.bar5";
+  ok($i5 =~ m/blah/, "file function with source and absolute path");
 
-   done_testing();
+  file "/tmp/sed.multiline.replace", content => "this is\na small\ntest\n";
+  sed qr/a small\ntest/, "replaced", "/tmp/sed.multiline.replace",
+    multiline => TRUE;
+
+  my $smr = cat "/tmp/sed.multiline.replace";
+  ok($smr eq "this is\nreplaced\n", "sed multiline replace");
+
+  
+
+  done_testing();
 };
 

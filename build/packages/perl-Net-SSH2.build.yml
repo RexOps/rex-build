@@ -1,187 +1,187 @@
 # basic informations
 name:
-   centos: perl-Net-SSH2
-   debian: libnet-ssh2-perl
-   ubuntu: libnet-ssh2-perl
-   suse: perl-Net-SSH2
-   mageia: perl-Net-SSH2
+  centos: perl-Net-SSH2
+  debian: libnet-ssh2-perl
+  ubuntu: libnet-ssh2-perl
+  suse: perl-Net-SSH2
+  mageia: perl-Net-SSH2
 realname: Net-SSH2
 version: 0.53
 pkgversion:
-   mageia: 0.530.0
+  mageia: 0.530.0
 release: 1
 epoch: 1
 summary: Net::SSH2 - Support for the SSH 2 protocol via libssh2.
 group:
-   centos: Development/Perl
-   debian: libs
-   ubuntu: libs
-   suse: Development/Perl
-   mageia: Development/Perl
+  centos: Development/Perl
+  debian: libs
+  ubuntu: libs
+  suse: Development/Perl
+  mageia: Development/Perl
 license: Artistic
 homepage: https://metacpan.org/pod/Net::SSH2
 source: http://cpan.metacpan.org/authors/id/R/RK/RKITOVER/Net-SSH2-0.53.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 description: |
-   Net::SSH2 - Support for the SSH 2 protocol via libssh2.
+  Net::SSH2 - Support for the SSH 2 protocol via libssh2.
 
 # requirements
 requires:
-   centos:
-      5:
-         build:
-            - openssl-devel
-            - zlib-devel
-            - make
-            - gcc
-            - perl
-            - libssh2
-            - libssh2-devel
-         runtime:
-            - pkgconfig
-            - libssh2
-            - perl
+  centos:
+    5:
+      build:
+        - openssl-devel
+        - zlib-devel
+        - make
+        - gcc
+        - perl
+        - libssh2
+        - libssh2-devel
+      runtime:
+        - pkgconfig
+        - libssh2
+        - perl
 
-      6:
-         build:
-            - openssl-devel
-            - zlib-devel
-            - make
-            - gcc
-            - perl
-            - perl-devel
-            - libssh2
-            - libssh2-devel
-         runtime:
-            - pkgconfig
-            - perl
-            - libssh2
+    6:
+      build:
+        - openssl-devel
+        - zlib-devel
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - libssh2
+        - libssh2-devel
+      runtime:
+        - pkgconfig
+        - perl
+        - libssh2
 
-   debian:
-      squeeze: &depsqueeze
-         build:
-            - build-essential
-            - debhelper
-            - perl
-            - libperl-dev
-            - perl-modules
-            - make
-            - debhelper
-            - autotools-dev
-            - automake
-            - libtool
-            - libssl-dev
-            - zlib1g-dev
-            - libssh2-1
-            - libssh2-1-dev
-         runtime:
-            - libssl0.9.8
-            - libssh2-1
+  debian:
+    squeeze: &depsqueeze
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - debhelper
+        - autotools-dev
+        - automake
+        - libtool
+        - libssl-dev
+        - zlib1g-dev
+        - libssh2-1
+        - libssh2-1-dev
+      runtime:
+        - libssl0.9.8
+        - libssh2-1
 
-   ubuntu:
-      lucid: *depsqueeze
-      precise:
-         build:
-            - build-essential
-            - debhelper
-            - perl
-            - libperl-dev
-            - perl-modules
-            - make
-            - debhelper
-            - autotools-dev
-            - automake
-            - libtool
-            - libssl-dev
-            - zlib1g-dev
-            - libssh2-1
-            - libssh2-1-dev
-         runtime:
-            - libssl1.0.0
-            - libssh2-1
+  ubuntu:
+    lucid: *depsqueeze
+    precise:
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - debhelper
+        - autotools-dev
+        - automake
+        - libtool
+        - libssl-dev
+        - zlib1g-dev
+        - libssh2-1
+        - libssh2-1-dev
+      runtime:
+        - libssl1.0.0
+        - libssh2-1
 
-   suse:
-      13.1:
-         build:
-            - make
-            - automake
-            - autoconf
-            - libopenssl-devel
-            - libssh2-1
-            - libssh2-devel
-            - zlib-devel
-            - libz1
-            - libtool
-         runtime:
-            - libz1
-            - libssh2-1
-            - libopenssl1_0_0
+  suse:
+    13.1:
+      build:
+        - make
+        - automake
+        - autoconf
+        - libopenssl-devel
+        - libssh2-1
+        - libssh2-devel
+        - zlib-devel
+        - libz1
+        - libtool
+      runtime:
+        - libz1
+        - libssh2-1
+        - libopenssl1_0_0
 
-   mageia:
-      3:
-         x86_64:
-            build:
-               - make
-               - automake
-               - autoconf
-               - lib64openssl1.0.0
-               - lib64openssl-devel
-               - lib64ssh2-devel
-               - lib64ssh2_1
-               - lib64zlib-devel
-               - lib64zlib1
-               - libtool
-               - perl
-               - perl-devel
-            runtime:
-               - lib64openssl1.0.0
-               - lib64ssh2_1
-               - lib64zlib1
+  mageia:
+    3:
+      x86_64:
+        build:
+          - make
+          - automake
+          - autoconf
+          - lib64openssl1.0.0
+          - lib64openssl-devel
+          - lib64ssh2-devel
+          - lib64ssh2_1
+          - lib64zlib-devel
+          - lib64zlib1
+          - libtool
+          - perl
+          - perl-devel
+        runtime:
+          - lib64openssl1.0.0
+          - lib64ssh2_1
+          - lib64zlib1
 
 
-         i686:
-            build:
-               - make
-               - automake
-               - autoconf
-               - libopenssl1.0.0
-               - libopenssl-devel
-               - libssh2-devel
-               - libssh2_1
-               - libzlib-devel
-               - libzlib1
-               - libtool
-               - perl
-               - perl-devel
-            runtime:
-               - libopenssl1.0.0
-               - libssh2_1
-               - libzlib1
+      i686:
+        build:
+          - make
+          - automake
+          - autoconf
+          - libopenssl1.0.0
+          - libopenssl-devel
+          - libssh2-devel
+          - libssh2_1
+          - libzlib-devel
+          - libzlib1
+          - libtool
+          - perl
+          - perl-devel
+        runtime:
+          - libopenssl1.0.0
+          - libssh2_1
+          - libzlib1
 
 
 # build instructions
 configure: |
-   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
-   cd <%= $realname %>-<%= $version %>
-     
-   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+    
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
 
 make: |
-   cd <%= $realname %>-<%= $version %>
-   make
+  cd <%= $realname %>-<%= $version %>
+  make
 
 install: |
-   rm -rf <%= $buildroot %>
-      
-   cd <%= $realname %>-<%= $version %>
-   make pure_install
-   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+  rm -rf <%= $buildroot %>
+    
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
 
 clean: |
-   rm -rf <%= $buildroot %>
+  rm -rf <%= $buildroot %>
 
 files:
-   package:
-      - /usr
+  package:
+    - /usr
 

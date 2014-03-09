@@ -1,90 +1,90 @@
 # basic informations
 name:
-   centos: libssh2
-   ubuntu: libssh2-1
-   debian: libssh2-1
+  centos: libssh2
+  ubuntu: libssh2-1
+  debian: libssh2-1
 realname: libssh2
 version: 1.4.2
 release: 1
 epoch: 1
 summary: A library implementing the SSH2 protocol
 group:
-   centos: System Environment/Libraries
-   ubuntu: libs
-   debian: libs
+  centos: System Environment/Libraries
+  ubuntu: libs
+  debian: libs
 license: BSD
 homepage: http://www.libssh2.org
 source: http://libssh2.org/download/libssh2-<%= $version %>.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 description: |
-   A library implementing the SSH2 protocol
+  A library implementing the SSH2 protocol
 
 # requirements
 requires:
-   centos:
+  centos:
+    build:
+      - openssl-devel
+      - zlib-devel
+      - make
+      - gcc
+    runtime:
+      - pkgconfig
+
+  debian:
+    squeeze: &depsqueeze
       build:
-         - openssl-devel
-         - zlib-devel
-         - make
-         - gcc
+        - debhelper
+        - autotools-dev
+        - automake
+        - libtool
+        - libssl-dev
+        - zlib1g-dev
       runtime:
-         - pkgconfig
+        - libssl0.9.8
 
-   debian:
-      squeeze: &depsqueeze
-         build:
-            - debhelper
-            - autotools-dev
-            - automake
-            - libtool
-            - libssl-dev
-            - zlib1g-dev
-         runtime:
-            - libssl0.9.8
-
-   ubuntu: *depsqueeze
+  ubuntu: *depsqueeze
 
 # build instructions
 configure: |
-   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
-   cd <%= $realname %>-<%= $version %>
-     
-   for i in ChangeLog NEWS ; do
-      iconv --from=ISO-8859-1 --to=UTF-8 $i > new
-      mv new $i
-   done
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
     
-   ./configure --disable-static --enable-shared --prefix=/usr --with-libssl-prefix=/
+  for i in ChangeLog NEWS ; do
+    iconv --from=ISO-8859-1 --to=UTF-8 $i > new
+    mv new $i
+  done
+   
+  ./configure --disable-static --enable-shared --prefix=/usr --with-libssl-prefix=/
 
 make: |
-   cd <%= $realname %>-<%= $version %>
-   make
+  cd <%= $realname %>-<%= $version %>
+  make
 
 install: |
-   rm -rf <%= $buildroot %>
-      
-   cd <%= $realname %>-<%= $version %>
-   make install DESTDIR=<%= $buildroot %> INSTALL="install -p"
-   find <%= $buildroot %> -name '*.la' -exec rm -f '{}' +
-     
-   # clean things up a bit for packaging
-   ( cd example && make clean )
-   find example/ -type d -name .deps -exec rm -rf {} +
-   find example/ -type f '(' -name '*.am' -o -name '*.in' ')' -exec rm -v {} +
-      
-   rm -rf <%= $buildroot %>/usr/include
-   rm -rf <%= $buildroot %>/usr/share
-   rm -rf <%= $buildroot %>/usr/lib/pkgconfig
-   rm -f <%= $buildroot %>/usr/lib/libssh2.so
+  rm -rf <%= $buildroot %>
+    
+  cd <%= $realname %>-<%= $version %>
+  make install DESTDIR=<%= $buildroot %> INSTALL="install -p"
+  find <%= $buildroot %> -name '*.la' -exec rm -f '{}' +
+    
+  # clean things up a bit for packaging
+  ( cd example && make clean )
+  find example/ -type d -name .deps -exec rm -rf {} +
+  find example/ -type f '(' -name '*.am' -o -name '*.in' ')' -exec rm -v {} +
+    
+  rm -rf <%= $buildroot %>/usr/include
+  rm -rf <%= $buildroot %>/usr/share
+  rm -rf <%= $buildroot %>/usr/lib/pkgconfig
+  rm -f <%= $buildroot %>/usr/lib/libssh2.so
 
 clean: |
-   rm -rf <%= $buildroot %>
+  rm -rf <%= $buildroot %>
 
 post: |
-   /sbin/ldconfig
+  /sbin/ldconfig
 
 files:
-   package:
-      - /usr/lib/*.so.*
+  package:
+    - /usr/lib/*.so.*
 

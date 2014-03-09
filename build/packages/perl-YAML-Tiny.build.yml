@@ -1,56 +1,56 @@
 # basic informations
 name:
-   centos: perl-YAML-Tiny
+  centos: perl-YAML-Tiny
 realname: YAML-Tiny
 version: 1.51
 release: 1
 epoch: 1
 summary: YAML::Tiny - Read/Write YAML files with as little code as possible
 group:
-   centos: System Environment/Libraries
+  centos: System Environment/Libraries
 license: Artistic
 homepage: https://metacpan.org/pod/YAML::Tiny
 source: http://cpan.metacpan.org/authors/id/A/AD/ADAMK/YAML-Tiny-1.51.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 arch:
-   centos: x86_64
+  centos: x86_64
 description: |
-   YAML::Tiny - Read/Write YAML files with as little code as possible
+  YAML::Tiny - Read/Write YAML files with as little code as possible
 
 # requirements
 requires:
-   centos:
-      5:
-         build:
-            - make
-            - gcc
-            - perl
-         runtime:
-            - perl
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+      runtime:
+        - perl
 
 # build instructions
 configure: |
-   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
-   cd <%= $realname %>-<%= $version %>
-     
-   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+    
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
 
 make: |
-   cd <%= $realname %>-<%= $version %>
-   make
+  cd <%= $realname %>-<%= $version %>
+  make
 
 install: |
-   rm -rf <%= $buildroot %>
-      
-   cd <%= $realname %>-<%= $version %>
-   make pure_install
-   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+  rm -rf <%= $buildroot %>
+    
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
 
 clean: |
-   rm -rf <%= $buildroot %>
+  rm -rf <%= $buildroot %>
 
 files:
-   package:
-      - /usr
+  package:
+    - /usr
 

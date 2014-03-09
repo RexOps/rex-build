@@ -1,63 +1,63 @@
 # basic informations
 name:
-   centos: perl-ExtUtils-ParseXS
+  centos: perl-ExtUtils-ParseXS
 realname: ExtUtils-ParseXS
 version: 3.22
 release: 1
 epoch: 1
 summary: ExtUtils::ParseXS - converts Perl XS code into C code
 group:
-   centos: System Environment/Libraries
+  centos: System Environment/Libraries
 license: Artistic
 homepage: https://metacpan.org/pod/ExtUtils::ParseXS
 source: http://cpan.metacpan.org/authors/id/S/SM/SMUELLER/ExtUtils-ParseXS-3.22.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 arch:
-   centos: x86_64
+  centos: x86_64
 description: |
-   ExtUtils::ParseXS - converts Perl XS code into C code
+  ExtUtils::ParseXS - converts Perl XS code into C code
 
 # requirements
 requires:
-   centos:
-      5:
-         build:
-            - make
-            - gcc
-            - perl
-            - perl-ExtUtils-CBuilder
-         runtime:
-            - perl
-            - perl-ExtUtils-CBuilder
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-ExtUtils-CBuilder
+      runtime:
+        - perl
+        - perl-ExtUtils-CBuilder
 
 # build instructions
 configure: |
-   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
-   cd <%= $realname %>-<%= $version %>
-   sed -ie "s/'ExtUtils::MakeMaker' => '6.46'/'ExtUtils::MakeMaker' => '0'/g" Makefile.PL
-   sed -ie "s/use ExtUtils::MakeMaker 6.46/use ExtUtils::MakeMaker/g" Makefile.PL
-     
-   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+  sed -ie "s/'ExtUtils::MakeMaker' => '6.46'/'ExtUtils::MakeMaker' => '0'/g" Makefile.PL
+  sed -ie "s/use ExtUtils::MakeMaker 6.46/use ExtUtils::MakeMaker/g" Makefile.PL
+    
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
 
 make: |
-   cd <%= $realname %>-<%= $version %>
-   make
+  cd <%= $realname %>-<%= $version %>
+  make
 
 install: |
-   rm -rf <%= $buildroot %>
-      
-   cd <%= $realname %>-<%= $version %>
-   make pure_install
-   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
-   mkdir -p <%= $buildroot %>/usr/local/bin
-   rm <%= $buildroot %>/usr/share/man/man1/xsubpp.1
-   mv <%= $buildroot %>/usr/bin/xsubpp <%= $buildroot %>/usr/local/bin
+  rm -rf <%= $buildroot %>
+    
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+  mkdir -p <%= $buildroot %>/usr/local/bin
+  rm <%= $buildroot %>/usr/share/man/man1/xsubpp.1
+  mv <%= $buildroot %>/usr/bin/xsubpp <%= $buildroot %>/usr/local/bin
 
 clean: |
-   rm -rf <%= $buildroot %>
+  rm -rf <%= $buildroot %>
 
 files:
-   package:
-      - /usr
+  package:
+    - /usr
 

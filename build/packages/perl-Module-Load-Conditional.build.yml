@@ -1,68 +1,68 @@
 # basic informations
 name:
-   centos: perl-Module-Load-Conditional
+  centos: perl-Module-Load-Conditional
 realname: Module-Load-Conditional
 version: 0.58
 release: 1
 epoch: 1
 summary: Module::Load::Conditional - Looking up module information / loading at runtime
 group:
-   centos: System Environment/Libraries
+  centos: System Environment/Libraries
 license: Artistic
 homepage: https://metacpan.org/pod/Module::Load::Conditional
 source: http://cpan.metacpan.org/authors/id/B/BI/BINGOS/Module-Load-Conditional-0.58.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 arch:
-   centos: x86_64
+  centos: x86_64
 description: |
-   Module::Load::Conditional - Looking up module information / loading at runtime
+  Module::Load::Conditional - Looking up module information / loading at runtime
 
 # requirements
 requires:
-   centos:
-      5:
-         build:
-            - make
-            - gcc
-            - perl
-            - perl-Module-CoreList
-            - perl-Module-Load
-            - perl-Module-Metadata
-            - perl-Locale-Maketext-Simple
-            - perl-Params-Check
-            - perl-version
-         runtime:
-            - perl
-            - perl-Module-CoreList
-            - perl-Module-Load
-            - perl-Module-Metadata
-            - perl-Locale-Maketext-Simple
-            - perl-Params-Check
-            - perl-version
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-Module-CoreList
+        - perl-Module-Load
+        - perl-Module-Metadata
+        - perl-Locale-Maketext-Simple
+        - perl-Params-Check
+        - perl-version
+      runtime:
+        - perl
+        - perl-Module-CoreList
+        - perl-Module-Load
+        - perl-Module-Metadata
+        - perl-Locale-Maketext-Simple
+        - perl-Params-Check
+        - perl-version
 
 # build instructions
 configure: |
-   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
-   cd <%= $realname %>-<%= $version %>
-     
-   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+    
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
 
 make: |
-   cd <%= $realname %>-<%= $version %>
-   make
+  cd <%= $realname %>-<%= $version %>
+  make
 
 install: |
-   rm -rf <%= $buildroot %>
-      
-   cd <%= $realname %>-<%= $version %>
-   make pure_install
-   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+  rm -rf <%= $buildroot %>
+    
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
 
 clean: |
-   rm -rf <%= $buildroot %>
+  rm -rf <%= $buildroot %>
 
 files:
-   package:
-      - /usr
+  package:
+    - /usr
 

@@ -16,19 +16,19 @@ pass_auth;
 group test => $ENV{HTEST};
 
 task prepare => group => test => sub {
-   install "sudo";
+  install "sudo";
 
-   create_group $user;
+  create_group $user;
 
-   create_user $user,
-      home     => "/home/$user",
-      groups   => [$user],
-      password => $pass;
+  create_user $user,
+    home    => "/home/$user",
+    groups  => [$user],
+    password => $pass;
 
-   # need to set_home / always_set_home so that sudo find the right home directory
-   file "/etc/sudoers",
-      content => "Defaults set_home, always_set_home\n\%$user	ALL=(ALL:ALL) ALL\nrsync_user	ALL=(ALL:ALL) ALL\n",
-      owner   => "root",
-      mode    => 440;
+  # need to set_home / always_set_home so that sudo find the right home directory
+  file "/etc/sudoers",
+    content => "Defaults set_home, always_set_home\n\%$user	ALL=(ALL:ALL) ALL\nrsync_user	ALL=(ALL:ALL) ALL\n",
+    owner  => "root",
+    mode   => 440;
 };
 

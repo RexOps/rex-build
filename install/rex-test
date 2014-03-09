@@ -22,21 +22,21 @@ $ENV{"PERLLIB"} = "/tmp/workspace/$rnd/rex/lib:" . (exists $ENV{PERLLIB} ? $ENV{
 $ENV{"PERL5LIB"} = "/tmp/workspace/$rnd/rex/lib:" . (exists $ENV{PERL5LIB} ? $ENV{PERL5LIB} : "");
 
 for my $file (@ARGV) {
-   system "perl /tmp/workspace/$rnd/rex/bin/rex -qf $file test";
+  system "perl /tmp/workspace/$rnd/rex/bin/rex -qf $file test";
 }
 
 system "rm -rf /tmp/workspace/$rnd";
 
 sub get_random {
-   my $count = shift;
-   my @chars = @_;
-   
-   srand();
-   my $ret = "";
-   for(1..$count) {
-      $ret .= $chars[int(rand(scalar(@chars)-1))];
-   }
-   
-   return $ret;
+  my $count = shift;
+  my @chars = @_;
+  
+  srand();
+  my $ret = "";
+  for(1..$count) {
+    $ret .= $chars[int(rand(scalar(@chars)-1))];
+  }
+  
+  return $ret;
 }
 

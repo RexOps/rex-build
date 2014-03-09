@@ -9,28 +9,28 @@ do "auth.conf";
 
 task "test", group => "test", sub {
 
-   my @route = route;
-   #print Dumper(\@route);
+  my @route = route;
+  #print Dumper(\@route);
 
-   #say ">> " . default_gateway;
-   ok(default_gateway() eq "192.168.112.1", "Default Gateway");
+  #say ">> " . default_gateway;
+  ok(default_gateway() eq "192.168.112.1", "Default Gateway");
 
-   #my @netstat = netstat;
-   #print Dumper(\@netstat);
-   my @tcp_connections = grep { $_->{"proto"} eq "tcp" } netstat;
+  #my @netstat = netstat;
+  #print Dumper(\@netstat);
+  my @tcp_connections = grep { $_->{"proto"} eq "tcp" } netstat;
 
-   if(is_openwrt) {
-      my ($ssh) = grep { $_->{command} =~ /dropbear/ } @tcp_connections;
-      ok($ssh, "found sshd");
-   }
-   elsif(is_linux) {
-      my ($ssh) = grep { $_->{command} =~ /^sshd/ } @tcp_connections;
-      ok($ssh, "found sshd");
-   }
-   else {
-      my ($ssh) = grep { $_->{local_addr} =~ /\.22$/ } @tcp_connections;
-      ok($ssh, "found sshd");
-   }
+  if(is_openwrt) {
+    my ($ssh) = grep { $_->{command} =~ /dropbear/ } @tcp_connections;
+    ok($ssh, "found sshd");
+  }
+  elsif(is_linux) {
+    my ($ssh) = grep { $_->{command} =~ /^sshd/ } @tcp_connections;
+    ok($ssh, "found sshd");
+  }
+  else {
+    my ($ssh) = grep { $_->{local_addr} =~ /\.22$/ } @tcp_connections;
+    ok($ssh, "found sshd");
+  }
 
-   done_testing();
+  done_testing();
 };

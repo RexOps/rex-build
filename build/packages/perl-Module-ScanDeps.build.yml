@@ -1,62 +1,62 @@
 # basic informations
 name:
-   centos: perl-Module-ScanDeps
+  centos: perl-Module-ScanDeps
 realname: Module-ScanDeps
 version: 1.10
 release: 1
 epoch: 1
 summary: Module::ScanDeps - Recursively scan Perl code for dependencies
 group:
-   centos: System Environment/Libraries
+  centos: System Environment/Libraries
 license: Artistic
 homepage: https://metacpan.org/pod/release/RSCHUPP/Module-ScanDeps-1.10/lib/Module/ScanDeps.pm
 source: http://cpan.metacpan.org/authors/id/R/RS/RSCHUPP/Module-ScanDeps-1.10.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 arch:
-   centos: x86_64
+  centos: x86_64
 description: |
-   Module::ScanDeps - Recursively scan Perl code for dependencies
+  Module::ScanDeps - Recursively scan Perl code for dependencies
 
 # requirements
 requires:
-   centos:
-      5:
-         build:
-            - make
-            - gcc
-            - perl
-            - perl-Module-Build
-            - perl-version
-         runtime:
-            - perl
-            - perl-Module-Build
-            - perl-version
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-Module-Build
+        - perl-version
+      runtime:
+        - perl
+        - perl-Module-Build
+        - perl-version
 
 # build instructions
 configure: |
-   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
-   cd <%= $realname %>-<%= $version %>
-   sed -ie "s/'ExtUtils::MakeMaker' => '6.46'/'ExtUtils::MakeMaker' => '0'/g" Makefile.PL
-   sed -ie "s/use ExtUtils::MakeMaker 6.46/use ExtUtils::MakeMaker/g" Makefile.PL
-     
-   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+  sed -ie "s/'ExtUtils::MakeMaker' => '6.46'/'ExtUtils::MakeMaker' => '0'/g" Makefile.PL
+  sed -ie "s/use ExtUtils::MakeMaker 6.46/use ExtUtils::MakeMaker/g" Makefile.PL
+    
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
 
 make: |
-   cd <%= $realname %>-<%= $version %>
-   make
+  cd <%= $realname %>-<%= $version %>
+  make
 
 install: |
-   rm -rf <%= $buildroot %>
-      
-   cd <%= $realname %>-<%= $version %>
-   make pure_install
-   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+  rm -rf <%= $buildroot %>
+    
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
 
 clean: |
-   rm -rf <%= $buildroot %>
+  rm -rf <%= $buildroot %>
 
 files:
-   package:
-      - /usr
+  package:
+    - /usr
 

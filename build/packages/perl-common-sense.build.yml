@@ -1,66 +1,66 @@
 # basic informations
 name:
-   centos: perl-common-sense
+  centos: perl-common-sense
 realname: common-sense
 version: 3.72
 release: 1
 epoch: 1
 summary: common::sense - save a tree AND a kitten, use common::sense!
 group:
-   centos: System Environment/Libraries
+  centos: System Environment/Libraries
 license: unknown
 homepage: https://metacpan.org/pod/common::sense
 source: http://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/common-sense-3.72.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 arch:
-   centos: x86_64
+  centos: x86_64
 description: |
-   common::sense - save a tree AND a kitten, use common::sense!
+  common::sense - save a tree AND a kitten, use common::sense!
 
 # requirements
 requires:
-   centos:
-      5:
-         build:
-            - make
-            - gcc
-            - perl
-         runtime:
-            - perl
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+      runtime:
+        - perl
 
-      6:
-         build:
-            - make
-            - gcc
-            - perl
-            - perl-devel
-         runtime:
-            - perl
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+      runtime:
+        - perl
 
 
 # build instructions
 configure: |
-   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
-   cd <%= $realname %>-<%= $version %>
-     
-   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+    
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
 
 make: |
-   cd <%= $realname %>-<%= $version %>
-   make
+  cd <%= $realname %>-<%= $version %>
+  make
 
 install: |
-   rm -rf <%= $buildroot %>
-      
-   cd <%= $realname %>-<%= $version %>
-   make pure_install
-   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+  rm -rf <%= $buildroot %>
+    
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
 
 clean: |
-   rm -rf <%= $buildroot %>
+  rm -rf <%= $buildroot %>
 
 files:
-   package:
-      - /usr
+  package:
+    - /usr
 

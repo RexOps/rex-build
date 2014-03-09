@@ -7,12 +7,12 @@ do "auth.conf";
 
 task test => group => test => sub {
 
-   eval {
-      run "this-command-fails";
-   } or do {
-      ok($@, "run command died");
-   };
+  eval {
+    run "this-command-fails";
+  } or do {
+    ok($@, "run command died");
+  };
 
-   done_testing();
+  done_testing();
 };
 

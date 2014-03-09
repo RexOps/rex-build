@@ -6,7 +6,7 @@ use Data::Dumper;
 do "auth.conf";
 
 no_ssh task "test", group => "test", sub {
-   ok(ref(connection) eq "Rex::Interface::Connection::Fake", "opened a fake connection");
+  ok(ref(connection) eq "Rex::Interface::Connection::Fake", "opened a fake connection");
 
-   done_testing();
+  done_testing();
 };

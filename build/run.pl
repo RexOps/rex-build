@@ -23,11 +23,11 @@ my $base_vm = $ARGV[0];
 my $build_file = $ARGV[1];
 
 if(! $base_vm) {
-   die("No base vm given");
+  die("No base vm given");
 }
 
 if(! $build_file || ! -f $build_file) {
-   die("No (valid) build file given");
+  die("No (valid) build file given");
 }
 
 Rex::connect(%{ $config });
@@ -35,7 +35,7 @@ Rex::connect(%{ $config });
 my $new_vm = "${base_vm}-build-$$";
 
 @SIG{qw( INT TERM HUP )} = sub {
-   remove_vm($new_vm);
+  remove_vm($new_vm);
 };
 
 vm clone => $base_vm  => $new_vm;
@@ -46,7 +46,7 @@ my $vminfo = vm guestinfo => $new_vm;
 my $ip = $vminfo->{network}->[0]->{ip};
 
 while(! is_port_open($ip, 22)) {
-   sleep 1;
+  sleep 1;
 }
 
 my ($user, $pass);
@@ -64,13 +64,13 @@ remove_vm($new_vm);
 exit $exit_code;
 
 sub remove_vm {
-   my ($name) = @_;
+  my ($name) = @_;
 
-   vm destroy => $name;
+  vm destroy => $name;
 
-   vm delete => $name;
+  vm delete => $name;
 
-   #rm "/var/lib/libvirt/images/$new_vm.img";
-   # fix for #6
-   run "virsh vol-delete --pool default $name.img";
+  #rm "/var/lib/libvirt/images/$new_vm.img";
+  # fix for #6
+  run "virsh vol-delete --pool default $name.img";
 }

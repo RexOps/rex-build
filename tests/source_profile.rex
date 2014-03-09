@@ -9,9 +9,9 @@ do "auth.conf";
 
 task "test", group => "test", sub {
 
-   my $in = run 'echo $MYFOO';
-   ok($in eq "MYBAR", "got .profile variable");
+  my $in = run 'echo $MYFOO';
+  ok($in eq "MYBAR", "got .profile variable");
 
-   done_testing();
+  done_testing();
 };
 

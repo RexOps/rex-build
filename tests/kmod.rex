@@ -10,56 +10,56 @@ do "auth.conf";
 desc "Load Kernel Module";
 task "test", group => "test", sub {
 
-   if(operating_system_is("SunOS")) {
+  if(operating_system_is("SunOS")) {
 
-      kmod load => "strmod/tun";
-      my @mods = run "modinfo | grep tun";
-      ok(scalar(@mods) == 1, "loaded strmod/tun");
+    kmod load => "strmod/tun";
+    my @mods = run "modinfo | grep tun";
+    ok(scalar(@mods) == 1, "loaded strmod/tun");
 
-      kmod unload => "strmod/tun";
-      @mods = run "modinfo | grep tun";
-      ok(scalar(@mods) == 0, "unloaded strmod/tun");
+    kmod unload => "strmod/tun";
+    @mods = run "modinfo | grep tun";
+    ok(scalar(@mods) == 0, "unloaded strmod/tun");
 
-   }
-   elsif(is_freebsd) {
-      kmod load => "scc";
+  }
+  elsif(is_freebsd) {
+    kmod load => "scc";
 
-      my @mods = run "kldstat | grep scc";
-      ok(scalar(@mods) == 1, "loaded scc");
+    my @mods = run "kldstat | grep scc";
+    ok(scalar(@mods) == 1, "loaded scc");
 
-      kmod unload => "scc";
-      @mods = run "kldstat | grep scc";
-      ok(scalar(@mods) == 0, "unloaded scc");
-   } elsif (is_openwrt) {
-      my $kmod = "ppp_async";
+    kmod unload => "scc";
+    @mods = run "kldstat | grep scc";
+    ok(scalar(@mods) == 0, "unloaded scc");
+  } elsif (is_openwrt) {
+    my $kmod = "ppp_async";
 
-      kmod unload => $kmod;
+    kmod unload => $kmod;
 
-      my @mods = run "lsmod | grep $kmod";
-      ok(scalar(@mods) == 0, "unloaded $kmod");
+    my @mods = run "lsmod | grep $kmod";
+    ok(scalar(@mods) == 0, "unloaded $kmod");
 
-      kmod load => $kmod;
+    kmod load => $kmod;
 
-      @mods = run "lsmod | grep $kmod";
-      ok(scalar(@mods) >= 1, "loaded $kmod");
-   }
-   else {
+    @mods = run "lsmod | grep $kmod";
+    ok(scalar(@mods) >= 1, "loaded $kmod");
+  }
+  else {
 
-      my $kmod = "ipmi_poweroff";
+    my $kmod = "ipmi_poweroff";
 
-      #kmod load => "ipmi_msghandler";
-      kmod load => $kmod;
+    #kmod load => "ipmi_msghandler";
+    kmod load => $kmod;
 
-      my @mods = run "lsmod |grep $kmod";
-      ok(scalar(@mods) >= 1, "loaded $kmod");
+    my @mods = run "lsmod |grep $kmod";
+    ok(scalar(@mods) >= 1, "loaded $kmod");
 
-      kmod unload => $kmod;
+    kmod unload => $kmod;
 
-      @mods = run "lsmod |grep $kmod";
-      ok(scalar(@mods) == 0, "unloaded $kmod");
+    @mods = run "lsmod |grep $kmod";
+    ok(scalar(@mods) == 0, "unloaded $kmod");
 
-   }
+  }
 
-   done_testing();
+  done_testing();
 
 };

@@ -6,11 +6,11 @@ use Test::More;
 do "auth.conf";
 
 task "test", group => "test", sub {
-   my $id = run "id";
-   
-   ok($id =~ m/uid=0\(root\)/, "i'm root");
+  my $id = run "id";
+  
+  ok($id =~ m/uid=0\(root\)/, "i'm root");
 
-   done_testing();
+  done_testing();
 };
 
 
