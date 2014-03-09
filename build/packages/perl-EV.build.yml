@@ -27,9 +27,12 @@ requires:
         - gcc
         - perl
         - perl-common-sense
+        - libev-devel
+        - libev
       runtime:
         - perl
         - perl-common-sense
+        - libev
 
 
 
@@ -37,7 +40,7 @@ requires:
 configure: |
   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
   cd <%= $realname %>-<%= $version %>
-  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+  yes | perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
 
 make: |
   cd <%= $realname %>-<%= $version %>
