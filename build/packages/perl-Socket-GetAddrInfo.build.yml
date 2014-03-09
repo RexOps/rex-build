@@ -27,6 +27,7 @@ requires:
         - gcc
         - perl
         - perl-Module-Build
+        - perl-ExtUtils-CChecker
       runtime:
         - perl
 
