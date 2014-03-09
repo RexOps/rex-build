@@ -27,13 +27,9 @@ requires:
         - gcc
         - perl
         - perl-common-sense
-        - libev-devel
-        - libev
       runtime:
         - perl
         - perl-common-sense
-        - libev
-
 
 
 # build instructions
