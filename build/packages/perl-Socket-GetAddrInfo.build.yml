@@ -1,0 +1,53 @@
+# basic informations
+name:
+  centos: perl-Socket-GetAddrInfo
+realname: Socket-GetAddrInfo
+version: 0.22
+release: 1
+epoch: 1
+summary: Socket::GetAddrInfo - address-family independent name resolving functions
+group:
+  centos: System Environment/Libraries
+license: perl
+homepage: https://metacpan.org/pod/Socket::GetAddrInfo
+source: http://cpan.metacpan.org/authors/id/P/PE/PEVANS/Socket-GetAddrInfo-0.22.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Socket::GetAddrInfo - address-family independent name resolving functions
+
+# requirements
+requires:
+  centos:
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+      runtime:
+        - perl
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
