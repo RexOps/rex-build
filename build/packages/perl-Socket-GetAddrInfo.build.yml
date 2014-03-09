@@ -26,6 +26,7 @@ requires:
         - make
         - gcc
         - perl
+        - perl-Module-Build
       runtime:
         - perl
 
