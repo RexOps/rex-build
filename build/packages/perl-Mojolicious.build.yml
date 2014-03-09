@@ -21,7 +21,7 @@ description: |
 # requirements
 requires:
   centos:
-    5:
+    6:
       build:
         - make
         - gcc
