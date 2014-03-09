@@ -18,6 +18,8 @@ arch:
 description: |
   FusionInventory::Agent - Fusion Inventory agent
 
+no_auto_scan: true
+
 # requirements
 requires:
   centos:
