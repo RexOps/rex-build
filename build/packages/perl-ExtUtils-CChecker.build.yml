@@ -1,0 +1,55 @@
+# basic informations
+name:
+  centos: perl-ExtUtils-CChecker
+realname: ExtUtils-CChecker
+version: 0.09
+release: 1
+epoch: 1
+summary: ExtUtils::CChecker - configure-time utilities for using C headers, libraries, or OS features
+group:
+  centos: System Environment/Libraries
+license: perl
+homepage: https://metacpan.org/pod/ExtUtils::CChecker
+source: http://cpan.metacpan.org/authors/id/P/PE/PEVANS/ExtUtils-CChecker-0.09.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  ExtUtils::CChecker - configure-time utilities for using C headers, libraries, or OS features
+
+# requirements
+requires:
+  centos:
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-ExtUtils-CBuilder
+      runtime:
+        - perl
+        - perl-ExtUtils-CBuilder
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
