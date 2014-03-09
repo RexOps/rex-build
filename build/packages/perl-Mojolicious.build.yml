@@ -1,0 +1,55 @@
+# basic informations
+name:
+  centos: perl-Mojolicious
+realname: Mojolicious
+version: 4.87
+release: 1
+epoch: 1
+summary: Mojolicious - Real-time web framework
+group:
+  centos: System Environment/Libraries
+license: Artistic
+homepage: http://mojolicio.us/
+source: http://cpan.metacpan.org/authors/id/S/SR/SRI/Mojolicious-4.87.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Mojolicious - Real-time web framework
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-IO-Socket-SSL
+      runtime:
+        - perl
+        - perl-IO-Socket-SSL
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
