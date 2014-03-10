@@ -15,7 +15,8 @@
 # ------------------------------------------------------------------------------
 # vim: set syn=perl:
 
-use Rex -feature => ['0.42', 'exit_status'];
+use Rex -feature => [ '0.42', 'exit_status' ];
+
 #use Rex::Transaction;
 use Test::More;
 use Data::Dumper;
@@ -26,14 +27,13 @@ do "auth.conf";
 
 my $pid = $$;
 
-
 ################################################################################
 # the tasks
 ################################################################################
 
 task info => group => test => sub {
 
-  my $op  = get_os_name;
+  my $op   = get_os_name;
   my $arch = get_os_arch;
   my $ver  = get_os_release;
 
@@ -47,7 +47,7 @@ task prepare => group => test => sub {
 
   my $param = shift;
 
-  my $op  = get_os_name;
+  my $op   = get_os_name;
   my $arch = get_os_arch;
   my $ver  = get_os_release;
 
@@ -55,32 +55,42 @@ task prepare => group => test => sub {
   say "arch> $arch";
   say "ver> $ver";
 
-  my ($default_build_file, $double_parsed_build_file) = build_config($param->{build});
+  my ( $default_build_file, $double_parsed_build_file ) =
+    build_config( $param->{build} );
 
 ################################################################################
-# register repositories, to use for build dependencies
+  # register repositories, to use for build dependencies
 ################################################################################
 
   Rex::Logger::info("Registering some repositories");
 
-  if(exists config->{repo}->{add}->{get_build_env()}->{lc($op)}
-    && exists config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}
-    && exists config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}->{$arch}) {
+  if ( exists config->{repo}->{add}->{ get_build_env() }->{ lc($op) }
+    && exists config->{repo}->{add}->{ get_build_env() }->{ lc($op) }->{$ver}
+    && exists config->{repo}->{add}->{ get_build_env() }->{ lc($op) }->{$ver}
+    ->{$arch} )
+  {
 
-    say Dumper(config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}->{$arch});
+    say Dumper(
+      config->{repo}->{add}->{ get_build_env() }->{ lc($op) }->{$ver}->{$arch}
+    );
 
-    if(is_mageia) {
-      my $url = config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}->{$arch}->{url};
+    if (is_mageia) {
+      my $url = config->{repo}->{add}->{ get_build_env() }->{ lc($op) }->{$ver}
+        ->{$arch}->{url};
       my $line = "rex $url {\n  key-ids: 16547F8C\n}\n";
       cp "/etc/urpmi/urpmi.cfg", "/etc/urpmi/urpmi.cfg.rex.bak";
       append_if_no_such_line "/etc/urpmi/urpmi.cfg",
-        line  => $line,
+        line   => $line,
         regexp => qr/rex $url/;
     }
     else {
 
       eval {
-        repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}->{$arch} }; 
+        repository
+          add => "rex",
+          ( distro => $ver ),
+          %{ config->{repo}->{add}->{ get_build_env() }->{ lc($op) }->{$ver}
+            ->{$arch} };
         1;
       } or do {
         eval { repository remove => "rex"; };
@@ -91,10 +101,13 @@ task prepare => group => test => sub {
   }
   else {
 
-    say Dumper(config->{repo}->{add}->{get_build_env()}->{lc($op)});
+    say Dumper( config->{repo}->{add}->{ get_build_env() }->{ lc($op) } );
     eval {
-      repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{get_build_env()}->{lc($op)} }
-        if(exists config->{repo}->{add}->{get_build_env()}->{lc($op)});
+      repository
+        add => "rex",
+        ( distro => $ver ),
+        %{ config->{repo}->{add}->{ get_build_env() }->{ lc($op) } }
+        if ( exists config->{repo}->{add}->{ get_build_env() }->{ lc($op) } );
       1;
     } or do {
       eval { repository remove => "rex"; };
@@ -102,68 +115,96 @@ task prepare => group => test => sub {
 
   }
 
-  if(is_debian) {
-    run "wget -O - http://rex.linux-files.org/DPKG-GPG-KEY-REXIFY-REPO | apt-key add -";
+  if (is_debian) {
+    run
+      "wget -O - http://rex.linux-files.org/DPKG-GPG-KEY-REXIFY-REPO | apt-key add -";
   }
   else {
-    if(lc($op) eq "centos" && $ver =~ m/^5/) {
-      run "rpm --import http://rex.linux-files.org/RPM-GPG-KEY-REXIFY-REPO.CENTOS5";
+    if ( lc($op) eq "centos" && $ver =~ m/^5/ ) {
+      run
+        "rpm --import http://rex.linux-files.org/RPM-GPG-KEY-REXIFY-REPO.CENTOS5";
     }
     else {
-      run "rpm --import http://rex.linux-files.org/RPM-GPG-KEY-REXIFY-REPO.CENTOS6";
+      run
+        "rpm --import http://rex.linux-files.org/RPM-GPG-KEY-REXIFY-REPO.CENTOS6";
     }
   }
 
-  if($? != 0) {
+  if ( $? != 0 ) {
     die("Error registering gpg key.");
   }
 
   eval { update_package_db; 1; } or do { repository remove => "rex"; };
 
 ################################################################################
-# install build dependencies
+  # install build dependencies
 ################################################################################
 
   Rex::Logger::info("Installing basic dependencies.");
 
   my $pkg_build_dep;
 
-  if(exists $double_parsed_build_file->{requires}->{lc($op)}->{$ver}->{$arch}->{build}) {
-    $pkg_build_dep = $double_parsed_build_file->{requires}->{lc($op)}->{$ver}->{$arch}->{build};
+  if (
+    exists $double_parsed_build_file->{requires}->{ lc($op) }->{$ver}->{$arch}
+    ->{build} )
+  {
+    $pkg_build_dep =
+      $double_parsed_build_file->{requires}->{ lc($op) }->{$ver}->{$arch}
+      ->{build};
   }
 
-  elsif(exists $double_parsed_build_file->{requires}->{lc($op)}->{$ver}->{build}) {
-    $pkg_build_dep = $double_parsed_build_file->{requires}->{lc($op)}->{$ver}->{build};
+  elsif (
+    exists $double_parsed_build_file->{requires}->{ lc($op) }->{$ver}->{build} )
+  {
+    $pkg_build_dep =
+      $double_parsed_build_file->{requires}->{ lc($op) }->{$ver}->{build};
   }
 
-  elsif(exists $double_parsed_build_file->{requires}->{lc($op)}->{build}) {
-    $pkg_build_dep = $double_parsed_build_file->{requires}->{lc($op)}->{build};
+  elsif ( exists $double_parsed_build_file->{requires}->{ lc($op) }->{build} ) {
+    $pkg_build_dep =
+      $double_parsed_build_file->{requires}->{ lc($op) }->{build};
   }
 
   else {
     Rex::Logger::info("No build dependencies found.");
   }
 
-  install $pkg_build_dep if($pkg_build_dep);
+  install $pkg_build_dep if ($pkg_build_dep);
 
   # install some additional packages that are needed for the build
   my $add_pkgs = case $op, {
-    qr{centos|redhat|fedora}i => ["ntp", "rpm-build", "expect", "gcc", "make", "automake", "autoconf", "bison", "flex", "m4", "openssh-clients"],
-    qr{mageia}i => ["ntp", "rpm-build", "expect", "gcc", "make", "automake", "autoconf", "bison", "flex", "m4", "openssh-clients", "gnupg", "rpm-sign"],
-    qr{suse}i       => ["ntp", "rpm-build", "expect", "gcc", "make", "automake", "autoconf", "bison", "flex", "m4"],
-    default        => ["ntpdate", "expect", "gcc", "make", "automake", "autoconf", "bison", "flex", "m4"],
+    qr{centos|redhat|fedora}i => [
+      "ntp",  "rpm-build", "expect",   "gcc",
+      "make", "automake",  "autoconf", "bison",
+      "flex", "m4",        "openssh-clients"
+      ],
+      qr{mageia}i => [
+      "ntp",  "rpm-build", "expect",          "gcc",
+      "make", "automake",  "autoconf",        "bison",
+      "flex", "m4",        "openssh-clients", "gnupg",
+      "rpm-sign"
+      ],
+      qr{suse}i => [
+      "ntp",  "rpm-build", "expect",   "gcc",
+      "make", "automake",  "autoconf", "bison",
+      "flex", "m4"
+      ],
+      default => [
+      "ntpdate", "expect", "gcc", "make", "automake", "autoconf",
+      "bison",   "flex",   "m4"
+      ],
   };
 
   install $add_pkgs;
 
-  if(is_redhat) {
+  if (is_redhat) {
     Rex::Logger::info("Installing some Fedora dependencies...");
     eval { install "perl-ExtUtils-MakeMaker"; };
     eval { install "rpm-sign"; };
   }
 
 ################################################################################
-# download tarball from website
+  # download tarball from website
 ################################################################################
 
   Rex::Logger::info("Downloading tarball: $double_parsed_build_file->{source}");
@@ -172,14 +213,14 @@ task prepare => group => test => sub {
   };
 
 ################################################################################
-# upload source tarball
+  # upload source tarball
 ################################################################################
 
   Rex::Logger::info("Uploading buildfiles to build host");
-  my $upload_tarball_dir = config->{build}->{source_directory}->{lc($op)};
+  my $upload_tarball_dir = config->{build}->{source_directory}->{ lc($op) };
   mkdir $upload_tarball_dir;
 
-  if($op =~ m/centos|redhat|fedora|suse|mageia/i) {
+  if ( $op =~ m/centos|redhat|fedora|suse|mageia/i ) {
     mkdir "$upload_tarball_dir/../BUILD";
     mkdir "$upload_tarball_dir/../RPMS";
     mkdir "$upload_tarball_dir/../RPMS/$arch";
@@ -192,35 +233,39 @@ task prepare => group => test => sub {
   Rex::Logger::info("Uploading: .build.$pid -> $upload_tarball_dir");
   sync_up ".build.$pid/", $upload_tarball_dir;
 
-  Rex::Logger::info("Uploading: " . config->{build}->{files} . "/" . lc($op) . " -> /root");
+  Rex::Logger::info(
+    "Uploading: " . config->{build}->{files} . "/" . lc($op) . " -> /root" );
   sync_up config->{build}->{files} . "/" . lc($op), "/root";
 
   sync_time;
 
-  my $pkg_name = $double_parsed_build_file->{name}->{lc($op)};
+  my $pkg_name  = $double_parsed_build_file->{name}->{ lc($op) };
   my $buildroot = "/tmp/build-$pkg_name-$pid";
   file "/tmp/build",
-    content => template("expect/" . lc($op) . ".expect", buildroot => $buildroot, %{ config->{build}->{gnupg} }),
-    mode   => 755;
+    content => template(
+    "expect/" . lc($op) . ".expect",
+    buildroot => $buildroot,
+    %{ config->{build}->{gnupg} }
+    ),
+    mode => 755;
 
 ################################################################################
-# create build file out of generic description file
-# build files can be: spec (rpm), debian build instruction directory
+  # create build file out of generic description file
+  # build files can be: spec (rpm), debian build instruction directory
 ################################################################################
 
   Rex::Logger::info("Creating build files");
   create_build_files($param);
 
 ################################################################################
-# also prepare for package signing / needed for example by 
-# debian and ubuntu
+  # also prepare for package signing / needed for example by
+  # debian and ubuntu
 ################################################################################
-  if(lc($op) eq "ubuntu" || lc($op) eq "debian") {
+  if ( lc($op) eq "ubuntu" || lc($op) eq "debian" ) {
     prepare_repo_server();
   }
 
 };
-
 
 ################################################################################
 # build the package
@@ -228,82 +273,81 @@ task prepare => group => test => sub {
 task build => group => test => sub {
 
   my $param = shift;
-  my $op   = get_os_name;
-  my $ver  = get_os_release;
+  my $op    = get_os_name;
+  my $ver   = get_os_release;
   my $arch  = get_os_arch;
 
   say "op> $op";
   say "arch> $arch";
   say "ver> $ver";
 
-  my ($default_build_file, $double_parsed_build_file) = build_config($param->{build});
+  my ( $default_build_file, $double_parsed_build_file ) =
+    build_config( $param->{build} );
 
-  my $pkg_name = $double_parsed_build_file->{name}->{lc($op)};
+  my $pkg_name  = $double_parsed_build_file->{name}->{ lc($op) };
   my $spec_file = "/root/build/$pkg_name.spec";
   my @out;
 
   Rex::Logger::info("Building package $pkg_name");
 
-  if(is_file($spec_file)) {
+  if ( is_file($spec_file) ) {
     say cat "$spec_file";
-    @out = split(/\n/, run_or_die("/tmp/build $spec_file"));
+    @out = split( /\n/, run_or_die("/tmp/build $spec_file") );
   }
   else {
-    @out = split(/\n/, run_or_die("cd /root/build ; /tmp/build"));
+    @out = split( /\n/, run_or_die("cd /root/build ; /tmp/build") );
   }
 
-# dpkg-deb: building package `libssh2' in `../libssh2_1.4.2_amd64.deb'.
-  my @files = grep { m/^Wrote: (.*)$/ && ($_ = $1); } @out;
+  # dpkg-deb: building package `libssh2' in `../libssh2_1.4.2_amd64.deb'.
+  my @files = grep { m/^Wrote: (.*)$/ && ( $_ = $1 ); } @out;
 
-  my ($src_file, $pkg_file);
-  if(@files) {
+  my ( $src_file, $pkg_file );
+  if (@files) {
     ($src_file) = grep { m/\.src\.rpm/ } @files;
     ($pkg_file) = grep { m/\.$arch\.rpm/ } @files;
   }
 
-  @files = grep { m/^dpkg-deb: building package `.*?' in `(.*?)'.$/ && ($_ = $1); } @out;
-  if(@files) {
+  @files =
+    grep { m/^dpkg-deb: building package `.*?' in `(.*?)'.$/ && ( $_ = $1 ); }
+    @out;
+  if (@files) {
     $pkg_file = "/root/build/$files[0]";
   }
 
-  if(!@files) {
-    my $upload_tarball_dir = config->{build}->{source_directory}->{lc($op)};
+  if ( !@files ) {
+    my $upload_tarball_dir = config->{build}->{source_directory}->{ lc($op) };
     Rex::Logger::info("Didn't find package file in output...");
     my $version = $double_parsed_build_file->{version};
-    if(exists $double_parsed_build_file->{pkgversion}->{lc($op)}) {
-      $version = $double_parsed_build_file->{pkgversion}->{lc($op)};
+    if ( exists $double_parsed_build_file->{pkgversion}->{ lc($op) } ) {
+      $version = $double_parsed_build_file->{pkgversion}->{ lc($op) };
     }
 
-    my $file = "$upload_tarball_dir/../RPMS/"
-              . $arch 
-              . "/" 
-              . $double_parsed_build_file->{name}->{lc($op)}
-              . "-" 
-              . $version
-              . "-" 
-              . $double_parsed_build_file->{release} 
-              . ".$arch.rpm";
+    my $file =
+        "$upload_tarball_dir/../RPMS/"
+      . $arch . "/"
+      . $double_parsed_build_file->{name}->{ lc($op) } . "-"
+      . $version . "-"
+      . $double_parsed_build_file->{release}
+      . ".$arch.rpm";
 
     Rex::Logger::info("  Trying with: $file");
-    if(is_file($file)) {
+    if ( is_file($file) ) {
       $pkg_file = $file;
       Rex::Logger::info("  Found file: $file");
     }
 
-    if($arch =~ m/i[3456]86/) {
+    if ( $arch =~ m/i[3456]86/ ) {
       for my $_a (qw/i386 i486 i586 i686/) {
-        $file = "$upload_tarball_dir/../RPMS/"
-                  . $_a
-                  . "/" 
-                  . $double_parsed_build_file->{name}->{lc($op)}
-                  . "-" 
-                  . $version
-                  . "-" 
-                  . $double_parsed_build_file->{release} 
-                  . ".$_a.rpm";
+        $file =
+            "$upload_tarball_dir/../RPMS/"
+          . $_a . "/"
+          . $double_parsed_build_file->{name}->{ lc($op) } . "-"
+          . $version . "-"
+          . $double_parsed_build_file->{release}
+          . ".$_a.rpm";
 
         Rex::Logger::info("  Trying with: $file");
-        if(is_file($file)) {
+        if ( is_file($file) ) {
           $pkg_file = $file;
           Rex::Logger::info("  Found file: $file");
         }
@@ -316,6 +360,7 @@ task build => group => test => sub {
   };
 
   Rex::Logger::info("Downloading package: $pkg_file");
+
   #download $src_file, ".packages.$pid/";
   download $pkg_file, ".packages.$pid/";
 };
@@ -333,7 +378,7 @@ task clean => sub {
 # publish the new package to the package server
 ################################################################################
 task publish => config->{repo}->{server} => sub {
-  my $op  = get_os_name;
+  my $op   = get_os_name;
   my $ver  = get_os_release;
   my $arch = get_os_arch;
 
@@ -342,8 +387,8 @@ task publish => config->{repo}->{server} => sub {
   say "ver> $ver";
 
   Rex::Logger::info("Publishing package to repository server");
-  
-  if($op =~ m/centos|redhat|fedora|suse|mageia/i) {
+
+  if ( $op =~ m/centos|redhat|fedora|suse|mageia/i ) {
     my $repo_name = config->{repo}->{name};
     my $repo_path = doc_root . "/$op/$ver/$repo_name/$arch";
 
@@ -357,32 +402,36 @@ task publish => config->{repo}->{server} => sub {
 
     Rex::Logger::info("Creating repository data files ...");
 
-    if(is_mageia($op)) {
+    if ( is_mageia($op) ) {
       run_or_die "cd $repo_path ; genhdlist2 --xml-info .";
     }
     else {
       run_or_die "cd $repo_path ; rm repodata/repomd.xml.asc ; createrepo .";
 
-      my $key = config->{repo}->{sign}->{lc($op)}->{key};
+      my $key = config->{repo}->{sign}->{ lc($op) }->{key};
       Rex::Logger::info("Signing repository with key: $key ...");
-      run_or_die "cd $repo_path ; gpg --default-key $key -a --batch --passphrase " . config->{build}->{gnupg}->{pass} . " --detach-sign repodata/repomd.xml";
+      run_or_die
+        "cd $repo_path ; gpg --default-key $key -a --batch --passphrase "
+        . config->{build}->{gnupg}->{pass}
+        . " --detach-sign repodata/repomd.xml";
     }
 
   }
 
-  if(lc($op) eq "ubuntu" || lc($op) eq "debian") {
+  if ( lc($op) eq "ubuntu" || lc($op) eq "debian" ) {
 
-    if($arch eq "x86_64") { # rewrite arch for debian/ubuntu
+    if ( $arch eq "x86_64" ) {    # rewrite arch for debian/ubuntu
       $arch = "amd64";
     }
 
-    if($arch eq "i686") { # rewrite arch for debian/ubuntu
+    if ( $arch eq "i686" ) {      # rewrite arch for debian/ubuntu
       $arch = "i386";
     }
 
     my $repo_name = config->{repo}->{name};
     my $repo_path = doc_root . "/" . lc($op) . "/pool/$ver/$repo_name";
-    my $dist_path = doc_root . "/" . lc($op) . "/dists/$ver/$repo_name/binary-$arch";
+    my $dist_path =
+      doc_root . "/" . lc($op) . "/dists/$ver/$repo_name/binary-$arch";
 
     mkdir $repo_path,
       owner => "www-data",
@@ -398,22 +447,30 @@ task publish => config->{repo}->{server} => sub {
     sync_up ".packages.$pid/", $repo_path;
 
     file "/root/aptgenerate.$ver.conf",
-      content => template("templates/aptgenerate.conf.tpl", dist => $ver);
+      content => template( "templates/aptgenerate.conf.tpl", dist => $ver );
 
     file "/root/aptftp.$ver.conf",
-      content => template("templates/aptftp.conf.tpl", dist => $ver);
+      content => template( "templates/aptftp.conf.tpl", dist => $ver );
 
     my $doc_root = doc_root . "/" . lc($op);
-    run "apt-ftparchive generate -c=/root/aptftp.$ver.conf /root/aptgenerate.$ver.conf",  cwd => $doc_root;
-    run "apt-ftparchive release -c=/root/aptftp.$ver.conf dists/$ver >dists/$ver/Release", cwd => $doc_root;
+    run
+      "apt-ftparchive generate -c=/root/aptftp.$ver.conf /root/aptgenerate.$ver.conf",
+      cwd => $doc_root;
+    run
+      "apt-ftparchive release -c=/root/aptftp.$ver.conf dists/$ver >dists/$ver/Release",
+      cwd => $doc_root;
 
     rm "$doc_root/dists/$ver/Release.gpg";
 
     file "/root/sign_release",
-      content => template("expect/" . lc($op) . ".sign_release.expect", dist => $ver, %{ config->{build}->{gnupg} }),
-      owner  => "root",
-      group  => "root",
-      mode   => 755;
+      content => template(
+      "expect/" . lc($op) . ".sign_release.expect",
+      dist => $ver,
+      %{ config->{build}->{gnupg} }
+      ),
+      owner => "root",
+      group => "root",
+      mode  => 755;
 
     run "/root/sign_release", cwd => $doc_root;
 
@@ -422,21 +479,23 @@ task publish => config->{repo}->{server} => sub {
   }
 };
 
-
 ################################################################################
 # run everything in a transaction
 ################################################################################
 task bundle => sub {
 
-#  transaction {
-    do_task [qw/
+  #  transaction {
+  do_task [
+    qw/
       info
       prepare
       build
       publish
       clean
-    /];
-#  };
+      /
+  ];
+
+  #  };
 
 };
 
@@ -445,61 +504,67 @@ task bundle => sub {
 ################################################################################
 task prepare_repo_server => config->{repo}->{server} => sub {
   eval {
-    install [qw/
-      gnupg
-      createrepo
-      apache2
-    /];
+    install [
+      qw/
+        gnupg
+        createrepo
+        apache2
+        /
+    ];
   };
 
   file "/root/gnupg.keys",
     source => config->{build}->{files} . "/gnupg.keys",
-    mode  => 600;
+    mode   => 600;
 
   run "gpg --import < /root/gnupg.keys";
 
   unlink "/root/gnupg.keys";
 };
 
-
 ################################################################################
 # build tar.gz archive
 ################################################################################
 task archive => config->{repo}->{server} => sub {
+  my $params = shift;
   my $pkg;
 
-  LOCAL {
-    Rex::Logger::info("Cloning Rex repository...");
+  my $build_project = $params->{project} || "Rex";
+  my $build_dir = "\L$build_project";
 
-    if(-d "rex") {
+  LOCAL {
+    Rex::Logger::info("Cloning $build_project repository...");
+
+    if ( -d $build_dir ) {
       Rex::Logger::info("Cleaning up...");
-      rmdir "rex";
+      rmdir $build_dir;
     }
 
     my $branch = 'development';
-    if(-f "/branch") {
-      $branch = eval { local(@ARGV, $/) = ('/branch'); <>; };
+    if ( -f "/branch" ) {
+      $branch = eval { local ( @ARGV, $/ ) = ('/branch'); <>; };
       $branch =~ s/[\r\n]//gms;
     }
 
-    run "git clone git\@github.com:krimdomu/Rex.git rex --branch $branch >/tmp/out.log 2>&1";
+    run
+      "git clone git\@github.com:krimdomu/$build_project.git $build_dir --branch $branch >/tmp/out.log 2>&1";
     run 'cd rex; perl Makefile.PL && make && make dist && cd ..';
-    ($pkg) = glob('rex/*.tar.gz');
+    ($pkg) = glob("$build_dir/*.tar.gz");
 
     Rex::Logger::info("Found package file: $pkg");
 
   };
 
-  if($pkg) {
+  if ($pkg) {
     mkdir doc_root . "/source",
       owner => "www-data",
       group => "www-data";
 
-    Rex::Logger::info("Uploading $pkg to ". doc_root . "/source");
+    Rex::Logger::info( "Uploading $pkg to " . doc_root . "/source" );
     upload $pkg, doc_root . "/source";
   }
   else {
-    Rex::Logger::info("No package found.", "error");
+    Rex::Logger::info( "No package found.", "error" );
     die("No package found.");
   }
 
@@ -508,18 +573,20 @@ task archive => config->{repo}->{server} => sub {
 ################################################################################
 # special authentication for repository server
 ################################################################################
-auth for => "publish",
-  user => config->{repo}->{user},
+auth
+  for      => "publish",
+  user     => config->{repo}->{user},
   password => config->{repo}->{password};
 
-auth for => "prepare_repo_server",
-  user => config->{repo}->{user},
+auth
+  for      => "prepare_repo_server",
+  user     => config->{repo}->{user},
   password => config->{repo}->{password};
 
-auth for => "archive",
-  user => config->{repo}->{user},
+auth
+  for      => "archive",
+  user     => config->{repo}->{user},
   password => config->{repo}->{password};
-
 
 ################################################################################
 # the end
