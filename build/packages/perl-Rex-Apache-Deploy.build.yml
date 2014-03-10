@@ -1,0 +1,195 @@
+# basic informations
+name:
+  centos: rex-apache-deploy
+  debian: rex-apache-deploy
+  ubuntu: rex-apache-deploy
+  fedora: rex-apache-deploy
+  redhat: rex-apache-deploy
+  suse: rex-apache-deploy
+  mageia: rex-apache-deploy
+realname: Rex-Apache-Deploy
+version: 0.10.0
+release: 1
+epoch: 1
+summary: Rex Module for Application Deployment
+group:
+  centos: Utilities/System
+  debian: admin
+  ubuntu: admin
+  redhat: admin
+  fedora: admin
+  suse: admin
+  mageia: admin
+license: Apache 2
+homepage: http://rexify.org/
+source: http://nightly.rex.linux-files.org/source/Rex-Apache-Deploy-0.10.0.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+no_auto_scan: true
+description: |
+  Rex Module for Application Deployment
+
+# requirements
+requires:
+  debian:
+    squeeze: &depsqueeze
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - rex
+        - libwww-perl
+        - libyaml-perl
+        - liblist-moreutils-perl
+      runtime:
+        - perl
+        - perl-modules
+        - rex
+        - libwww-perl
+        - libyaml-perl
+        - liblist-moreutils-perl
+
+
+    wheezy: &depwheezy
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - rex
+        - libwww-perl
+        - liblwp-protocol-https-perl
+        - libyaml-perl
+        - liblist-moreutils-perl
+      runtime:
+        - perl
+        - perl-modules
+        - rex
+        - libwww-perl
+        - liblwp-protocol-https-perl
+        - libyaml-perl
+        - liblist-moreutils-perl
+
+  centos:
+    5:
+      build:
+        - make
+        - perl
+        - rex
+        - perl-libwww-perl
+        - perl-YAML
+        - perl-List-MoreUtils
+      runtime:
+        - perl
+        - rex
+        - perl-libwww-perl
+        - perl-YAML
+        - perl-List-MoreUtils
+
+    6: &depcentos6
+      build:
+        - make
+        - perl
+        - perl-devel
+        - rex
+        - perl-libwww-perl
+        - perl-YAML
+        - perl-List-MoreUtils
+        - perl-Time-HiRes
+
+      runtime:
+        - perl
+        - rex
+        - perl-libwww-perl
+        - perl-YAML
+        - perl-List-MoreUtils
+        - perl-Time-HiRes
+
+
+  ubuntu:
+    lucid: *depsqueeze
+    precise: *depwheezy
+    quantal: *depwheezy
+    raring: *depwheezy
+    saucy: *depwheezy
+
+  fedora:
+    18: &depfedora18
+      build:
+        - make
+        - perl
+        - perl-devel
+        - rex
+        - perl-libwww-perl
+        - perl-YAML
+        - perl-ExtUtils-MakeMaker
+        - perl-List-MoreUtils
+
+      runtime:
+        - perl
+        - rex
+        - perl-libwww-perl
+        - perl-YAML
+        - perl-ExtUtils-MakeMaker
+        - perl-List-MoreUtils
+
+    19: *depfedora18
+    20: *depfedora18
+
+  redhat:
+    18: *depfedora18
+    19: *depfedora18
+    20: *depfedora18
+
+  suse:
+    13.1: &depsuse13
+      build:
+        - make
+        - perl
+        - rex
+        - perl-libwww-perl
+        - perl-YAML
+        - perl-List-MoreUtils
+      runtime:
+        - perl
+        - rex
+        - perl-libwww-perl
+        - perl-YAML
+        - perl-List-MoreUtils
+
+  mageia:
+    3: *depsuse13
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+  fedora:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_bindir}/*
+      - %{perl_vendorlib}/*
