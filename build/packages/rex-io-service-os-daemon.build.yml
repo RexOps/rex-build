@@ -3,7 +3,7 @@ name:
   centos: rex-io-service-os-daemon
 realname: Rex-IO-Service-OS-Daemon
 version: 0.4.0
-release: 2
+release: 3
 epoch: 1
 summary: Service Daemon for Rex.IO
 group:
