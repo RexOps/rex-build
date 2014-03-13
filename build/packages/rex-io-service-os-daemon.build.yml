@@ -71,3 +71,5 @@ clean: |
 files:
   package:
     - /usr
+    - /etc/init.d/rex-io-service-os-daemon
+    - /etc/rex/io/inventory
