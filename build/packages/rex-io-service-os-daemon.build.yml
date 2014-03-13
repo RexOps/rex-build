@@ -3,7 +3,7 @@ name:
   centos: rex-io-service-os-daemon
 realname: Rex-IO-Service-OS-Daemon
 version: 0.4.0
-release: 1
+release: 2
 epoch: 1
 summary: Service Daemon for Rex.IO
 group:
@@ -53,6 +53,16 @@ install: |
   cd <%= $realname %>-<%= $version %>
   make pure_install
   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+  mkdir -p <%= $buildroot %>/etc/rex/io/inventory
+  mkdir -p <%= $buildroot %>/etc/init.d
+  cp doc/bootdevice.inventory <%= $buildroot %>/etc/rex/io/inventory/bootdevice
+  cp doc/bridge.inventory <%= $buildroot %>/etc/rex/io/inventory/bridge
+  cp doc/os.inventory <%= $buildroot %>/etc/rex/io/inventory/os
+  cp doc/sysinfo.inventory <%= $buildroot %>/etc/rex/io/inventory/sysinfo
+  chmod 755 <%= $buildroot %>/etc/rex/io/inventory/*
+  cp doc/rex-io-service-os-daemon.init <%= $buildroot %>/etc/init.d/rex-io-service-os-daemon
+  chmod 755 <%= $buildroot %>/etc/init.d/rex-io-service-os-daemon
+
 
 clean: |
   rm -rf <%= $buildroot %>
