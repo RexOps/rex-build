@@ -59,6 +59,7 @@ install: |
   cp doc/bridge.inventory <%= $buildroot %>/etc/rex/io/inventory/bridge
   cp doc/os.inventory <%= $buildroot %>/etc/rex/io/inventory/os
   cp doc/sysinfo.inventory <%= $buildroot %>/etc/rex/io/inventory/sysinfo
+  cp doc/internal_primary_eth_addr.inventory <%= $buildroot %>/etc/rex/io/inventory/internal_primary_eth_addr
   chmod 755 <%= $buildroot %>/etc/rex/io/inventory/*
   cp doc/rex-io-service-os-daemon.init <%= $buildroot %>/etc/init.d/rex-io-service-os-daemon
   chmod 755 <%= $buildroot %>/etc/init.d/rex-io-service-os-daemon
