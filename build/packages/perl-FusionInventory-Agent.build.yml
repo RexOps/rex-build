@@ -3,7 +3,7 @@ name:
   centos: perl-FusionInventory-Agent
 realname: FusionInventory-Agent
 version: 2.3.5
-release: 1
+release: 2
 epoch: 1
 summary: FusionInventory::Agent - Fusion Inventory agent
 group:
@@ -34,6 +34,7 @@ requires:
         - perl-Text-Template
         - perl-UNIVERSAL-require
         - perl-XML-TreePP
+        - perl-File-Which
       runtime:
         - perl
         - perl-libwww-perl
@@ -42,6 +43,7 @@ requires:
         - perl-Text-Template
         - perl-UNIVERSAL-require
         - perl-XML-TreePP
+        - perl-File-Which
 
 # build instructions
 configure: |
@@ -58,6 +60,9 @@ install: |
   cd <%= $realname %>-<%= $version %>
   make pure_install
   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+  for x in <%= $buildroot %>/usr/bin/*; do
+    sed -i 's:<%= $buildroot %>::' $x
+  done
 
 clean: |
   rm -rf <%= $buildroot %>
