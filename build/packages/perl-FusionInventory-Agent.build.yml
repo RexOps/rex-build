@@ -3,7 +3,7 @@ name:
   centos: perl-FusionInventory-Agent
 realname: FusionInventory-Agent
 version: 2.3.5
-release: 2
+release: 3
 epoch: 1
 summary: FusionInventory::Agent - Fusion Inventory agent
 group:
@@ -62,7 +62,10 @@ install: |
   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
   for x in <%= $buildroot %>/usr/bin/*; do
     sed -i 's:<%= $buildroot %>::' $x
+    sed -i 's:/usr/etc:/etc:' $x
   done
+  mkdir -p <%= $buildroot %>/etc/fusioninventory
+  touch <%= $buildroot %>/etc/fusioninventory/agent.cfg
 
 clean: |
   rm -rf <%= $buildroot %>
@@ -70,3 +73,4 @@ clean: |
 files:
   package:
     - /usr
+    - /etc/fusioninventory
