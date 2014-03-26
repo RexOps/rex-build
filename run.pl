@@ -25,7 +25,8 @@ if(exists $ENV{use_sudo}) {
   $new_vm .= "-sudo";
 }
 
-vm clone => $base_vm  => $new_vm;
+#vm clone => $base_vm  => $new_vm;
+run "/usr/bin/virt-clone --connect qemu:///system -o '$base_vm' -n '$new_vm' --auto-clone -f /ram/$new_vm.img";
 
 vm start => $new_vm;
 
@@ -107,9 +108,9 @@ vm destroy => $new_vm;
 
 vm delete => $new_vm;
 
-#rm "/var/lib/libvirt/images/$new_vm.img";
+rm "/ram/$new_vm.img";
 # fix for #6
-run "virsh vol-delete --pool default $new_vm.img";
+#run "virsh vol-delete --pool default $new_vm.img";
 
 
 sub get_random {
