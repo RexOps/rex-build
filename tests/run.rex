@@ -61,7 +61,19 @@ task test => group => test => sub {
   my $check_0 = run 'grep -c sdfsdf /etc/passwd';
   ok($check_0 eq "0", "got 0 as answer");
 
+  my @check_env = run "env", env => {
+    key1 => "my val",
+    key2 => 'my 2nd "val"',
+  };
+
+  my %t_env = ();
+  for my $line (@check_env) {
+    my ($key, $val) = split(/=/, $line);
+    $t_env{$key} = $val;
+  }
+
+  ok($t_env{key1} eq "my val", "got first env variable");
+  ok($t_env{key2} eq "my 2nd \"val\"", "got 2nd env variable");
 
   done_testing();
 };
-
