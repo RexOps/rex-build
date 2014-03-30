@@ -108,9 +108,9 @@ vm destroy => $new_vm;
 
 vm delete => $new_vm;
 
-rm "/ram/$new_vm.img";
+#rm "/ram/$new_vm.img";
 # fix for #6
-#run "virsh vol-delete --pool default $new_vm.img";
+run "virsh vol-delete --pool memory $new_vm.img";
 
 
 sub get_random {
