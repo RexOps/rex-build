@@ -25,8 +25,8 @@ if(exists $ENV{use_sudo}) {
   $new_vm .= "-sudo";
 }
 
-#vm clone => $base_vm  => $new_vm;
-run "/usr/bin/virt-clone --connect qemu:///system -o '$base_vm' -n '$new_vm' --auto-clone -f /ram/$new_vm.img";
+vm clone => $base_vm  => $new_vm;
+#run "/usr/bin/virt-clone --connect qemu:///system -o '$base_vm' -n '$new_vm' --auto-clone -f /ram/$new_vm.img";
 
 vm start => $new_vm;
 
@@ -110,19 +110,18 @@ vm delete => $new_vm;
 
 #rm "/ram/$new_vm.img";
 # fix for #6
-run "virsh vol-delete --pool memory $new_vm.img";
+run "virsh vol-delete --pool default $new_vm.img";
 
 
 sub get_random {
   my $count = shift;
   my @chars = @_;
-  
+
   srand();
   my $ret = "";
   for(1..$count) {
     $ret .= $chars[int(rand(scalar(@chars)-1))];
   }
-  
+
   return $ret;
 }
-
