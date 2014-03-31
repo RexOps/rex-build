@@ -19,6 +19,8 @@ task test => group => test => sub {
   my $path = run 'echo $PATH', path => '/tmp';
   ok($path eq "/tmp", "used custom path");
 
+  my ($cmd) = can_run "ifconfig", "ip";
+  ok($cmd =~ m/ifconfig|ip/, "found ifconfig or ip command");
 
   if(is_freebsd) {
 
