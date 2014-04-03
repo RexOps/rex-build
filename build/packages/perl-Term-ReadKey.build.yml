@@ -1,6 +1,8 @@
 # basic informations
 name:
   centos: perl-Term-ReadKey
+  fedora: perl-Term-ReadKey
+  redhat: perl-Term-ReadKey
 realname: TermReadKey
 version: 2.31
 release: 1
@@ -8,6 +10,8 @@ epoch: 1
 summary: Term::ReadKey - A perl module for simple terminal control
 group:
   centos: System Environment/Libraries
+  fedora: System Environment/Libraries
+  redhat: System Environment/Libraries
 license: Artistic
 homepage: https://metacpan.org/pod/Term::ReadKey
 source: http://cpan.metacpan.org/authors/id/J/JS/JSTOWE/TermReadKey-2.31.tar.gz
@@ -15,6 +19,8 @@ maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 arch:
   centos: x86_64
+  fedora: x86_64
+  redhat: x86_64
 description: |
   Term::ReadKey - A perl module for simple terminal control
 
