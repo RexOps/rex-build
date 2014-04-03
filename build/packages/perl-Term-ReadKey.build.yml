@@ -1,0 +1,82 @@
+# basic informations
+name:
+  centos: perl-Term-ReadKey
+realname: Term-ReadKey
+version: 2.31
+release: 1
+epoch: 1
+summary: Term::ReadKey - A perl module for simple terminal control
+group:
+  centos: System Environment/Libraries
+license: Artistic
+homepage: https://metacpan.org/pod/Term::ReadKey
+source: http://cpan.metacpan.org/authors/id/J/JS/JSTOWE/TermReadKey-2.31.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Term::ReadKey - A perl module for simple terminal control
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+      runtime:
+        - perl
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+      runtime:
+        - perl
+
+fedora:
+  18: &depfedora18
+    build:
+      - make
+      - perl
+      - perl-devel
+
+    runtime:
+      - perl
+
+  19: *depfedora18
+  20: *depfedora18
+
+redhat:
+  18: *depfedora18
+  19: *depfedora18
+  20: *depfedora18
+
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr

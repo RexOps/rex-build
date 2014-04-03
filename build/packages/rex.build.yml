@@ -36,7 +36,7 @@ description: |
 requires:
   debian:
     squeeze: &depsqueeze
-      build: 
+      build:
         - build-essential
         - debhelper
         - perl
@@ -53,6 +53,7 @@ requires:
         - libstring-escape-perl
         - libjson-xs-perl
         - liblist-moreutils-perl
+        - libterm-readkey-perl
       runtime:
         - perl
         - perl-modules
@@ -66,6 +67,7 @@ requires:
         - libstring-escape-perl
         - libjson-xs-perl
         - liblist-moreutils-perl
+        - libterm-readkey-perl
 
 
     wheezy: &depwheezy
@@ -87,6 +89,8 @@ requires:
         - libstring-escape-perl
         - libjson-xs-perl
         - liblist-moreutils-perl
+        - libterm-readkey-perl
+
       runtime:
         - perl
         - perl-modules
@@ -101,6 +105,8 @@ requires:
         - libstring-escape-perl
         - libjson-xs-perl
         - liblist-moreutils-perl
+        - libterm-readkey-perl
+
 
   centos:
     5:
@@ -117,6 +123,7 @@ requires:
         - perl-String-Escape
         - perl-JSON-XS
         - perl-List-MoreUtils
+        - perl-Term-ReadKey
       runtime:
         - perl
         - perl-Net-SSH2
@@ -129,7 +136,9 @@ requires:
         - perl-String-Escape
         - perl-JSON-XS
         - perl-List-MoreUtils
- 
+        - perl-Term-ReadKey
+
+
     6: &depcentos6
       build:
         - make
@@ -146,7 +155,9 @@ requires:
         - perl-JSON-XS
         - perl-List-MoreUtils
         - perl-Time-HiRes
- 
+        - perl-Term-ReadKey
+
+
       runtime:
         - perl
         - perl-Net-SSH2
@@ -160,7 +171,9 @@ requires:
         - perl-JSON-XS
         - perl-List-MoreUtils
         - perl-Time-HiRes
- 
+        - perl-Term-ReadKey
+
+
 
   ubuntu:
     lucid: *depsqueeze
@@ -186,7 +199,9 @@ requires:
         - perl-ExtUtils-MakeMaker
         - perl-JSON-XS
         - perl-List-MoreUtils
- 
+        - perl-Term-ReadKey
+
+
       runtime:
         - perl
         - perl-Net-SSH2
@@ -199,10 +214,12 @@ requires:
         - perl-String-Escape
         - perl-JSON-XS
         - perl-List-MoreUtils
- 
+        - perl-Term-ReadKey
+
+
     19: *depfedora18
     20: *depfedora18
-      
+
   redhat:
     18: *depfedora18
     19: *depfedora18
@@ -223,6 +240,8 @@ requires:
         - perl-String-Escape
         - perl-JSON-XS
         - perl-List-MoreUtils
+        - perl-Term-ReadKey
+
       runtime:
         - perl
         - perl-Net-SSH2
@@ -235,6 +254,8 @@ requires:
         - perl-String-Escape
         - perl-JSON-XS
         - perl-List-MoreUtils
+        - perl-Term-ReadKey
+
 
   mageia:
     3: *depsuse13
@@ -243,7 +264,7 @@ requires:
 configure: |
   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
   cd <%= $realname %>-<%= $version %>
-    
+
   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
 
 make: |
@@ -252,7 +273,7 @@ make: |
 
 install: |
   rm -rf <%= $buildroot %>
-    
+
   cd <%= $realname %>-<%= $version %>
   make pure_install
   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
@@ -269,4 +290,3 @@ files:
     package:
       - %{_bindir}/*
       - %{perl_vendorlib}/*
-
