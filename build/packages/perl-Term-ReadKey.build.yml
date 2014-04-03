@@ -1,7 +1,7 @@
 # basic informations
 name:
   centos: perl-Term-ReadKey
-realname: Term-ReadKey
+realname: TermReadKey
 version: 2.31
 release: 1
 epoch: 1
