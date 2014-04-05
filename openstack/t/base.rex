@@ -26,18 +26,18 @@ task test => sub {
   my $param = shift;
 
   my @images = cloud_image_list;
-  ok( $images[0]->{name} eq 'cirros-0.3.1-x86_64-uec',
-    "Got first cloud image." );
+  my @my_img = grep { $_->{name} eq 'openwrt-i386' } @images;
+  ok( scalar @my_img == 1, "Got first cloud image." );
 
   my $vol_id = cloud_volume create => { size => 1, zone => "nova", };
   sleep 2;
 
-  ok($vol_id =~ m/[a-z0-9\-]+/, "volume-id found");
+  ok( $vol_id =~ m/[a-z0-9\-]+/, "volume-id found" );
 
   my @vols = cloud_volume_list;
   my @my_vol = grep { $_->{id} eq $vol_id } @vols;
 
-  ok(scalar @my_vol, "found created volume.");
+  ok( scalar @my_vol, "found created volume." );
 
   cloud_volume delete => $vol_id;
 
@@ -47,7 +47,7 @@ task test => sub {
   @vols = cloud_volume_list;
   @my_vol = grep { $_->{id} eq $vol_id } @vols;
 
-  ok(scalar @my_vol == 0, "deleted my volume.");
+  ok( scalar @my_vol == 0, "deleted my volume." );
 
   done_testing();
 };
