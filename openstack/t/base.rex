@@ -32,6 +32,8 @@ task test => sub {
   my $vol_id = cloud_volume create => { size => 1, zone => "nova", };
   ok($vol_id =~ m/[a-z0-9\-]+/, "volume-id found");
 
+  sleep 2;
+
   my @vols = cloud_volume_list;
   my @my_vol = grep { $_->{id} eq $vol_id } @vols;
 
