@@ -29,6 +29,24 @@ task test => sub {
   ok( $images[0]->{name} eq 'cirros-0.3.1-x86_64-uec',
     "Got first cloud image." );
 
+  my $vol_id = cloud_volume create => { size => 1, zone => "nova", };
+  ok($vol_id =~ m/[a-z0-9\-]+/, "volume-id found");
+
+  my @vols = cloud_volume_list;
+  my @my_vol = grep { $_->{id} eq $vol_id } @vols;
+
+  ok(scalar @my_vol, "found created volume.");
+
+  cloud_volume delete => $vol_id;
+
+  # need to wait a bit, because the delete is not instant
+
+  sleep 5;
+  @vols = cloud_volume_list;
+  @my_vol = grep { $_->{id} eq $vol_id } @vols;
+
+  ok(scalar @my_vol == 0, "deleted my volume.");
+
   done_testing();
 };
 
