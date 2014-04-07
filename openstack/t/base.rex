@@ -30,8 +30,6 @@ task test => sub {
   ok( scalar @my_img == 1, "Got first cloud image." );
 
   my $vol_id = cloud_volume create => { size => 1, zone => "nova", };
-  sleep 2;
-
   ok( $vol_id =~ m/[a-z0-9\-]+/, "volume-id found" );
 
   my @vols = cloud_volume_list;
@@ -41,9 +39,6 @@ task test => sub {
 
   cloud_volume delete => $vol_id;
 
-  # need to wait a bit, because the delete is not instant
-
-  sleep 5;
   @vols = cloud_volume_list;
   @my_vol = grep { $_->{id} eq $vol_id } @vols;
 
