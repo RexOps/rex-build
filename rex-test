@@ -11,5 +11,5 @@ $ENV{"PERLLIB"} = "$ENV{WORK_DIR}/rex/lib:" . (exists $ENV{PERLLIB} ? $ENV{PERLL
 $ENV{"PERL5LIB"} = "$ENV{WORK_DIR}/rex/lib:" . (exists $ENV{PERL5LIB} ? $ENV{PERL5LIB} : "");
 
 for my $file (@ARGV) {
-  system "perl $ENV{WORK_DIR}/rex/bin/rex -qf $file test 2>'/var/log/rex/$ENV{JOB_NAME}.log'";
+  system "perl $ENV{WORK_DIR}/rex/bin/rex -f $file test >'/var/log/rex/$ENV{JOB_NAME}.log' 2>&1";
 }
