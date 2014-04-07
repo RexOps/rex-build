@@ -26,6 +26,7 @@ task test => sub {
   my $param = shift;
 
   my @images = cloud_image_list;
+
   my @my_img = grep { $_->{name} eq 'openwrt-i386' } @images;
   ok( scalar @my_img == 1, "Got first cloud image." );
 
@@ -36,6 +37,29 @@ task test => sub {
   my @my_vol = grep { $_->{id} eq $vol_id } @vols;
 
   ok( scalar @my_vol, "found created volume." );
+
+  my $instance = cloud_instance create => {
+    image_id => "ccd8bcab-8ad2-4744-8227-08279fab7a42",
+    name     => "ostack01",
+    plan_id  => 2,
+    volume   => $vol_id,
+  };
+
+  ok( $instance->{name} eq "ostack01", "got instance name" );
+
+  my ($inst) =
+    grep { ( $_->{name} eq "ostack01" ) && ( $_->{state} eq "running" ) }
+    cloud_instance_list;
+
+  ok( $inst->{name} eq "ostack01", "got instance name" );
+
+  cloud_instance terminate => $instance->{id};
+
+  ($inst) =
+    grep { ( $_->{name} eq "ostack01" ) && ( $_->{state} eq "running" ) }
+    cloud_instance_list;
+
+  ok( !$inst, "instance removed" );
 
   cloud_volume delete => $vol_id;
 
