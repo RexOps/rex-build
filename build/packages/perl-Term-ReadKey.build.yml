@@ -5,7 +5,7 @@ name:
   redhat: perl-Term-ReadKey
 realname: TermReadKey
 version: 2.31
-release: 1
+release: 2
 epoch: 1
 summary: Term::ReadKey - A perl module for simple terminal control
 group:
@@ -88,6 +88,9 @@ files:
     - /usr
   fedora:
     doc:
-      - %{_mandir}/*
+      - /usr/share/man/man3/Term::ReadKey.3pm.gz
     package:
-      - %{perl_vendorlib}/*
+      - /usr/lib/perl5/vendor_perl/Term/ReadKey.pm
+      - /usr/lib/perl5/vendor_perl/auto/Term/ReadKey/ReadKey.bs
+      - /usr/lib/perl5/vendor_perl/auto/Term/ReadKey/ReadKey.so
+      - /usr/lib/perl5/vendor_perl/auto/Term/ReadKey/autosplit.ix
