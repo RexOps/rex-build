@@ -90,7 +90,7 @@ files:
     doc:
       - /usr/share/man/man3/Term::ReadKey.3pm.gz
     package:
-      - /usr/lib/perl5/vendor_perl/Term/ReadKey.pm
-      - /usr/lib/perl5/vendor_perl/auto/Term/ReadKey/ReadKey.bs
-      - /usr/lib/perl5/vendor_perl/auto/Term/ReadKey/ReadKey.so
-      - /usr/lib/perl5/vendor_perl/auto/Term/ReadKey/autosplit.ix
+      - %{_libdir}/perl5/vendor_perl/Term/ReadKey.pm
+      - %{_libdir}/perl5/vendor_perl/auto/Term/ReadKey/ReadKey.bs
+      - %{_libdir}/perl5/vendor_perl/auto/Term/ReadKey/ReadKey.so
+      - %{_libdir}/perl5/vendor_perl/auto/Term/ReadKey/autosplit.ix
