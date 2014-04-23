@@ -28,7 +28,7 @@ task "test", group => "test", sub {
     password => 'hello2',
   };
 
-  say "New UID: $new_uid";
+  #say "New UID: $new_uid";
   ok(defined $new_uid, "new user created");
 
   ok(is_dir('/users/trak'), "homedirectory created");
@@ -129,9 +129,18 @@ task "test", group => "test", sub {
   delete_user "horse",
     delete_home => TRUE;
 
+  my $new_uid7 = create_user "apple",
+    home => "/users/apple",
+    create_home => TRUE,
+    ssh_key => "apple";
+
+  ok(defined $new_uid7, "user apple ($new_uid7) created");
+  ok(is_dir("/users/apple"), "apple does have a home");
+  ok(is_file("/users/apple/.ssh/authorized_keys"), "apple does have an authorized_keys");
+
+
   ok(! get_uid("horse"), "user horse deleted");
   ok(! is_dir("/users/horse"), "home of horse deleted");
 
   done_testing();
 };
-
