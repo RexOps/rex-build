@@ -54,20 +54,21 @@ task prepare => group => test => sub {
     create_group "nobody";
 
     # some tests need a user
-    create_user "nobody", groups => ["nobody"];
+    account "nobody", groups => ["nobody"];
 
     create_group "rsync_user",
       gid => 6000,
       ;
 
-    create_user "rsync_user",
-      uid      => 6000,
-      password => "rsync.pw",
-      home     => "/home/rsync_user",
-      groups   => ["rsync_user"];
+    account "rsync_user",
+      uid         => 6000,
+      password    => "rsync.pw",
+      home        => "/home/rsync_user",
+      create_home => TRUE,
+      groups      => ["rsync_user"];
 
     if ( is_openwrt() ) {
-      create_user "rsync_user", shell => "/bin/ash";
+      account "rsync_user", shell => "/bin/ash";
     }
 
   };
