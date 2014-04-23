@@ -16,6 +16,13 @@ task "test",
     mkdir "/users";
   }
 
+  my $default_create_home = 0;
+  if ( is_file("/etc/login.defs") ) {
+    my @content_lines = split( /\n/, cat("/etc/login.defs") );
+    my ($create_home) = grep { m/^CREATE_HOME.*yes/ } @content_lines;
+    $default_create_home = 1 if ($create_home);
+  }
+
   create_group "users";
   ok( get_gid("users") > 1, "created group users" );
 
@@ -34,7 +41,11 @@ task "test",
   #say "New UID: $new_uid";
   ok( defined $new_uid, "new user created" );
 
-  ok( is_dir('/users/trak'), "homedirectory created" );
+  ok( is_dir('/users/trak'), "homedirectory created" )
+    if ($default_create_home);
+
+  ok( !is_dir('/users/trak'), "homedirectory NOT created" )
+    if ( !$default_create_home );
 
   delete_user "trak", { delete_home => 1 };
   ok( !get_uid("trak"),       "user deleted" );
@@ -87,7 +98,12 @@ task "test",
   ok(
     is_file("/users/bar/.ssh/authorized_keys"),
     "user bar have an authorized_keys files"
-  );
+  ) if ($default_create_home);
+
+  ok(
+    !is_file("/users/bar/.ssh/authorized_keys"),
+    "user bar have NOT an authorized_keys files"
+  ) if ( !$default_create_home );
 
   my @content = cat("/users/bar/.ssh/authorized_keys");
   chomp @content;
