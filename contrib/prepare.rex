@@ -54,13 +54,14 @@ task prepare => group => test => sub {
     create_group "nobody";
 
     # some tests need a user
-    account "nobody", groups => ["nobody"];
+    account "nobody", groups => ["nobody"], ensure => "present";
 
     create_group "rsync_user",
       gid => 6000,
       ;
 
     account "rsync_user",
+      ensure      => "present",
       uid         => 6000,
       password    => "rsync.pw",
       home        => "/home/rsync_user",
