@@ -105,9 +105,11 @@ task "test",
     "user bar have NOT an authorized_keys files"
   ) if ( !$default_create_home );
 
-  my @content = cat("/users/bar/.ssh/authorized_keys");
-  chomp @content;
-  ok( $content[0] eq "blahblah", "content of authorized_keys file is ok" );
+  if ($default_create_home) {
+    my @content = cat("/users/bar/.ssh/authorized_keys");
+    chomp @content;
+    ok( $content[0] eq "blahblah", "content of authorized_keys file is ok" );
+  }
 
   delete_user "bar", delete_home => TRUE;
   ok( !get_uid("bar"),       "user bar deleted" );
