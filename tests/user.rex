@@ -147,6 +147,13 @@ task "test",
     "apple does have an authorized_keys"
   );
 
+  my $new_uid8 = create_user "banana",
+    home        => "/users/banana",
+    create_home => FALSE;
+
+  ok( defined $new_uid7,        "user banana ($new_uid8) created" );
+  ok( !is_dir("/users/banana"), "banana does NOT have a home" );
+
   ok( !get_uid("horse"),       "user horse deleted" );
   ok( !is_dir("/users/horse"), "home of horse deleted" );
 
