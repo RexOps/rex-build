@@ -69,7 +69,10 @@ task prepare => group => test => sub {
       groups      => ["rsync_user"];
 
     if ( is_openwrt() ) {
-      account "rsync_user", shell => "/bin/ash";
+      account "rsync_user",
+        home        => "/home/rsync_user",
+        create_home => TRUE,
+        shell       => "/bin/ash";
     }
 
   };
