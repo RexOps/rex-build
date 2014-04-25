@@ -1,6 +1,6 @@
 # vim: set syn=perl:
 
-use Rex -feature => ['0.42', 'exec_and_sleep'];
+use Rex -feature => ['0.42'];
 #use Rex -feature => ['0.42'];
 use Rex::Commands::Service;
 use Rex::Commands::Gather;
