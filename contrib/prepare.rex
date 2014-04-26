@@ -34,7 +34,7 @@ task prepare => group => test => sub {
     qr{centos|redhat}i => [qw/openssh-clients/],
       qr{freebsd}i     => [qw/dmidecode/],
       qr{openwrt}i     => [
-      qw/perlbase-bytes perlbase-digest perlbase-essential perlbase-file perlbase-xsloader shadow-groupadd shadow-groupdel shadow-groupmod shadow-useradd shadow-userdel shadow-usermod swap-utils/
+      qw/coreutils-nohup perlbase-bytes perlbase-digest perlbase-essential perlbase-file perlbase-xsloader shadow-groupadd shadow-groupdel shadow-groupmod shadow-useradd shadow-userdel shadow-usermod swap-utils/
       ],
       qr{debian|ubuntu}i => [qw/rsync/],
       qr{suse}i          => [qw/lsb-release/],
