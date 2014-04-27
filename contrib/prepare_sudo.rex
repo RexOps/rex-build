@@ -20,10 +20,11 @@ task prepare => group => test => sub {
 
   create_group $user;
 
-  create_user $user,
+  account $user,
     home    => "/home/$user",
     groups  => [$user],
-    password => $pass;
+    password => $pass,
+    create_home => TRUE;
 
   # need to set_home / always_set_home so that sudo find the right home directory
   file "/etc/sudoers",
@@ -31,4 +32,3 @@ task prepare => group => test => sub {
     owner  => "root",
     mode   => 440;
 };
-
