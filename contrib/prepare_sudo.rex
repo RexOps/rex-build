@@ -25,6 +25,7 @@ task prepare => group => test => sub {
     home        => "/home/$user",
     groups      => [$user],
     password    => $pass,
+    ensure      => "present",
     create_home => TRUE;
 
  # need to set_home / always_set_home so that sudo find the right home directory
