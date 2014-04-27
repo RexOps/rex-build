@@ -162,9 +162,9 @@ sub start_phase {
   $phase = shift;
   $starttime = time;
   local $| = 1;
-  print $phase . ' ... ';
+  printf '%-40s', $phase;
 }
 
 sub end_phase {
-  say scalar( time - $starttime ) . ' s';
+  printf "%4u s\n", scalar( time - $starttime );
 }
