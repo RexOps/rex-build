@@ -78,7 +78,7 @@ LOCAL {
   }
 
   start_phase('Cloning git repo');
-  system "git clone git\@github.com:krimdomu/Rex.git rex --branch $branch >/var/log/rex/checkout.log 2>&1";
+  system "git clone git\@github.com:RexOps/Rex.git rex --branch $branch >/var/log/rex/checkout.log 2>&1";
   &end_phase;
 
   chdir $cwd;
