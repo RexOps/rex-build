@@ -103,8 +103,17 @@ LOCAL {
 
   # run tests from tests directory
   $ENV{PATH} = getcwd() . ":" . $ENV{PATH};
-  system "WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST=$ip prove --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests >junit_output_tests.xml";
+  opendir(my $dh, "tests") or die($!);
+  while(my $entry = readdir($dh)) {
+    next if ($entry =~ m/^\./);
+    next if (! -f "tests/$entry");
+    next if ($entry !~ m/\.rex$/);
 
+    start_phase("Running tests/$entry");
+    system "WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST=$ip prove --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests/$entry >junit_output_tests_$entry.xml";
+    &end_phase;
+  }
+  closedir($dh);
 
   # run tests from tests.d directory
   opendir(my $dh, "tests.d") or die($!);
