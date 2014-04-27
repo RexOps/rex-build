@@ -15,10 +15,6 @@ my $phase;
 
 start_phase('Initializing');
 
-# use unbuffered output to make Jenkins console output more responsive
-binmode( STDOUT, ":unix" );
-binmode( STDERR, ":unix" );
-
 my $yaml = eval { local(@ARGV, $/) = ($ENV{HOME} . "/.build_config"); <>; };
 $yaml .= "\n";
 my $config = Load($yaml);
@@ -165,6 +161,7 @@ sub get_random {
 sub start_phase {
   $phase = shift;
   $starttime = time;
+  local $| = 1;
   print $phase . ' ... ';
 }
 
