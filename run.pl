@@ -110,7 +110,7 @@ LOCAL {
     next if ($entry !~ m/\.rex$/);
 
     start_phase("Running tests/$entry");
-    system "WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST=$ip prove --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests/$entry >junit_output_tests_$entry.xml";
+    system "WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST=$ip prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests/$entry >junit_output_tests_$entry.xml";
     &end_phase;
   }
   closedir($dh);
@@ -123,13 +123,13 @@ LOCAL {
 
     $ENV{PERL5LIB} = "tests.d/$entry/lib:" . (exists $ENV{PERL5LIB} ? $ENV{PERL5LIB} : "");
     start_phase("Running tests.d/$entry");
-    system "WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST=$ip prove --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.d/$entry >junit_output_testsd_$entry.xml";
+    system "WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST=$ip prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.d/$entry >junit_output_testsd_$entry.xml";
     &end_phase;
   }
   closedir($dh);
 
   start_phase('tests.post.d');
-  system "WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST=$ip prove --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.post.d >junit_output_tests_post_d.xml";
+  system "WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST=$ip prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.post.d >junit_output_tests_post_d.xml";
   &end_phase;
 
   system "rm -rf /tmp/workspace/$rnd";
