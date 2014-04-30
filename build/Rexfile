@@ -10,7 +10,7 @@
 #
 # Usage:
 #
-# rex bundle --build=buildfile.yaml
+# rex bundle --build=buildfile.yaml --branch=development
 #
 # ------------------------------------------------------------------------------
 # vim: set syn=perl:
@@ -545,6 +545,7 @@ task archive => config->{repo}->{server} => sub {
       $branch = eval { local ( @ARGV, $/ ) = ('/branch'); <>; };
       $branch =~ s/[\r\n]//gms;
     }
+    $branch = $params->{branch} || $branch;
 
     run
 "git clone git\@github.com:RexOps/$build_project.git $build_dir --branch $branch >/tmp/out.log 2>&1";

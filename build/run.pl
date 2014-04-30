@@ -29,6 +29,8 @@ if ( !$build_file || !-f $build_file ) {
   die("No (valid) build file given");
 }
 
+my $branch = $ENV{REX_BRANCH} || 'development';
+
 Rex::connect( %{$config} );
 
 my $new_vm = "${base_vm}-build-$$";
@@ -54,9 +56,9 @@ $user = $config->{box}->{default}->{user};
 $pass = $config->{box}->{default}->{password};
 
 print
-"Running: REXUSER=$user REXPASS=$pass HTEST=$ip rex -f build/Rexfile -c bundle --build=$build_file\n";
+"Running: REXUSER=$user REXPASS=$pass HTEST=$ip rex -f build/Rexfile -c bundle --build=$build_file --branch=$branch\n";
 system
-"REXUSER=$user REXPASS=$pass HTEST=$ip rex -f build/Rexfile -c bundle --build=$build_file";
+"REXUSER=$user REXPASS=$pass HTEST=$ip rex -f build/Rexfile -c bundle --build=$build_file --branch=$branch";
 my $exit_code = $?;
 
 remove_vm($new_vm);
