@@ -39,7 +39,7 @@ task test => sub {
   ok($instance->{name} eq "amaz01", "got instance name");
   ok($instance->{security_group} eq "alltcpfoo", "got security group");
 
-  my ($inst) = grep { ($_->{name} eq "amaz01") && ($_->{state} eq "running") } cloud_instance_list;
+  my ($inst) = grep { (exists $_->{name} && $_->{name} && $_->{name} eq "amaz01") && ($_->{state} eq "running") } cloud_instance_list;
 
   ok($inst->{name} eq "amaz01", "got instance name");
   ok($inst->{security_group} eq "alltcpfoo", "got security group");
@@ -48,7 +48,7 @@ task test => sub {
   cloud_instance terminate => $inst->{id};
 
   $inst = undef;
-  ($inst) = grep { ($_->{name} eq "amaz01") && ($_->{state} ne "running") } cloud_instance_list;
+  ($inst) = grep { (exists $_->{name} && $_->{name} && $_->{name} eq "amaz01") && ($_->{state} ne "running") } cloud_instance_list;
 
   ok($inst->{state} ne "running", "instance terminated");
 
@@ -68,8 +68,8 @@ task test => sub {
          security_groups => ["alltcpfoo", "default"],
        };
 
-  
-  ($inst) = grep { ($_->{name} eq "amaz02") && ($_->{state} eq "running") } cloud_instance_list;
+
+  ($inst) = grep { (exists $_->{name} && $_->{name} && $_->{name} eq "amaz02") && ($_->{state} eq "running") } cloud_instance_list;
 
   ok($inst->{name} eq "amaz02", "got instance name");
   ok($inst->{security_group} eq "default,alltcpfoo", "got security groups");
@@ -80,7 +80,7 @@ task test => sub {
   cloud_instance terminate => $inst->{id};
 
   $inst = undef;
-  ($inst) = grep { ($_->{name} eq "amaz02") && ($_->{state} ne "running") } cloud_instance_list;
+  ($inst) = grep { (exists $_->{name} && $_->{name} && $_->{name} eq "amaz02") && ($_->{state} ne "running") } cloud_instance_list;
 
   ok($inst->{state} ne "running", "instance terminated");
 
@@ -89,4 +89,3 @@ task test => sub {
 };
 
 1;
-
