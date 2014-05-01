@@ -40,7 +40,7 @@ $pass = $config->{box}->{default}->{password};
 
 # run tests from tests directory
 $ENV{PATH} = getcwd() . ":" . $ENV{PATH};
-system "REXUSER=$user REXPASS=$pass HTEST=$ip prove --formatter TAP::Formatter::JUnit --ext rex -e rex-test t >../junit_output_tests.xml";
+system "REXUSER=$user REXPASS=$pass HTEST=$ip prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test t >../junit_output_tests.xml";
 
 
 vm destroy => $new_vm;
