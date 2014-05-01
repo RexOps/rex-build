@@ -39,7 +39,7 @@ task test => sub {
   ok( scalar @my_vol, "found created volume." );
 
   my $instance = cloud_instance create => {
-    image_id => "ccd8bcab-8ad2-4744-8227-08279fab7a42",
+    image_id => $my_img[0]->{id},
     name     => "ostack01",
     plan_id  => 2,
     volume   => $vol_id,
