@@ -181,6 +181,7 @@ requires:
     quantal: *depwheezy
     raring: *depwheezy
     saucy: *depwheezy
+    trusty: *depwheezy
 
   fedora:
     18: &depfedora18
