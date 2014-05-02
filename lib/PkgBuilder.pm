@@ -1,9 +1,9 @@
 #
 # (c) Jan Gehring <jan.gehring@gmail.com>
-# 
+#
 # vim: set ts=2 sw=2 tw=0:
 # vim: set expandtab:
-  
+
 package PkgBuilder;
 
 use strict;
@@ -26,7 +26,8 @@ use vars qw(@EXPORT);
   create_build_files
   doc_root
   get_build_env
-  sync_time);
+  sync_time
+  get_version_to_install);
 
 my $pid = $$;
 
@@ -252,7 +253,7 @@ sub create_build_files {
     mkdir $buildroot;
 
     file "/root/build/$pkg_name.spec",
-      content => parse_template("templates/spec.tpl", 
+      content => parse_template("templates/spec.tpl",
                   buildroot  => $buildroot,
                   os      => $op,
                   rel      => $rel,
@@ -390,6 +391,16 @@ sub get_build_env {
   }
 
   return $env;
+}
+
+sub get_version_to_install {
+  if(-f "/version") {
+    my $content = io("/version")->slurp;
+    chomp $content;
+    return $content;
+  }
+
+  die "No version defined.";
 }
 
 1;

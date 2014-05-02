@@ -33,7 +33,7 @@ task test => group => test => sub {
     else {
 
       eval {
-        repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}->{$arch} }; 
+        repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}->{$arch} };
         $ok = 1;
         1;
       } or do {
@@ -95,7 +95,7 @@ task test => group => test => sub {
   ok($? == 0, "run rex");
   my ($name, $version) = split(/ /, $out);
   ok($version =~ m/\d+\.\d+\.\d+/, "got version ($version)");
+  ok($version eq get_version_to_install(), "got correct version");
 
   done_testing();
 };
-
