@@ -10,7 +10,7 @@
 #
 # Usage:
 #
-# rex bundle --build=buildfile.yaml
+# rex bundle --build=buildfile.yaml --branch=development
 #
 # ------------------------------------------------------------------------------
 # vim: set syn=perl:
@@ -117,16 +117,16 @@ task prepare => group => test => sub {
 
   if (is_debian) {
     run
-      "wget -O - http://rex.linux-files.org/DPKG-GPG-KEY-REXIFY-REPO | apt-key add -";
+"wget -O - http://rex.linux-files.org/DPKG-GPG-KEY-REXIFY-REPO | apt-key add -";
   }
   else {
     if ( lc($op) eq "centos" && $ver =~ m/^5/ ) {
       run
-        "rpm --import http://rex.linux-files.org/RPM-GPG-KEY-REXIFY-REPO.CENTOS5";
+"rpm --import http://rex.linux-files.org/RPM-GPG-KEY-REXIFY-REPO.CENTOS5";
     }
     else {
       run
-        "rpm --import http://rex.linux-files.org/RPM-GPG-KEY-REXIFY-REPO.CENTOS6";
+"rpm --import http://rex.linux-files.org/RPM-GPG-KEY-REXIFY-REPO.CENTOS6";
     }
   }
 
@@ -454,10 +454,10 @@ task publish => config->{repo}->{server} => sub {
 
     my $doc_root = doc_root . "/" . lc($op);
     run
-      "apt-ftparchive generate -c=/root/aptftp.$ver.conf /root/aptgenerate.$ver.conf",
+"apt-ftparchive generate -c=/root/aptftp.$ver.conf /root/aptgenerate.$ver.conf",
       cwd => $doc_root;
     run
-      "apt-ftparchive release -c=/root/aptftp.$ver.conf dists/$ver >dists/$ver/Release",
+"apt-ftparchive release -c=/root/aptftp.$ver.conf dists/$ver >dists/$ver/Release",
       cwd => $doc_root;
 
     rm "$doc_root/dists/$ver/Release.gpg";
@@ -545,9 +545,10 @@ task archive => config->{repo}->{server} => sub {
       $branch = eval { local ( @ARGV, $/ ) = ('/branch'); <>; };
       $branch =~ s/[\r\n]//gms;
     }
+    $branch = $params->{branch} || $branch;
 
     run
-      "git clone git\@github.com:RexOps/$build_project.git $build_dir --branch $branch >/tmp/out.log 2>&1";
+"git clone git\@github.com:RexOps/$build_project.git $build_dir --branch $branch >/tmp/out.log 2>&1";
     run "cd $build_dir; perl Makefile.PL && make && make dist && cd ..";
     ($pkg) = glob("$build_dir/*.tar.gz");
 
