@@ -1,8 +1,8 @@
 # basic informations
 name:
-  centos: perl-Term-ReadKey
-  fedora: perl-Term-ReadKey
-  redhat: perl-Term-ReadKey
+  centos: perl-TermReadKey
+  fedora: perl-TermReadKey
+  redhat: perl-TermReadKey
 realname: TermReadKey
 version: 2.31
 release: 3
@@ -61,6 +61,10 @@ redhat:
   19: *depfedora18
   20: *depfedora18
 
+provides:
+  centos:
+    5: perl(Term::ReadKey)
+    6: perl(Term::ReadKey)
 
 # build instructions
 configure: |

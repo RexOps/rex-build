@@ -123,7 +123,7 @@ requires:
         - perl-String-Escape
         - perl-JSON-XS
         - perl-List-MoreUtils
-        - perl-Term-ReadKey
+        - perl(Term::ReadKey)
       runtime:
         - perl
         - perl-Net-SSH2
@@ -136,7 +136,7 @@ requires:
         - perl-String-Escape
         - perl-JSON-XS
         - perl-List-MoreUtils
-        - perl-Term-ReadKey
+        - perl(Term::ReadKey)
 
 
     6: &depcentos6
@@ -155,7 +155,7 @@ requires:
         - perl-JSON-XS
         - perl-List-MoreUtils
         - perl-Time-HiRes
-        - perl-Term-ReadKey
+        - perl(Term::ReadKey)
 
 
       runtime:
@@ -171,7 +171,7 @@ requires:
         - perl-JSON-XS
         - perl-List-MoreUtils
         - perl-Time-HiRes
-        - perl-Term-ReadKey
+        - perl(Term::ReadKey)
 
 
 
