@@ -40,6 +40,9 @@ Requires:  <%= $req %><% } %>
 
 <% } %>
 
+
+<% if(exists $data->{provides}->{lc($os)}->{$rel}) { %>
+
 <% for my $prov (@{ $data->{provides}->{lc($os)}->{$rel} }) { %>
 Provides:  <%= $prov %><% } %>
 
