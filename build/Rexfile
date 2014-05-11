@@ -169,6 +169,8 @@ task prepare => group => test => sub {
     Rex::Logger::info("No build dependencies found.");
   }
 
+  print Dumper $pkg_build_dep;
+
   $pkg_build_dep = [
     map {
       if ( ref $_ eq "HASH" ) {
@@ -177,6 +179,9 @@ task prepare => group => test => sub {
       }
     } @{$pkg_build_dep}
   ];
+
+  print Dumper $pkg_build_dep;
+
 
   pkg $pkg_build_dep, ensure => "latest"
     if ($pkg_build_dep);
