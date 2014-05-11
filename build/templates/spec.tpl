@@ -40,6 +40,11 @@ Requires:  <%= $req %><% } %>
 
 <% } %>
 
+<% for my $prov (@{ $data->{provides}->{lc($os)}->{$rel} }) { %>
+Provides:  <%= $prov %><% } %>
+
+<% } %>
+
 
 %description
 <%= $data->{description} %>
@@ -89,4 +94,3 @@ Requires:  <%= $req %><% } %>
 %post
 <%= $data->{post} %>
 <% } %>
-
