@@ -63,8 +63,10 @@ redhat:
 
 provides:
   centos:
-    5: perl(Term::ReadKey)
-    6: perl(Term::ReadKey)
+    5:
+      - perl(Term::ReadKey)
+    6:
+      - perl(Term::ReadKey)
 
 # build instructions
 configure: |
