@@ -169,7 +169,14 @@ task prepare => group => test => sub {
     Rex::Logger::info("No build dependencies found.");
   }
 
-  $pkg_build_dep = [ grep { $_ !~ m/perl\(/i } @{$pkg_build_dep} ];
+  $pkg_build_dep = [
+    map {
+      if ( ref $_ eq "HASH" ) {
+        my ($key) = keys %{$_};
+        $_ = $_->{$key};
+      }
+    } @{$pkg_build_dep}
+  ];
 
   pkg $pkg_build_dep, ensure => "latest"
     if ($pkg_build_dep);

@@ -15,6 +15,7 @@ AutoReqProv: no
 <% if(exists $data->{requires}->{lc($os)}->{$rel}->{build}) { %>
 
 <% for my $req (@{ $data->{requires}->{lc($os)}->{$rel}->{build} }) { %>
+<% if(ref $req eq "HASH") { ($req) = keys %{ $req } } %>
 BuildRequires:  <%= $req %><% } %>
 
 <% } %>
@@ -22,6 +23,7 @@ BuildRequires:  <%= $req %><% } %>
 <% if(exists $data->{requires}->{lc($os)}->{$rel}->{runtime}) { %>
 
 <% for my $req (@{ $data->{requires}->{lc($os)}->{$rel}->{runtime} }) { %>
+<% if(ref $req eq "HASH") { ($req) = keys %{ $req } } %>
 Requires:  <%= $req %><% } %>
 
 <% } %>
@@ -29,6 +31,7 @@ Requires:  <%= $req %><% } %>
 <% if(exists $data->{requires}->{lc($os)}->{$rel}->{$arch}->{build}) { %>
 
 <% for my $req (@{ $data->{requires}->{lc($os)}->{$rel}->{$arch}->{build} }) { %>
+<% if(ref $req eq "HASH") { ($req) = keys %{ $req } } %>
 BuildRequires:  <%= $req %><% } %>
 
 <% } %>
@@ -36,6 +39,7 @@ BuildRequires:  <%= $req %><% } %>
 <% if(exists $data->{requires}->{lc($os)}->{$rel}->{$arch}->{runtime}) { %>
 
 <% for my $req (@{ $data->{requires}->{lc($os)}->{$rel}->{$arch}->{runtime} }) { %>
+<% if(ref $req eq "HASH") { ($req) = keys %{ $req } } %>
 Requires:  <%= $req %><% } %>
 
 <% } %>

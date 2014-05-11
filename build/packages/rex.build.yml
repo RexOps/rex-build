@@ -123,7 +123,7 @@ requires:
         - perl-String-Escape
         - perl-JSON-XS
         - perl-List-MoreUtils
-        - perl(Term::ReadKey)
+        - perl(Term::ReadKey): perl-TermReadKey
       runtime:
         - perl
         - perl-Net-SSH2
@@ -136,7 +136,7 @@ requires:
         - perl-String-Escape
         - perl-JSON-XS
         - perl-List-MoreUtils
-        - perl(Term::ReadKey)
+        - perl(Term::ReadKey): perl-TermReadKey
 
 
     6: &depcentos6
@@ -155,7 +155,7 @@ requires:
         - perl-JSON-XS
         - perl-List-MoreUtils
         - perl-Time-HiRes
-        - perl(Term::ReadKey)
+        - perl(Term::ReadKey): perl-TermReadKey
 
 
       runtime:
@@ -171,7 +171,7 @@ requires:
         - perl-JSON-XS
         - perl-List-MoreUtils
         - perl-Time-HiRes
-        - perl(Term::ReadKey)
+        - perl(Term::ReadKey): perl-TermReadKey
 
 
 
@@ -200,7 +200,7 @@ requires:
         - perl-ExtUtils-MakeMaker
         - perl-JSON-XS
         - perl-List-MoreUtils
-        - perl(Term::ReadKey)
+        - perl(Term::ReadKey): perl-TermReadKey
 
 
       runtime:
@@ -215,7 +215,7 @@ requires:
         - perl-String-Escape
         - perl-JSON-XS
         - perl-List-MoreUtils
-        - perl(Term::ReadKey)
+        - perl(Term::ReadKey): perl-TermReadKey
 
 
     19: *depfedora18
@@ -241,7 +241,7 @@ requires:
         - perl-String-Escape
         - perl-JSON-XS
         - perl-List-MoreUtils
-        - perl(Term::ReadKey)
+        - perl(Term::ReadKey): perl-TermReadKey
 
       runtime:
         - perl
@@ -255,7 +255,7 @@ requires:
         - perl-String-Escape
         - perl-JSON-XS
         - perl-List-MoreUtils
-        - perl(Term::ReadKey)
+        - perl(Term::ReadKey): perl-TermReadKey
 
 
   mageia:
