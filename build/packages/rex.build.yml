@@ -200,7 +200,7 @@ requires:
         - perl-ExtUtils-MakeMaker
         - perl-JSON-XS
         - perl-List-MoreUtils
-        - perl-Term-ReadKey
+        - perl(Term::ReadKey)
 
 
       runtime:
@@ -215,7 +215,7 @@ requires:
         - perl-String-Escape
         - perl-JSON-XS
         - perl-List-MoreUtils
-        - perl-Term-ReadKey
+        - perl(Term::ReadKey)
 
 
     19: *depfedora18
@@ -241,7 +241,7 @@ requires:
         - perl-String-Escape
         - perl-JSON-XS
         - perl-List-MoreUtils
-        - perl-Term-ReadKey
+        - perl(Term::ReadKey)
 
       runtime:
         - perl
@@ -255,7 +255,7 @@ requires:
         - perl-String-Escape
         - perl-JSON-XS
         - perl-List-MoreUtils
-        - perl-Term-ReadKey
+        - perl(Term::ReadKey)
 
 
   mageia:
