@@ -177,6 +177,8 @@ task prepare => group => test => sub {
         my ($key) = keys %{$_};
         $_ = $_->{$key};
       }
+
+      $_
     } @{$pkg_build_dep}
   ];
 
