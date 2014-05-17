@@ -5,7 +5,7 @@ name:
   redhat: perl-TermReadKey
 realname: TermReadKey
 version: 2.31
-release: 3
+release: 4
 epoch: 1
 summary: Term::ReadKey - A perl module for simple terminal control
 group:
@@ -67,6 +67,13 @@ provides:
       - perl(Term::ReadKey)
     6:
       - perl(Term::ReadKey)
+
+obsoletes:
+  centos:
+    5:
+      - perl-Term-ReadKey
+    6:
+      - perl-Term-ReadKey
 
 # build instructions
 configure: |

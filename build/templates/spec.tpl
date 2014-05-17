@@ -53,6 +53,14 @@ Provides:  <%= $prov %><% } %>
 <% } %>
 
 
+<% if(exists $data->{obsoletes}->{lc($os)}->{$rel}) { %>
+
+<% for my $obs (@{ $data->{obsoletes}->{lc($os)}->{$rel} }) { %>
+Obsoletes:  <%= $obs %><% } %>
+
+<% } %>
+
+
 %description
 <%= $data->{description} %>
 
