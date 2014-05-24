@@ -1,6 +1,7 @@
 package Foo::Baz::Aaa;
 
 use Rex -base;
+use Test::More;
 
 task test => sub {
 
