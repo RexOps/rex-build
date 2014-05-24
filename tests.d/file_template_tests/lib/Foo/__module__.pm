@@ -29,8 +29,16 @@ task "bar", sub {
   unlink "/tmp/baz.txt";
   $content = undef;
 
+  my $x = template('@test.tpl', name => 'foo');
+  ok($x =~ m/this is another test: foo/ms, 'template in data section (__module__.pm)');
 
 };
 
 
 1;
+
+__DATA__
+
+@test.tpl
+this is another test: <%= $name %>
+@end
