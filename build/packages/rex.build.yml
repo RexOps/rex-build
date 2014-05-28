@@ -259,7 +259,35 @@ requires:
 
 
   mageia:
-    3: *depsuse13
+    3:
+      build:
+        - make
+        - perl
+        - perl-Net-SSH2
+        - perl-Expect
+        - perl-DBI
+        - perl-libwww-perl
+        - perl-XML-Simple
+        - perl-Digest-HMAC
+        - perl-YAML
+        - perl-String-Escape
+        - perl-JSON-XS
+        - perl-List-MoreUtils
+        - perl-Term-ReadKey
+
+      runtime:
+        - perl
+        - perl-Net-SSH2
+        - perl-Expect
+        - perl-DBI
+        - perl-libwww-perl
+        - perl-XML-Simple
+        - perl-Digest-HMAC
+        - perl-YAML
+        - perl-String-Escape
+        - perl-JSON-XS
+        - perl-List-MoreUtils
+        - perl-Term-ReadKey
 
 # build instructions
 configure: |
