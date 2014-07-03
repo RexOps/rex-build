@@ -31,7 +31,7 @@ task prepare => group => test => sub {
   my @packages = qw/perl rsync/;
 
   my $additional_packages = case operating_system, {
-    qr{centos|redhat}i => [qw/openssh-clients/],
+    qr{centos|redhat}i => [qw/openssh-clients dmidecode/],
       qr{freebsd}i     => [qw/dmidecode/],
       qr{openwrt}i     => [
       qw/coreutils-nohup perlbase-bytes perlbase-digest perlbase-essential perlbase-file perlbase-xsloader shadow-groupadd shadow-groupdel shadow-groupmod shadow-useradd shadow-userdel shadow-usermod swap-utils/
