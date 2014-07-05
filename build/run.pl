@@ -29,7 +29,8 @@ if ( !$build_file || !-f $build_file ) {
   die("No (valid) build file given");
 }
 
-my $branch = $ENV{REX_BRANCH} || 'development';
+my $branch      = $ENV{REX_BRANCH} || 'master';
+my $environment = $ENV{BUILD_ENV}  || 'nightly';
 
 Rex::connect( %{$config} );
 
@@ -55,10 +56,14 @@ my ( $user, $pass );
 $user = $config->{box}->{default}->{user};
 $pass = $config->{box}->{default}->{password};
 
-print
-"Running: REXUSER=$user REXPASS=$pass HTEST=$ip rex -f build/Rexfile -c bundle --build=$build_file --branch=$branch\n";
-system
-"REXUSER=$user REXPASS=$pass HTEST=$ip rex -f build/Rexfile -c bundle --build=$build_file --branch=$branch";
+print "Running: REXUSER=$user REXPASS=$pass HTEST=$ip rex -f build/Rexfile "
+  . "-c bundle --build=$build_file "
+  . "--branch=$branch --environment=$environment\n";
+
+system "REXUSER=$user REXPASS=$pass HTEST=$ip rex -f build/Rexfile "
+  . "-c bundle --build=$build_file "
+  . "--branch=$branch --environment=$environment";
+
 my $exit_code = $?;
 
 remove_vm($new_vm);

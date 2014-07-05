@@ -557,12 +557,7 @@ task archive => config->{repo}->{server} => sub {
       rmdir $build_dir;
     }
 
-    my $branch = 'development';
-    if ( -f "/branch" ) {
-      $branch = eval { local ( @ARGV, $/ ) = ('/branch'); <>; };
-      $branch =~ s/[\r\n]//gms;
-    }
-    $branch = $params->{branch} || $branch;
+    my $branch = $params->{branch} || "development";
 
     run
       "git clone git\@github.com:RexOps/$build_project.git $build_dir --branch $branch >/tmp/out.log 2>&1";

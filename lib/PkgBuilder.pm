@@ -376,17 +376,28 @@ sub doc_root {
 }
 
 sub get_build_env {
-  my $env = $ENV{BUILD_ENV} || "live";
 
-  if(-f "/nightly" && ! exists $ENV{BUILD_ENV}) {
+  my %args = Rex::Args->get;
+
+  if(exists $args{environment}) {
+    return $args{environment};
+  }
+
+  if(exists $ENV{BUILD_ENV}) {
+    return $ENV{BUILD_ENV};
+  }
+
+  my $env = "nightly";
+
+  if(-f "/nightly") {
     $env = "nightly";
   }
 
-  if(-f "/prelive" && ! exists $ENV{BUILD_ENV}) {
+  if(-f "/prelive") {
     $env = "prelive";
   }
 
-  if(-f "/live" && ! exists $ENV{BUILD_ENV}) {
+  if(-f "/live") {
     $env = "live";
   }
 
