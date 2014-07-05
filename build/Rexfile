@@ -65,13 +65,15 @@ task version_tag => sub {
   Rex::Logger::info("Cloning $repository to tmp");
   run "cd tmp ; git clone $repository --branch master >/tmp/out.log 2>&1";
 
-  my $file_content = io("tmp/$param->{project}/$param->{version_file}")->slurp;
+  my $version_file = "tmp/$param->{project}/$param->{version_file}";
+
+  my $file_content = io($version_file)->slurp;
   my $new_version  = $param->{version_tag};
   $file_content =~ s/VERSION = "([^"]+)"/VERSION = "$new_version"/;
 
-  Rex::Logger::info("Writing new version $new_version");
+  Rex::Logger::info("Writing new version $new_version to $version_file");
 
-  io( $param->{version_file} ) < $file_content;
+  io($version_file) < $file_content;
 
   run "cd tmp/$param->{project} ; git add $param->{version_file} "
     . " ; git commit -m 'updated version'";
