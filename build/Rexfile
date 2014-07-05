@@ -78,9 +78,13 @@ task version_tag => sub {
   run "cd tmp/$param->{project} ; git add $param->{version_file} "
     . " ; git commit -m 'updated version'";
 
+  run "cd tmp/$param->{project} ; perl Makefile.PL ; make ; make manifest ; "
+    . "git add MANIFEST ; git commit -m 'updated manifest'";
+
   run "cd tmp/$param->{project} ; git push origin";
 
-  run "cd tmp/$param->{project} ; git tag $param->{version_tag} ; git push origin $param->{version_tag}";
+  run
+    "cd tmp/$param->{project} ; git tag $param->{version_tag} ; git push origin $param->{version_tag}";
 };
 
 task prepare => group => test => sub {
