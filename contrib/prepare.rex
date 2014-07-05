@@ -42,6 +42,10 @@ task prepare => group => test => sub {
       default            => [],
   };
 
+  if(is_freebsd && operating_system_release >= 10) {
+    @packages = qw/perl5 rsync/;
+  }
+
   push @packages, @{$additional_packages};
 
   eval { install \@packages; };
