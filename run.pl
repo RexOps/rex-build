@@ -91,7 +91,7 @@ LOCAL {
   mkdir "/tmp/workspace/$rnd";
   chdir "/tmp/workspace/$rnd";
 
-  start_phase('Cloning git repo');
+  start_phase("Cloning git repo: $git_repo with refspec: $branch");
   system
     "git clone $git_repo rex --branch $branch >/var/log/rex/checkout-$$.log 2>&1";
   &end_phase;
