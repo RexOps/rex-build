@@ -96,7 +96,7 @@ LOCAL {
 
   start_phase('Cloning git repo');
   system
-    "git clone git\@github.com:RexOps/Rex.git rex --branch $branch >/var/log/rex/checkout.log 2>&1";
+    "git clone git\@github.com:RexOps/Rex.git rex --branch $branch >/var/log/rex/checkout-$$.log 2>&1";
   &end_phase;
 
   chdir $cwd;
@@ -109,13 +109,13 @@ LOCAL {
 
   start_phase('Running prepare.rex');
   system
-    "HTEST=$ip perl /tmp/workspace/$rnd/rex/bin/rex -f contrib/prepare.rex prepare >>/var/log/rex/prepare.log 2>&1";
+    "HTEST=$ip perl /tmp/workspace/$rnd/rex/bin/rex -f contrib/prepare.rex prepare >>/var/log/rex/prepare-$$.log 2>&1";
   &end_phase;
 
   if ( $ENV{use_sudo} ) {
     start_phase('Running prepare_sudo.rex');
     system
-      "HTEST=$ip perl /tmp/workspace/$rnd/rex/bin/rex -f contrib/prepare_sudo.rex prepare >>/var/log/rex/prepare_sudo.log 2>&1";
+      "HTEST=$ip perl /tmp/workspace/$rnd/rex/bin/rex -f contrib/prepare_sudo.rex prepare >>/var/log/rex/prepare_sudo-$$.log 2>&1";
     if ( $? != 0 ) {
       print STDERR "Error preparing for sudo.\n";
       exit 1;
