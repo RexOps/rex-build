@@ -13,7 +13,7 @@ $::QUIET = 1;
 my $starttime;
 my $phase;
 
-my $branch = $ENV{REX_BRANCH} || "development";
+my $branch = $ENV{REX_BRANCH} || "master";
 my $git_repo = $ENV{GIT_REPO} || "git\@github.com:RexOps/Rex.git";
 
 start_phase('Initializing');
