@@ -14,7 +14,7 @@ my $starttime;
 my $phase;
 
 my $branch = $ENV{REX_BRANCH} || "development";
-my $git_repo = $ENV{GIT_REPO} || "git\@github.com:RexOps/Rex.git rex";
+my $git_repo = $ENV{GIT_REPO} || "git\@github.com:RexOps/Rex.git";
 
 start_phase('Initializing');
 
@@ -93,7 +93,7 @@ LOCAL {
 
   start_phase('Cloning git repo');
   system
-    "git clone $git_repo --branch $branch >/var/log/rex/checkout-$$.log 2>&1";
+    "git clone $git_repo rex --branch $branch >/var/log/rex/checkout-$$.log 2>&1";
   &end_phase;
 
   chdir $cwd;
