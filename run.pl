@@ -13,6 +13,9 @@ $::QUIET = 1;
 my $starttime;
 my $phase;
 
+my $branch = $ENV{REX_BRANCH} || "development";
+my $git_repo = $ENV{GIT_REPO} || "git\@github.com:RexOps/Rex.git rex";
+
 start_phase('Initializing');
 
 my $yaml =
@@ -88,15 +91,9 @@ LOCAL {
   mkdir "/tmp/workspace/$rnd";
   chdir "/tmp/workspace/$rnd";
 
-  my $branch = 'development';
-  if ( -f "/branch" ) {
-    $branch = eval { local ( @ARGV, $/ ) = ('/branch'); <>; };
-    $branch =~ s/[\r\n]//gms;
-  }
-
   start_phase('Cloning git repo');
   system
-    "git clone git\@github.com:RexOps/Rex.git rex --branch $branch >/var/log/rex/checkout-$$.log 2>&1";
+    "git clone $git_repo --branch $branch >/var/log/rex/checkout-$$.log 2>&1";
   &end_phase;
 
   chdir $cwd;
