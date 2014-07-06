@@ -139,8 +139,9 @@ task release_to_cpan => sub {
 
   my $package = "\u$project-$version.tar.gz";
   Rex::Logger::info("Uploading $package to CPAN.");
-  run "cpan-upload --user $user --password $pw $package";
+  my $output = run "cpan-upload --user $user --password $pw $package 2>&1";
   if ( $? != 0 ) {
+    print "$output\n";
     die "Error uploading $package.";
   }
 
