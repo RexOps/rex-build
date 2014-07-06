@@ -21,6 +21,7 @@ use Rex -feature => [ '0.45', 'exit_status', 'empty_groups' ];
 use Test::More;
 use Data::Dumper;
 use IO::All;
+use DateTime;
 use PkgBuilder;
 
 do "auth.conf";
@@ -85,6 +86,27 @@ task version_tag => sub {
 
   run
     "cd tmp/$param->{project} ; git tag $param->{version_tag} ; git push origin $param->{version_tag}";
+};
+
+task release_files => config->{repo}->{server} => sub {
+  my $param = shift;
+
+  my $from = $param->{from};
+  my $to   = $param->{to};
+
+  die "no from or to parameter given." if ( !$from or !$to );
+
+  my $dt = DateTime->now;
+  my $now = $dt->ymd('-');
+
+  Rex::Logger::info("Releasing files from $from to $to. This may take a while.");
+
+  run "cd /srv/www/vhosts.d/$to.rex.linuxfiles.org ; "
+    . " mv htdocs htdocs.$now ; "
+    . " mv ../$from.rex.linuxfiles.org/htdocs . ; "
+    . " cp -R htdocs ../$from.rex.linuxfiles.org/";
+
+  Rex::Logger::info("Done releasing files.");
 };
 
 task prepare => group => test => sub {
