@@ -125,6 +125,9 @@ task release_to_cpan => sub {
   my $repo    = $param->{repository};
 
   Rex::Logger::info("Cloning repository: $repo");
+
+  run "rm -rf tmp";
+
   mkdir "tmp";
   run "cd tmp ; git clone $repo . --branch $version >/tmp/out.log 2>&1";
 
@@ -136,10 +139,10 @@ task release_to_cpan => sub {
 
   my $package = "\u$project-$version.tar.gz";
   Rex::Logger::info("Uploading $package to CPAN.");
-  # run "cpan-upload --user $user --password $pw $package";
-  # if ( $? != 0 ) {
-  #   die "Error uploading $package.";
-  # }
+  run "cpan-upload --user $user --password $pw $package";
+  if ( $? != 0 ) {
+    die "Error uploading $package.";
+  }
 
   Rex::Logger::info("Uploaded $package to CPAN.");
 };
