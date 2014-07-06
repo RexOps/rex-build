@@ -54,6 +54,7 @@ requires:
         - libjson-xs-perl
         - liblist-moreutils-perl
         - libterm-readkey-perl
+        - libxml-libxml-perl
       runtime:
         - perl
         - perl-modules
@@ -68,6 +69,7 @@ requires:
         - libjson-xs-perl
         - liblist-moreutils-perl
         - libterm-readkey-perl
+        - libxml-libxml-perl
 
 
     wheezy: &depwheezy
@@ -90,6 +92,7 @@ requires:
         - libjson-xs-perl
         - liblist-moreutils-perl
         - libterm-readkey-perl
+        - libxml-libxml-perl
 
       runtime:
         - perl
@@ -106,6 +109,7 @@ requires:
         - libjson-xs-perl
         - liblist-moreutils-perl
         - libterm-readkey-perl
+        - libxml-libxml-perl
 
 
   centos:
@@ -124,6 +128,7 @@ requires:
         - perl-JSON-XS
         - perl-List-MoreUtils
         - perl(Term::ReadKey): perl-TermReadKey
+        - perl-XML-LibXML
       runtime:
         - perl
         - perl-Net-SSH2
@@ -137,6 +142,7 @@ requires:
         - perl-JSON-XS
         - perl-List-MoreUtils
         - perl(Term::ReadKey): perl-TermReadKey
+        - perl-XML-LibXML
 
 
     6: &depcentos6
@@ -156,6 +162,7 @@ requires:
         - perl-List-MoreUtils
         - perl-Time-HiRes
         - perl(Term::ReadKey): perl-TermReadKey
+        - perl-XML-LibXML
 
 
       runtime:
@@ -172,6 +179,7 @@ requires:
         - perl-List-MoreUtils
         - perl-Time-HiRes
         - perl(Term::ReadKey): perl-TermReadKey
+        - perl-XML-LibXML
 
 
 
@@ -201,6 +209,7 @@ requires:
         - perl-JSON-XS
         - perl-List-MoreUtils
         - perl(Term::ReadKey): perl-TermReadKey
+        - perl-XML-LibXML
 
 
       runtime:
@@ -216,6 +225,7 @@ requires:
         - perl-JSON-XS
         - perl-List-MoreUtils
         - perl(Term::ReadKey): perl-TermReadKey
+        - perl-XML-LibXML
 
 
     19: *depfedora18
@@ -242,6 +252,7 @@ requires:
         - perl-JSON-XS
         - perl-List-MoreUtils
         - perl(Term::ReadKey): perl-TermReadKey
+        - perl-XML-LibXML
 
       runtime:
         - perl
@@ -256,6 +267,7 @@ requires:
         - perl-JSON-XS
         - perl-List-MoreUtils
         - perl(Term::ReadKey): perl-TermReadKey
+        - perl-XML-LibXML
 
 
   mageia:
@@ -274,6 +286,7 @@ requires:
         - perl-JSON-XS
         - perl-List-MoreUtils
         - perl-Term-ReadKey
+        - perl-XML-LibXML
 
       runtime:
         - perl
@@ -288,6 +301,7 @@ requires:
         - perl-JSON-XS
         - perl-List-MoreUtils
         - perl-Term-ReadKey
+        - perl-XML-LibXML
 
 # build instructions
 configure: |
