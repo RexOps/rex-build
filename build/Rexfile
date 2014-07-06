@@ -110,6 +110,40 @@ task release_files => config->{repo}->{server} => sub {
   Rex::Logger::info("Done releasing files.");
 };
 
+task release_to_cpan => sub {
+  my $param = shift;
+
+  die "no version given"    if ( !exists $param->{version} );
+  die "no project given"    if ( !exists $param->{project} );
+  die "no repository given" if ( !exists $param->{repository} );
+
+  my $user = config->{pause}->{user};
+  my $pw   = config->{pause}->{password};
+
+  my $project = $param->{project};
+  my $version = $param->{version};
+  my $repo    = $param->{repository};
+
+  Rex::Logger::info("Cloning repository: $repo");
+  mkdir "tmp";
+  run "cd tmp ; git clone $repo . --branch $version >/tmp/out.log 2>&1";
+
+  Rex::Logger::info("Creating dist file.");
+  run "cd tmp && perl Makefile.PL && make manifest && make dist";
+  if( $? != 0 ) {
+    die "Error creating dist file.";
+  }
+
+  my $package = "\u$project-$version.tar.gz";
+  Rex::Logger::info("Uploading $package to CPAN.");
+  # run "cpan-upload --user $user --password $pw $package";
+  # if ( $? != 0 ) {
+  #   die "Error uploading $package.";
+  # }
+
+  Rex::Logger::info("Uploaded $package to CPAN.");
+};
+
 task prepare => group => test => sub {
 
   my $param = shift;
