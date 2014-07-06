@@ -96,10 +96,11 @@ task release_files => config->{repo}->{server} => sub {
 
   die "no from or to parameter given." if ( !$from or !$to );
 
-  my $dt = DateTime->now;
+  my $dt  = DateTime->now;
   my $now = $dt->ymd('-');
 
-  Rex::Logger::info("Releasing files from $from to $to. This may take a while.");
+  Rex::Logger::info(
+    "Releasing files from $from to $to. This may take a while.");
 
   run "cd /srv/www/vhosts.d/$to.rex.linuxfiles.org ; "
     . " mv htdocs htdocs.$now ; "
@@ -663,6 +664,11 @@ auth
 
 auth
   for      => "archive",
+  user     => config->{repo}->{user},
+  password => config->{repo}->{password};
+
+auth
+  for      => "release_files",
   user     => config->{repo}->{user},
   password => config->{repo}->{password};
 
