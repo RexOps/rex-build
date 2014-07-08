@@ -42,7 +42,7 @@ task prepare => group => test => sub {
       default            => [],
   };
 
-  if(is_freebsd && operating_system_release >= 10) {
+  if ( is_freebsd && operating_system_release >= 10 ) {
     @packages = qw/perl5 rsync/;
   }
 
@@ -106,6 +106,10 @@ task prepare => group => test => sub {
     run "ifconfig $dev 1.2.3.4 netmask 255.255.255.255 alias";
   }
   else {
+    $dev = "eth0";
     run "ifconfig $dev:1 1.2.3.4 netmask 255.255.255.255";
+    if ( $? != 0 ) {
+      run "ip addr add 1.2.3.4/32 dev $dev label $dev:1";
+    }
   }
 };
