@@ -12,10 +12,10 @@ task test => group => test => sub {
   my $repo_options = {
     #Ubuntu => {
     #},
-    CentOS => {
-      url    => 'http://rex.linux-files.org/CentOS/$releasever/rex/$basearch/',
-      gpgcheck => 0,
-    },
+    # CentOS => {
+    #   url    => 'http://rex.linux-files.org/CentOS/$releasever/rex/$basearch/',
+    #   gpgcheck => 0,
+    # },
     SuSE => {
       url    => 'http://rex.linux-files.org/OpenSuSE/' . operating_system_release . '/x86_64/',
     },
@@ -51,4 +51,3 @@ task test => group => test => sub {
 
   done_testing();
 };
-

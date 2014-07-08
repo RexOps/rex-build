@@ -46,6 +46,10 @@ task prepare => group => test => sub {
     @packages = qw/perl5 rsync/;
   }
 
+  if ( is_redhat && operating_system_release >= 7 ) {
+    push @packages, "net-tools";
+  }
+
   push @packages, @{$additional_packages};
 
   eval { install \@packages; };
