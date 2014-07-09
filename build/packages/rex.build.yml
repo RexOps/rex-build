@@ -9,7 +9,7 @@ name:
   mageia: rex
 realname: Rex
 version: 0.43.7
-release: 2
+release: 3
 epoch: 1
 summary: Rex is a tool to ease the execution of commands on multiple remote servers.
 group:
@@ -146,6 +146,42 @@ requires:
 
 
     6: &depcentos6
+      build:
+        - make
+        - perl
+        - perl-devel
+        - perl-Net-SSH2
+        - perl-Expect
+        - perl-DBI
+        - perl-libwww-perl
+        - perl-XML-Simple
+        - perl-Digest-HMAC
+        - perl-YAML
+        - perl-String-Escape
+        - perl-JSON-XS
+        - perl-List-MoreUtils
+        - perl-Time-HiRes
+        - perl(Term::ReadKey): perl-TermReadKey
+        - perl-XML-LibXML
+
+
+      runtime:
+        - perl
+        - perl-Net-SSH2
+        - perl-Expect
+        - perl-DBI
+        - perl-libwww-perl
+        - perl-XML-Simple
+        - perl-Digest-HMAC
+        - perl-YAML
+        - perl-String-Escape
+        - perl-JSON-XS
+        - perl-List-MoreUtils
+        - perl-Time-HiRes
+        - perl(Term::ReadKey): perl-TermReadKey
+        - perl-XML-LibXML
+        
+    7:
       build:
         - make
         - perl
