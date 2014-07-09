@@ -78,8 +78,11 @@ clean: |
 files:
   package:
     - /usr
+files:
+  package:
+    - /usr
   centos:
     doc:
       - %{_mandir}/*
     package:
-      - %{_libdir}/*
+      - %{perl_vendorlib}/*
