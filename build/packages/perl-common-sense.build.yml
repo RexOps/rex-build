@@ -75,4 +75,4 @@ files:
     doc:
       - %{_mandir}/*
     package:
-      - %{perl_vendorlib}/*
+      - %{_libdir}/*
