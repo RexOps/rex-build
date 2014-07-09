@@ -81,4 +81,5 @@ files:
     doc:
       - %{_mandir}/*
     package:
-      - %{perl_vendorlib}/*
+      - %{_bindir}/*
+      - %{_libdir}/*
