@@ -9,7 +9,7 @@ name:
   mageia: rex
 realname: Rex
 version: 0.43.7
-release: 1
+release: 2
 epoch: 1
 summary: Rex is a tool to ease the execution of commands on multiple remote servers.
 group:
