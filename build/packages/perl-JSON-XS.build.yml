@@ -42,11 +42,22 @@ requires:
         - perl
         - perl-Types-Serialiser
 
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Types-Serialiser
+      runtime:
+        - perl
+        - perl-Types-Serialiser
+
 # build instructions
 configure: |
   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
   cd <%= $realname %>-<%= $version %>
-    
+
   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
 
 make: |
@@ -55,7 +66,7 @@ make: |
 
 install: |
   rm -rf <%= $buildroot %>
-    
+
   cd <%= $realname %>-<%= $version %>
   make pure_install
   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
@@ -66,4 +77,8 @@ clean: |
 files:
   package:
     - /usr
-
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
