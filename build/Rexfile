@@ -152,8 +152,8 @@ task release_to_cpan => sub {
 task write_changelog => sub {
   my $param                = shift;
   my $repo                 = $param->{repo};
-  my $old_tag              = $param->{old_version};
   my $new_tag              = $param->{new_version};
+  my $commits              = $param->{commits};
   my $release_manager      = $param->{release_manager};
   my $release_manager_mail = $param->{release_manager_mail};
 
@@ -162,16 +162,16 @@ task write_changelog => sub {
 
   run "cd tmp ; git clone $repo . >/tmp/out.log 2>&1";
 
-  my @out = run "cd tmp ; git log --pretty=format:%s $old_tag..$new_tag";
-
   my $date = DateTime->now;
 
   my @changelog_entry;
   push @changelog_entry, $date->ymd("-") . " $release_manager <$release_manager_mail> ($new_tag)";
 
-  for my $line (@out) {
-    chomp $line;
-    push @changelog_entry, "  * $line";
+  for my $commit (split(/,/, $commits)) {
+    my @log_msg = run "cd tmp ; git log --format=%s -n 1 $commit";
+    chomp @log_msg;
+    my $msg = join("\n    ", @log_msg);
+    push @changelog_entry, "  * $msg";
   }
 
   my $current_changelog = cat "tmp/ChangeLog";
