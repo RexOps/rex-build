@@ -160,7 +160,7 @@ task build_recipes_directory => config->{recipes}->{server} => sub {
 
   LOCAL {
     # create a new branch for the new version
-    
+
     run "rm -rf tmp";
     mkdir "tmp";
 
@@ -745,8 +745,7 @@ auth
 
 auth
   for      => "build_recipes_directory",
-  user     => config->{recipes}->{user},
-  password => config->{recipes}->{password};
+  user     => config->{recipes}->{user};
 
 ################################################################################
 # the end
