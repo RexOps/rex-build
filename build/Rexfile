@@ -153,7 +153,7 @@ task write_changelog => sub {
   my $param                = shift;
   my $repo                 = $param->{repo};
   my $new_tag              = $param->{new_version};
-  my $commits              = $param->{commits};
+  my $commits              = $ENV{COMMITS};
   my $release_manager      = $param->{release_manager};
   my $release_manager_mail = $param->{release_manager_mail};
 
@@ -167,10 +167,11 @@ task write_changelog => sub {
   my @changelog_entry;
   push @changelog_entry, $date->ymd("-") . " $release_manager <$release_manager_mail> ($new_tag)";
 
-  for my $commit (split(/,/, $commits)) {
+  for my $commit (split(/\n/, $commits)) {
     my @log_msg = run "cd tmp ; git log --format=%s -n 1 $commit";
     chomp @log_msg;
     my $msg = join("\n    ", @log_msg);
+    say "New log message: $msg";
     push @changelog_entry, "  * $msg";
   }
 
