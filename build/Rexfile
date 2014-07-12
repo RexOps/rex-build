@@ -179,6 +179,10 @@ task write_changelog => sub {
   my $new_changelog     = join("\n", @changelog_entry) . "\n\n$current_changelog";
 
   file "tmp/ChangeLog", content => $new_changelog;
+
+  # commit back
+  run "cd tmp ; git add ChangeLog ; git commit -m 'updated changelog'";
+  run "cd tmp ; git push origin";
 };
 
 task build_recipes_directory => config->{recipes}->{server} => sub {
