@@ -60,6 +60,7 @@ task version_tag => sub {
     die "No version file given.";
   }
 
+  run "rm -rf tmp";
   mkdir "tmp";
 
   my $repository = "git\@github.com:RexOps/$param->{project}.git";
