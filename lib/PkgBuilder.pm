@@ -405,6 +405,10 @@ sub get_build_env {
 }
 
 sub get_version_to_install {
+  if(exists $ENV{TEST_VERSION}) {
+    return $ENV{TEST_VERSION};
+  }
+
   if(-f "/version") {
     my $content = io("/version")->slurp;
     chomp $content;
