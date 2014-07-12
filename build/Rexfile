@@ -148,6 +148,39 @@ task release_to_cpan => sub {
   Rex::Logger::info("Uploaded $package to CPAN.");
 };
 
+task build_recipes_directory => config->{recipes}->{server} => sub {
+
+  my $param   = shift;
+  my $version = $param->{version};
+  my $old_version = $param->{old_version};
+
+  my ($main_version) = ($version =~ m/^(\d+\.\d+)/);
+
+  my $repo = config->{recipes}->{repo};
+
+  LOCAL {
+    # create a new branch for the new version
+    
+    run "rm -rf tmp";
+    mkdir "tmp";
+
+    run "cd tmp ; git clone $repo . --branch $old_version >/tmp/out.log 2>&1";
+    run "cd tmp ; git checkout -b $main_version";
+    run "cd tmp ; git push origin $main_version";
+  };
+
+  # update documentation tree
+  run "git fetch ; git checkout $version",
+    cwd => "/opt/rex-recipes";
+
+  run "perl create_dep_tree.pl $main_version ; mv modules.$main_version module/",
+    cwd => "/opt/modules.rexify.org";
+
+  run "perl create_index.pl localhost 9200 /opt/rex-recipes",
+    cwd => "/opt/modules.rexify.org";
+
+};
+
 task prepare => group => test => sub {
 
   my $param = shift;
@@ -709,6 +742,11 @@ auth
   for      => "release_files",
   user     => config->{repo}->{user},
   password => config->{repo}->{password};
+
+auth
+  for      => "build_recipes_directory",
+  user     => config->{recipes}->{user},
+  password => config->{recipes}->{password};
 
 ################################################################################
 # the end
