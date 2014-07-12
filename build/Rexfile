@@ -23,6 +23,7 @@ use Data::Dumper;
 use IO::All;
 use DateTime;
 use PkgBuilder;
+use DateTime;
 
 do "auth.conf";
 
@@ -146,6 +147,37 @@ task release_to_cpan => sub {
   }
 
   Rex::Logger::info("Uploaded $package to CPAN.");
+};
+
+task write_changelog => sub {
+  my $param                = shift;
+  my $repo                 = $param->{repo};
+  my $old_tag              = $param->{old_version};
+  my $new_tag              = $param->{new_version};
+  my $release_manager      = $param->{release_manager};
+  my $release_manager_mail = $param->{release_manager_mail};
+
+  run "rm -rf tmp";
+  mkdir "tmp";
+
+  run "cd tmp ; git clone $repo . >/tmp/out.log 2>&1";
+
+  my @out = run "cd tmp ; git log --pretty=format:%s $old_tag..$new_tag";
+
+  my $date = DateTime->now;
+
+  my @changelog_entry;
+  push @changelog_entry, $date->ymd("-") . " $release_manager <$release_manager_mail> ($new_tag)";
+
+  for my $line (@out) {
+    chomp $line;
+    push @changelog_entry, "  * $line";
+  }
+
+  my $current_changelog = cat "tmp/ChangeLog";
+  my $new_changelog     = join("\n", @changelog_entry) . "\n\n$current_changelog";
+
+  file "tmp/ChangeLog", content => $new_changelog;
 };
 
 task build_recipes_directory => config->{recipes}->{server} => sub {
