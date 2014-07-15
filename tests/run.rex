@@ -77,5 +77,12 @@ task test => group => test => sub {
   ok($t_env{key1} eq "my val", "got first env variable");
   ok($t_env{key2} eq "my 2nd \"val\"", "got 2nd env variable");
 
+  # test failed command
+  run "no-command";
+  ok($? == 127, "got error code 127 for 'command not found'");
+
+  run "ls -l /not-there";
+  ok($? != 0, "got non-zero return code for ls on unavailable directory.");
+
   done_testing();
 };
