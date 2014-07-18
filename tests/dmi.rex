@@ -21,6 +21,12 @@ task test => group => test => sub {
 
   ok($dmi, "initialize dmi object");
 
+  my ($out) = run "dmidecode | wc -l";
+  if($out <= 10) {
+    done_testing();
+    return;
+  }
+
   my $bios = $dmi->get_bios;
   if($bios->get_vendor eq "Bochs") {
     ok($bios->get_vendor eq "Bochs", "got bios vendor bochs");
@@ -28,7 +34,7 @@ task test => group => test => sub {
   else {
 
     my $bb = $dmi->get_base_board;
-    #  
+    #
     #say "bb manuf: " . $bb->get_manufacturer;
     ok($bb->get_manufacturer eq "Parallels Software International Inc." || $bb->get_manufacturer eq "Intel Corporation", "base board get manufacturer");
 
@@ -52,7 +58,7 @@ task test => group => test => sub {
 
     my @mems = $dmi->get_memory_modules;
     ok($mems[0]->get_size eq "512 MB" || $mems[0]->get_size eq "1024 MB" || $mems[0]->get_size eq "1073741824 bytes", "memory size");
-   
+
     my @mema = $dmi->get_memory_arrays;
     ok($mema[0]->get_maximum_capacity eq "8 GB" || $mema[0]->get_maximum_capacity eq "256 GB" || $mema[0]->get_maximum_capacity eq "8589934592 bytes", "memory array max capacity");
 
@@ -67,4 +73,3 @@ task test => group => test => sub {
 
   done_testing();
 };
-
