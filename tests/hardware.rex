@@ -15,9 +15,9 @@ task "test", group => "test", sub {
 
   ok(@{$hw{Network}->{networkdevices}} ~~ m/(eth0|em0|e1000g0)/, "Found $1");
   my $dev = $1;
-  ok($hw{Network}->{networkconfiguration}->{"$dev"}->{"ip"} =~ m/^(192|10)\./, "Got IP for $dev");
-  ok($hw{Network}->{networkconfiguration}->{"$dev"}->{"netmask"} =~ m/255\.|ff/, "Got Netmask for $dev");
-  ok($hw{Network}->{networkconfiguration}->{"$dev"}->{"mac"} =~ m/^(00:|0:|52:)/, "Got MAC for $dev");
+  ok($hw{Network}->{networkconfiguration}->{"$dev"}->{"ip"} =~ m/^(\d+)\./, "Got IP for $dev");
+  ok($hw{Network}->{networkconfiguration}->{"$dev"}->{"netmask"} =~ m/\d+\.|ff/, "Got Netmask for $dev");
+  ok($hw{Network}->{networkconfiguration}->{"$dev"}->{"mac"} =~ m/^([a-f0-9]+:[a-f0-9]+:)/i, "Got MAC for $dev");
 
   ok($hw{Memory}->{free} > 1, "Got free memory");
   ok($hw{Memory}->{used} > 1, "Got used memory");
@@ -33,5 +33,3 @@ task "test", group => "test", sub {
 
   done_testing();
 };
-
-
