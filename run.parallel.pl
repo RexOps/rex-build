@@ -23,6 +23,8 @@ cloud_auth $config->{jiffybox}->{auth}->{access_key};
 my @instances;
 my @ips;
 for my $i ( 1 .. $config->{parallelism} ) {
+  start_phase("Creating test instance: $i");
+
   my $instance = cloud_instance create => {
     image_id => "debian_squeeze_64bit",
     name     => "ptest$i",
@@ -32,6 +34,8 @@ for my $i ( 1 .. $config->{parallelism} ) {
 
   push @instances, $instance;
   push @ips,       $instance->{ip};
+
+  &end_phase;
 }
 
 our $user = "root";
@@ -42,8 +46,14 @@ parallelism 50;
 
 do "run.tests.pl";
 
-for my $i ( @instances ) {
-  cloud_instance terminate => $i->{id};
+my $i=1;
+for my $inst ( @instances ) {
+  start_phase("Terminating test instance: $i");
+
+  cloud_instance terminate => $inst->{id};
+  $i++;
+
+  &end_phase;
 }
 
 my @running = grep { lc( $_->{state} ) eq "running" } cloud_instance_list;

@@ -74,3 +74,5 @@ LOCAL {
 
   system "rm -rf /tmp/workspace/$rnd";
 };
+
+1;
