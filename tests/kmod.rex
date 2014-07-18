@@ -45,6 +45,13 @@ task "test", group => "test", sub {
   }
   else {
 
+    my ($out) = run "lsmod | wc -l";
+    if($out == 1) {
+      ok(1==1, "no tests on this box.");
+      done_testing();
+      return;
+    }
+
     my $kmod = "ipmi_poweroff";
 
     #kmod load => "ipmi_msghandler";

@@ -19,8 +19,8 @@ task "test", group => "test", sub {
 
   ok(scalar (grep { m/eth|em|e1000/ } @devs) >= 1, "count of devs ok");
 
-  ok($net->{networkconfiguration}->{$dev}->{ip} =~ m/^192\.168\.112\./, "found ip of $dev");
-  ok($net->{networkconfiguration}->{$dev}->{netmask} =~ m/^255\.255\.255\./, "found netmask of $dev");
+  ok($net->{networkconfiguration}->{$dev}->{ip} =~ m/^\d+\.\d+\.\d+\./, "found ip of $dev");
+  ok($net->{networkconfiguration}->{$dev}->{netmask} =~ m/^\d+\.\d+\.\d+\./, "found netmask of $dev");
 
   if(is_freebsd) {
     done_testing();

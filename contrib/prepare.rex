@@ -14,8 +14,8 @@ my $config = Load($yaml);
 my $user = $config->{box}->{sudo}->{user};
 my $pass = $config->{box}->{sudo}->{password};
 
-user $config->{box}->{default}->{user};
-password $config->{box}->{default}->{password};
+user( $ENV{REX_USER}     || $config->{box}->{default}->{user} );
+password( $ENV{REX_PASS} || $config->{box}->{default}->{password} );
 pass_auth;
 
 group test => $ENV{HTEST};

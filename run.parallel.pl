@@ -51,6 +51,9 @@ our $user = "root";
 our $pass = $config->{jiffybox}->{auth}->{password};
 our $ip = join( " ", @ips );
 
+$ENV{REX_USER} = $user;
+$ENV{REX_PASS} = $pass;
+
 parallelism 50;
 
 do "run.tests.pl";
