@@ -20,9 +20,6 @@ my $config = Load($yaml);
 cloud_service "Jiffybox";
 cloud_auth $config->{jiffybox}->{auth}->{access_key};
 
-user "root";
-password $config->{jiffybox}->{auth}->{password};
-
 my @instances;
 my @ips;
 for my $i ( 1 .. $config->{parallelism} ) {
@@ -37,14 +34,15 @@ for my $i ( 1 .. $config->{parallelism} ) {
   push @ips,       $instance->{ip};
 }
 
-$::ip = undef;
-$::ip = join( " ", @ips );
+our $user = "root";
+our $pass = $config->{jiffybox}->{auth}->{password};
+our $ip = join( " ", @ips );
 
 parallelism 50;
 
 do "run.tests.pl";
 
-for my $i ( 1 .. $config->{parallelism} ) {
+for my $i ( @instances ) {
   cloud_instance terminate => $i->{id};
 }
 

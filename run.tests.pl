@@ -23,13 +23,13 @@ LOCAL {
 
   start_phase('Running prepare.rex');
   system
-    "HTEST='$::ip' perl /tmp/workspace/$rnd/rex/bin/rex -f contrib/prepare.rex prepare >>/var/log/rex/prepare-$$.log 2>&1";
+    "HTEST='$ip' perl /tmp/workspace/$rnd/rex/bin/rex -f contrib/prepare.rex prepare >>/var/log/rex/prepare-$$.log 2>&1";
   &end_phase;
 
   if ( $ENV{use_sudo} ) {
     start_phase('Running prepare_sudo.rex');
     system
-      "HTEST='$::ip' perl /tmp/workspace/$rnd/rex/bin/rex -f contrib/prepare_sudo.rex prepare >>/var/log/rex/prepare_sudo-$$.log 2>&1";
+      "HTEST='$ip' perl /tmp/workspace/$rnd/rex/bin/rex -f contrib/prepare_sudo.rex prepare >>/var/log/rex/prepare_sudo-$$.log 2>&1";
     if ( $? != 0 ) {
       print STDERR "Error preparing for sudo.\n";
       exit 1;
@@ -47,7 +47,7 @@ LOCAL {
 
     start_phase("Running tests/$entry");
     system
-      "WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$::ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests/$entry >junit_output_tests_$entry.xml";
+      "WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests/$entry >junit_output_tests_$entry.xml";
     &end_phase;
   }
   closedir($dh);
@@ -62,14 +62,14 @@ LOCAL {
       "tests.d/$entry/lib:" . ( exists $ENV{PERL5LIB} ? $ENV{PERL5LIB} : "" );
     start_phase("Running tests.d/$entry");
     system
-      "WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$::ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.d/$entry >junit_output_testsd_$entry.xml";
+      "WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.d/$entry >junit_output_testsd_$entry.xml";
     &end_phase;
   }
   closedir($dh);
 
   start_phase('tests.post.d');
   system
-    "WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$::ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.post.d >junit_output_tests_post_d.xml";
+    "WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.post.d >junit_output_tests_post_d.xml";
   &end_phase;
 
   system "rm -rf /tmp/workspace/$rnd";

@@ -61,16 +61,16 @@ if($vm_started == 0) {
 
 start_phase('Getting VM info');
 my $vminfo = vm guestinfo => $new_vm;
-$::ip = $vminfo->{network}->[0]->{ip};
+our $ip = $vminfo->{network}->[0]->{ip};
 &end_phase;
 
 start_phase('Wating for VM SSH port wakeup');
-while ( !is_port_open( $::ip, 22 ) ) {
+while ( !is_port_open( $ip, 22 ) ) {
   sleep 1;
 }
 &end_phase;
 
-my ( $user, $pass );
+our ( $user, $pass );
 
 if ( exists $ENV{use_sudo} ) {
   $user = $config->{box}->{sudo}->{user};
