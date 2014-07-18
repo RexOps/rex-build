@@ -11,7 +11,10 @@ use Rex::Commands::Iptables;
 use Test::More;
 use Data::Dumper;
 use YAML;
+use Cwd 'getcwd';
 
+
+$::QUIET = 1;
 my $starttime;
 my $phase;
 
