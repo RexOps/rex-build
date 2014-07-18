@@ -13,7 +13,8 @@ set rex_internals => {
 
 task test => group => test => sub {
 
-  ok(connection->server eq $ENV{HTEST}, "connected to $ENV{HTEST}");
+  my $s = connection->server;
+  ok($ENV{HTEST} =~ m/\Q$s\E/, "connected to $s");
 
   my $out = run "id";
   ok($out =~ /uid=0\(root\) gid=0\((root|wheel)\)/, "logged in as root");
@@ -64,4 +65,3 @@ task test => group => test => sub {
 
   done_testing();
 };
-
