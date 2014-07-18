@@ -23,5 +23,5 @@ for my $file (@ARGV) {
 
   print join("\n", @test_line);
 
-  print "1.." . scalar(@test_line) . "\n";
+  print "\n1.." . scalar(@test_line) . "\n";
 }
