@@ -43,7 +43,7 @@ parallelism 50;
 
 do "run.tests.pl";
 
-for my $i (1 .. 10) {
+for my $i (1 .. $config->{parallelism}) {
   cloud_instance terminate => $i->{id};
 }
 
