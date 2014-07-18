@@ -61,11 +61,11 @@ if($vm_started == 0) {
 
 start_phase('Getting VM info');
 my $vminfo = vm guestinfo => $new_vm;
-my $ip = $vminfo->{network}->[0]->{ip};
+$::ip = $vminfo->{network}->[0]->{ip};
 &end_phase;
 
 start_phase('Wating for VM SSH port wakeup');
-while ( !is_port_open( $ip, 22 ) ) {
+while ( !is_port_open( $::ip, 22 ) ) {
   sleep 1;
 }
 &end_phase;
@@ -81,82 +81,8 @@ else {
   $pass = $config->{box}->{default}->{password};
 }
 
-LOCAL {
-  my $cwd = getcwd();
-  my $rnd = get_random( 8, 'a' .. 'z' );
 
-  $ENV{"WORK_DIR"} = "/tmp/workspace/$rnd";
-
-  mkdir "/tmp/workspace";
-  mkdir "/tmp/workspace/$rnd";
-  chdir "/tmp/workspace/$rnd";
-
-  start_phase("Cloning git repo: $git_repo with refspec: $branch");
-  system
-    "git clone $git_repo rex --branch $branch >/var/log/rex/checkout-$$.log 2>&1";
-  &end_phase;
-
-  chdir $cwd;
-
-  $ENV{"PATH"}    = "/tmp/workspace/$rnd/rex/bin:" . $ENV{PATH};
-  $ENV{"PERLLIB"} = "/tmp/workspace/$rnd/rex/lib:"
-    . ( exists $ENV{PERLLIB} ? $ENV{PERLLIB} : "" );
-  $ENV{"PERL5LIB"} = "/tmp/workspace/$rnd/rex/lib:"
-    . ( exists $ENV{PERL5LIB} ? $ENV{PERL5LIB} : "" );
-
-  start_phase('Running prepare.rex');
-  system
-    "HTEST=$ip perl /tmp/workspace/$rnd/rex/bin/rex -f contrib/prepare.rex prepare >>/var/log/rex/prepare-$$.log 2>&1";
-  &end_phase;
-
-  if ( $ENV{use_sudo} ) {
-    start_phase('Running prepare_sudo.rex');
-    system
-      "HTEST=$ip perl /tmp/workspace/$rnd/rex/bin/rex -f contrib/prepare_sudo.rex prepare >>/var/log/rex/prepare_sudo-$$.log 2>&1";
-    if ( $? != 0 ) {
-      print STDERR "Error preparing for sudo.\n";
-      exit 1;
-    }
-    &end_phase;
-  }
-
-  # run tests from tests directory
-  $ENV{PATH} = getcwd() . ":" . $ENV{PATH};
-  opendir( my $dh, "tests" ) or die($!);
-  while ( my $entry = readdir($dh) ) {
-    next if ( $entry =~ m/^\./ );
-    next if ( !-f "tests/$entry" );
-    next if ( $entry !~ m/\.rex$/ );
-
-    start_phase("Running tests/$entry");
-    system
-      "WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST=$ip prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests/$entry >junit_output_tests_$entry.xml";
-    &end_phase;
-  }
-  closedir($dh);
-
-  # run tests from tests.d directory
-  opendir( my $dh, "tests.d" ) or die($!);
-  while ( my $entry = readdir($dh) ) {
-    next if ( $entry =~ m/^\./ );
-    next if ( !-d "tests.d/$entry" );
-
-    $ENV{PERL5LIB} =
-      "tests.d/$entry/lib:" . ( exists $ENV{PERL5LIB} ? $ENV{PERL5LIB} : "" );
-    start_phase("Running tests.d/$entry");
-    system
-      "WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST=$ip prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.d/$entry >junit_output_testsd_$entry.xml";
-    &end_phase;
-  }
-  closedir($dh);
-
-  start_phase('tests.post.d');
-  system
-    "WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST=$ip prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.post.d >junit_output_tests_post_d.xml";
-  &end_phase;
-
-  system "rm -rf /tmp/workspace/$rnd";
-};
+do "run.tests.pl";
 
 start_phase('Cleaning up VM');
 vm destroy => $new_vm;
