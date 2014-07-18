@@ -23,10 +23,9 @@ cloud_auth $config->{jiffybox}->{auth}->{access_key};
 user "root";
 password $config->{jiffybox}->{auth}->{password};
 
-
 my @instances;
 my @ips;
-for my $i (1 .. 10) {
+for my $i ( 1 .. $config->{parallelism} ) {
   my $instance = cloud_instance create => {
     image_id => "debian_squeeze_64bit",
     name     => "ptest$i",
@@ -35,23 +34,23 @@ for my $i (1 .. 10) {
   };
 
   push @instances, $instance;
-  push @ips, $instance->{ip};
+  push @ips,       $instance->{ip};
 }
 
 $::ip = undef;
-$::ip = join(" ", @ips);
+$::ip = join( " ", @ips );
 
 parallelism 50;
 
 do "run.tests.pl";
 
-for my $i (1 .. $config->{parallelism}) {
+for my $i ( 1 .. $config->{parallelism} ) {
   cloud_instance terminate => $i->{id};
 }
 
-my @running = grep { lc($_->{state}) eq "running" } cloud_instance_list;
+my @running = grep { lc( $_->{state} ) eq "running" } cloud_instance_list;
 
-if(scalar @running >= 1) {
+if ( scalar @running >= 1 ) {
   die "There are still some instances running...";
 }
 
