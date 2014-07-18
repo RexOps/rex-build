@@ -13,7 +13,7 @@ task "test", group => "test", sub {
   #print Dumper(\@route);
 
   #say ">> " . default_gateway;
-  ok(default_gateway() eq "192.168.112.1", "Default Gateway");
+  ok(default_gateway() =~ /^\d+\.\d+\.\d+\.\d+$/, "Default Gateway");
 
   #my @netstat = netstat;
   #print Dumper(\@netstat);
