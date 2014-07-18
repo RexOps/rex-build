@@ -20,6 +20,8 @@ pass_auth;
 
 group test => split(/ /, $ENV{HTEST});
 
+parallelism 50;
+
 task prepare => group => test => sub {
 
   # images are absolute minimal
