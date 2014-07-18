@@ -11,19 +11,17 @@ task "test", group => "test", sub {
 
   my $remote_md5 = md5('/etc/passwd');
 
-  download "/etc/passwd", "./passwd.test";
+  my $s = connection->server;
+  download "/etc/passwd", "./passwd.test.$s";
 
   LOCAL {
-    ok(is_file("passwd.test"), "download okay");
-    ok($remote_md5 eq md5("passwd.test"), "local md5 okay");
+    ok(is_file("passwd.test.$s"), "download okay");
+    ok($remote_md5 eq md5("passwd.test.$s"), "local md5 okay");
 
-    rm "passwd.test";
+    rm "passwd.test.$s";
 
-    ok(! is_file("passwd.test"), "delete okay");
+    ok(! is_file("passwd.test.$s"), "delete okay");
   };
-
-  download "/etc/passwd", "./passwd.test";
 
   done_testing();
 };
-

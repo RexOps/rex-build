@@ -11,5 +11,17 @@ $ENV{"PERLLIB"} = "$ENV{WORK_DIR}/rex/lib:" . (exists $ENV{PERLLIB} ? $ENV{PERLL
 $ENV{"PERL5LIB"} = "$ENV{WORK_DIR}/rex/lib:" . (exists $ENV{PERL5LIB} ? $ENV{PERL5LIB} : "");
 
 for my $file (@ARGV) {
-  system "perl $ENV{WORK_DIR}/rex/bin/rex -qw -Ff $file test";
+  my @out = `perl $ENV{WORK_DIR}/rex/bin/rex -qw -Ff $file test`;
+  my @test_line;
+  for my $line (@out) {
+    chomp $line;
+
+    if($line =~ m/^(ok|not)/) {
+      push @test_line, $line;
+    }
+  }
+
+  print join("\n", @test_line);
+
+  print "1.." . scalar(@test_line) . "\n";
 }
