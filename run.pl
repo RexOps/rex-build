@@ -13,15 +13,15 @@ $::QUIET = 1;
 my $starttime;
 my $phase;
 
-my $branch = $ENV{REX_BRANCH} || "master";
-my $git_repo = $ENV{GIT_REPO} || "git\@github.com:RexOps/Rex.git";
+our $branch = $ENV{REX_BRANCH} || "master";
+our $git_repo = $ENV{GIT_REPO} || "git\@github.com:RexOps/Rex.git";
 
 start_phase('Initializing');
 
 my $yaml =
   eval { local ( @ARGV, $/ ) = ( $ENV{HOME} . "/.build_config" ); <>; };
 $yaml .= "\n";
-my $config = Load($yaml);
+our $config = Load($yaml);
 
 my $base_vm = $ARGV[0];
 

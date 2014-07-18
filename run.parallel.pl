@@ -12,10 +12,16 @@ use Test::More;
 use Data::Dumper;
 use YAML;
 
+my $starttime;
+my $phase;
+
+our $branch = $ENV{REX_BRANCH} || "master";
+our $git_repo = $ENV{GIT_REPO} || "git\@github.com:RexOps/Rex.git";
+
 my $yaml =
   eval { local ( @ARGV, $/ ) = ( $ENV{HOME} . "/.build_config" ); <>; };
 $yaml .= "\n";
-my $config = Load($yaml);
+our $config = Load($yaml);
 
 cloud_service "Jiffybox";
 cloud_auth $config->{jiffybox}->{auth}->{access_key};
@@ -63,3 +69,15 @@ if ( scalar @running >= 1 ) {
 }
 
 exit 0;
+
+
+sub start_phase {
+  $phase     = shift;
+  $starttime = time;
+  local $| = 1;
+  printf '%-50s', $phase;
+}
+
+sub end_phase {
+  printf "%4u s\n", scalar( time - $starttime );
+}
