@@ -18,7 +18,7 @@ user( $ENV{REX_USER}     || $config->{box}->{default}->{user} );
 password( $ENV{REX_PASS} || $config->{box}->{default}->{password} );
 pass_auth;
 
-group test => $ENV{HTEST};
+group test => split(/ /, $ENV{HTEST});
 
 task prepare => group => test => sub {
 
