@@ -39,6 +39,7 @@ task test => group => test => sub {
 
   if(! exists ($repo_options->{$op}) ) {
     print STDERR "no test for $op yet.\n";
+    ok(1==1, "no test for $op yet.");
   }
   else {
     eval {
