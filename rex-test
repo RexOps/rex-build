@@ -25,7 +25,7 @@ for my $file (@ARGV) {
       push @test_line, $line;
     }
 
-    if ( $line =~ m/^1 \-/ ) {
+    if ( $line =~ m/ 1 \-/ ) {
       $p_count++;
     }
 
