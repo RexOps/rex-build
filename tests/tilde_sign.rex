@@ -13,7 +13,9 @@ task "test", group => "test", sub {
   LOCAL {
     $local_home = run 'echo $HOME';
   };
-  
+
+  my $s = connection->server;
+
   mkdir "~/test";
   ok(is_dir("$home/test"), "found test directory in $home");
   ok(is_dir("~/test"), "found test directory in $home with tilde");
@@ -38,23 +40,23 @@ task "test", group => "test", sub {
   upload "/etc/passwd", "~/test.file";
   ok(is_file("$home/test.file"), "uploaded test.file to $home");
 
-  download "~/test.file", "/tmp/test.file";
+  download "~/test.file", "/tmp/test.file.$s";
   LOCAL {
-    ok(is_file("/tmp/test.file"), "download test.file from $home");
+    ok(is_file("/tmp/test.file.$s"), "download test.file.$s from $home");
   };
 
-  download "~/test.file", "~/test.file";
+  download "~/test.file", "~/test.file.$s";
   LOCAL {
-    ok(is_file("$local_home/test.file"), "download test.file from $home to $local_home");
+    ok(is_file("$local_home/test.file.$s"), "download test.file.$s from $home to $local_home");
   };
 
-  upload "~/test.file", "~/test2.file";
+  upload "~/test.file.$s", "~/test2.file";
   ok(is_file("$home/test2.file"), "uploaded test2.file to $home");
 
   LOCAL {
-    rm "~/test.file";
-    ok(! is_file("$local_home/test.file"), "local test.file removed");
-    ok(! is_file("~/test.file"), "local test.file removed, test with tilde");
+    rm "~/test.file.$s";
+    ok(! is_file("$local_home/test.file.$s"), "local test.file.$s removed");
+    ok(! is_file("~/test.file.$s"), "local test.file.$s removed, test with tilde");
   };
 
   mkdir "~rsync_user/foo";
@@ -62,4 +64,3 @@ task "test", group => "test", sub {
 
   done_testing();
 };
-
