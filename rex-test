@@ -7,21 +7,36 @@ use Cwd 'getcwd';
 use Data::Dumper;
 
 $ENV{"PATH"} = "$ENV{WORK_DIR}/rex/bin:" . $ENV{PATH};
-$ENV{"PERLLIB"} = "$ENV{WORK_DIR}/rex/lib:" . (exists $ENV{PERLLIB} ? $ENV{PERLLIB} : "");
-$ENV{"PERL5LIB"} = "$ENV{WORK_DIR}/rex/lib:" . (exists $ENV{PERL5LIB} ? $ENV{PERL5LIB} : "");
+$ENV{"PERLLIB"} =
+  "$ENV{WORK_DIR}/rex/lib:" . ( exists $ENV{PERLLIB} ? $ENV{PERLLIB} : "" );
+$ENV{"PERL5LIB"} =
+  "$ENV{WORK_DIR}/rex/lib:" . ( exists $ENV{PERL5LIB} ? $ENV{PERL5LIB} : "" );
 
 for my $file (@ARGV) {
   my @out = `perl $ENV{WORK_DIR}/rex/bin/rex -qw -Ff $file test`;
   my @test_line;
+  my $found_end = 0;
+  my $p_count   = 0;
+
   for my $line (@out) {
     chomp $line;
 
-    if($line =~ m/^(ok|not)/) {
+    if ( $line =~ m/^(ok|not)/ ) {
       push @test_line, $line;
+    }
+
+    if ( $line =~ m/^1 \-/ ) {
+      $p_count++;
+    }
+
+    if ( $line =~ m/^1\.\./ ) {
+      $found_end++;
     }
   }
 
-  print join("\n", @test_line);
+  print join( "\n", @test_line );
 
-  print "\n1.." . scalar(@test_line) . "\n";
+  if ( $found_end == $p_count ) {
+    print "\n1.." . scalar(@test_line) . "\n";
+  }
 }
