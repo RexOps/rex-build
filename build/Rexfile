@@ -782,8 +782,7 @@ auth
   password => config->{repo}->{password};
 
 auth
-  for      => "build_recipes_directory",
-  user     => config->{recipes}->{user};
+  for => "build_recipes_directory", %{ config->{recipes}->{user} };
 
 ################################################################################
 # the end
