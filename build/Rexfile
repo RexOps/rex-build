@@ -119,8 +119,8 @@ task release_to_cpan => sub {
   die "no project given"    if ( !exists $param->{project} );
   die "no repository given" if ( !exists $param->{repository} );
 
-  my $user = config->{pause}->{user};
-  my $pw   = config->{pause}->{password};
+  my $user = $ENV{pause_user}; # config->{pause}->{user};
+  my $pw   = $ENV{pause_password}; # config->{pause}->{password};
 
   my $project = $param->{project};
   my $version = $param->{version};
@@ -141,7 +141,7 @@ task release_to_cpan => sub {
 
   my $package = "\u$project-$version.tar.gz";
   Rex::Logger::info("Uploading $package to CPAN.");
-  my $output = run "cpan-upload --user $user --password $pw tmp/$package 2>&1";
+  my $output = run "cpan-upload --user '$user' --password '$pw' tmp/$package 2>&1";
   if ( $? != 0 ) {
     print "$output\n";
     die "Error uploading $package.";
