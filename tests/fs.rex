@@ -16,10 +16,12 @@ task test => group => test => sub {
   ok(scalar(@etc) == 1, "list_files: found passwd");
 
   symlink("/etc/passwd", "/tmp/passwd");
+  ok(is_symlink("/tmp/passwd"), "is_symlink: /tmp/passwd is a symlink");
   ok(readlink("/tmp/passwd") eq "/etc/passwd", "readlink, symlink: ok");
 
   unlink("/tmp/passwd");
   ok(!is_file("/tmp/passwd"), "unlink: /tmp/passwd is removed");
+  ok(!is_symlink("/tmp/passwd"), "unlink: /tmp/passwd is removed and is not a symlink");
 
   eval {
     readlink "/tmp/passwd";
