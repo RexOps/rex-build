@@ -57,7 +57,7 @@ task test => group => test => sub {
   } or do {
     $died = 1;
   };
-  ok($died == 0, "die with successfull only_if command");
+  ok($died == 1, "die with successfull only_if command");
 
 
 
