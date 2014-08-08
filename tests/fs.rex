@@ -74,6 +74,14 @@ task test => group => test => sub {
   cp "/tmp/rename.test", "/tmp/copy.test";
   ok(is_file("/tmp/copy.test"), "cp: copy.test exists");
 
+  file "/a/b/c/d", ensure => "directory";
+  ok(is_dir("/a/b/c/d"), "created /a/b/c/d directory with file resource.");
+  ok(!is_file("/a/b/c/d"), "/a/b/c/d is not a file.");
+
+  file "/a/b/c/d", ensure => "absent";
+  ok(!is_dir("/a/b/c/d"), "removed /a/b/c/d directory with file resource.");
+  ok(!is_file("/a/b/c/d"), "/a/b/c/d is not a file.");
+
   #unlink "/tmp/rename.test";
   #unlink "/tmp/copy.test";
   #ok(! is_file("/tmp/rename.test"), "removed rename.test");
