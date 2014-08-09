@@ -16,6 +16,7 @@ mkdir "/tmp/workspace";
 mkdir "/tmp/workspace/$rnd";
 chdir "/tmp/workspace/$rnd";
 
+print "Cloning git repository: $git_repo with branch $branch\n";
 system "git clone $git_repo rex --branch $branch >/tmp/out.log 2>&1";
 chdir $cwd;
 
