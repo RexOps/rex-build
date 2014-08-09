@@ -1,3 +1,9 @@
+#
+# (c) Jan Gehring <jan.gehring@gmail.com>
+# 
+# vim: set ts=2 sw=2 tw=0:
+# vim: set expandtab:
+
 use strict;
 use warnings;
 
@@ -26,11 +32,10 @@ task test => sub {
   my $param = shift;
 
   my @images = cloud_image_list;
-
-  my @my_img = grep { $_->{name} eq 'fedora' } @images;
+  my @my_img = grep { $_->{name} eq $config->{openstack}->{options}->{image} } @images;
   ok( scalar @my_img == 1, "Got first cloud image." );
 
-  my $vol_id = cloud_volume create => { size => 1, zone => "nova", };
+  my $vol_id = cloud_volume create => { size => 1, zone => $config->{openstack}->{options}->{volume_zone}, };
   ok( $vol_id =~ m/[a-z0-9\-]+/, "volume-id found" );
 
   my @vols = cloud_volume_list;
@@ -41,7 +46,7 @@ task test => sub {
   my $instance = cloud_instance create => {
     image_id => $my_img[0]->{id},
     name     => "ostack01",
-    plan_id  => 2,
+    plan_id  => $config->{openstack}->{options}->{plan_id},
     volume   => $vol_id,
   };
 
