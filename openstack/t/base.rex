@@ -27,7 +27,7 @@ task test => sub {
 
   my @images = cloud_image_list;
 
-  my @my_img = grep { $_->{name} eq 'openwrt-i386' } @images;
+  my @my_img = grep { $_->{name} eq 'fedora' } @images;
   ok( scalar @my_img == 1, "Got first cloud image." );
 
   my $vol_id = cloud_volume create => { size => 1, zone => "nova", };
