@@ -1,0 +1,112 @@
+# basic informations
+name:
+  centos: perl-IPC-Shareable
+  suse: perl-IPC-Shareable
+  mageia: perl-IPC-Shareable
+realname: IPC-Shareable
+version: 0.61
+release: 1
+epoch: 1
+summary: IPC::Shareable - share Perl variables between processes
+group:
+  centos: Development/Perl
+  suse: Development/Perl
+  mageia: Development/Perl
+license: unknown
+homepage: https://metacpan.org/pod/IPC::Shareable
+source: http://cpan.metacpan.org/authors/id/M/MS/MSOUTH/IPC-Shareable-0.61.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  IPC::Shareable allows you to tie a variable to shared memory making it easy to share the contents of that variable with other Perl processes. Scalars, arrays, and hashes can be tied. The variable being tied may contain arbitrarily complex data structures - including references to arrays, hashes of hashes, etc.
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+      runtime:
+        - perl
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+      runtime:
+        - perl
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+      runtime:
+        - perl
+
+  suse:
+    13.1:
+      build:
+        - make
+        - automake
+        - autoconf
+        - libtool
+        - perl
+      runtime:
+        - perl
+
+  mageia:
+    3:
+      x86_64:
+        build:
+          - make
+          - automake
+          - autoconf
+          - perl
+          - perl-devel
+        runtime:
+          - perl
+
+      i686:
+        build:
+          - make
+          - automake
+          - autoconf
+          - perl
+          - perl-devel
+        runtime:
+          - perl
+
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+    
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+    
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_libdir}/*
