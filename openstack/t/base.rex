@@ -3,6 +3,7 @@
 #
 # vim: set ts=2 sw=2 tw=0:
 # vim: set expandtab:
+# vim: set ft=perl:
 
 use strict;
 use warnings;
@@ -31,6 +32,12 @@ public_key $config->{amazon}->{auth}->{public_key};
 task test => sub {
   my $param = shift;
 
+  my @list = cloud_instance_list
+    private_network => 'private',
+    public_network  => 'private',
+    public_ip_type  => 'floating',
+    private_ip_type => 'fixed';
+
   my @images = cloud_image_list;
   my @my_img =
     grep { $_->{name} eq $config->{openstack}->{options}->{image} } @images;
@@ -45,20 +52,18 @@ task test => sub {
 
   ok( scalar @my_vol, "found created volume." );
 
-  #my $float_ip = get_cloud_floating_ip;
-  #ok( $float_ip =~ m/^\d+\.\d+\.\d+\.\d+$/, "got a floating ip" );
+  my $float_ip = get_cloud_floating_ip;
+  ok( $float_ip =~ m/^\d+\.\d+\.\d+\.\d+$/, "got a floating ip" );
 
   my $instance = cloud_instance create => {
     image_id    => $my_img[0]->{id},
     name        => "ostack01",
     plan_id     => $config->{openstack}->{options}->{plan_id},
     volume      => $vol_id,
-    #floating_ip => $float_ip,
+    floating_ip => $float_ip,
   };
 
   ok( $instance->{name} eq "ostack01", "got instance name" );
-
-  print Dumper $instance;
 
   my ($inst) =
     grep { ( $_->{name} eq "ostack01" ) && ( $_->{state} eq "running" ) }
@@ -73,7 +78,7 @@ task test => sub {
     cloud_instance_list;
 
   ok( !$inst, "instance removed" );
-  
+
   cloud_volume delete => $vol_id;
 
   @vols = cloud_volume_list;
