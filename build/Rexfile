@@ -68,23 +68,23 @@ task version_tag => sub {
   Rex::Logger::info("Cloning $repository to tmp");
   run "cd tmp ; git clone $repository --branch master >/tmp/out.log 2>&1";
 
-  my $version_file = "tmp/$param->{project}/$param->{version_file}";
+#  my $version_file = "tmp/$param->{project}/$param->{version_file}";
 
-  my $file_content = io($version_file)->slurp;
-  my $new_version  = $param->{version_tag};
-  $file_content =~ s/VERSION = "([^"]+)"/VERSION = "$new_version"/;
+#  my $file_content = io($version_file)->slurp;
+#  my $new_version  = $param->{version_tag};
+#  $file_content =~ s/VERSION = "([^"]+)"/VERSION = "$new_version"/;
 
-  Rex::Logger::info("Writing new version $new_version to $version_file");
+#  Rex::Logger::info("Writing new version $new_version to $version_file");
 
-  io($version_file) < $file_content;
+#  io($version_file) < $file_content;
 
-  run "cd tmp/$param->{project} ; git add $param->{version_file} "
-    . " ; git commit -m 'updated version'";
+#  run "cd tmp/$param->{project} ; git add $param->{version_file} "
+#    . " ; git commit -m 'updated version'";
 
-  run "cd tmp/$param->{project} ; perl Makefile.PL ; make ; make manifest ; "
-    . "git add MANIFEST ; git commit -m 'updated manifest'";
+#  run "cd tmp/$param->{project} ; perl Makefile.PL ; make ; make manifest ; "
+#    . "git add MANIFEST ; git commit -m 'updated manifest'";
 
-  run "cd tmp/$param->{project} ; git push origin";
+#  run "cd tmp/$param->{project} ; git push origin";
 
   run
     "cd tmp/$param->{project} ; git tag $param->{version_tag} ; git push origin $param->{version_tag}";
@@ -134,7 +134,8 @@ task release_to_cpan => sub {
   run "cd tmp ; git clone $repo . --branch $version >/tmp/out.log 2>&1";
 
   Rex::Logger::info("Creating dist file.");
-  run "cd tmp && perl Makefile.PL && make manifest && make dist";
+  #run "cd tmp && perl Makefile.PL && make manifest && make dist";
+  run "cd tmp && dzil test && dzil build";
   if( $? != 0 ) {
     die "Error creating dist file.";
   }
@@ -736,7 +737,8 @@ task archive => config->{repo}->{server} => sub {
 
     run
       "git clone git\@github.com:RexOps/$build_project.git $build_dir --branch $branch >/tmp/out.log 2>&1";
-    run "cd $build_dir; perl Makefile.PL && make && make dist && cd ..";
+    #run "cd $build_dir; perl Makefile.PL && make && make dist && cd ..";
+    run "cd $build_dir; dzip test && dzil build";
     ($pkg) = glob("$build_dir/*.tar.gz");
 
     Rex::Logger::info("Found package file: $pkg");
