@@ -743,6 +743,12 @@ task archive => config->{repo}->{server} => sub {
 
     Rex::Logger::info("Found package file: $pkg");
 
+    my ($version) = ($pkg =~ m/(\d+\.\d+\.\d+(\.\d+)?)\.tar\.gz/);
+
+    Rex::Logger::info("Found Version: $version");
+
+    $version > io("version.txt");
+
   };
 
   if ($pkg) {
