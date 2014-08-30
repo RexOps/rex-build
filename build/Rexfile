@@ -738,7 +738,7 @@ task archive => config->{repo}->{server} => sub {
     run
       "git clone git\@github.com:RexOps/$build_project.git $build_dir --branch $branch >/tmp/out.log 2>&1";
     #run "cd $build_dir; perl Makefile.PL && make && make dist && cd ..";
-    run "cd $build_dir; dzip test && dzil build";
+    run "cd $build_dir; dzil test && dzil build";
     ($pkg) = glob("$build_dir/*.tar.gz");
 
     Rex::Logger::info("Found package file: $pkg");
