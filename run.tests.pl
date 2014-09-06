@@ -19,6 +19,7 @@ LOCAL {
 
   my ($version_line) = grep { m/^version/ } io("rex/dist.ini")->slurp;
   my ($t1, $version) = split(/ = /, $version_line);
+  $version =~ s/[\n\r]//gms;;
   $ENV{REX_VERSION} = $version;
 
   chdir $cwd;
