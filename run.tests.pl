@@ -17,7 +17,7 @@ LOCAL {
 
   system "cd rex ; dzil build";
 
-  my ($version_line) = grep { m/^version/ } io("dist.ini")->slurp;
+  my ($version_line) = grep { m/^version/ } io("rex/dist.ini")->slurp;
   my ($t1, $version) = split(/ = /, $version_line);
   $ENV{REX_VERSION} = $version;
 
