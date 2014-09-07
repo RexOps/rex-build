@@ -1,16 +1,28 @@
 # basic informations
 name:
   centos: perl-Mojolicious
+  debian: libmojolicious-perl
+  ubuntu: libmojolicious-perl
+  fedora: perl-Mojolicious
+  redhat: perl-Mojolicious
+  suse: perl-Mojolicious
+  mageia: perl-Mojolicious
 realname: Mojolicious
-version: 4.87
+version: 5.39
 release: 1
 epoch: 1
 summary: Mojolicious - Real-time web framework
 group:
-  centos: System Environment/Libraries
+  centos: Utilities/System
+  debian: admin
+  ubuntu: admin
+  redhat: admin
+  fedora: admin
+  suse: admin
+  mageia: admin
 license: Artistic
 homepage: http://mojolicio.us/
-source: http://cpan.metacpan.org/authors/id/S/SR/SRI/Mojolicious-4.87.tar.gz
+source: http://cpan.metacpan.org/authors/id/S/SR/SRI/Mojolicious-5.39.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 arch:
@@ -20,16 +32,137 @@ description: |
 
 # requirements
 requires:
+  debian:
+    squeeze: &depsqueeze
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - libio-socket-ssl-perl
+        - libwww-perl
+      runtime:
+        - perl
+        - perl-modules
+        - libwww-perl
+        - libio-socket-ssl-perl
+
+
+    wheezy: &depwheezy
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - liblwp-protocol-https-perl
+        - libio-socket-ssl-perl
+
+      runtime:
+        - perl
+        - perl-modules
+        - libio-socket-ssl-perl
+        - liblwp-protocol-https-perl
+
+
   centos:
-    6:
+    5:
       build:
         - make
-        - gcc
         - perl
+        - perl-libwww-perl
         - perl-IO-Socket-SSL
       runtime:
         - perl
+        - perl-libwww-perl
         - perl-IO-Socket-SSL
+
+    6: &depcentos6
+      build:
+        - make
+        - perl
+        - perl-devel
+        - perl-IO-Socket-SSL
+        - perl-libwww-perl
+
+
+      runtime:
+        - perl
+        - perl-IO-Socket-SSL
+        - perl-libwww-perl
+
+    7:
+      build:
+        - make
+        - perl
+        - perl-devel
+        - perl-IO-Socket-SSL
+        - perl-libwww-perl
+
+
+      runtime:
+        - perl
+        - perl-IO-Socket-SSL
+        - perl-libwww-perl
+
+  ubuntu:
+    lucid: *depsqueeze
+    precise: *depwheezy
+    quantal: *depwheezy
+    raring: *depwheezy
+    saucy: *depwheezy
+    trusty: *depwheezy
+
+  fedora:
+    18: &depfedora18
+      build:
+        - make
+        - perl
+        - perl-devel
+        - perl-IO-Socket-SSL
+        - perl-libwww-perl
+
+      runtime:
+        - perl
+        - perl-IO-Socket-SSL
+        - perl-libwww-perl
+
+    19: *depfedora18
+    20: *depfedora18
+
+  redhat:
+    18: *depfedora18
+    19: *depfedora18
+    20: *depfedora18
+
+  suse:
+    13.1: &depsuse13
+      build:
+        - make
+        - perl
+        - perl-IO-Socket-SSL
+        - perl-libwww-perl
+
+      runtime:
+        - perl
+        - perl-IO-Socket-SSL
+        - perl-libwww-perl
+
+  mageia:
+    3:
+      build:
+        - make
+        - perl
+        - perl-IO-Socket-SSL
+        - perl-libwww-perl
+
+      runtime:
+        - perl
+        - perl-IO-Socket-SSL
+        - perl-libwww-perl
 
 # build instructions
 configure: |
@@ -53,3 +186,15 @@ clean: |
 files:
   package:
     - /usr
+  fedora:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_bindir}/*
+      - %{perl_vendorlib}/*
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_bindir}/*
+      - %{perl_vendorlib}/*
