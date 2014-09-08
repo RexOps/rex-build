@@ -39,6 +39,7 @@ requires:
         - libperl-dev
         - perl-modules
         - make
+        - libmodule-build-perl
       runtime:
         - perl
         - perl-modules
@@ -52,6 +53,7 @@ requires:
         - libperl-dev
         - perl-modules
         - make
+        - libmodule-build-perl
 
       runtime:
         - perl
@@ -64,6 +66,7 @@ requires:
         - make
         - perl
         - perl-devel
+        - perl-Module-Build
 
       runtime:
         - perl
@@ -73,6 +76,7 @@ requires:
         - make
         - perl
         - perl-devel
+        - perl-Module-Build
 
       runtime:
         - perl
@@ -91,6 +95,7 @@ requires:
         - make
         - perl
         - perl-devel
+        - perl-Module-Build
 
       runtime:
         - perl
@@ -108,6 +113,7 @@ requires:
       build:
         - make
         - perl
+        - perl-Module-Build
 
       runtime:
         - perl
@@ -117,6 +123,7 @@ requires:
       build:
         - make
         - perl
+        - perl-Module-Build
 
       runtime:
         - perl
