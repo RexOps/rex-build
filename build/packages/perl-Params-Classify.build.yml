@@ -40,9 +40,12 @@ requires:
         - perl-modules
         - make
         - libmodule-build-perl
+        - libparent-perl
+        - libtest-simple-perl
       runtime:
         - perl
         - perl-modules
+        - libparent-perl
 
 
     wheezy: &depwheezy
@@ -54,10 +57,13 @@ requires:
         - perl-modules
         - make
         - libmodule-build-perl
+        - libparent-perl
+        - libtest-simple-perl
 
       runtime:
         - perl
         - perl-modules
+        - libparent-perl
 
 
   centos:
@@ -67,9 +73,12 @@ requires:
         - perl
         - perl-devel
         - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
 
       runtime:
         - perl
+        - perl-parent
 
     7:
       build:
@@ -77,9 +86,12 @@ requires:
         - perl
         - perl-devel
         - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
 
       runtime:
         - perl
+        - perl-parent
 
   ubuntu:
     lucid: *depsqueeze
@@ -96,9 +108,12 @@ requires:
         - perl
         - perl-devel
         - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
 
       runtime:
         - perl
+        - perl-parent
 
     19: *depfedora18
     20: *depfedora18
@@ -114,9 +129,12 @@ requires:
         - make
         - perl
         - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
 
       runtime:
         - perl
+        - perl-parent
 
   mageia:
     3:
@@ -124,9 +142,12 @@ requires:
         - make
         - perl
         - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
 
       runtime:
         - perl
+        - perl-parent
 
 # build instructions
 configure: |
