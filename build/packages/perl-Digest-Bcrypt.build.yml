@@ -1,0 +1,237 @@
+# basic informations
+name:
+  centos: perl-Digest-Bcrypt
+  debian: libdigest-bcrypt
+  ubuntu: libdigest-bcrypt
+  fedora: perl-Digest-Bcrypt
+  redhat: perl-Digest-Bcrypt
+  suse: perl-Digest-Bcrypt
+  mageia: perl-Digest-Bcrypt
+realname: Digest-Bcrypt
+version: 1.0.1
+release: 1
+epoch: 1
+summary: Digest::Bcrypt - Perl interface to the bcrypt digest algorithm
+group:
+  centos: Utilities/System
+  debian: admin
+  ubuntu: admin
+  redhat: admin
+  fedora: admin
+  suse: admin
+  mageia: admin
+license: Artistic
+homepage: https://metacpan.org/pod/Digest::Bcrypt
+source: https://cpan.metacpan.org/authors/id/J/JA/JAITKEN/Digest-Bcrypt-1.0.1.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+description: |
+  Provides an interface to the bcrypt digest algorithm.
+
+# requirements
+requires:
+  debian:
+    squeeze: &depsqueeze
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - libmodule-build-perl
+        - libtest-simple-perl
+        - libcrypt-eksblowfish-bcrypt-perl
+        - libdigest-perl
+
+      runtime:
+        - perl
+        - perl-modules
+        - libdigest-perl
+        - libcrypt-eksblowfish-bcrypt-perl
+
+
+    wheezy: &depwheezy
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - libmodule-build-perl
+        - libtest-simple-perl
+        - libdigest-perl
+        - libcrypt-eksblowfish-bcrypt-perl
+
+      runtime:
+        - perl
+        - perl-modules
+        - libparent-perl
+        - libclass-mix-perl
+        - libdigest-perl
+        - libcrypt-eksblowfish-bcrypt-perl
+
+
+  centos:
+    6: &depcentos6
+      build:
+        - make
+        - perl
+        - perl-devel
+        - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
+        - perl-Crypt-Eksblowfish-Bcrypt
+        - perl-Digest
+
+      runtime:
+        - perl
+        - perl-parent
+        - perl-Crypt-Eksblowfish-Bcrypt
+        - perl-Digest
+
+
+    7:
+      build:
+        - make
+        - perl
+        - perl-devel
+        - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
+        - perl-Crypt-Eksblowfish-Bcrypt
+        - perl-Digest
+
+
+      runtime:
+        - perl
+        - perl-parent
+        - perl-Crypt-Eksblowfish-Bcrypt
+        - perl-Digest
+
+
+  ubuntu:
+    lucid: *depsqueeze
+    precise:
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - libmodule-build-perl
+        - libtest-simple-perl
+        - libcrypt-eksblowfish-bcrypt-perl
+        - libdigest-perl
+
+      runtime:
+        - perl
+        - perl-modules
+        - libcrypt-eksblowfish-bcrypt-perl
+        - libdigest-perl
+
+
+    quantal: *depwheezy
+    raring: *depwheezy
+    saucy: *depwheezy
+    trusty: *depwheezy
+
+  fedora:
+    18: &depfedora18
+      build:
+        - make
+        - perl
+        - perl-devel
+        - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
+        - perl-Crypt-Eksblowfish-Bcrypt
+        - perl-Digest
+
+
+      runtime:
+        - perl
+        - perl-parent
+        - perl-Crypt-Eksblowfish-Bcrypt
+        - perl-Digest
+
+
+    19: *depfedora18
+    20: *depfedora18
+
+  redhat:
+    18: *depfedora18
+    19: *depfedora18
+    20: *depfedora18
+
+  suse:
+    13.1: &depsuse13
+      build:
+        - make
+        - perl
+        - perl-Module-Build
+        - perl-Test-Simple
+        - perl-Crypt-Eksblowfish-Bcrypt
+        - perl-Digest
+
+
+      runtime:
+        - perl
+        - perl-Crypt-Eksblowfish-Bcrypt
+        - perl-Digest
+
+
+  mageia:
+    3:
+      build:
+        - make
+        - perl
+        - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
+        - perl-devel
+        - perl-Crypt-Eksblowfish-Bcrypt
+        - perl-Digest
+
+
+      runtime:
+        - perl
+        - perl-parent
+        - perl-Crypt-Eksblowfish-Bcrypt
+        - perl-Digest
+
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+  fedora:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
