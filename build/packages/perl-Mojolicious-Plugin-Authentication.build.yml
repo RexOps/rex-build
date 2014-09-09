@@ -1,0 +1,173 @@
+# basic informations
+name:
+  centos: perl-Mojolicious-Plugin-Authentication
+  debian: libmojolicious-plugin-authentication-perl
+  ubuntu: libmojolicious-plugin-authentication-perl
+  fedora: perl-Mojolicious-Plugin-Authentication
+  redhat: perl-Mojolicious-Plugin-Authentication
+  suse: perl-Mojolicious-Plugin-Authentication
+  mageia: perl-Mojolicious-Plugin-Authentication
+realname: Mojolicious-Plugin-Authentication
+version: 1.26
+release: 1
+epoch: 1
+summary: Mojolicious::Plugin::Authentication - A plugin to make authentication a bit easier
+group:
+  centos: Utilities/System
+  debian: admin
+  ubuntu: admin
+  redhat: admin
+  fedora: admin
+  suse: admin
+  mageia: admin
+license: Artistic
+homepage: https://metacpan.org/pod/Mojolicious::Plugin::Authentication
+source: https://cpan.metacpan.org/authors/id/M/MA/MADCAT/Mojolicious-Plugin-Authentication-1.26.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+description: |
+  Mojolicious::Plugin::Authentication - A plugin to make authentication a bit easier
+
+# requirements
+requires:
+  debian:
+    squeeze: &depsqueeze
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - libmojolicious-perl
+      runtime:
+        - perl
+        - perl-modules
+        - libmojolicious-perl
+
+
+    wheezy: &depwheezy
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - libmojolicious-perl
+
+      runtime:
+        - perl
+        - perl-modules
+        - libmojolicious-perl
+
+
+  centos:
+    6: &depcentos6
+      build:
+        - make
+        - perl
+        - perl-devel
+        - perl-Mojolicious
+
+
+      runtime:
+        - perl
+        - perl-Mojolicious
+
+    7:
+      build:
+        - make
+        - perl
+        - perl-devel
+        - perl-Mojolicious
+
+
+      runtime:
+        - perl
+        - perl-Mojolicious
+
+  ubuntu:
+    lucid: *depsqueeze
+    precise: *depwheezy
+    quantal: *depwheezy
+    raring: *depwheezy
+    saucy: *depwheezy
+    trusty: *depwheezy
+
+  fedora:
+    18: &depfedora18
+      build:
+        - make
+        - perl
+        - perl-devel
+        - perl-Mojolicious
+
+      runtime:
+        - perl
+        - perl-Mojolicious
+
+    19: *depfedora18
+    20: *depfedora18
+
+  redhat:
+    18: *depfedora18
+    19: *depfedora18
+    20: *depfedora18
+
+  suse:
+    13.1: &depsuse13
+      build:
+        - make
+        - perl
+        - perl-Mojolicious
+
+      runtime:
+        - perl
+        - perl-Mojolicious
+
+  mageia:
+    3:
+      build:
+        - make
+        - perl
+        - perl-Mojolicious
+
+      runtime:
+        - perl
+        - perl-Mojolicious
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+  fedora:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_bindir}/*
+      - %{perl_vendorlib}/*
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_bindir}/*
+      - %{perl_vendorlib}/*
