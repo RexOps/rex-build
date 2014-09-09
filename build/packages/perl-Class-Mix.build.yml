@@ -1,0 +1,212 @@
+# basic informations
+name:
+  centos: perl-Class-Mix
+  debian: libclass-mix-perl
+  ubuntu: libclass-mix-perl
+  fedora: perl-Class-Mix
+  redhat: perl-Class-Mix
+  suse: perl-Class-Mix
+  mageia: perl-Class-Mix
+realname: Class-Mix
+version: 0.005
+release: 1
+epoch: 1
+summary: Class::Mix - dynamic class mixing
+group:
+  centos: Utilities/System
+  debian: admin
+  ubuntu: admin
+  redhat: admin
+  fedora: admin
+  suse: admin
+  mageia: admin
+license: Artistic
+homepage: https://metacpan.org/pod/Params::Classify
+source: https://cpan.metacpan.org/authors/id/Z/ZE/ZEFRAM/Class-Mix-0.005.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+description: |
+  The mix_class function provided by this module dynamically generates `anonymous' classes with specified inheritance.
+
+# requirements
+requires:
+  debian:
+    squeeze: &depsqueeze
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - libmodule-build-perl
+        - libparent-perl
+        - libtest-simple-perl
+        - libparams-classify-perl
+      runtime:
+        - perl
+        - perl-modules
+        - libparent-perl
+        - libparams-classify-perl
+
+
+    wheezy: &depwheezy
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - libmodule-build-perl
+        - libparent-perl
+        - libtest-simple-perl
+        - libparams-classify-perl
+
+      runtime:
+        - perl
+        - perl-modules
+        - libparent-perl
+        - libparams-classify-perl
+
+
+  centos:
+    6: &depcentos6
+      build:
+        - make
+        - perl
+        - perl-devel
+        - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
+        - perl-Params-Classify
+
+      runtime:
+        - perl
+        - perl-parent
+        - perl-Params-Classify
+
+    7:
+      build:
+        - make
+        - perl
+        - perl-devel
+        - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
+        - perl-Params-Classify
+
+      runtime:
+        - perl
+        - perl-parent
+        - perl-Params-Classify
+
+  ubuntu:
+    lucid: *depsqueeze
+    precise:
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - libmodule-build-perl
+        - libtest-simple-perl
+        - libparams-classify-perl
+
+      runtime:
+        - perl
+        - perl-modules
+        - libparams-classify-perl
+
+    quantal: *depwheezy
+    raring: *depwheezy
+    saucy: *depwheezy
+    trusty: *depwheezy
+
+  fedora:
+    18: &depfedora18
+      build:
+        - make
+        - perl
+        - perl-devel
+        - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
+        - perl-Params-Classify
+
+      runtime:
+        - perl
+        - perl-parent
+        - perl-Params-Classify
+
+    19: *depfedora18
+    20: *depfedora18
+
+  redhat:
+    18: *depfedora18
+    19: *depfedora18
+    20: *depfedora18
+
+  suse:
+    13.1: &depsuse13
+      build:
+        - make
+        - perl
+        - perl-Module-Build
+        - perl-Test-Simple
+        - perl-Params-Classify
+
+      runtime:
+        - perl
+        - perl-Params-Classify
+
+  mageia:
+    3:
+      build:
+        - make
+        - perl
+        - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
+        - perl-devel
+        - perl-Params-Classify
+
+      runtime:
+        - perl
+        - perl-parent
+        - perl-Params-Classify
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+  fedora:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_libdir}/*
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_libdir}/*
