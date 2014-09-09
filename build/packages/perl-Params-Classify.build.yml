@@ -95,7 +95,21 @@ requires:
 
   ubuntu:
     lucid: *depsqueeze
-    precise: *depwheezy
+    precise:
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - libmodule-build-perl
+        - libtest-simple-perl
+
+      runtime:
+        - perl
+        - perl-modules
+
     quantal: *depwheezy
     raring: *depwheezy
     saucy: *depwheezy
@@ -129,12 +143,10 @@ requires:
         - make
         - perl
         - perl-Module-Build
-        - perl-parent
         - perl-Test-Simple
 
       runtime:
         - perl
-        - perl-parent
 
   mageia:
     3:
@@ -144,6 +156,7 @@ requires:
         - perl-Module-Build
         - perl-parent
         - perl-Test-Simple
+        - perl-devel
 
       runtime:
         - perl
