@@ -204,9 +204,9 @@ files:
     doc:
       - %{_mandir}/*
     package:
-      - %{perl_vendorlib}/*
+      - %{_libdir}/*
   centos:
     doc:
       - %{_mandir}/*
     package:
-      - %{perl_vendorlib}/*
+      - %{_libdir}/*
