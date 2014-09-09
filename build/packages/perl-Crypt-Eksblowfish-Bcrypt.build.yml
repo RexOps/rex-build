@@ -1,17 +1,17 @@
 # basic informations
 name:
-  centos: perl-Crypt-Eksblowfish-Bcrypt
-  debian: libcrypt-eksblowfish-bcrypt
-  ubuntu: libcrypt-eksblowfish-bcrypt
-  fedora: perl-Crypt-Eksblowfish-Bcrypt
-  redhat: perl-Crypt-Eksblowfish-Bcrypt
-  suse: perl-Crypt-Eksblowfish-Bcrypt
-  mageia: perl-Crypt-Eksblowfish-Bcrypt
-realname: Crypt-Eksblowfish-Bcrypt
+  centos: perl-Crypt-Eksblowfish
+  debian: libcrypt-eksblowfish
+  ubuntu: libcrypt-eksblowfish
+  fedora: perl-Crypt-Eksblowfish
+  redhat: perl-Crypt-Eksblowfish
+  suse: perl-Crypt-Eksblowfish
+  mageia: perl-Crypt-Eksblowfish
+realname: Crypt-Eksblowfish
 version: 0.009
 release: 1
 epoch: 1
-summary: Crypt::Eksblowfish::Bcrypt - Blowfish-based Unix crypt() password hash
+summary: Crypt::Eksblowfish - the Eksblowfish block cipher
 group:
   centos: Utilities/System
   debian: admin
@@ -21,12 +21,12 @@ group:
   suse: admin
   mageia: admin
 license: Artistic
-homepage: https://metacpan.org/pod/Crypt::Eksblowfish::Bcrypt
+homepage: https://metacpan.org/pod/Crypt::Eksblowfish
 source: https://cpan.metacpan.org/authors/id/Z/ZE/ZEFRAM/Crypt-Eksblowfish-0.009.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 description: |
-  This module implements the Blowfish-based Unix crypt() password hashing algorithm, known as "bcrypt".
+  Crypt::Eksblowfish - the Eksblowfish block cipher
 
 # requirements
 requires:
