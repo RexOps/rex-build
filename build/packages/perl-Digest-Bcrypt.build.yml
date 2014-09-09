@@ -83,13 +83,11 @@ requires:
         - perl-parent
         - perl-Test-Simple
         - perl-Crypt-Eksblowfish
-        - perl-Digest
 
       runtime:
         - perl
         - perl-parent
         - perl-Crypt-Eksblowfish
-        - perl-Digest
 
 
     7:
