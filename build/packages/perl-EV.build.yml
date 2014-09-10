@@ -3,7 +3,7 @@ name:
   centos: perl-EV
 realname: EV
 version: 4.16
-release: 1
+release: 2
 epoch: 1
 summary: EV - perl interface to libev, a high performance full-featured event loop
 group:
@@ -54,3 +54,13 @@ clean: |
 files:
   package:
     - /usr
+  fedora:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_libdir}/*
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_libdir}/*
