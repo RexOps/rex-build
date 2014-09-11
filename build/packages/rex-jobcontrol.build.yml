@@ -44,7 +44,6 @@ requires:
         - libmojolicious-perl
         - libminion-perl
         - libmojolicious-plugin-authentication-perl
-        - libio-all-perl
         - libdatetime-perl
         - libyaml-perl
         - libdigest-bcrypt-perl
@@ -55,7 +54,6 @@ requires:
         - libmojolicious-perl
         - libminion-perl
         - libmojolicious-plugin-authentication-perl
-        - libio-all-perl
         - libdatetime-perl
         - libyaml-perl
         - libdigest-bcrypt-perl
@@ -73,7 +71,6 @@ requires:
         - libmojolicious-perl
         - libminion-perl
         - libmojolicious-plugin-authentication-perl
-        - libio-all-perl
         - libdatetime-perl
         - libyaml-perl
         - libdigest-bcrypt-perl
@@ -85,7 +82,6 @@ requires:
         - libmojolicious-perl
         - libminion-perl
         - libmojolicious-plugin-authentication-perl
-        - libio-all-perl
         - libdatetime-perl
         - libyaml-perl
         - libdigest-bcrypt-perl
@@ -101,7 +97,6 @@ requires:
         - perl-Mojolicious
         - perl-Minion
         - perl-Mojolicious-Plugin-Authentication
-        - perl-IO-All
         - perl-DateTime
         - perl-YAML
         - perl-Digest-Bcrypt
@@ -113,7 +108,6 @@ requires:
         - perl-Mojolicious
         - perl-Minion
         - perl-Mojolicious-Plugin-Authentication
-        - perl-IO-All
         - perl-DateTime
         - perl-YAML
         - perl-Digest-Bcrypt
@@ -127,7 +121,6 @@ requires:
         - perl-Mojolicious
         - perl-Minion
         - perl-Mojolicious-Plugin-Authentication
-        - perl-IO-All
         - perl-DateTime
         - perl-YAML
         - perl-Digest-Bcrypt
@@ -138,7 +131,6 @@ requires:
         - perl-Mojolicious
         - perl-Minion
         - perl-Mojolicious-Plugin-Authentication
-        - perl-IO-All
         - perl-DateTime
         - perl-YAML
         - perl-Digest-Bcrypt
@@ -161,7 +153,6 @@ requires:
         - perl-Mojolicious
         - perl-Minion
         - perl-Mojolicious-Plugin-Authentication
-        - perl-IO-All
         - perl-DateTime
         - perl-YAML
         - perl-Digest-Bcrypt
@@ -173,7 +164,6 @@ requires:
         - perl-Mojolicious
         - perl-Minion
         - perl-Mojolicious-Plugin-Authentication
-        - perl-IO-All
         - perl-DateTime
         - perl-YAML
         - perl-Digest-Bcrypt
@@ -195,7 +185,6 @@ requires:
         - perl-Mojolicious
         - perl-Minion
         - perl-Mojolicious-Plugin-Authentication
-        - perl-IO-All
         - perl-DateTime
         - perl-YAML
         - perl-Digest-Bcrypt
@@ -206,7 +195,6 @@ requires:
         - perl-Mojolicious
         - perl-Minion
         - perl-Mojolicious-Plugin-Authentication
-        - perl-IO-All
         - perl-DateTime
         - perl-YAML
         - perl-Digest-Bcrypt
@@ -220,7 +208,6 @@ requires:
         - perl-Mojolicious
         - perl-Minion
         - perl-Mojolicious-Plugin-Authentication
-        - perl-IO-All
         - perl-DateTime
         - perl-YAML
         - perl-Digest-Bcrypt
@@ -232,7 +219,6 @@ requires:
         - perl-Mojolicious
         - perl-Minion
         - perl-Mojolicious-Plugin-Authentication
-        - perl-IO-All
         - perl-DateTime
         - perl-YAML
         - perl-Digest-Bcrypt

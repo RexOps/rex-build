@@ -737,7 +737,7 @@ task archive => config->{repo}->{server} => sub {
   my $build_repo = $params->{repo} || 'git@github.com:RexOps/Rex.git';
 
   LOCAL {
-    Rex::Logger::info("Cloning $build_project repository...");
+    Rex::Logger::info("Cloning $build_repo repository...");
 
     if ( -d $build_dir ) {
       Rex::Logger::info("Cleaning up...");
