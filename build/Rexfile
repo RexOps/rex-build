@@ -734,6 +734,7 @@ task archive => config->{repo}->{server} => sub {
 
   my $build_project = $params->{project} || "Rex";
   my $build_dir = "\L$build_project";
+  my $build_repo = $params->{repo} || 'git@github.com:RexOps/Rex.git';
 
   LOCAL {
     Rex::Logger::info("Cloning $build_project repository...");
@@ -745,8 +746,7 @@ task archive => config->{repo}->{server} => sub {
 
     my $branch = $params->{branch} || "master";
 
-    run
-      "git clone git\@github.com:RexOps/$build_project.git $build_dir --branch $branch >/tmp/out.log 2>&1";
+    run "git clone $build_repo $build_dir --branch $branch >/tmp/out.log 2>&1";
     #run "cd $build_dir; perl Makefile.PL && make && make dist && cd ..";
     run "cd $build_dir; dzil test && dzil build";
     ($pkg) = glob("$build_dir/*.tar.gz");
