@@ -1,8 +1,8 @@
 # basic informations
 name:
   centos: perl-Digest-Bcrypt
-  debian: libdigest-bcrypt
-  ubuntu: libdigest-bcrypt
+  debian: libdigest-bcrypt-perl
+  ubuntu: libdigest-bcrypt-perl
   fedora: perl-Digest-Bcrypt
   redhat: perl-Digest-Bcrypt
   suse: perl-Digest-Bcrypt
