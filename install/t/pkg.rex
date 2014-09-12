@@ -86,16 +86,18 @@ task test => group => test => sub {
 
   eval {
     $ok = 0;
-    install "rex";
+    install $ENV{TEST_PACKAGE};
     $ok = 1;
   };
-  ok($ok == 1, "rex installed");
+  ok($ok == 1, "$ENV{TEST_PACKAGE} installed");
 
-  my $out = run "rex -v";
-  ok($? == 0, "run rex");
-  my ($name, $version) = split(/ /, $out);
-  ok($version =~ m/\d+\.\d+\.\d+/, "got version ($version)");
-  ok($version eq get_version_to_install(), "got correct version");
+  if($ENV{TEST_PACKAGE} eq "rex") {
+    my $out = run "rex -v";
+    ok($? == 0, "run rex");
+    my ($name, $version) = split(/ /, $out);
+    ok($version =~ m/\d+\.\d+\.\d+/, "got version ($version)");
+    ok($version eq get_version_to_install(), "got correct version");
+  }
 
   done_testing();
 };
