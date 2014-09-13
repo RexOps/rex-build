@@ -15,7 +15,7 @@ $ENV{"PERL5LIB"} =
   "$ENV{WORK_DIR}/rex/Rex-$version/lib:" . ( exists $ENV{PERL5LIB} ? $ENV{PERL5LIB} : "" );
 
 for my $file (@ARGV) {
-  my @out = `perl $ENV{WORK_DIR}/rex/Rex-$version/bin/rex -qw -Ff $file test`;
+  my @out = `perl $ENV{WORK_DIR}/rex/Rex-$version/bin/rex -cqw -Ff $file test`;
   my @test_line;
   my $found_end = 0;
   my $p_count   = 0;
