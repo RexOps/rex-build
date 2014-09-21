@@ -99,5 +99,14 @@ task test => group => test => sub {
     ok($version eq get_version_to_install(), "got correct version");
   }
 
+  if($ENV{TEST_PACKAGE} eq "rex-jobcontrol") {
+    my $out = run "rex_job_control jobcontrol version";
+    ok($? == 0, "run rex_job_control");
+    my ($version) = ($out =~ m/\((\d+\.\d+\.\d+)\)/);
+    ok($version =~ m/\d+\.\d+\.\d+/, "got version ($version)");
+    ok($version eq get_version_to_install(), "got correct version");
+  }
+
+
   done_testing();
 };
