@@ -47,6 +47,8 @@ requires:
         - libdatetime-perl
         - libyaml-perl
         - libdigest-bcrypt-perl
+        - libcapture-tiny-perl
+
       runtime:
         - perl
         - perl-modules
@@ -57,6 +59,7 @@ requires:
         - libdatetime-perl
         - libyaml-perl
         - libdigest-bcrypt-perl
+        - libcapture-tiny-perl
 
 
     wheezy: &depwheezy
@@ -74,6 +77,7 @@ requires:
         - libdatetime-perl
         - libyaml-perl
         - libdigest-bcrypt-perl
+        - libcapture-tiny-perl
 
       runtime:
         - perl
@@ -85,6 +89,7 @@ requires:
         - libdatetime-perl
         - libyaml-perl
         - libdigest-bcrypt-perl
+        - libcapture-tiny-perl
 
 
   centos:
@@ -101,6 +106,7 @@ requires:
         - perl-YAML
         - perl-Digest-Bcrypt
         - perl-Time-Local-rex
+        - perl-Capture-Tiny
 
 
       runtime:
@@ -113,6 +119,7 @@ requires:
         - perl-YAML
         - perl-Digest-Bcrypt
         - perl-Time-Local-rex
+        - perl-Capture-Tiny
 
     7:
       build:
@@ -126,6 +133,7 @@ requires:
         - perl-DateTime
         - perl-YAML
         - perl-Digest-Bcrypt
+        - perl-Capture-Tiny
 
       runtime:
         - perl
@@ -136,6 +144,7 @@ requires:
         - perl-DateTime
         - perl-YAML
         - perl-Digest-Bcrypt
+        - perl-Capture-Tiny
 
   ubuntu:
     lucid: *depsqueeze
@@ -158,6 +167,7 @@ requires:
         - perl-DateTime
         - perl-YAML
         - perl-Digest-Bcrypt
+        - perl-Capture-Tiny
 
 
       runtime:
@@ -169,6 +179,7 @@ requires:
         - perl-DateTime
         - perl-YAML
         - perl-Digest-Bcrypt
+        - perl-Capture-Tiny
 
     19: *depfedora18
     20: *depfedora18
@@ -190,6 +201,7 @@ requires:
         - perl-DateTime
         - perl-YAML
         - perl-Digest-Bcrypt
+        - perl-Capture-Tiny
 
       runtime:
         - perl
@@ -200,6 +212,7 @@ requires:
         - perl-DateTime
         - perl-YAML
         - perl-Digest-Bcrypt
+        - perl-Capture-Tiny
 
   mageia:
     3:
@@ -213,6 +226,7 @@ requires:
         - perl-DateTime
         - perl-YAML
         - perl-Digest-Bcrypt
+        - perl-Capture-Tiny
 
 
       runtime:
@@ -224,6 +238,7 @@ requires:
         - perl-DateTime
         - perl-YAML
         - perl-Digest-Bcrypt
+        - perl-Capture-Tiny
 
 
 # build instructions
