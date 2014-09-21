@@ -100,6 +100,13 @@ task test => group => test => sub {
   }
 
   if($ENV{TEST_PACKAGE} eq "rex-jobcontrol") {
+    mkdir "/etc/rex";
+    require Mojo::UserAgent;
+    my $ua = Mojo::UserAgent->new;
+    my $content = $ua->get("https://raw.githubusercontent.com/RexOps/rex-jobcontrol/master/jobcontrol.conf")->res->body;
+    open(my $fh, ">", "/etc/rex/jobcontrol.conf") or die($!);
+    print $fh $content;
+    close($fh);
     my $out = run "rex_job_control jobcontrol version";
     ok($? == 0, "run rex_job_control");
     my ($version) = ($out =~ m/\((\d+\.\d+\.\d+)\)/);
