@@ -100,6 +100,7 @@ requires:
         - perl-DateTime
         - perl-YAML
         - perl-Digest-Bcrypt
+        - perl-Time-Local-rex
 
 
       runtime:
@@ -111,6 +112,7 @@ requires:
         - perl-DateTime
         - perl-YAML
         - perl-Digest-Bcrypt
+        - perl-Time-Local-rex
 
     7:
       build:
