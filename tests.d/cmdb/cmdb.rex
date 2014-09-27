@@ -3,15 +3,14 @@ use Rex -feature => '0.45';
 use Rex::CMDB;
 use Data::Dumper;
 
-set cmdb => {
-  type => "YAML",
-  path => "tests.d/cmdb/cmdb",
-};
-
 use Test::More;
 
 do "auth.conf";
 
+set cmdb => {
+  type => "YAML",
+  path => "tests.d/cmdb/cmdb",
+};
 
 task "test", group => "test", sub {
   my $ntp_server = get cmdb "ntp_server";
