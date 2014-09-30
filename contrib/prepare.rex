@@ -41,6 +41,7 @@ task prepare => group => test => sub {
       qr{debian|ubuntu}i => [qw/rsync/],
       qr{suse}i          => [qw/lsb-release/],
       qr{fedora}i        => [qw/perl openssh-clients which/],
+      qr{gentoo}i        => ['sys-process/vixie-cron'],
       default            => [],
   };
 

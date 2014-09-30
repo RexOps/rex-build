@@ -52,7 +52,11 @@ task "test", group => "test", sub {
       return;
     }
 
+    my $os = lc operating_system;
     my $kmod = "ipmi_poweroff";
+    if($os =~ m/Gentoo/i) {
+      $kmod = "ntfs";
+    }
 
     #kmod load => "ipmi_msghandler";
     kmod load => $kmod;
