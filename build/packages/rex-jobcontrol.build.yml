@@ -134,6 +134,7 @@ requires:
         - perl-YAML
         - perl-Digest-Bcrypt
         - perl-Capture-Tiny
+        - perl-Digest-MD5
 
       runtime:
         - perl
@@ -145,6 +146,7 @@ requires:
         - perl-YAML
         - perl-Digest-Bcrypt
         - perl-Capture-Tiny
+        - perl-Digest-MD5
 
   ubuntu:
     lucid: *depsqueeze
