@@ -1,3 +1,5 @@
+# vim: set syn=perl:
+
 use Rex -feature => '0.42';
 use Rex::Commands::User;
 use YAML;
