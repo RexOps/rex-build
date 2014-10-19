@@ -112,6 +112,7 @@ task "test",
       qr{Mageia}i => "vim-enhanced",
       qr{Debian}i => "vim",
       qr{Ubuntu}i => "vim",
+      qr{Gentoo}i => "app-misc/screen",
       default     => "vim",
   };
 
