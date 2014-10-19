@@ -33,9 +33,10 @@ my $vm_info;
 
 # try cloning until end of time
 my $new_vm;
+my $vm_cloned;
 
 my $try = 0;
-while ( !$vm_info ) {
+while ( !$vm_cloned ) {
   $try++;
   $new_vm = "${base_vm}-test-$$-$try";
   if ( exists $ENV{use_sudo} ) {
@@ -44,10 +45,12 @@ while ( !$vm_info ) {
 
   start_phase('Cloning VM');
   vm clone => $base_vm => $new_vm;
+  if($? == 0) {
+    $vm_cloned = 1;
+  }
 
-  my $vm_info;
   eval {
-    $vm_info = vm info => $new_vm;
+    my $vm_info = vm info => $new_vm;
     1;
   };
 
