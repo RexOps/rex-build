@@ -9,7 +9,8 @@ task "test", group => "test", sub {
 
   my @c = grep { is_file($_) } glob ("/etc/p*");
 
-  ok(grep { m:/etc/passwd: } @c, "found /etc/passwd");
+  my ($passwd) = grep { m:/etc/passwd: } @c;
+  ok($passwd, "found /etc/passwd");
 
   done_testing();
 };
