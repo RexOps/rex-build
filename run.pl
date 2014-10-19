@@ -13,8 +13,8 @@ $::QUIET = 1;
 my $starttime;
 my $phase;
 
-our $branch = $ENV{REX_BRANCH} || "master";
-our $git_repo = $ENV{GIT_REPO} || "git\@github.com:RexOps/Rex.git";
+our $branch   = $ENV{REX_BRANCH} || "master";
+our $git_repo = $ENV{GIT_REPO}   || "git\@github.com:RexOps/Rex.git";
 
 start_phase('Initializing');
 
@@ -34,19 +34,23 @@ if ( exists $ENV{use_sudo} ) {
 
 &end_phase;
 
-start_phase('Cloning VM');
-vm clone => $base_vm => $new_vm;
+my $vm_info;
 
-eval {
-  my $info = vm info => $new_vm;
-  1;
-} or do {
-  Rex::Logger::info("Clone doesn't work");
+# try cloning until end of time
+while ( !$vm_info ) {
+  start_phase('Cloning VM');
   vm clone => $base_vm => $new_vm;
-};
+
+  my $vm_info;
+  eval {
+    $vm_info = vm info => $new_vm;
+    1;
+  };
+
+  &end_phase;
+}
 
 #run "/usr/bin/virt-clone --connect qemu:///system -o '$base_vm' -n '$new_vm' --auto-clone -f /ram/$new_vm.img";
-&end_phase;
 
 start_phase('Starting VM');
 my $vm_started = 0;
@@ -55,7 +59,7 @@ for (qw/1 2 3/) {
 }
 &end_phase;
 
-if($vm_started == 0) {
+if ( $vm_started == 0 ) {
   die("Can't start vm: $new_vm.");
 }
 
@@ -80,7 +84,6 @@ else {
   $user = $config->{box}->{default}->{user};
   $pass = $config->{box}->{default}->{password};
 }
-
 
 do "run.tests.pl";
 
