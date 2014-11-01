@@ -154,7 +154,7 @@ task "test",
     "nofile1 up-to-date" );
 
   ok( $report->{"unlink[$tmp_dir/nofile2.txt]"}->{changed} == 0,
-    "nofile1 up-to-date" );
+    "nofile2 up-to-date" );
 
   ok( $report->{"unlink[$tmp_dir/test1.ren]"}->{changed} == 1,
     "test1.ren unlink'ed" );
