@@ -28,6 +28,7 @@ our $config = Load($yaml);
 
 my $base_vm = $ARGV[0];
 my $new_vm  = "${base_vm}-test-$$";
+$new_vm =~ s/:/_/gms;
 
 #Rex::connect( %{$config} );
 
