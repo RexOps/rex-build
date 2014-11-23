@@ -78,8 +78,9 @@ task test => group => test => sub {
   ok($t_env{key2} eq "my 2nd \"val\"", "got 2nd env variable");
 
   # test failed command
+  my $expected_error_code = is_freebsd ? 1 : 127;
   run "no-command";
-  ok($? == 127, "got error code 127 for 'command not found'");
+  ok($? == $expected_error_code, "got proper error code for 'command not found'");
 
   run "ls -l /not-there";
   ok($? != 0, "got non-zero return code for ls on unavailable directory.");
