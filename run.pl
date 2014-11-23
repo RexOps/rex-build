@@ -105,10 +105,12 @@ my $tx = $ua->post(
   }
 );
 
+my $docker_id;
+
 if ( $tx->success ) {
   my $ref = $tx->res->json;
 
-  my $docker_id = $ref->{id};
+  $docker_id = $ref->{id};
   if ( !$docker_id ) {
     die "Error creating test VM";
   }
@@ -152,9 +154,12 @@ else {
 do "run.tests.pl";
 
 start_phase('Cleaning up VM');
-vm destroy => $new_vm;
 
-vm delete => $new_vm;
+$ua->delete( "$con_str/$docker_id");
+
+#vm destroy => $new_vm;
+
+#vm delete => $new_vm;
 
 #rm "/ram/$new_vm.img";
 # fix for #6
