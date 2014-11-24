@@ -8,6 +8,12 @@ do "auth.conf";
 
 task test => group => test => sub {
 
+  if(is_file("/.dockerinit")) {
+    ok(1==1, "inside docker");
+    done_testing();
+    return;
+  }
+
   my $package = case operating_system, {
     #qr{SuSE}i   => 'pmtools',
     default    => 'dmidecode',
