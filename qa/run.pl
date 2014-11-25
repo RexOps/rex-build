@@ -70,6 +70,6 @@ else {
   die "Error creating test VM";
 }
 
-system "REXUSER=$user REXPASS=$pass HTEST=$ip rex test"; 
+system "REXUSER=$user REXPASS=$pass HTEST=$ip rex -d test"; 
 
 $ua->delete( "$con_str/$docker_id");
