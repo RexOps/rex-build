@@ -6,6 +6,7 @@
    
 use Rex -feature => ['0.42'];
 use Rex::Misc::ShellBlock;
+use Rex::Commands::Rsync;
 use Mojo::UserAgent;
 
 chdir "..";
@@ -49,7 +50,7 @@ EOS
   say $out;
 
   download "/tmp/checkstyle-result.xml", "../checkstyle-result.xml";
-
+  rsync "/tmp/test/test/cover_db", ".", { download => 1, };
 };
 
 1;
