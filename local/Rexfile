@@ -92,7 +92,7 @@ chmod 755 test.sh
 dzil run `pwd`/test.sh
 EOS
 
-  download "/tmp/junit_output.xml", "junit_output.xml";
+  download "/tmp/junit_output.xml", "../junit_output.xml";
 
   $ua->delete( "$con_str/$docker_id");
 };
