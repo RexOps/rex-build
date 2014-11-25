@@ -50,7 +50,7 @@ EOS
   say $out;
 
   download "/tmp/checkstyle-result.xml", "../checkstyle-result.xml";
-  rsync "/tmp/test/test/cover_db", ".", { download => 1, };
+  sync "/tmp/test/test/cover_db", ".", { download => 1, };
 };
 
 1;
