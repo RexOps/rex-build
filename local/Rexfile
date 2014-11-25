@@ -16,7 +16,7 @@ task test => group => test => sub {
 
   my $perl_version = $ENV{perl_version};
 
-  shell_block "/bin/bash", <<EOS;
+  my $out = shell_block "/bin/bash", <<EOS;
 
 mkdir /tmp/test
 cd /tmp/test
@@ -40,8 +40,10 @@ EOF
 
 chmod 755 test.sh
 
-dzil run `pwd`/test.sh
+dzil run /tmp/test/test/test.sh
 EOS
+
+  say $out;
 
   download "/tmp/junit_output.xml", "../junit_output.xml";
 
