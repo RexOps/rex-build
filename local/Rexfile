@@ -8,6 +8,10 @@ use Rex -feature => ['0.42'];
 use Rex::Misc::ShellBlock;
 use Mojo::UserAgent;
 
+chdir "..";
+do "auth.conf";
+chdir "local";
+
 task test => group => test => sub {
 
   my $perl_version = $ENV{perl_version};
