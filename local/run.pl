@@ -39,7 +39,7 @@ my $tx = $ua->post(
     parent =>
       "3a7f1fc9e58a8492fc625d8a16e85e76_c5fd214cdd0d2b3b4272e73b022ba5c2",
     data => {
-      image => "rexops-perl-$perl_version:0.1",
+      image => "rexops-perl-$perl_version:$ENV{docker_tag}",
       host =>
 "3a7f1fc9e58a8492fc625d8a16e85e76_1b21b0d71706897b69f108572c444d40_b0da275520918e23dd615e2a747528f1",
       command => "/usr/sbin/sshd -D",
