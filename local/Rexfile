@@ -24,7 +24,7 @@ git clone $ENV{git_repo} test
 cd test
 git checkout $ENV{branch}
 
-. \~/.bash_profile
+source /usr/local/perlbrew/etc/bashrc
 perlbrew use perl-$perl_version
 cpanm Dist::Zilla
 dzil authordeps --missing | cpanm
