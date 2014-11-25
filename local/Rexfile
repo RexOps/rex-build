@@ -71,6 +71,7 @@ mkdir /tmp/test
 cd /tmp/test
 git clone $ENV{git_repo} test
 cd test
+git checkout $ENV{branch}
 
 . \~/.bash_profile
 perlbrew use perl-$perl_version
