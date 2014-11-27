@@ -1,9 +1,9 @@
 #
 # (c) Jan Gehring <jan.gehring@gmail.com>
-# 
+#
 # vim: set ts=2 sw=2 tw=0:
 # vim: set expandtab:
-   
+
 use Rex -feature => ['0.42'];
 use Rex::Misc::ShellBlock;
 use Rex::Commands::Rsync;
@@ -33,7 +33,7 @@ dzil listdeps --missing | cpanm
 cpanm -in TAP::Formatter::JUnit
 
 cat >qa.sh<<EOF
-perlcritic --gentle lib | /usr/local/bin/format-checkstyle >checkstyle-result.xml
+perlcritic --gentle --profile /tmp/.perlcriticrc lib | /usr/local/bin/format-checkstyle >checkstyle-result.xml
 cover --test --report_c0 50 --report_c1 70 --report_c2 80
 ls -l
 rm -rf ../../cover_db
