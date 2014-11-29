@@ -5,16 +5,12 @@ use Rex::Commands::Kernel;
 use Rex::Commands::Gather;
 use Test::More;
 
+plan skip_all => "Skipping kmod tests with docker" if is_file("/.dockerinit");
+
 do "auth.conf";
 
 desc "Load Kernel Module";
 task "test", group => "test", sub {
-
-  if(is_file("/.dockerinit")) {
-    ok(1==1, "inside docker");
-    done_testing();
-    return;
-  }
 
   if(operating_system_is("SunOS")) {
 
