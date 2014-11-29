@@ -1,9 +1,9 @@
 #
 # (c) Jan Gehring <jan.gehring@gmail.com>
-# 
+#
 # vim: set ts=2 sw=2 tw=0:
 # vim: set expandtab:
-   
+
 use Rex -feature => ['0.42'];
 use Rex::Misc::ShellBlock;
 use Mojo::UserAgent;
@@ -20,8 +20,9 @@ task test => group => test => sub {
 
 mkdir /tmp/test
 cd /tmp/test
-git clone $ENV{git_repo} test
+git clone --config remote.origin.fetch=$ENV{refspec} $ENV{git_repo} test
 cd test
+git fetch
 git checkout $ENV{branch}
 
 source /usr/local/perlbrew/etc/bashrc
