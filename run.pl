@@ -92,8 +92,7 @@ my $con_str =
   . "$config->{jobcontrol}->{host}:$config->{jobcontrol}->{port}"
   . "/api/1.0/project/5bde00a59817c6e3e6e79cc4ad8a514a/node";
 
-
-if( $ENV{use_docker} ) {
+if ( $ENV{use_docker} ) {
 
   my $tx = $ua->post(
     $con_str,
@@ -105,7 +104,7 @@ if( $ENV{use_docker} ) {
       data => {
         image => $base_vm,
         host =>
-  "3a7f1fc9e58a8492fc625d8a16e85e76_1b21b0d71706897b69f108572c444d40_b0da275520918e23dd615e2a747528f1",
+"3a7f1fc9e58a8492fc625d8a16e85e76_1b21b0d71706897b69f108572c444d40_b0da275520918e23dd615e2a747528f1",
         command => "/usr/sbin/sshd -D",
       }
     }
@@ -134,7 +133,7 @@ if( $ENV{use_docker} ) {
 
 }
 
-if( $ENV{use_kvm} ) {
+if ( $ENV{use_kvm} ) {
 
   my $tx = $ua->post(
     $con_str,
@@ -146,7 +145,7 @@ if( $ENV{use_kvm} ) {
       data => {
         image => $base_vm,
         host =>
-  "3a7f1fc9e58a8492fc625d8a16e85e76_1b21b0d71706897b69f108572c444d40_b0da275520918e23dd615e2a747528f1",
+"3a7f1fc9e58a8492fc625d8a16e85e76_1b21b0d71706897b69f108572c444d40_b0da275520918e23dd615e2a747528f1",
       }
     }
   );
@@ -177,7 +176,6 @@ if( $ENV{use_kvm} ) {
 
 }
 
-
 &end_phase;
 
 if ( !$ip ) {
@@ -205,7 +203,7 @@ do "run.tests.pl";
 
 start_phase('Cleaning up VM');
 
-$ua->delete( "$con_str/$vm_id");
+$ua->delete("$con_str/$vm_id");
 
 #vm destroy => $new_vm;
 

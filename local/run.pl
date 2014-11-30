@@ -47,7 +47,7 @@ my $tx = $ua->post(
   }
 );
 
-my ($docker_id, $ip);
+my ( $docker_id, $ip );
 
 if ( $tx->success ) {
   my $ref = $tx->res->json;
@@ -70,6 +70,6 @@ else {
   die "Error creating test VM";
 }
 
-system "REXUSER=$user REXPASS=$pass HTEST=$ip rex test"; 
+system "REXUSER=$user REXPASS=$pass HTEST=$ip rex test";
 
-$ua->delete( "$con_str/$docker_id");
+$ua->delete("$con_str/$docker_id");
