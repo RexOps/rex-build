@@ -166,6 +166,7 @@ if( $ENV{use_kvm} ) {
       $ip = $qref->{provisioner}->{network}->[0]->{ip};
     }
     else {
+      print STDERR Dumper $qtx;
       die "Error getting info of test VM";
     }
   }
