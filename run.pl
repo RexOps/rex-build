@@ -162,7 +162,7 @@ if( $ENV{use_kvm} ) {
     my $qtx = $ua->get("$con_str/$vm_id");
     if ( $qtx->success ) {
       my $qref = $qtx->res->json;
-      $ip = $qref->{provisioner}->[0]->{ip};
+      $ip = $qref->{provisioner}->{network}->[0]->{ip};
     }
     else {
       die "Error getting info of test VM";
