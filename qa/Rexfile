@@ -33,7 +33,9 @@ dzil listdeps --missing | cpanm
 cpanm -in TAP::Formatter::JUnit
 
 cat >qa.sh<<EOF
-perlcritic --gentle --profile /tmp/.perlcriticrc lib | /usr/local/bin/format-checkstyle >checkstyle-result.xml
+cp ../../.perlcriticrc .
+cp ../../.perltidyrc .
+perlcritic lib/ | /usr/local/bin/format-checkstyle > checkstyle-result.xml
 cover --test --report_c0 50 --report_c1 70 --report_c2 80
 ls -l
 rm -rf ../../cover_db
