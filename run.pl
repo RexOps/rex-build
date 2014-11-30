@@ -210,7 +210,7 @@ $ua->delete( "$con_str/$vm_id");
 
 #rm "/ram/$new_vm.img";
 # fix for #6
-run "virsh vol-delete --pool default $new_vm.img";
+#run "virsh vol-delete --pool default $new_vm.img";
 &end_phase;
 
 sub get_random {
