@@ -12,6 +12,7 @@ set virtualization => "LibVirt";
 
 my $ua = Mojo::UserAgent->new;
 $ua->request_timeout(60);
+$ua->inactivity_timeout(60);
 
 $::QUIET = 1;
 my $starttime;
