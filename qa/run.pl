@@ -60,7 +60,7 @@ if ( $tx->success ) {
   my $qtx = $ua->get("$con_str/$docker_id");
   if ( $qtx->success ) {
     my $qref = $qtx->res->json;
-    $ip = $qref->{provisioner}->{network}->[0]->{ip};
+    $ip = $qref->{provisioner}->[0]->{NetworkSettings}->{IPAddress};
   }
   else {
     die "Error getting info of test VM";
