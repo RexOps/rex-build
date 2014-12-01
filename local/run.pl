@@ -61,7 +61,7 @@ if ( $tx->success ) {
   if ( $qtx->success ) {
   print STDERR Dumper $qtx;
     my $qref = $qtx->res->json;
-    $ip = $qref->{provisioner}->{network}->[0]->{ip};
+    $ip = $qref->{provisioner}->[0]->{NetworkSettings}->{IPAddress};
   }
   else {
     die "Error getting info of test VM";
