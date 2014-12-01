@@ -59,6 +59,7 @@ if ( $tx->success ) {
 
   my $qtx = $ua->get("$con_str/$docker_id");
   if ( $qtx->success ) {
+  print STDERR Dumper $qtx;
     my $qref = $qtx->res->json;
     $ip = $qref->{provisioner}->[0]->{NetworkSettings}->{IPAddress};
   }
