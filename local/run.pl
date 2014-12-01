@@ -47,7 +47,7 @@ my $tx = $ua->post(
   }
 );
 
-my ($docker_id, $ip);
+my ( $docker_id, $ip );
 
 if ( $tx->success ) {
   my $ref = $tx->res->json;
@@ -61,7 +61,7 @@ if ( $tx->success ) {
   if ( $qtx->success ) {
   print STDERR Dumper $qtx;
     my $qref = $qtx->res->json;
-    $ip = $qref->{provisioner}->[0]->{NetworkSettings}->{IPAddress};
+    $ip = $qref->{provisioner}->{network}->[0]->{ip};
   }
   else {
     die "Error getting info of test VM";
@@ -71,6 +71,6 @@ else {
   die "Error creating test VM";
 }
 
-system "REXUSER=$user REXPASS=$pass HTEST=$ip rex test"; 
+system "REXUSER=$user REXPASS=$pass HTEST=$ip rex test";
 
-$ua->delete( "$con_str/$docker_id");
+$ua->delete("$con_str/$docker_id");

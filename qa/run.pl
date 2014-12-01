@@ -60,7 +60,7 @@ if ( $tx->success ) {
   my $qtx = $ua->get("$con_str/$docker_id");
   if ( $qtx->success ) {
     my $qref = $qtx->res->json;
-    $ip = $qref->{provisioner}->[0]->{NetworkSettings}->{IPAddress};
+    $ip = $qref->{provisioner}->{network}->[0]->{ip};
   }
   else {
     die "Error getting info of test VM";
@@ -70,6 +70,6 @@ else {
   die "Error creating test VM";
 }
 
-system "REXUSER=$user REXPASS=$pass HTEST=$ip rex test"; 
+system "REXUSER=$user REXPASS=$pass HTEST=$ip rex test";
 
 $ua->delete("$con_str/$docker_id");
