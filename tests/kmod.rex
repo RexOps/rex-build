@@ -5,12 +5,19 @@ use Rex::Commands::Kernel;
 use Rex::Commands::Gather;
 use Test::More;
 
-plan skip_all => "Skipping kmod tests with docker" if is_file("/.dockerinit");
-
 do "auth.conf";
 
 desc "Load Kernel Module";
 task "test", group => "test", sub {
+
+  # need to be inside the task, so that is_file() is not local
+  if (is_file("/.dockerinit")) {
+    # skip_all doesn't seem to work with JUnit
+    #plan skip_all => "Skipping dmi tests with docker" 
+    ok(1==1, "Skipping dmi tests with docker");
+    done_testing();
+    return;
+  }
 
   if(operating_system_is("SunOS")) {
 
