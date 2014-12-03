@@ -29,6 +29,9 @@ task test => group => test => sub {
     return;
   }
 
+  use Data::Dumper;
+  print STDERR Dumper $dmi;
+
   my $bios = $dmi->get_bios;
   if($bios->get_vendor eq "Bochs") {
     ok($bios->get_vendor eq "Bochs", "got bios vendor bochs");
