@@ -132,8 +132,7 @@ if ( $ENV{use_docker} ) {
   }
 
 }
-
-if ( $ENV{use_kvm} ) {
+else {
 
   my $tx = $ua->post(
     $con_str,
