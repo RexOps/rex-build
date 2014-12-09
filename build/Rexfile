@@ -783,31 +783,32 @@ auth
   for         => "publish",
   user        => config->{repo}->{user},
   private_key => config->{repo}->{private_key},
-  public_key  => config->{repo}->{public_key};
+  public_key  => config->{repo}->{public_key},
+  auth_type   => 'key';
 
 auth
   for         => "prepare_repo_server",
   user        => config->{repo}->{user},
   private_key => config->{repo}->{private_key},
-  public_key  => config->{repo}->{public_key};
+  public_key  => config->{repo}->{public_key},
+  auth_type   => 'key';
 
 auth
   for      => "archive",
   user        => config->{repo}->{user},
   private_key => config->{repo}->{private_key},
-  public_key  => config->{repo}->{public_key};
+  public_key  => config->{repo}->{public_key},
+  auth_type   => 'key';
 
 auth
   for      => "release_files",
   user        => config->{repo}->{user},
   private_key => config->{repo}->{private_key},
-  public_key  => config->{repo}->{public_key};
+  public_key  => config->{repo}->{public_key},
+  auth_type   => 'key';
 
 auth
   for => "build_recipes_directory", %{ config->{recipes} };
-  user        => config->{repo}->{user},
-  private_key => config->{repo}->{private_key},
-  public_key  => config->{repo}->{public_key};
 
 ################################################################################
 # the end
