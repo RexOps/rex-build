@@ -436,7 +436,7 @@ task prepare => group => test => sub {
   Rex::Logger::info("Uploading: .build.$pid -> $upload_tarball_dir");
   sync_up ".build.$pid/", $upload_tarball_dir;
 
-  say "" . run "find /root";
+  say "" . run "find /root -exec ls -l '{}' ';'";
 
   Rex::Logger::info(
     "Uploading: " . config->{build}->{files} . "/" . lc($op) . " -> /root" );
