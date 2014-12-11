@@ -649,23 +649,25 @@ task publish => config->{repo}->{server} => sub {
     Rex::Logger::info("Uploading to: $repo_path ...");
     sync_up ".packages.$pid/", $repo_path;
 
-    file "/root/aptgenerate.$ver.conf",
+    my $home_dir = "/home/linuxfiles";
+
+    file "$home_dir/aptgenerate.$ver.conf",
       content => template( "templates/aptgenerate.conf.tpl", dist => $ver );
 
-    file "/root/aptftp.$ver.conf",
+    file "$home_dir/aptftp.$ver.conf",
       content => template( "templates/aptftp.conf.tpl", dist => $ver );
 
     my $doc_root = doc_root . "/" . lc($op);
     run
-      "apt-ftparchive generate -c=/root/aptftp.$ver.conf /root/aptgenerate.$ver.conf",
+      "apt-ftparchive generate -c=$home_dir/aptftp.$ver.conf $home_dir/aptgenerate.$ver.conf",
       cwd => $doc_root;
     run
-      "apt-ftparchive release -c=/root/aptftp.$ver.conf dists/$ver >dists/$ver/Release",
+      "apt-ftparchive release -c=$home_dir/aptftp.$ver.conf dists/$ver >dists/$ver/Release",
       cwd => $doc_root;
 
     rm "$doc_root/dists/$ver/Release.gpg";
 
-    file "/root/sign_release",
+    file "$home_dir/sign_release",
       content => template(
       "expect/" . lc($op) . ".sign_release.expect",
       dist => $ver,
@@ -675,7 +677,7 @@ task publish => config->{repo}->{server} => sub {
       group => "root",
       mode  => 755;
 
-    run "/root/sign_release", cwd => $doc_root;
+    run "$home_dir/sign_release", cwd => $doc_root;
 
     rm "$doc_root/packages-i386.db";
     rm "$doc_root/packages-amd64.db";
