@@ -1,0 +1,281 @@
+# basic informations
+name:
+  centos: rex-jobcontrol
+  debian: rex-jobcontrol
+  ubuntu: rex-jobcontrol
+  fedora: rex-jobcontrol
+  redhat: rex-jobcontrol
+  suse: rex-jobcontrol
+  mageia: rex-jobcontrol
+realname: Rex-JobControl
+version: 0.0.4
+release: 1
+epoch: 1
+summary: Rex::JobControl - Job-Control Webinterface for Rex
+group:
+  centos: Utilities/System
+  debian: admin
+  ubuntu: admin
+  redhat: admin
+  fedora: admin
+  suse: admin
+  mageia: admin
+license: Apache 2
+homepage: http://www.rexify.org/
+source: http://nightly.rex-jobcontrol.linux-files.org/source/Rex-JobControl-0.0.4.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+no_auto_scan: true
+description: |
+  Rex::JobControl - Job-Control Webinterface for Rex
+
+# requirements
+requires:
+  debian:
+    squeeze: &depsqueeze
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - rex
+        - libmojolicious-perl
+        - libminion-perl
+        - libmojolicious-plugin-authentication-perl
+        - libdatetime-perl
+        - libyaml-perl
+        - libdigest-bcrypt-perl
+        - libcapture-tiny-perl
+
+      runtime:
+        - perl
+        - perl-modules
+        - rex
+        - libmojolicious-perl
+        - libminion-perl
+        - libmojolicious-plugin-authentication-perl
+        - libdatetime-perl
+        - libyaml-perl
+        - libdigest-bcrypt-perl
+        - libcapture-tiny-perl
+
+
+    wheezy: &depwheezy
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - rex
+        - libmojolicious-perl
+        - libminion-perl
+        - libmojolicious-plugin-authentication-perl
+        - libdatetime-perl
+        - libyaml-perl
+        - libdigest-bcrypt-perl
+        - libcapture-tiny-perl
+
+      runtime:
+        - perl
+        - perl-modules
+        - rex
+        - libmojolicious-perl
+        - libminion-perl
+        - libmojolicious-plugin-authentication-perl
+        - libdatetime-perl
+        - libyaml-perl
+        - libdigest-bcrypt-perl
+        - libcapture-tiny-perl
+
+
+  centos:
+    6: &depcentos6
+      build:
+        - make
+        - perl
+        - perl-devel
+        - rex
+        - perl-Mojolicious
+        - perl-Minion
+        - perl-Mojolicious-Plugin-Authentication
+        - perl-DateTime
+        - perl-YAML
+        - perl-Digest-Bcrypt
+        - perl-Time-Local-rex
+        - perl-Capture-Tiny
+
+
+      runtime:
+        - perl
+        - rex
+        - perl-Mojolicious
+        - perl-Minion
+        - perl-Mojolicious-Plugin-Authentication
+        - perl-DateTime
+        - perl-YAML
+        - perl-Digest-Bcrypt
+        - perl-Time-Local-rex
+        - perl-Capture-Tiny
+
+    7:
+      build:
+        - make
+        - perl
+        - perl-devel
+        - rex
+        - perl-Mojolicious
+        - perl-Minion
+        - perl-Mojolicious-Plugin-Authentication
+        - perl-DateTime
+        - perl-YAML
+        - perl-Digest-Bcrypt
+        - perl-Capture-Tiny
+        - perl-Digest-MD5
+
+      runtime:
+        - perl
+        - rex
+        - perl-Mojolicious
+        - perl-Minion
+        - perl-Mojolicious-Plugin-Authentication
+        - perl-DateTime
+        - perl-YAML
+        - perl-Digest-Bcrypt
+        - perl-Capture-Tiny
+        - perl-Digest-MD5
+
+  ubuntu:
+    lucid: *depsqueeze
+    precise: *depwheezy
+    quantal: *depwheezy
+    raring: *depwheezy
+    saucy: *depwheezy
+    trusty: *depwheezy
+
+  fedora:
+    18: &depfedora18
+      build:
+        - make
+        - perl
+        - perl-devel
+        - rex
+        - perl-Mojolicious
+        - perl-Minion
+        - perl-Mojolicious-Plugin-Authentication
+        - perl-DateTime
+        - perl-YAML
+        - perl-Digest-Bcrypt
+        - perl-Capture-Tiny
+
+
+      runtime:
+        - perl
+        - rex
+        - perl-Mojolicious
+        - perl-Minion
+        - perl-Mojolicious-Plugin-Authentication
+        - perl-DateTime
+        - perl-YAML
+        - perl-Digest-Bcrypt
+        - perl-Capture-Tiny
+
+    19: *depfedora18
+    20: *depfedora18
+
+  redhat:
+    18: *depfedora18
+    19: *depfedora18
+    20: *depfedora18
+
+  suse:
+    13.1: &depsuse13
+      build:
+        - make
+        - perl
+        - rex
+        - perl-Mojolicious
+        - perl-Minion
+        - perl-Mojolicious-Plugin-Authentication
+        - perl-DateTime
+        - perl-YAML
+        - perl-Digest-Bcrypt
+        - perl-Capture-Tiny
+
+      runtime:
+        - perl
+        - rex
+        - perl-Mojolicious
+        - perl-Minion
+        - perl-Mojolicious-Plugin-Authentication
+        - perl-DateTime
+        - perl-YAML
+        - perl-Digest-Bcrypt
+        - perl-Capture-Tiny
+
+  mageia:
+    3:
+      build:
+        - make
+        - perl
+        - rex
+        - perl-Mojolicious
+        - perl-Minion
+        - perl-Mojolicious-Plugin-Authentication
+        - perl-DateTime
+        - perl-YAML
+        - perl-Digest-Bcrypt
+        - perl-Capture-Tiny
+
+
+      runtime:
+        - perl
+        - rex
+        - perl-Mojolicious
+        - perl-Minion
+        - perl-Mojolicious-Plugin-Authentication
+        - perl-DateTime
+        - perl-YAML
+        - perl-Digest-Bcrypt
+        - perl-Capture-Tiny
+
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+  fedora:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_bindir}/*
+      - %{perl_vendorlib}/*
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_bindir}/*
+      - %{perl_vendorlib}/*

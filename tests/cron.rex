@@ -29,6 +29,8 @@ task test => group => test => sub {
 
   ok(scalar(@crons) == 1, "no duplicated cron job");
 
+  my $env_id = 0;
+
   if(! is_solaris) {
     cron env => root => add => {
       MYVAR => "foo",
@@ -36,10 +38,20 @@ task test => group => test => sub {
     };
 
     my @envs = cron env => root => "list";
-    ok($envs[0]->{name} eq "MYVAR", "env MYVAR");
-    ok($envs[0]->{value} eq '"foo"', "env MYVAR value");
-    ok($envs[1]->{name} eq "MYFOO", "env MYFOO");
-    ok($envs[1]->{value} eq '"bar"', "env MYFOO value");
+
+    my $i = 0;
+    for my $e (@envs) {
+      if($e->{name} eq "MYVAR") { $env_id = $i; last; }
+      $i++;
+    }
+
+    my ($e1) = grep { $_->{name} eq "MYVAR" } @envs;
+    my ($e2) = grep { $_->{name} eq "MYFOO" } @envs;
+ 
+    ok($e1->{name} eq "MYVAR", "env MYVAR");
+    ok($e1->{value} eq '"foo"', "env MYVAR value");
+    ok($e2->{name} eq "MYFOO", "env MYFOO");
+    ok($e2->{value} eq '"bar"', "env MYFOO value");
   }
 
   cron add => "root", {
@@ -52,10 +64,14 @@ task test => group => test => sub {
   ok($crons[1]->{"command"} eq "uptime", "Added cron (2)");
 
   if(! is_solaris) {
-    cron env => root => delete => 0;
+    cron env => root => delete => $env_id;
     my @envs = cron env => root => "list";
-    ok($envs[0]->{name} eq "MYFOO", "env MYFOO");
-    ok($envs[0]->{value} eq '"bar"', "env MYFOO value");
+    my ($e1) = grep { $_->{name} eq "MYVAR" } @envs;
+    my ($e2) = grep { $_->{name} eq "MYFOO" } @envs;
+ 
+    ok($e2->{name} eq "MYFOO", "env MYFOO");
+    ok($e2->{value} eq '"bar"', "env MYFOO value");
+    ok(!$e1, "env MYVAR delete.");
    
     cron delete => "root", 1;
 

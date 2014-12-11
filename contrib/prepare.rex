@@ -41,6 +41,7 @@ task prepare => group => test => sub {
       qr{debian|ubuntu}i => [qw/rsync/],
       qr{suse}i          => [qw/lsb-release/],
       qr{fedora}i        => [qw/perl openssh-clients which/],
+      qr{gentoo}i        => ['sys-process/vixie-cron'],
       default            => [],
   };
 
@@ -86,10 +87,10 @@ task prepare => group => test => sub {
 
   run "echo 127.0.2.1 `uname -n` >>/etc/hosts";
 
-  file "/root/.profile", content => "export MYFOO='MYBAR'\nexport PATH=/bin\n";
+  file "/root/.profile", content => "export MYFOO='MYBAR'\nexport PATH=/bin:/usr/bin\n";
 
   # for csh
-  file "/root/.login", content => "set MYFOO='MYBAR'\nset PATH=/bin\n";
+  file "/root/.login", content => "set MYFOO='MYBAR'\nset PATH=/bin:/usr/bin\n";
 
   mkdir "/tmp2";
 

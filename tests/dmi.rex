@@ -4,9 +4,19 @@ use Rex::Commands::Cron;
 
 use Test::More;
 
+
 do "auth.conf";
 
 task test => group => test => sub {
+
+  # need to be inside the task, so that is_file() is not local
+  if (is_file("/.dockerinit")) {
+    # skip_all doesn't seem to work with JUnit
+    #plan skip_all => "Skipping dmi tests with docker" 
+    ok(1==1, "Skipping dmi tests with docker");
+    done_testing();
+    return;
+  }
 
   my $package = case operating_system, {
     #qr{SuSE}i   => 'pmtools',

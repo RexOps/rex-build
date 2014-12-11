@@ -75,9 +75,10 @@ task "test",
       qr{Redhat}i  => 'httpd',
       qr{Ubuntu}i  => 'apache2',
       qr{Debian}i  => 'apache2',
-      qr{FreeBSD}i => 'apache22',
+      qr{FreeBSD}i => 'nginx',
       qr{OpenWrt}i => 'uhttpd',
       qr{Mageia}i  => 'apache',
+      qr{Gentoo}i  => 'nginx',
   };
 
   my $service = case operating_system, {
@@ -87,9 +88,10 @@ task "test",
       qr{Redhat}i  => 'httpd',
       qr{Ubuntu}i  => 'apache2',
       qr{Debian}i  => 'apache2',
-      qr{FreeBSD}i => 'apache22',
+      qr{FreeBSD}i => 'nginx',
       qr{OpenWrt}i => 'uhttpd',
       qr{Mageia}i  => 'httpd',
+      qr{Gentoo}i  => 'nginx',
   };
 
   pkg $package, ensure => "present";
@@ -110,6 +112,7 @@ task "test",
       qr{Mageia}i => "vim-enhanced",
       qr{Debian}i => "vim",
       qr{Ubuntu}i => "vim",
+      qr{Gentoo}i => "app-misc/screen",
       default     => "vim",
   };
 
@@ -151,7 +154,7 @@ task "test",
     "nofile1 up-to-date" );
 
   ok( $report->{"unlink[$tmp_dir/nofile2.txt]"}->{changed} == 0,
-    "nofile1 up-to-date" );
+    "nofile2 up-to-date" );
 
   ok( $report->{"unlink[$tmp_dir/test1.ren]"}->{changed} == 1,
     "test1.ren unlink'ed" );

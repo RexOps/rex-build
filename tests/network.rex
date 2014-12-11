@@ -23,12 +23,8 @@ task "test", group => "test", sub {
     my ($ssh) = grep { $_->{command} =~ /dropbear/ } @tcp_connections;
     ok($ssh, "found sshd");
   }
-  elsif(is_linux) {
-    my ($ssh) = grep { $_->{command} =~ /^sshd/ } @tcp_connections;
-    ok($ssh, "found sshd");
-  }
   else {
-    my ($ssh) = grep { $_->{local_addr} =~ /\.22$/ } @tcp_connections;
+    my ($ssh) = grep { $_->{local_addr} =~ /[\.:]22$/ } @tcp_connections;
     ok($ssh, "found sshd");
   }
 

@@ -1,0 +1,58 @@
+#
+# (c) Jan Gehring <jan.gehring@gmail.com>
+#
+# vim: set ts=2 sw=2 tw=0:
+# vim: set expandtab:
+
+use Rex -feature => ['0.42'];
+use Rex::Misc::ShellBlock;
+use Rex::Commands::Rsync;
+use Mojo::UserAgent;
+
+chdir "..";
+do "auth.conf";
+chdir "qa";
+
+task test => group => test => sub {
+
+  my $perl_version = $ENV{perl_version};
+
+  my $out = shell_block "/bin/bash", <<EOS;
+
+mkdir /tmp/test
+cd /tmp/test
+git clone $ENV{git_repo} test
+cd test
+git checkout $ENV{branch}
+
+source /usr/local/perlbrew/etc/bashrc
+perlbrew use perl-$perl_version
+cpanm Dist::Zilla Devel::Cover
+dzil authordeps --missing | cpanm
+dzil listdeps --missing | cpanm
+cpanm -in TAP::Formatter::JUnit
+
+cat >qa.sh<<EOF
+cp ../../.perlcriticrc .
+cp ../../.perltidyrc .
+perlcritic bin/ lib/ | /usr/local/bin/format-checkstyle > checkstyle-result.xml
+cover --test --report_c0 50 --report_c1 70 --report_c2 80
+ls -l
+rm -rf ../../cover_db
+mv *.xml ../../
+mv cover_db ../../
+EOF
+
+chmod 755 qa.sh
+
+dzil run /tmp/test/test/qa.sh
+
+EOS
+
+  say $out;
+
+  download "/tmp/test/test/checkstyle-result.xml", "../checkstyle-result.xml";
+  sync "/tmp/test/test/cover_db", "../", { download => 1, };
+};
+
+1;

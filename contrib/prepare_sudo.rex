@@ -1,3 +1,5 @@
+# vim: set syn=perl:
+
 use Rex -feature => '0.42';
 use Rex::Commands::User;
 use YAML;
@@ -23,7 +25,20 @@ task prepare => group => test => sub {
 
   account $user,
     home        => "/home/$user",
+    uid         => 5000,
     groups      => [$user],
+    password    => $pass,
+    ensure      => "present",
+    create_home => TRUE;
+
+
+  # a user to test sudo -u
+  create_group "mytest1";
+
+  account "mytest1",
+    home        => "/home/mytest1",
+    uid         => 7000,
+    groups      => ["mytest1"],
     password    => $pass,
     ensure      => "present",
     create_home => TRUE;

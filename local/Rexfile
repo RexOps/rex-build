@@ -1,0 +1,53 @@
+#
+# (c) Jan Gehring <jan.gehring@gmail.com>
+#
+# vim: set ts=2 sw=2 tw=0:
+# vim: set expandtab:
+
+use Rex -feature => ['0.42'];
+use Rex::Misc::ShellBlock;
+use Mojo::UserAgent;
+
+chdir "..";
+do "auth.conf";
+chdir "local";
+
+task test => group => test => sub {
+
+  my $perl_version = $ENV{perl_version};
+
+  my $out = shell_block "/bin/bash", <<EOS;
+
+mkdir /tmp/test
+cd /tmp/test
+git clone --config remote.origin.fetch=$ENV{refspec} $ENV{git_repo} test
+cd test
+git fetch
+git checkout $ENV{branch}
+
+source /usr/local/perlbrew/etc/bashrc
+perlbrew use perl-$perl_version
+cpanm Dist::Zilla
+dzil authordeps --missing | cpanm
+dzil listdeps --missing | cpanm
+cpanm -in TAP::Formatter::JUnit
+
+cat >test.sh<<EOF
+make clean
+perl Makefile.PL
+make
+prove --blib --recurse --timer --formatter TAP::Formatter::JUnit >/tmp/junit_output.xml
+EOF
+
+chmod 755 test.sh
+
+dzil run /tmp/test/test/test.sh
+EOS
+
+  say $out;
+
+  download "/tmp/junit_output.xml", "../junit_output.xml";
+
+};
+
+1;

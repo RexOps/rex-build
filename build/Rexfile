@@ -63,7 +63,7 @@ task version_tag => sub {
   run "rm -rf tmp";
   mkdir "tmp";
 
-  my $repository = "git\@github.com:RexOps/$param->{project}.git";
+  my $repository = "https://github.com/RexOps/$param->{project}.git";
 
   Rex::Logger::info("Cloning $repository to tmp");
   run "cd tmp ; git clone $repository --branch master >/tmp/out.log 2>&1";
@@ -436,6 +436,8 @@ task prepare => group => test => sub {
   Rex::Logger::info("Uploading: .build.$pid -> $upload_tarball_dir");
   sync_up ".build.$pid/", $upload_tarball_dir;
 
+  say "" . run "find /root -exec ls -l '{}' ';'";
+
   Rex::Logger::info(
     "Uploading: " . config->{build}->{files} . "/" . lc($op) . " -> /root" );
   sync_up config->{build}->{files} . "/" . lc($op), "/root";
@@ -736,9 +738,10 @@ task archive => config->{repo}->{server} => sub {
 
   my $build_project = $params->{project} || "Rex";
   my $build_dir = "\L$build_project";
+  my $build_repo = $params->{repo} || 'https://github.com/RexOps/Rex.git';
 
   LOCAL {
-    Rex::Logger::info("Cloning $build_project repository...");
+    Rex::Logger::info("Cloning $build_repo repository...");
 
     if ( -d $build_dir ) {
       Rex::Logger::info("Cleaning up...");
@@ -747,8 +750,7 @@ task archive => config->{repo}->{server} => sub {
 
     my $branch = $params->{branch} || "master";
 
-    run
-      "git clone git\@github.com:RexOps/$build_project.git $build_dir --branch $branch >/tmp/out.log 2>&1";
+    run "git clone $build_repo $build_dir --branch $branch >/tmp/out.log 2>&1";
     #run "cd $build_dir; perl Makefile.PL && make && make dist && cd ..";
     run "cd $build_dir; dzil test && dzil build";
     ($pkg) = glob("$build_dir/*.tar.gz");
@@ -782,24 +784,32 @@ task archive => config->{repo}->{server} => sub {
 # special authentication for repository server
 ################################################################################
 auth
-  for      => "publish",
-  user     => config->{repo}->{user},
-  password => config->{repo}->{password};
+  for         => "publish",
+  user        => config->{repo}->{user},
+  private_key => config->{repo}->{private_key},
+  public_key  => config->{repo}->{public_key},
+  auth_type   => 'key';
 
 auth
-  for      => "prepare_repo_server",
-  user     => config->{repo}->{user},
-  password => config->{repo}->{password};
+  for         => "prepare_repo_server",
+  user        => config->{repo}->{user},
+  private_key => config->{repo}->{private_key},
+  public_key  => config->{repo}->{public_key},
+  auth_type   => 'key';
 
 auth
   for      => "archive",
-  user     => config->{repo}->{user},
-  password => config->{repo}->{password};
+  user        => config->{repo}->{user},
+  private_key => config->{repo}->{private_key},
+  public_key  => config->{repo}->{public_key},
+  auth_type   => 'key';
 
 auth
   for      => "release_files",
-  user     => config->{repo}->{user},
-  password => config->{repo}->{password};
+  user        => config->{repo}->{user},
+  private_key => config->{repo}->{private_key},
+  public_key  => config->{repo}->{public_key},
+  auth_type   => 'key';
 
 auth
   for => "build_recipes_directory", %{ config->{recipes} };

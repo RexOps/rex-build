@@ -86,16 +86,32 @@ task test => group => test => sub {
 
   eval {
     $ok = 0;
-    install "rex";
+    install $ENV{TEST_PACKAGE};
     $ok = 1;
   };
-  ok($ok == 1, "rex installed");
+  ok($ok == 1, "$ENV{TEST_PACKAGE} installed");
 
-  my $out = run "rex -v";
-  ok($? == 0, "run rex");
-  my ($name, $version) = split(/ /, $out);
-  ok($version =~ m/\d+\.\d+\.\d+/, "got version ($version)");
-  ok($version eq get_version_to_install(), "got correct version");
+  if($ENV{TEST_PACKAGE} eq "rex") {
+    my $out = run "rex -v";
+    ok($? == 0, "run rex");
+    my ($name, $version) = split(/ /, $out);
+    ok($version =~ m/\d+\.\d+\.\d+/, "got version ($version)");
+    ok($version eq get_version_to_install(), "got correct version");
+  }
+
+  if($ENV{TEST_PACKAGE} eq "rex-jobcontrol") {
+    mkdir "/etc/rex";
+    require Mojo::UserAgent;
+    my $ua = Mojo::UserAgent->new;
+    my $content = $ua->get("https://raw.githubusercontent.com/RexOps/rex-jobcontrol/master/jobcontrol.conf")->res->body;
+    file "/etc/rex/jobcontrol.conf", content => $content;
+    my $out = run "rex_job_control jobcontrol version";
+    ok($? == 0, "run rex_job_control");
+    my ($version) = ($out =~ m/\((\d+\.\d+\.\d+)\)/);
+    ok($version =~ m/\d+\.\d+\.\d+/, "got version ($version)");
+    ok($version eq get_version_to_install(), "got correct version");
+  }
+
 
   done_testing();
 };
