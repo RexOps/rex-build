@@ -436,8 +436,6 @@ task prepare => group => test => sub {
   Rex::Logger::info("Uploading: .build.$pid -> $upload_tarball_dir");
   sync_up ".build.$pid/", $upload_tarball_dir;
 
-  say "" . run "find /root -exec ls -l '{}' ';'";
-
   Rex::Logger::info(
     "Uploading: " . config->{build}->{files} . "/" . lc($op) . " -> /root" );
   sync_up config->{build}->{files} . "/" . lc($op), "/root";
@@ -611,7 +609,12 @@ task publish => config->{repo}->{server} => sub {
       run_or_die "cd $repo_path ; genhdlist2 --xml-info .";
     }
     else {
-      run_or_die "cd $repo_path ; rm repodata/repomd.xml.asc ; createrepo .";
+      if($op =~ m/centos|redhat/ && $ver == 5) {
+        run_or_die "cd $repo_path ; rm repodata/repomd.xml.asc ; createrepo --checksum=sha .";
+      }
+      else {
+        run_or_die "cd $repo_path ; rm repodata/repomd.xml.asc ; createrepo .";
+      }
 
       my $key = config->{repo}->{sign}->{ lc($op) }->{key};
       Rex::Logger::info("Signing repository with key: $key ...");
