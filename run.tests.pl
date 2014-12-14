@@ -41,7 +41,7 @@ LOCAL {
       "HTEST='$ip' perl /tmp/workspace/$rnd/rex/Rex-$version/bin/rex -f contrib/prepare_sudo.rex prepare >>/var/log/rex/prepare_sudo-$$.log 2>&1";
     if ( $? != 0 ) {
       print STDERR "Error preparing for sudo.\n";
-      exit 1;
+      die "Error preparing for sudo.";
     }
     &end_phase;
   }

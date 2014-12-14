@@ -56,7 +56,14 @@ $ENV{REX_PASS} = $pass;
 
 parallelism 50;
 
-do "run.tests.pl";
+our $RETVAL = 0;
+
+eval {
+  do "run.tests.pl";
+  1;
+} or do {
+  $RETVAL = 1;
+};
 
 my $i=1;
 for my $inst ( @instances ) {
@@ -74,7 +81,7 @@ if ( scalar @running >= 1 ) {
   die "There are still some instances running...";
 }
 
-exit 0;
+exit $RETVAL;
 
 
 sub start_phase {
