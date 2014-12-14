@@ -30,7 +30,7 @@ LOCAL {
   $ENV{"PERL5LIB"} = "/tmp/workspace/$rnd/rex/Rex-$version/lib:"
     . ( exists $ENV{PERL5LIB} ? $ENV{PERL5LIB} : "" );
 
-  start_phase('Running prepare.rex');
+  start_phase("Running prepare.rex on $ip");
   system
     "HTEST='$ip' perl /tmp/workspace/$rnd/rex/Rex-$version/bin/rex -f contrib/prepare.rex prepare >>/var/log/rex/prepare-$$.log 2>&1";
   &end_phase;
@@ -54,7 +54,7 @@ LOCAL {
     next if ( !-f "tests/$entry" );
     next if ( $entry !~ m/\.rex$/ );
 
-    start_phase("Running tests/$entry");
+    start_phase("Running tests/$entry on $ip");
     system
       "REX_VERSION=$version WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests/$entry >junit_output_tests_$entry.xml";
     &end_phase;

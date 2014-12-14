@@ -48,7 +48,7 @@ my $con_str =
   . "/api/1.0/project/5bde00a59817c6e3e6e79cc4ad8a514a/node";
 
 
-my ($vm_id, $ip) = create_vm($new_vm, $base_vm);
+our ($vm_id, $ip) = create_vm($new_vm, $base_vm);
 
 &end_phase;
 
