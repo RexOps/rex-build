@@ -30,6 +30,7 @@ perlbrew use perl-$perl_version
 cpanm Dist::Zilla\@5.025
 dzil authordeps --missing | cpanm
 dzil listdeps --missing | cpanm
+cpanm DBI IPC::Shareable Parallel::ForkManager Digest::HMAC_SHA1 String::Escape XML::LibXML
 cpanm -in TAP::Formatter::JUnit
 
 cat >test.sh<<EOF
