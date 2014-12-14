@@ -114,7 +114,7 @@ sub start_phase {
   $phase     = shift;
   $starttime = time;
   local $| = 1;
-  printf '%-50s', $phase;
+  printf '%-70s', $phase;
 }
 
 sub end_phase {
