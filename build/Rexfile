@@ -63,7 +63,7 @@ task version_tag => sub {
   run "rm -rf tmp";
   mkdir "tmp";
 
-  my $repository = "https://github.com/RexOps/$param->{project}.git";
+  my $repository = "git\@github.com:RexOps/$param->{project}.git";
 
   Rex::Logger::info("Cloning $repository to tmp");
   run "cd tmp ; git clone $repository --branch master >/tmp/out.log 2>&1";
