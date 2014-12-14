@@ -6,15 +6,24 @@ use Rex -base;
 use Rex::Commands::Virtualization;
 use Rex::Commands::SimpleCheck;
 use Cwd 'getcwd';
+use Mojo::UserAgent;
 
 set virtualization => "LibVirt";
 
+my $ua = Mojo::UserAgent->new;
+$ua->request_timeout(60);
+$ua->inactivity_timeout(60);
 
 $::QUIET = 1;
 
 my $yaml = eval { local(@ARGV, $/) = ($ENV{HOME} . "/.build_config"); <>; };
 $yaml .= "\n";
 my $config = Load($yaml);
+
+my $con_str =
+    "http://$config->{jobcontrol}->{user}:$config->{jobcontrol}->{password}\@"
+  . "$config->{jobcontrol}->{host}:$config->{jobcontrol}->{port}"
+  . "/api/1.0/project/5bde00a59817c6e3e6e79cc4ad8a514a/node";
 
 my $base_vm = $ARGV[0];
 
