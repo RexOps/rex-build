@@ -32,7 +32,8 @@ $yaml .= "\n";
 our $config = Load($yaml);
 
 my $base_vm = $ARGV[0];
-my $new_vm  = "${base_vm}-test-$$";
+my $time = time;
+my $new_vm  = "${base_vm}-test-$time-$$";
 $new_vm =~ s/:/_/gms;
 
 #Rex::connect( %{$config} );

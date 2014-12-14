@@ -41,7 +41,8 @@ if ( !$build_file || !-f $build_file ) {
 my $branch      = $ENV{REX_BRANCH} || 'master';
 my $environment = $ENV{BUILD_ENV}  || 'nightly';
 
-my $new_vm = "${base_vm}-build-$$";
+my $time = time;
+my $new_vm = "${base_vm}-build-$time-$$";
 
 @SIG{qw( INT TERM HUP )} = sub {
   remove_vm($new_vm);

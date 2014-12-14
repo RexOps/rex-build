@@ -27,7 +27,8 @@ my $con_str =
 
 my $base_vm = $ARGV[0];
 
-my $new_vm = "${base_vm}-install-test-$$";
+my $time = time;
+my $new_vm = "${base_vm}-install-test-$time-$$";
 
 my ($vm_id, $ip) = create_vm($new_vm, $base_vm);
 
