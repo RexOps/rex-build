@@ -218,16 +218,16 @@ task build_recipes_directory => config->{recipes}->{server} => sub {
     run "cd tmp ; git push origin $main_version";
   };
 
-  # update documentation tree
-  run "git fetch ; git checkout $version",
-    cwd => "/opt/rex-recipes";
-
-  run "perl create_dep_tree.pl $main_version ; mv modules.$main_version module/",
-    cwd => "/opt/modules.rexify.org";
-
-  run "perl create_index.pl localhost 9200 /opt/rex-recipes",
-    cwd => "/opt/modules.rexify.org";
-
+#  # update documentation tree
+#  run "git fetch ; git checkout $version",
+#    cwd => "/opt/rex-recipes";
+#
+#  run "perl create_dep_tree.pl $main_version ; mv modules.$main_version module/",
+#    cwd => "/opt/modules.rexify.org";
+#
+#  run "perl create_index.pl localhost 9200 /opt/rex-recipes",
+#    cwd => "/opt/modules.rexify.org";
+#
 };
 
 task prepare => group => test => sub {
