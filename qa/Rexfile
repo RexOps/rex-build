@@ -27,7 +27,7 @@ git checkout $ENV{branch}
 
 source /usr/local/perlbrew/etc/bashrc
 perlbrew use perl-$perl_version
-cpanm Dist::Zillai@5.025 Devel::Cover
+cpanm Dist::Zilla\@5.025 Devel::Cover
 dzil authordeps --missing | cpanm
 dzil listdeps --missing | cpanm
 cpanm -in TAP::Formatter::JUnit
