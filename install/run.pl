@@ -45,7 +45,7 @@ $ENV{PATH} = getcwd() . ":" . $ENV{PATH};
 system "REXUSER=$user REXPASS=$pass HTEST=$ip prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test t >../junit_output_tests.xml";
 
 
-remove_vm($new_vm);
+remove_vm($vm_id);
 
 
 sub create_vm {
