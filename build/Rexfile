@@ -609,7 +609,7 @@ task publish => config->{repo}->{server} => sub {
       run_or_die "cd $repo_path ; genhdlist2 --xml-info .";
     }
     else {
-      if($op =~ m/centos|redhat/ && $ver == 5) {
+      if($op =~ m/centos|redhat/i && $ver == 5) {
         run_or_die "cd $repo_path ; rm repodata/repomd.xml.asc ; createrepo --checksum=sha .";
       }
       else {
