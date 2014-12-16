@@ -125,7 +125,7 @@ task prepare => group => test => sub {
       file "/root/issue473.txt",
         owner => "root",
         group => "root",
-        content => "issue473";
+        content => "issue473",
         mode  => 600;
 
       chmod 700, "/root";
