@@ -98,7 +98,7 @@ task test => group => test => sub {
       download "/root/issue473.txt", "issue473.txt";
       LOCAL {
         my $content = cat "issue473.txt";
-        ok($content eq "issue473", "download root restricted file from root restricted directory");
+        ok($content =~ m/issue473/, "download root restricted file from root restricted directory");
       };
     }
   }
