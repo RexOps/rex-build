@@ -118,4 +118,18 @@ task prepare => group => test => sub {
       run "ip addr add 1.2.3.4/32 dev $dev label $dev:1";
     }
   }
+
+
+  { # for issue: 473
+    if($ENV{use_sudo}) {
+      file "/root/issue473.txt",
+        owner => "root",
+        group => "root",
+        content => "issue473";
+        mode  => 600;
+
+      chmod 700, "/root";
+    }
+  }
+
 };
