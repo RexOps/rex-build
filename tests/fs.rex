@@ -93,17 +93,6 @@ task test => group => test => sub {
   #  ok($df->{used} >= 1000, "got df used from /dev/sda1");
   #  ok($df->{mounted_on}, "got df mounted on from /dev/sda1");
 
-  { # for issue: 473
-    if($ENV{use_sudo}) {
-      download "/root/issue473.txt", "issue473.txt";
-      LOCAL {
-        my $content = cat "issue473.txt";
-        ok($content =~ m/issue473/, "download root restricted file from root restricted directory");
-      };
-    }
-  }
-
-
   #};
   done_testing();
 };

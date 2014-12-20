@@ -77,17 +77,68 @@ LOCAL {
   closedir($dh);
 
   if($ENV{use_sudo}) {
-    start_phase('sudo.tests.d');
-    system
-      "REX_VERSION=$version WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test sudo.tests.d/$entry >junit_output_sudo_testsd_$entry.xml";
+    opendir( my $dh, "tests.sudo.d" ) or die($!);
+    while ( my $entry = readdir($dh) ) {
+      next if ( $entry =~ m/^\./ );
+      next if ( !-f "tests.sudo.d/$entry" );
+      next if ( $entry !~ m/\.rex$/ );
 
-    &end_phase;
+      start_phase("Running tests.sudo.d/$entry on $ip");
+ 
+      system
+        "REX_VERSION=$version WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test sudo.tests.d/$entry >junit_output_sudo_testsd_$entry.xml";
+
+      &end_phase;
+    }
+    closedir($fh);
   }
 
-  start_phase('tests.post.d');
-  system
-    "REX_VERSION=$version WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.post.d >junit_output_tests_post_d.xml";
-  &end_phase;
+  opendir( my $dh, "tests.issues.d" ) or die($!);
+  while ( my $entry = readdir($dh) ) {
+    next if ( $entry =~ m/^\./ );
+    next if ( !-f "tests.issues.d/$entry" );
+    next if ( $entry !~ m/\.rex$/ );
+
+    start_phase("Running tests.issues.d/$entry on $ip");
+ 
+    system
+      "REX_VERSION=$version WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.issues.d/$entry >junit_output_tests_issues_d_$entry.xml";
+
+    &end_phase;
+    closedir($dh);
+  }
+
+  if($ENV{use_sudo}) {
+    opendir( my $dh, "tests.issues.d/sudo.d" ) or die($!);
+    while ( my $entry = readdir($dh) ) {
+      next if ( $entry =~ m/^\./ );
+      next if ( !-f "tests.issues.d/sudo.d/$entry" );
+      next if ( $entry !~ m/\.rex$/ );
+
+      start_phase("Running tests.issues.d/sudo.d/$entry on $ip");
+   
+      system
+        "REX_VERSION=$version WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.issues.d/sudo.d/$entry >junit_output_tests_issues_d_sudo_d_$entry.xml";
+
+      &end_phase;
+      closedir($dh);
+    }
+  }
+
+  opendir( my $dh, "tests.post.d" ) or die($!);
+  while ( my $entry = readdir($dh) ) {
+    next if ( $entry =~ m/^\./ );
+    next if ( !-f "tests.post.d/$entry" );
+    next if ( $entry !~ m/\.rex$/ );
+
+    start_phase("Running tests.post.d/$entry on $ip");
+ 
+    system
+      "REX_VERSION=$version WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.post.d/$entry >junit_output_tests_post_d_$entry.xml";
+
+    &end_phase;
+    closedir($dh);
+  }
 
   system "rm -rf /tmp/workspace/$rnd";
 };
