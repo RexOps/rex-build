@@ -133,9 +133,7 @@ task prepare => group => test => sub {
   }
 
   { # for issue: 498
-    if($ENV{use_sudo}) {
-      mkdir "/tmp/issue498";
-    }
+    mkdir "/tmp/issue498";
   }
 
 };
