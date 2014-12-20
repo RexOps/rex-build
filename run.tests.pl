@@ -86,7 +86,7 @@ LOCAL {
       start_phase("Running tests.sudo.d/$entry on $ip");
  
       system
-        "REX_VERSION=$version WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test sudo.tests.d/$entry >junit_output_sudo_testsd_$entry.xml";
+        "REX_VERSION=$version WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.sudo.d/$entry >junit_output_sudo_testsd_$entry.xml";
 
       &end_phase;
     }
