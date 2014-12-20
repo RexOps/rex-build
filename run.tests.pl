@@ -105,8 +105,8 @@ LOCAL {
       "REX_VERSION=$version WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.issues.d/$entry >junit_output_tests_issues_d_$entry.xml";
 
     &end_phase;
-    closedir($dh);
   }
+  closedir($dh);
 
   if($ENV{use_sudo}) {
     opendir( my $dh, "tests.issues.d/sudo.d" ) or die($!);
