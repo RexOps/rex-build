@@ -75,7 +75,6 @@ LOCAL {
     &end_phase;
   }
   closedir($dh);
-print STDERR "\nRunning sudo tests...\n";
   if($ENV{use_sudo}) {
     opendir( my $dh, "tests.sudo.d" ) or die($!);
     while ( my $entry = readdir($dh) ) {
@@ -90,10 +89,9 @@ print STDERR "\nRunning sudo tests...\n";
 
       &end_phase;
     }
-    closedir($fh);
+    closedir($dh);
   }
 
-print STDERR "\nRunning issue tests...\n";
   opendir( my $dh, "tests.issues.d" ) or die($!);
   while ( my $entry = readdir($dh) ) {
     next if ( $entry =~ m/^\./ );
