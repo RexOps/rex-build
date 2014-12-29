@@ -114,9 +114,9 @@ task release_files => config->{repo}->{server} => sub {
   Rex::Logger::info(
     "Releasing files from $from to $to. This may take a while.");
 
-  run "cd /home/websites/linux-files.org/$to/htdocs ; "
+  run "cd /home/websites/linux-files.org/$to ; "
     . " mv htdocs htdocs.$now ; "
-    . " mv ../../$from/htdocs . ; "
+    . " mv ../$from/htdocs . ; "
     . " cp -R htdocs ../$from/";
 
   Rex::Logger::info("Done releasing files.");
