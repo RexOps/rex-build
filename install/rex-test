@@ -24,7 +24,7 @@ $ENV{"PERL5LIB"} = "/tmp/workspace/$rnd/rex/lib:" . (exists $ENV{PERL5LIB} ? $EN
 $ENV{TEST_PACKAGE} ||= "rex";
 
 for my $file (@ARGV) {
-  system "perl /tmp/workspace/$rnd/rex/bin/rex -qf $file test";
+  system "perl /tmp/workspace/$rnd/rex/bin/rex -f $file test >../rex.out.$file.log 2>&1";
 }
 
 system "rm -rf /tmp/workspace/$rnd";
