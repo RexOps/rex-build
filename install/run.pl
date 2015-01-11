@@ -32,13 +32,9 @@ my $new_vm = "${base_vm}-install-test-$time-$$";
 
 my ($vm_id, $ip) = create_vm($new_vm, $base_vm);
 
-print STDERR "Waiting for port 22 to open on $ip\n";
-
 while(! is_port_open($ip, 22)) {
   sleep 1;
 }
-
-print STDERR "Port 22 is now opened. Machine has booted...\n";
 
 my ($user, $pass);
 
@@ -47,7 +43,7 @@ $pass = $config->{box}->{default}->{password};
 
 # run tests from tests directory
 $ENV{PATH} = getcwd() . ":" . $ENV{PATH};
-system "REXUSER=$user REXPASS=$pass HTEST=$ip prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test t >../junit_output_tests.xml 2>../out.err.log";
+system "REXUSER=$user REXPASS=$pass HTEST=$ip prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test t >../junit_output_tests.xml";
 
 
 remove_vm($vm_id);
