@@ -682,7 +682,13 @@ task publish => config->{repo}->{server} => sub {
       group => "root",
       mode  => 755;
 
-    run "$home_dir/sign_release", cwd => $doc_root;
+    my $out = run "$home_dir/sign_release", cwd => $doc_root;
+
+    if($? != 0) {
+      Rex::Logger::info("Error signing release", "error");
+      print $out;
+      die;
+    }
 
     rm "$doc_root/packages-i386.db";
     rm "$doc_root/packages-amd64.db";
