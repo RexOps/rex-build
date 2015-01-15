@@ -25,7 +25,6 @@ requires:
       build:
         - make
         - perl
-        - perl-devel
 
       runtime:
         - perl
