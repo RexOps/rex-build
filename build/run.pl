@@ -106,6 +106,7 @@ sub create_vm {
     if ( $qtx->success ) {
       my $qref = $qtx->res->json;
       $ip = $qref->{provisioner}->{network}->[0]->{ip};
+      print STDERR "Got ip for VM: $ip\n";
     }
     else {
       print STDERR Dumper $qtx;
