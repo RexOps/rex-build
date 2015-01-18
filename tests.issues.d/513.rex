@@ -7,6 +7,7 @@ do "auth.conf";
 
 task test => group => test => sub {
   ok(1==1, "Rexfile executed and run");
+  done_testing();
 };
 
 
