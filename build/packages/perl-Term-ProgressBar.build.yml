@@ -42,10 +42,12 @@ requires:
         - perl-devel
         - perl-Class-MethodMaker
         - perl(Term::ReadKey): perl-TermReadKey
+        - perl-autodie
       runtime:
         - perl
         - perl-Class-MethodMaker
         - perl(Term::ReadKey): perl-TermReadKey
+        - perl-autodie
 
 # build instructions
 configure: |

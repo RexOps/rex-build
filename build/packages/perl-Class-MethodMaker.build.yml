@@ -36,8 +36,10 @@ requires:
         - gcc
         - perl
         - perl-devel
+        - perl-autodie
       runtime:
         - perl
+        - perl-autodie
 
 # build instructions
 configure: |
