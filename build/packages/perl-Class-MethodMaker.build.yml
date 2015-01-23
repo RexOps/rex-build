@@ -3,7 +3,7 @@ name:
   centos: perl-Class-MethodMaker
 realname: Class-MethodMaker
 version: 2.22
-release: 1
+release: 2
 epoch: 1
 summary: Class::MethodMaker - Create generic methods for OO Perl
 group:
@@ -69,4 +69,4 @@ files:
     doc:
       - %{_mandir}/*
     package:
-      - %{_libdir}/*
+      - %{perl_vendorlib}/*

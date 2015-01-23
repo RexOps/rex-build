@@ -73,10 +73,8 @@ clean: |
 files:
   package:
     - /usr
-    - /usr/share/perl5/vendor_perl/Term/ProgressBar.pm
-    - /usr/share/perl5/vendor_perl/Term/ProgressBar/IO.pm
   centos:
     doc:
       - %{_mandir}/*
     package:
-      - %{_libdir}/*
+      - %{perl_vendorlib}/*
