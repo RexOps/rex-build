@@ -69,4 +69,4 @@ files:
     doc:
       - %{_mandir}/*
     package:
-      - %{perl_vendorlib}/*
+      - %{_libdir}/perl5/vendor_perl/*
