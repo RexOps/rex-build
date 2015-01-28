@@ -36,7 +36,7 @@ cpanm --quiet --notest --skip-satisfied TAP::Formatter::JUnit
 cat >qa.sh<<EOF
 cp ../../.perlcriticrc .
 cp ../../.perltidyrc .
-perlcritic bin/ lib/ t/ | /usr/local/bin/format-checkstyle > checkstyle-result.xml
+perlcritic bin/ lib/ | /usr/local/bin/format-checkstyle > checkstyle-result.xml
 cover --test --report_c0 50 --report_c1 70 --report_c2 80
 ls -l
 rm -rf ../../cover_db
