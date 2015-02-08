@@ -175,5 +175,16 @@ task "test",
   ok( !get_uid("horse"),       "user horse deleted" );
   ok( !is_dir("/users/horse"), "home of horse deleted" );
 
+  group "mytestgroup",
+    ensure => "present",
+    gid    => 9556;
+
+  ok( get_gid("mytestgroup") == 9556,
+    "got group created with group() resource." );
+
+  group "mytestgroup", ensure => "absent";
+
+  ok( !get_gid("mytestgroup"), "got group created with group() resource." );
+
   done_testing();
   };
