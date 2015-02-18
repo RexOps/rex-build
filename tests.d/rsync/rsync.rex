@@ -15,8 +15,14 @@ task "test", group => "test", sub {
 
   my %stat = stat "/home/rsync_user/etc2/my.cnf";
 
-  ok($stat{uid} == 6000, "/home/rsync_user/etc/my.cnf owner");
-  ok($stat{gid} == 6000, "/home/rsync_user/etc2/my.cnf group");
+  if( Rex::is_sudo ) {
+    ok($stat{uid} != 6000, "/home/rsync_user/etc/my.cnf owner");
+    ok($stat{gid} != 6000, "/home/rsync_user/etc2/my.cnf group");
+  }
+  else {
+    ok($stat{uid} == 6000, "/home/rsync_user/etc/my.cnf owner");
+    ok($stat{gid} == 6000, "/home/rsync_user/etc2/my.cnf group");
+  }
 
   done_testing();
 };

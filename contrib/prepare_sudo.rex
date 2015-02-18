@@ -46,7 +46,7 @@ task prepare => group => test => sub {
  # need to set_home / always_set_home so that sudo find the right home directory
   file "/etc/sudoers",
     content =>
-    "Defaults set_home, always_set_home\n\%$user	ALL=(ALL:ALL) ALL\nrsync_user	ALL=(ALL:ALL) ALL\n",
+    "Defaults set_home, always_set_home\n\%$user	ALL=(ALL:ALL) ALL\nrsync_user	ALL=(ALL:ALL) ALL\nrsync_user ALL=(ALL:ALL) NOPASSWD: /usr/bin/rsync\n",
     owner => "root",
     mode  => 440;
 };
