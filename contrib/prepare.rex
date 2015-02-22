@@ -25,6 +25,31 @@ parallelism 50;
 task prepare => group => test => sub {
 
   # images are absolute minimal
+  if (is_freebsd) {
+    if(operating_system_release =~ m/^8\./) {
+      file "/usr/local/etc/pkg/repos",
+        ensure => "directory",
+        owner  => "root",
+        group  => "root",
+        mode   => 755;
+
+      file "/usr/local/etc/pkg/repos/FreeBSD.conf",
+        ensure => "present",
+        source => "files/freebsd/FreeBSD.conf",
+        owner  => "root",
+        group  => "root",
+        mode   => 644;
+
+      file "/usr/local/etc/pkg.conf",
+        ensure => "present",
+        source => "files/freebsd/pkg.conf",
+        owner  => "root",
+        group  => "root",
+        mode   => 644;
+    }
+
+    run "pwd_mkdb /etc/master.passwd";
+  }
 
   eval {    # just update the package db, if it fails it doesn't matter
     update_package_db;
@@ -134,10 +159,6 @@ task prepare => group => test => sub {
 
   {    # for issue: 498
     mkdir "/tmp/issue498";
-  }
-
-  if (is_freebsd) {
-    run "pwd_mkdb /etc/master.passwd";
   }
 
 };
