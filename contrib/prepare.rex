@@ -18,7 +18,7 @@ user( $ENV{REX_USER}     || $config->{box}->{default}->{user} );
 password( $ENV{REX_PASS} || $config->{box}->{default}->{password} );
 pass_auth;
 
-group test => split(/ /, $ENV{HTEST});
+group test => split( / /, $ENV{HTEST} );
 
 parallelism 50;
 
@@ -41,7 +41,7 @@ task prepare => group => test => sub {
       qr{debian|ubuntu}i => [qw/rsync augeas-tools augeas-lenses/],
       qr{suse}i          => [qw/lsb-release augeas augeas-lenses/],
       qr{fedora}i        => [qw/perl openssh-clients which augeas augeas-libs/],
-      qr{gentoo}i        => ['sys-process/vixie-cron', 'app-admin/augeas'],
+      qr{gentoo}i        => [ 'sys-process/vixie-cron', 'app-admin/augeas' ],
       default            => [],
   };
 
@@ -87,7 +87,8 @@ task prepare => group => test => sub {
 
   run "echo 127.0.2.1 `uname -n` >>/etc/hosts";
 
-  file "/root/.profile", content => "export MYFOO='MYBAR'\nexport PATH=/bin:/usr/bin\n";
+  file "/root/.profile",
+    content => "export MYFOO='MYBAR'\nexport PATH=/bin:/usr/bin\n";
 
   # for csh
   file "/root/.login", content => "set MYFOO='MYBAR'\nset PATH=/bin:/usr/bin\n";
@@ -119,21 +120,24 @@ task prepare => group => test => sub {
     }
   }
 
-
-  { # for issue: 473
-    if($ENV{use_sudo}) {
+  {    # for issue: 473
+    if ( $ENV{use_sudo} ) {
       file "/root/issue473.txt",
-        owner => "root",
-        group => "root",
+        owner   => "root",
+        group   => "root",
         content => "issue473",
-        mode  => 600;
+        mode    => 600;
 
       chmod 700, "/root";
     }
   }
 
-  { # for issue: 498
+  {    # for issue: 498
     mkdir "/tmp/issue498";
+  }
+
+  if (is_freebsd) {
+    run "pwd_mkdb /etc/master.passwd";
   }
 
 };
