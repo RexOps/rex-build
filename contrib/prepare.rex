@@ -30,21 +30,21 @@ task prepare => group => test => sub {
       file "/usr/local/etc/pkg/repos",
         ensure => "directory",
         owner  => "root",
-        group  => "root",
+        group  => "wheel",
         mode   => 755;
 
       file "/usr/local/etc/pkg/repos/FreeBSD.conf",
         ensure => "present",
         source => "files/freebsd/FreeBSD.conf",
         owner  => "root",
-        group  => "root",
+        group  => "wheel",
         mode   => 644;
 
       file "/usr/local/etc/pkg.conf",
         ensure => "present",
         source => "files/freebsd/pkg.conf",
         owner  => "root",
-        group  => "root",
+        group  => "wheel",
         mode   => 644;
     }
 
@@ -59,7 +59,7 @@ task prepare => group => test => sub {
 
   my $additional_packages = case operating_system, {
     qr{centos|redhat}i => [qw/openssh-clients dmidecode augeas augeas-libs/],
-      qr{freebsd}i     => [qw/dmidecode/],
+      qr{freebsd}i     => [qw/dmidecode rsync/],
       qr{openwrt}i     => [
       qw/coreutils-nohup perlbase-bytes perlbase-digest perlbase-essential perlbase-file perlbase-xsloader shadow-groupadd shadow-groupdel shadow-groupmod shadow-useradd shadow-userdel shadow-usermod swap-utils/
       ],
@@ -80,7 +80,11 @@ task prepare => group => test => sub {
 
   push @packages, @{$additional_packages};
 
-  eval { install \@packages; };
+  for my $p (@packages) {
+    eval {
+      pkg $p, ensure => "present";
+    };
+  }
 
   eval {
     # ensure that /home exists
