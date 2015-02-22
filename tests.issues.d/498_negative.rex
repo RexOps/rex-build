@@ -3,6 +3,7 @@ use Test::More;
 use Rex::Commands::Fs;
 
 do "auth.conf";
+Rex::Config->set_autodie(0); # emulate Rex version < 0.56
 
 task test => group => test => sub {
 
