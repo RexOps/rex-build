@@ -16,6 +16,8 @@ task test => sub {
   my $count_before_task < io "before_task_start.cnt";
   my $count_after_task  < io "after_task_finished.cnt";
 
+  print "\n\n>>>> $count_before / $count_after / $count_before_task / $count_after_task\n\n";
+
   ok($count_before == 2, "before hook runs 2 times");
   ok($count_after == 2, "after hook runs 2 times");
   ok($count_before_task == 1, "before_task_start hook runs 1 time");
