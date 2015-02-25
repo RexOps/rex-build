@@ -9,8 +9,8 @@ use Cwd 'getcwd';
 use Mojo::UserAgent;
 
 my $ua = Mojo::UserAgent->new;
-$ua->request_timeout(60);
-$ua->inactivity_timeout(60);
+$ua->request_timeout(360);
+$ua->inactivity_timeout(360);
 
 
 $::QUIET = 1;
