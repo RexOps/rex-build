@@ -11,8 +11,8 @@ use Mojo::UserAgent;
 set virtualization => "LibVirt";
 
 my $ua = Mojo::UserAgent->new;
-$ua->request_timeout(60);
-$ua->inactivity_timeout(60);
+$ua->request_timeout(300);
+$ua->inactivity_timeout(300);
 
 $::QUIET = 1;
 
@@ -49,52 +49,90 @@ system "REXUSER=$user REXPASS=$pass HTEST=$ip prove --timer --formatter TAP::For
 remove_vm($vm_id);
 
 
+
 sub create_vm {
 
   my ($new_vm, $base_vm) = @_;
+  my ($ip, $vm_id);
 
-  my $tx = $ua->post(
-    $con_str,
-    json => {
-      name => $new_vm,
-      type => "kvm",
-      parent =>
-        "3a7f1fc9e58a8492fc625d8a16e85e76_c5fd214cdd0d2b3b4272e73b022ba5c2",
-      data => {
-        image => $base_vm,
-        host =>
-"3a7f1fc9e58a8492fc625d8a16e85e76_1b21b0d71706897b69f108572c444d40_b0da275520918e23dd615e2a747528f1",
+  if ( $ENV{use_docker} ) {
+
+    my $tx = $ua->post(
+      $con_str,
+      json => {
+        name => $new_vm,
+        type => "docker",
+        parent => "3a7f1fc9e58a8492fc625d8a16e85e76_c5fd214cdd0d2b3b4272e73b022ba5c2",
+        data => {
+          image => $base_vm,
+          host => "3a7f1fc9e58a8492fc625d8a16e85e76_1b21b0d71706897b69f108572c444d40_b0da275520918e23dd615e2a747528f1",
+          command => "/usr/sbin/sshd -D",
+        }
+      }
+    );
+
+    if ( $tx->success ) {
+      my $ref = $tx->res->json;
+
+      $vm_id = $ref->{id};
+      if ( !$vm_id ) {
+        die "Error creating test VM";
+      }
+
+      my $qtx = $ua->get("$con_str/$vm_id");
+      if ( $qtx->success ) {
+        my $qref = $qtx->res->json;
+        $ip = $qref->{provisioner}->[0]->{NetworkSettings}->{IPAddress};
+      }
+      else {
+        die "Error getting info of test VM";
       }
     }
-  );
-
-  my ($vm_id, $ip);
-
-  if ( $tx->success ) {
-    my $ref = $tx->res->json;
-
-    $vm_id = $ref->{id};
-    if ( !$vm_id ) {
+    else {
       die "Error creating test VM";
     }
 
-    my $qtx = $ua->get("$con_str/$vm_id");
-    if ( $qtx->success ) {
-      my $qref = $qtx->res->json;
-      $ip = $qref->{provisioner}->{network}->[0]->{ip};
-      print STDERR "Got ip for VM: $ip\n";
-    }
-    else {
-      print STDERR Dumper $qtx;
-      die "Error getting info of test VM";
-    }
   }
   else {
-    die "Error creating test VM";
+
+    my $tx = $ua->post(
+      $con_str,
+      json => {
+        name => $new_vm,
+        type => "kvm",
+        parent => "3a7f1fc9e58a8492fc625d8a16e85e76_c5fd214cdd0d2b3b4272e73b022ba5c2",
+        data => {
+          image => $base_vm,
+          host => "3a7f1fc9e58a8492fc625d8a16e85e76_1b21b0d71706897b69f108572c444d40_b0da275520918e23dd615e2a747528f1",
+        }
+      }
+    );
+
+    if ( $tx->success ) {
+      my $ref = $tx->res->json;
+
+      $vm_id = $ref->{id};
+      if ( !$vm_id ) {
+        die "Error creating test VM";
+      }
+
+      my $qtx = $ua->get("$con_str/$vm_id");
+      if ( $qtx->success ) {
+        my $qref = $qtx->res->json;
+        $ip = $qref->{provisioner}->{network}->[0]->{ip};
+      }
+      else {
+        print STDERR Dumper $qtx;
+        die "Error getting info of test VM";
+      }
+    }
+    else {
+      die "Error creating test VM";
+    }
+
   }
 
   return ($vm_id, $ip);
-
 }
 
 sub remove_vm {
