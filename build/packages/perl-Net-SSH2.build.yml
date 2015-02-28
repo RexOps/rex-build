@@ -133,6 +133,23 @@ requires:
         - libssh2-1
         - libopenssl1_0_0
 
+
+    13.2:
+      build:
+        - make
+        - automake
+        - autoconf
+        - libopenssl-devel
+        - libssh2-1
+        - libssh2-devel
+        - zlib-devel
+        - libz1
+        - libtool
+      runtime:
+        - libz1
+        - libssh2-1
+        - libopenssl1_0_0
+
   mageia:
     3:
       x86_64:
