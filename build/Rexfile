@@ -596,8 +596,8 @@ task publish => config->{repo}->{server} => sub {
     my $repo_path = doc_root . "/$op/$ver/$repo_name/$arch";
 
     mkdir $repo_path,
-      owner => "www-data",
-      group => "www-data",
+      owner => "linuxfiles",
+      group => "linuxfiles",
       mode  => 755;
 
     Rex::Logger::info("Uploading to: $repo_path ...");
@@ -642,13 +642,13 @@ task publish => config->{repo}->{server} => sub {
       doc_root . "/" . lc($op) . "/dists/$ver/$repo_name/binary-$arch";
 
     mkdir $repo_path,
-      owner => "www-data",
-      group => "www-data",
+      owner => "linuxfiles",
+      group => "linuxfiles",
       mode  => 755;
 
     mkdir $dist_path,
-      owner => "www-data",
-      group => "www-data",
+      owner => "linuxfiles",
+      group => "linuxfiles",
       mode  => 755;
 
     Rex::Logger::info("Uploading to: $repo_path ...");
@@ -776,8 +776,8 @@ task archive => config->{repo}->{server} => sub {
 
   if ($pkg) {
     mkdir doc_root . "/source",
-      owner => "www-data",
-      group => "www-data";
+      owner => "linuxfiles",
+      group => "linuxfiles";
 
     Rex::Logger::info( "Uploading $pkg to " . doc_root . "/source" );
     upload $pkg, doc_root . "/source";
