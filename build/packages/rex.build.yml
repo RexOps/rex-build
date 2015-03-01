@@ -301,11 +301,13 @@ requires:
 
     19: *depfedora18
     20: *depfedora18
+    21: *depfedora18
 
   redhat:
     18: *depfedora18
     19: *depfedora18
     20: *depfedora18
+    21: *depfedora18
 
   suse:
     13.1: &depsuse13

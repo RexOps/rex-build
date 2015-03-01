@@ -48,7 +48,7 @@ requires:
         - perl
 
   suse:
-    13.1:
+    13.1: &depsuse13
       build:
         - make
         - automake
@@ -57,6 +57,9 @@ requires:
         - perl
       runtime:
         - perl
+
+    13.2: *depsuse13
+
 
   mageia:
     3:

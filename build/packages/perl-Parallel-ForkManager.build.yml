@@ -61,6 +61,7 @@ requires:
 
       runtime:
         - perl
+    13.2: *depsuse13
 
   mageia:
     3:
