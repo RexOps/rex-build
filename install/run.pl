@@ -71,6 +71,8 @@ sub create_vm {
       }
     );
 
+    print Dumper $tx;
+
     if ( $tx->success ) {
       my $ref = $tx->res->json;
 
