@@ -57,9 +57,9 @@ sub create_vm {
 
   if ( $ENV{use_docker} ) {
 
-    my ($x, $y) = split(/:/, $base_vm);
+    my ($x, $y) = split(/:/, $new_vm);
     if($y) {
-        $base_vm = $y;
+        $new_vm = $y;
     }
 
     my $tx = $ua->post(
