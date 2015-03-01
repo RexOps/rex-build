@@ -57,6 +57,11 @@ sub create_vm {
 
   if ( $ENV{use_docker} ) {
 
+    my ($x, $y) = split(/:/, $base_vm);
+    if($y) {
+        $base_vm = $y;
+    }
+
     my $tx = $ua->post(
       $con_str,
       json => {
@@ -70,8 +75,6 @@ sub create_vm {
         }
       }
     );
-
-    print Dumper $tx;
 
     if ( $tx->success ) {
       my $ref = $tx->res->json;
