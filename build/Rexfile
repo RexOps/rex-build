@@ -251,6 +251,9 @@ task prepare => group => test => sub {
 
   Rex::Logger::info("Registering some repositories");
 
+  eval { update_package_db; };
+  eval { pkg "wget"; };
+
   if ( exists config->{repo}->{add}->{ get_build_env() }->{ lc($op) }
     && exists config->{repo}->{add}->{ get_build_env() }->{ lc($op) }->{$ver}
     && exists config->{repo}->{add}->{ get_build_env() }->{ lc($op) }->{$ver}
@@ -313,7 +316,7 @@ task prepare => group => test => sub {
     }
     else {
       run
-        "rpm --import http://rex.linux-files.org/RPM-GPG-KEY-REXIFY-REPO.CENTOS6";
+        "wget http://rex.linux-files.org/RPM-GPG-KEY-REXIFY-REPO.CENTOS6 ; rpm --import RPM-GPG-KEY-REXIFY-REPO.CENTOS6";
     }
   }
 
@@ -379,22 +382,22 @@ task prepare => group => test => sub {
     qr{centos|redhat|fedora}i => [
       "ntp",  "rpm-build", "expect",   "gcc",
       "make", "automake",  "autoconf", "bison",
-      "flex", "m4",        "openssh-clients"
+      "flex", "m4",        "openssh-clients", "tar",
       ],
       qr{mageia}i => [
       "ntp",  "rpm-build", "expect",          "gcc",
       "make", "automake",  "autoconf",        "bison",
       "flex", "m4",        "openssh-clients", "gnupg",
-      "rpm-sign"
+      "rpm-sign", "tar",
       ],
       qr{suse}i => [
       "ntp",  "rpm-build", "expect",   "gcc",
       "make", "automake",  "autoconf", "bison",
-      "flex", "m4"
+      "flex", "m4", "tar",
       ],
       default => [
       "ntpdate", "expect", "gcc", "make", "automake", "autoconf",
-      "bison",   "flex",   "m4"
+      "bison",   "flex",   "m4", "tar",
       ],
   };
 
