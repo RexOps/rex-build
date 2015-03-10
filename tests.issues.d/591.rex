@@ -11,6 +11,9 @@ task test => group => test => sub {
   symlink "/usr", "/tmp/foo";
   is(readlink("/tmp/foo"), "/usr", "/tmp/foo is a link to /usr");
 
+  unlink "/tmp/foo";
+  ok(!is_symlink("/tmp/foo"), "/tmp/foo is removed");
+
   done_testing();
 };
 
