@@ -64,7 +64,7 @@ print "Running: REXUSER=$user REXPASS=$pass HTEST=$ip rex -f build/Rexfile "
   . "--branch=$branch --environment=$environment --repo=$ENV{BUILD_REPO}\n";
 
 system "REXUSER=$user REXPASS=$pass HTEST=$ip rex -f build/Rexfile "
-  . "-c -d bundle --build=$build_file "
+  . "-c bundle --build=$build_file "
   . "--branch=$branch --environment=$environment --repo=$ENV{BUILD_REPO}";
 
 my $exit_code = $?;
