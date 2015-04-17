@@ -1,11 +1,8 @@
 # basic informations
 name:
   centos: perl-Sort-Naturally
-  fedora: perl-Sort-Naturally
   redhat: perl-Sort-Naturally
-  suse: perl-Sort-Naturally
-  mageia: perl-Sort-Naturally
-realname: Sort::Naturally
+realname: Sort-Naturally
 version: 1.03
 release: 1
 epoch: 1
@@ -43,42 +40,6 @@ requires:
         - perl
         - perl-devel
 
-
-      runtime:
-        - perl
-
-  fedora:
-    18: &depfedora18
-      build:
-        - make
-        - perl
-        - perl-devel
-
-      runtime:
-        - perl
-
-    19: *depfedora18
-    20: *depfedora18
-
-  redhat:
-    18: *depfedora18
-    19: *depfedora18
-    20: *depfedora18
-
-  suse:
-    13.1: &depsuse13
-      build:
-        - make
-        - perl
-
-      runtime:
-        - perl
-
-  mageia:
-    3:
-      build:
-        - make
-        - perl
 
       runtime:
         - perl
