@@ -1,0 +1,117 @@
+# basic informations
+name:
+  centos: perl-Sort-Naturally
+  fedora: perl-Sort-Naturally
+  redhat: perl-Sort-Naturally
+  suse: perl-Sort-Naturally
+  mageia: perl-Sort-Naturally
+realname: Sort::Naturally
+version: 1.03
+release: 1
+epoch: 1
+summary: Sort::Naturally -- sort lexically, but sort numeral parts numerically
+group:
+  centos: Utilities/System
+  redhat: admin
+  fedora: admin
+  suse: admin
+  mageia: admin
+license: Artistic
+homepage: https://metacpan.org/pod/Sort::Naturally
+source: https://cpan.metacpan.org/authors/id/B/BI/BINGOS/Sort-Naturally-1.03.tar.gz
+maintainer: Ferenc Erki <erkiferenc@gmail.com>
+priority: optional
+description: |
+  Sorts strings "naturally", meaning numeric substrings are compared numerically, and other word-characters are compared lexically.
+
+# requirements
+requires:
+  centos:
+    6: &depcentos6
+      build:
+        - make
+        - perl
+        - perl-devel
+
+
+      runtime:
+        - perl
+
+    7:
+      build:
+        - make
+        - perl
+        - perl-devel
+
+
+      runtime:
+        - perl
+
+  fedora:
+    18: &depfedora18
+      build:
+        - make
+        - perl
+        - perl-devel
+
+      runtime:
+        - perl
+
+    19: *depfedora18
+    20: *depfedora18
+
+  redhat:
+    18: *depfedora18
+    19: *depfedora18
+    20: *depfedora18
+
+  suse:
+    13.1: &depsuse13
+      build:
+        - make
+        - perl
+
+      runtime:
+        - perl
+
+  mageia:
+    3:
+      build:
+        - make
+        - perl
+
+      runtime:
+        - perl
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+  fedora:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
