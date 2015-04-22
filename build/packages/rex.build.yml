@@ -58,6 +58,7 @@ requires:
         - libparallel-forkmanager-perl
         - libipc-shareable-perl
         - libtext-glob-perl
+        - libsort-naturally-perl
       runtime:
         - perl
         - perl-modules
@@ -76,6 +77,7 @@ requires:
         - libparallel-forkmanager-perl
         - libipc-shareable-perl
         - libtext-glob-perl
+        - libsort-naturally-perl
 
 
     wheezy: &depwheezy
@@ -102,6 +104,7 @@ requires:
         - libparallel-forkmanager-perl
         - libipc-shareable-perl
         - libtext-glob-perl
+        - libsort-naturally-perl
 
       runtime:
         - perl
@@ -122,6 +125,7 @@ requires:
         - libparallel-forkmanager-perl
         - libipc-shareable-perl
         - libtext-glob-perl
+        - libsort-naturally-perl
 
 
   centos:
@@ -144,6 +148,7 @@ requires:
         - perl(Parallel::ForkManager): perl-Parallel-ForkManager
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
+        - perl(Sort::Naturally): perl-Sort-Naturally
       runtime:
         - perl
         - perl-Net-SSH2
@@ -161,6 +166,7 @@ requires:
         - perl(Parallel::ForkManager): perl-Parallel-ForkManager
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
+        - perl(Sort::Naturally): perl-Sort-Naturally
 
     6: &depcentos6
       build:
@@ -183,6 +189,7 @@ requires:
         - perl(Parallel::ForkManager): perl-Parallel-ForkManager
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
+        - perl(Sort::Naturally): perl-Sort-Naturally
 
 
       runtime:
@@ -203,6 +210,7 @@ requires:
         - perl(Parallel::ForkManager): perl-Parallel-ForkManager
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
+        - perl(Sort::Naturally): perl-Sort-Naturally
 
     7:
       build:
@@ -225,6 +233,7 @@ requires:
         - perl(Parallel::ForkManager): perl-Parallel-ForkManager
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
+        - perl(Sort::Naturally): perl-Sort-Naturally
 
 
       runtime:
@@ -245,6 +254,7 @@ requires:
         - perl(Parallel::ForkManager): perl-Parallel-ForkManager
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
+        - perl(Sort::Naturally): perl-Sort-Naturally
 
 
 
@@ -278,6 +288,7 @@ requires:
         - perl(Parallel::ForkManager): perl-Parallel-ForkManager
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
+        - perl(Sort::Naturally): perl-Sort-Naturally
 
 
       runtime:
@@ -297,6 +308,7 @@ requires:
         - perl(Parallel::ForkManager): perl-Parallel-ForkManager
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
+        - perl(Sort::Naturally): perl-Sort-Naturally
 
 
     19: *depfedora18
@@ -329,6 +341,7 @@ requires:
         - perl(Parallel::ForkManager): perl-Parallel-ForkManager
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
+        - perl(Sort::Naturally): perl-Sort-Naturally
 
       runtime:
         - perl
@@ -347,6 +360,7 @@ requires:
         - perl(Parallel::ForkManager): perl-Parallel-ForkManager
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
+        - perl(Sort::Naturally): perl-Sort-Naturally
 
     13.2: *depsuse13
 
@@ -370,6 +384,7 @@ requires:
         - perl(Parallel::ForkManager): perl-Parallel-ForkManager
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
+        - perl(Sort::Naturally): perl-Sort-Naturally
 
       runtime:
         - perl
@@ -388,6 +403,7 @@ requires:
         - perl(Parallel::ForkManager): perl-Parallel-ForkManager
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
+        - perl(Sort::Naturally): perl-Sort-Naturally
 
 # build instructions
 configure: |
