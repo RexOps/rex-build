@@ -1,0 +1,105 @@
+# basic informations
+name:
+  centos: perl-Moo
+realname: Moo
+version: 2.000001
+release: 1
+epoch: 1
+summary: Moo - Minimalist Object Orientation (with Moose compatibility)
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/Moo
+source: https://cpan.metacpan.org/authors/id/H/HA/HAARG/Moo-2.000001.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Moo - Minimalist Object Orientation (with Moose compatibility)
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl(Class::Method::Modifiers): perl-Class-Method-Modifiers
+        - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(Role::Tiny): perl-Role-Tiny
+      runtime:
+        - perl
+        - perl(Class::Method::Modifiers): perl-Class-Method-Modifiers
+        - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(Role::Tiny): perl-Role-Tiny
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl(Class::Method::Modifiers): perl-Class-Method-Modifiers
+        - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(Role::Tiny): perl-Role-Tiny
+      runtime:
+        - perl
+        - perl(Class::Method::Modifiers): perl-Class-Method-Modifiers
+        - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(Role::Tiny): perl-Role-Tiny
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-autodie
+        - perl(Class::Method::Modifiers): perl-Class-Method-Modifiers
+        - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(Role::Tiny): perl-Role-Tiny
+      runtime:
+        - perl
+        - perl-autodie
+        - perl(Class::Method::Modifiers): perl-Class-Method-Modifiers
+        - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(Role::Tiny): perl-Role-Tiny
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
