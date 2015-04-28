@@ -26,8 +26,10 @@ requires:
         - make
         - gcc
         - perl
+        - perl(Module::Build): perl-Module-Build
       runtime:
         - perl
+        - perl(Module::Build): perl-Module-Build
 
     6:
       build:
