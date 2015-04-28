@@ -1,22 +1,22 @@
 # basic informations
 name:
-  centos: perl-Class-Method-Modifiers
-realname: Class-Method-Modifiers
-version: 2.11
+  centos: perl-Sub-Exporter-Progressive
+realname: Sub-Exporter-Progressive
+version: 0.001011
 release: 1
 epoch: 1
-summary: Class::Method::Modifiers - provides Moose-like method modifiers
+summary: Sub::Exporter::Progressive - Only use Sub::Exporter if you need it.
 group:
   centos: System Environment/Libraries
 license: perl5
 homepage: https://metacpan.org/pod/Class::MethodMaker
-source: https://cpan.metacpan.org/authors/id/E/ET/ETHER/Class-Method-Modifiers-2.11.tar.gz
+source: https://cpan.metacpan.org/authors/id/F/FR/FREW/Sub-Exporter-Progressive-0.001011.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 arch:
   centos: x86_64
 description: |
-  Class::Method::Modifiers - provides Moose-like method modifiers
+  Sub::Exporter::Progressive - Only use Sub::Exporter if you need it
 
 # requirements
 requires:
