@@ -37,8 +37,10 @@ requires:
         - gcc
         - perl
         - perl-devel
+        - perl(Module::Build): perl-Module-Build
       runtime:
         - perl
+        - perl(Module::Build): perl-Module-Build
 
     7:
       build:
@@ -47,9 +49,11 @@ requires:
         - perl
         - perl-devel
         - perl-autodie
+        - perl(Module::Build): perl-Module-Build
       runtime:
         - perl
         - perl-autodie
+        - perl(Module::Build): perl-Module-Build
 
 # build instructions
 configure: |
