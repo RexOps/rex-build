@@ -78,3 +78,4 @@ files:
       - %{_mandir}/*
     package:
       - %{_libdir}/perl5/vendor_perl/*
+      - %{_datadir}/perl5/vendor_perl/*
