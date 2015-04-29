@@ -26,28 +26,19 @@ requires:
         - make
         - gcc
         - perl
-        - perl(Clone)
-        - perl(Digest::MD5)
-        - perl(File::Spec)
-        - perl(IO::String)
-        - perl(List::MoreUtils)
-        - perl(List::Util)
-        - perl(Params::Util)
-        - perl(Task::Weaken)
-        - perl(Storable)
-        - perl(Test::More)
+        - perl(Clone): perl-Clone
+        - perl(IO::String): perl-IO-String
+        - perl(List::MoreUtils): perl-List-MoreUtils
+        - perl(Params::Util): perl-Params-Util
+        - perl(Task::Weaken): perl-Task-Weaken
 
       runtime:
         - perl
-        - perl(Clone)
-        - perl(Digest::MD5)
-        - perl(File::Spec)
-        - perl(IO::String)
-        - perl(List::MoreUtils)
-        - perl(List::Util)
-        - perl(Params::Util)
-        - perl(Task::Weaken)
-        - perl(Storable)
+        - perl(Clone): perl-Clone
+        - perl(IO::String): perl-IO-String
+        - perl(List::MoreUtils): perl-List-MoreUtils
+        - perl(Params::Util): perl-Params-Util
+        - perl(Task::Weaken): perl-Task-Weaken
 
 # build instructions
 configure: |
