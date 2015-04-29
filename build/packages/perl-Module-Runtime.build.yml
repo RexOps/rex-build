@@ -38,6 +38,7 @@ requires:
         - perl
         - perl-devel
         - perl(Module::Build): perl-Module-Build
+        - perl(Test::More): perl-Test-Simple
       runtime:
         - perl
         - perl(Module::Build): perl-Module-Build
@@ -50,6 +51,7 @@ requires:
         - perl-devel
         - perl-autodie
         - perl(Module::Build): perl-Module-Build
+        - perl(Test::More): perl-Test-Simple
       runtime:
         - perl
         - perl-autodie
