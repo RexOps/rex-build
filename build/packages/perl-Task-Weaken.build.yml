@@ -1,0 +1,81 @@
+# basic informations
+name:
+  centos: perl-Task-Weaken
+realname: Task-Weaken
+version: 1.04
+release: 1
+epoch: 1
+summary: Task::Weaken - Ensure that a platform has weaken support
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/Task::Weaken
+source: https://cpan.metacpan.org/authors/id/A/AD/ADAMK/Task-Weaken-1.04.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Task::Weaken - Ensure that a platform has weaken support
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+      runtime:
+        - perl
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+      runtime:
+        - perl
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-autodie
+      runtime:
+        - perl
+        - perl-autodie
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
