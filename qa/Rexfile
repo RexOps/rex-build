@@ -30,6 +30,7 @@ perlbrew use perl-$perl_version
 cpanm --quiet --notest --skip-satisfied Dist::Zilla Devel::Cover
 dzil authordeps --missing | cpanm --quiet --notest --skip-satisfied
 dzil listdeps --missing | cpanm --quiet --notest --skip-satisfied
+cpanm --quite --notest --skip-satisfied Net::SFTP::Foreign, Net::OpenSSH XML::Simple IO::Pty
 cpanm --quiet --notest --skip-satisfied DBI IPC::Shareable Parallel::ForkManager Digest::HMAC_SHA1 String::Escape XML::LibXML
 cpanm --quiet --notest --skip-satisfied TAP::Formatter::JUnit
 
