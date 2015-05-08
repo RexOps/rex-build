@@ -15,7 +15,7 @@ LOCAL {
     "git clone $git_repo rex --branch $branch >/var/log/rex/checkout-$$.log 2>&1";
   &end_phase;
 
-  system "cd rex ; dzil build";
+  system "cd rex ; dzil authordeps --missing | cpanm; dzil build";
 
   my ($version_line) = grep { m/^version/ } io("rex/dist.ini")->slurp;
   my ($t1, $version) = split(/ = /, $version_line);
