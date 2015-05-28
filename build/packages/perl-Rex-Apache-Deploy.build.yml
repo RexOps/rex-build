@@ -110,6 +110,7 @@ requires:
         - perl-List-MoreUtils
         - perl-Time-HiRes
 
+  7: *depcentos6
 
   ubuntu:
     lucid: *depsqueeze
