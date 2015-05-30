@@ -55,7 +55,7 @@ task prepare => group => test => sub {
     update_package_db;
   };
 
-  my @packages = qw/perl rsync/;
+  my @packages = qw/perl rsync sudo/;
 
   my $additional_packages = case operating_system, {
     qr{centos|redhat}i => [qw/openssh-clients dmidecode augeas augeas-libs/],
