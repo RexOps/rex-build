@@ -40,12 +40,7 @@ task "test", group => "test", sub {
   upload "/etc/passwd", "~/test.file";
   ok(is_file("$home/test.file"), "uploaded test.file to $home");
 
-  Rex::Logger::debug("Try to download ~/test.file");
-  my @out = run "ls -l /root/";
-  Rex::Logger::debug($_) for @out;
   download "~/test.file", "/tmp/test.file.$s";
-  Rex::Logger::debug("Downloaded ~/test.file");
-
   LOCAL {
     ok(is_file("/tmp/test.file.$s"), "download test.file.$s from $home");
   };
@@ -66,6 +61,10 @@ task "test", group => "test", sub {
 
   mkdir "~rsync_user/foo";
   ok(is_dir("/home/rsync_user/foo"), "created foo folder inside rsync_user \$HOME");
+
+  LOCAL {
+    run "rm -f /tmp/test.file.$s";
+  };
 
   done_testing();
 };
