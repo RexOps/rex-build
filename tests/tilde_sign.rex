@@ -40,7 +40,12 @@ task "test", group => "test", sub {
   upload "/etc/passwd", "~/test.file";
   ok(is_file("$home/test.file"), "uploaded test.file to $home");
 
+  Rex::Logger::debug("Try to download ~/test.file");
+  my @out = run "ls -l /root/";
+  Rex::Logger::debug($_) for @out;
   download "~/test.file", "/tmp/test.file.$s";
+  Rex::Logger::debug("Downloaded ~/test.file");
+
   LOCAL {
     ok(is_file("/tmp/test.file.$s"), "download test.file.$s from $home");
   };
