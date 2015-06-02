@@ -24,6 +24,7 @@ task test => group => test => sub {
 
     append_if_no_such_line "/etc/sudoers", "test692 ALL=(ALL:ALL) ALL";
     delete_lines_matching "/etc/sudoers", "Defaults targetpw";
+    delete_lines_matching "/etc/sudoers", qr{Defaults\s+requiretty};
 
     do_task "auth_test";
     done_testing();
