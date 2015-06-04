@@ -13,7 +13,7 @@ mkdir "/tmp/workspace";
 mkdir "/tmp/workspace/$rnd";
 chdir "/tmp/workspace/$rnd";
 
-system 'git clone https://github.com/RexOps/Rex.git rex --branch development >/tmp/out.log 2>&1';
+system 'git clone https://github.com/RexOps/Rex.git rex --branch master >/tmp/out.log 2>&1';
 
 chdir $cwd;
 
