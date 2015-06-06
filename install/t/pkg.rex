@@ -19,7 +19,7 @@ task test => group => test => sub {
     && exists config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}
     && exists config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}->{$arch}) {
 
-    say Dumper(config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}->{$arch});
+    #say Dumper(config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}->{$arch});
 
     if(is_mageia) {
       my $url = config->{repo}->{add}->{get_build_env()}->{lc($op)}->{$ver}->{$arch}->{url};
@@ -45,7 +45,7 @@ task test => group => test => sub {
   }
   else {
 
-    say Dumper(config->{repo}->{add}->{get_build_env()}->{lc($op)});
+    #say Dumper(config->{repo}->{add}->{get_build_env()}->{lc($op)});
     eval {
       repository add => "rex", (distro => $ver), %{ config->{repo}->{add}->{get_build_env()}->{lc($op)} }
         if(exists config->{repo}->{add}->{get_build_env()}->{lc($op)});
