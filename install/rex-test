@@ -13,7 +13,7 @@ mkdir "/tmp/workspace";
 mkdir "/tmp/workspace/$rnd";
 chdir "/tmp/workspace/$rnd";
 
-system 'git clone https://github.com/RexOps/Rex.git rex --branch master >/tmp/out.log 2>&1';
+system "git clone https://github.com/RexOps/Rex.git rex --branch master >/var/log/rex/install-out-git-$$.log 2>&1";
 
 chdir $cwd;
 
@@ -24,7 +24,7 @@ $ENV{"PERL5LIB"} = "/tmp/workspace/$rnd/rex/lib:" . (exists $ENV{PERL5LIB} ? $EN
 $ENV{TEST_PACKAGE} ||= "rex";
 
 for my $file (@ARGV) {
-  system "perl /tmp/workspace/$rnd/rex/bin/rex -Fqf $file test";
+  system "perl /tmp/workspace/$rnd/rex/bin/rex -Fqf $file test 2>&1 | tee -a /var/log/rex/install-out-$$.log ";
 }
 
 system "rm -rf /tmp/workspace/$rnd";
