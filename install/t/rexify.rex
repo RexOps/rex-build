@@ -3,7 +3,8 @@
 use Rex -feature => '0.42';
 use Test::More;
 
-do "auth.conf";
+use lib "../lib";
+do "../auth.conf";
 
 task test => group => test => sub {
 
@@ -12,8 +13,8 @@ task test => group => test => sub {
     run "cd /tmp/rexify-$$; rexify MyProject";
     ok($? == 0, "rexify command run without errors.");
 
-    ok(-f "/tmp/rexify-$$/MyProject/Rexfile", "found Rexfile");
-    ok(-f "/tmp/rexify-$$/MyProject/lib/MyProject.pm", "found MyProject.pm");
+    ok(is_file( "/tmp/rexify-$$/MyProject/Rexfile" ), "found Rexfile");
+    ok(is_file( "/tmp/rexify-$$/MyProject/lib/MyProject.pm" ), "found MyProject.pm");
 
     my $c_rexfile = cat "/tmp/rexify-$$/MyProject/Rexfile";
     ok($c_rexfile =~ m/require MyProject/gm, "found right content in Rexfile");
