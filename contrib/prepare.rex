@@ -1,6 +1,6 @@
 # vim: set syn=perl:
 
-use Rex -feature => '0.42';
+use Rex -feature => '1.0';
 use Rex::Commands::User;
 use Rex::Hardware::Network;
 use List::Util qw/first/;
