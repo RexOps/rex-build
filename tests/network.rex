@@ -19,14 +19,8 @@ task "test", group => "test", sub {
   #print Dumper(\@netstat);
   my @tcp_connections = grep { $_->{"proto"} eq "tcp" } netstat;
 
-  if(is_openwrt) {
-    my ($ssh) = grep { $_->{command} =~ /dropbear/ } @tcp_connections;
-    ok($ssh, "found sshd");
-  }
-  else {
-    my ($ssh) = grep { $_->{local_addr} =~ /[\.:]22$/ } @tcp_connections;
-    ok($ssh, "found sshd");
-  }
+  my ($ssh) = grep { $_->{local_addr} =~ /[\.:]22$/ } @tcp_connections;
+  ok($ssh, "found sshd");
 
   done_testing();
 };
