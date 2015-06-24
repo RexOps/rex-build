@@ -8,7 +8,7 @@ name:
   suse: rex-apache-deploy
   mageia: rex-apache-deploy
 realname: Rex-Apache-Deploy
-version: 0.10.0
+version: 0.11.99.3
 release: 1
 epoch: 1
 summary: Rex Module for Application Deployment
@@ -22,7 +22,7 @@ group:
   mageia: admin
 license: Apache 2
 homepage: http://rexify.org/
-source: http://nightly.rex.linux-files.org/source/Rex-Apache-Deploy-0.10.0.tar.gz
+source: http://nightly.rex.linux-files.org/source/Rex-Apache-Deploy-0.11.99.3.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 no_auto_scan: true
@@ -110,7 +110,24 @@ requires:
         - perl-List-MoreUtils
         - perl-Time-HiRes
 
-  7: *depcentos6
+  7: *depcentos7
+      build:
+        - make
+        - perl
+        - perl-devel
+        - rex
+        - perl-libwww-perl
+        - perl-YAML
+        - perl-List-MoreUtils
+        - perl-Time-HiRes
+
+      runtime:
+        - perl
+        - rex
+        - perl-libwww-perl
+        - perl-YAML
+        - perl-List-MoreUtils
+        - perl-Time-HiRes
 
   ubuntu:
     lucid: *depsqueeze
