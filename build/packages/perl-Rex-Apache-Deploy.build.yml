@@ -9,7 +9,7 @@ name:
   mageia: rex-apache-deploy
 realname: Rex-Apache-Deploy
 version: 0.11.99.3
-release: 1
+release: 2
 epoch: 1
 summary: Rex Module for Application Deployment
 group:
