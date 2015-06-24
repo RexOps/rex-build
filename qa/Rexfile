@@ -21,7 +21,7 @@ task test => group => test => sub {
 
 mkdir /tmp/test
 cd /tmp/test
-git clone $ENV{git_repo} test
+git clone --config remote.origin.fetch=$ENV{refspec} $ENV{git_repo} test
 cd test
 git checkout $ENV{branch}
 
