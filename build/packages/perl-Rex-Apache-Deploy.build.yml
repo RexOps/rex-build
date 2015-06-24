@@ -110,7 +110,7 @@ requires:
         - perl-List-MoreUtils
         - perl-Time-HiRes
 
-  7: *depcentos7
+    7: *depcentos7
       build:
         - make
         - perl
