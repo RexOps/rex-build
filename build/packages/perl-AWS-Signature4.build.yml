@@ -81,10 +81,8 @@ requires:
       build:
         - make
         - perl
-        - perl-devel
         - perl-Module-Build
         - perl-parent
-        - perl-Test-Simple
         - perl-Digest-SHA
         - perl-TimeDate
         - perl-URI
@@ -271,16 +269,16 @@ requires:
 configure: |
   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
   cd <%= $realname %>-<%= $version %>
-  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+  perl Build.PL
 
 make: |
   cd <%= $realname %>-<%= $version %>
-  make
+  ./Build
 
 install: |
   rm -rf <%= $buildroot %>
   cd <%= $realname %>-<%= $version %>
-  make pure_install
+  ./Build install --destdir <%= $buildroot %>
   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
 
 clean: |
