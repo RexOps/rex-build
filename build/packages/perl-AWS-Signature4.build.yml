@@ -86,7 +86,7 @@ requires:
         - perl-parent
         - perl-Test-Simple
         - perl-Digest-SHA
-        - perl-TimeLocal
+        - perl-TimeDate
         - perl-URI
         - perl-libwww-perl
 
@@ -94,7 +94,7 @@ requires:
         - perl
         - perl-parent
         - perl-Digest-SHA
-        - perl-TimeLocal
+        - perl-TimeDate
         - perl-URI
         - perl-libwww-perl
 
@@ -107,7 +107,7 @@ requires:
         - perl-parent
         - perl-Test-Simple
         - perl-Digest-SHA
-        - perl-TimeLocal
+        - perl-TimeDate
         - perl-URI
         - perl-libwww-perl
 
@@ -115,7 +115,7 @@ requires:
         - perl
         - perl-parent
         - perl-Digest-SHA
-        - perl-TimeLocal
+        - perl-TimeDate
         - perl-URI
         - perl-libwww-perl
 
@@ -129,7 +129,7 @@ requires:
         - perl-parent
         - perl-Test-Simple
         - perl-Digest-SHA
-        - perl-TimeLocal
+        - perl-TimeDate
         - perl-URI
         - perl-libwww-perl
 
@@ -137,7 +137,7 @@ requires:
         - perl
         - perl-parent
         - perl-Digest-SHA
-        - perl-TimeLocal
+        - perl-TimeDate
         - perl-URI
         - perl-libwww-perl
 
@@ -181,7 +181,7 @@ requires:
         - perl-parent
         - perl-Test-Simple
         - perl-Digest-SHA
-        - perl-TimeLocal
+        - perl-TimeDate
         - perl-URI
         - perl-libwww-perl
 
@@ -190,7 +190,7 @@ requires:
         - perl
         - perl-parent
         - perl-Digest-SHA
-        - perl-TimeLocal
+        - perl-TimeDate
         - perl-URI
         - perl-libwww-perl
 
@@ -212,7 +212,7 @@ requires:
         - perl-Module-Build
         - perl-Test-Simple
         - perl-Digest-SHA
-        - perl-TimeLocal
+        - perl-TimeDate
         - perl-URI
         - perl-libwww-perl
 
@@ -220,7 +220,7 @@ requires:
       runtime:
         - perl
         - perl-Digest-SHA
-        - perl-TimeLocal
+        - perl-TimeDate
         - perl-URI
         - perl-libwww-perl
 
@@ -231,7 +231,7 @@ requires:
         - perl-Module-Build
         - perl-Test-Simple
         - perl-Digest-SHA
-        - perl-TimeLocal
+        - perl-TimeDate
         - perl-URI
         - perl-libwww-perl
 
@@ -239,7 +239,7 @@ requires:
       runtime:
         - perl
         - perl-Digest-SHA
-        - perl-TimeLocal
+        - perl-TimeDate
         - perl-URI
         - perl-libwww-perl
 
@@ -253,7 +253,7 @@ requires:
         - perl-Test-Simple
         - perl-devel
         - perl-Digest-SHA
-        - perl-TimeLocal
+        - perl-TimeDate
         - perl-URI
         - perl-libwww-perl
 
@@ -262,7 +262,7 @@ requires:
         - perl
         - perl-parent
         - perl-Digest-SHA
-        - perl-TimeLocal
+        - perl-TimeDate
         - perl-URI
         - perl-libwww-perl
 
