@@ -224,7 +224,7 @@ requires:
         - perl-URI
         - perl-libwww-perl
 
-    13.2: &depsuse13_2
+    13.2: &depsuse132
       build:
         - make
         - perl
