@@ -1,0 +1,301 @@
+# basic informations
+name:
+  centos: perl-AWS-Signature4
+  debian: libaws-signature4-perl
+  ubuntu: libaws-signature4-perl
+  fedora: perl-AWS-Signature4
+  redhat: perl-AWS-Signature4
+  suse: perl-AWS-Signature4
+  mageia: perl-AWS-Signature4
+realname: AWS-Signature4
+version: 1.02
+release: 1
+epoch: 1
+summary: AWS::Signature4 - Create a version4 signature for Amazon Web Services
+group:
+  centos: Utilities/System
+  debian: admin
+  ubuntu: admin
+  redhat: admin
+  fedora: admin
+  suse: admin
+  mageia: admin
+license: Artistic
+homepage: https://metacpan.org/pod/AWS::Signature4
+source: https://cpan.metacpan.org/authors/id/L/LD/LDS/AWS-Signature4-1.02.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+description: |
+  AWS::Signature4 - Create a version4 signature for Amazon Web Services
+
+# requirements
+requires:
+  debian:
+    squeeze: &depsqueeze
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - libmodule-build-perl
+        - libtest-simple-perl
+        - libdigest-sha-perl
+        - libtimedate-perl
+        - libwww-perl
+
+      runtime:
+        - perl
+        - perl-modules
+        - libdigest-sha-perl
+        - libtimedate-perl
+        - libwww-perl
+
+
+    wheezy: &depwheezy
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - libmodule-build-perl
+        - libtest-simple-perl
+        - libdigest-sha-perl
+        - libtimedate-perl
+        - libwww-perl
+
+      runtime:
+        - perl
+        - perl-modules
+        - libdigest-sha-perl
+        - libtimedate-perl
+        - libwww-perl
+
+
+  centos:
+
+    5: &depcentos5
+      build:
+        - make
+        - perl
+        - perl-devel
+        - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
+        - perl-Digest-SHA
+        - perl-TimeLocal
+        - perl-URI
+        - perl-libwww-perl
+
+      runtime:
+        - perl
+        - perl-parent
+        - perl-Digest-SHA
+        - perl-TimeLocal
+        - perl-URI
+        - perl-libwww-perl
+
+    6: &depcentos6
+      build:
+        - make
+        - perl
+        - perl-devel
+        - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
+        - perl-Digest-SHA
+        - perl-TimeLocal
+        - perl-URI
+        - perl-libwww-perl
+
+      runtime:
+        - perl
+        - perl-parent
+        - perl-Digest-SHA
+        - perl-TimeLocal
+        - perl-URI
+        - perl-libwww-perl
+
+
+    7:
+      build:
+        - make
+        - perl
+        - perl-devel
+        - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
+        - perl-Digest-SHA
+        - perl-TimeLocal
+        - perl-URI
+        - perl-libwww-perl
+
+      runtime:
+        - perl
+        - perl-parent
+        - perl-Digest-SHA
+        - perl-TimeLocal
+        - perl-URI
+        - perl-libwww-perl
+
+
+  ubuntu:
+    lucid: *depsqueeze
+    precise:
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - libmodule-build-perl
+        - libtest-simple-perl
+        - libdigest-sha-perl
+        - libtimedate-perl
+        - libwww-perl
+
+      runtime:
+        - perl
+        - perl-modules
+        - libdigest-sha-perl
+        - libtimedate-perl
+        - libwww-perl
+
+
+    quantal: *depwheezy
+    raring: *depwheezy
+    saucy: *depwheezy
+    trusty: *depwheezy
+
+  fedora:
+    18: &depfedora18
+      build:
+        - make
+        - perl
+        - perl-devel
+        - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
+        - perl-Digest-SHA
+        - perl-TimeLocal
+        - perl-URI
+        - perl-libwww-perl
+
+
+      runtime:
+        - perl
+        - perl-parent
+        - perl-Digest-SHA
+        - perl-TimeLocal
+        - perl-URI
+        - perl-libwww-perl
+
+
+    19: *depfedora18
+    20: *depfedora18
+    21: *depfedora18
+
+  redhat:
+    18: *depfedora18
+    19: *depfedora18
+    20: *depfedora18
+
+  suse:
+    13.1: &depsuse13
+      build:
+        - make
+        - perl
+        - perl-Module-Build
+        - perl-Test-Simple
+        - perl-Digest-SHA
+        - perl-TimeLocal
+        - perl-URI
+        - perl-libwww-perl
+
+
+      runtime:
+        - perl
+        - perl-Digest-SHA
+        - perl-TimeLocal
+        - perl-URI
+        - perl-libwww-perl
+
+    13.2: &depsuse13_2
+      build:
+        - make
+        - perl
+        - perl-Module-Build
+        - perl-Test-Simple
+        - perl-Digest-SHA
+        - perl-TimeLocal
+        - perl-URI
+        - perl-libwww-perl
+
+
+      runtime:
+        - perl
+        - perl-Digest-SHA
+        - perl-TimeLocal
+        - perl-URI
+        - perl-libwww-perl
+
+  mageia:
+    3:
+      build:
+        - make
+        - perl
+        - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
+        - perl-devel
+        - perl-Digest-SHA
+        - perl-TimeLocal
+        - perl-URI
+        - perl-libwww-perl
+
+
+      runtime:
+        - perl
+        - perl-parent
+        - perl-Digest-SHA
+        - perl-TimeLocal
+        - perl-URI
+        - perl-libwww-perl
+
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+  fedora:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*

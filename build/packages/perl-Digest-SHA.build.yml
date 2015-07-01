@@ -1,0 +1,213 @@
+# basic informations
+name:
+  centos: perl-Digest-SHA
+  debian: libdigest-sha-perl
+  ubuntu: libdigest-sha-perl
+  fedora: perl-Digest-SHA
+  redhat: perl-Digest-SHA
+  suse: perl-Digest-SHA
+  mageia: perl-Digest-SHA
+realname: Digest-SHA
+version: 5.95
+release: 1
+epoch: 1
+summary: Digest::SHA - Perl extension for SHA-1/224/256/384/512
+group:
+  centos: Utilities/System
+  debian: admin
+  ubuntu: admin
+  redhat: admin
+  fedora: admin
+  suse: admin
+  mageia: admin
+license: Artistic
+homepage: https://metacpan.org/pod/Digest::SHA
+source: https://cpan.metacpan.org/authors/id/M/MS/MSHELOR/Digest-SHA-5.95.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+description: |
+  Digest::SHA - Perl extension for SHA-1/224/256/384/512
+
+# requirements
+requires:
+  debian:
+    squeeze: &depsqueeze
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - libmodule-build-perl
+        - libtest-simple-perl
+
+      runtime:
+        - perl
+        - perl-modules
+
+
+    wheezy: &depwheezy
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - libmodule-build-perl
+        - libtest-simple-perl
+
+      runtime:
+        - perl
+        - perl-modules
+
+
+  centos:
+    6: &depcentos6
+      build:
+        - make
+        - perl
+        - perl-devel
+        - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
+
+      runtime:
+        - perl
+        - perl-parent
+
+
+    7:
+      build:
+        - make
+        - perl
+        - perl-devel
+        - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
+
+
+      runtime:
+        - perl
+        - perl-parent
+
+
+  ubuntu:
+    lucid: *depsqueeze
+    precise:
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - libmodule-build-perl
+        - libtest-simple-perl
+
+      runtime:
+        - perl
+        - perl-modules
+
+
+    quantal: *depwheezy
+    raring: *depwheezy
+    saucy: *depwheezy
+    trusty: *depwheezy
+
+  fedora:
+    18: &depfedora18
+      build:
+        - make
+        - perl
+        - perl-devel
+        - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
+
+
+      runtime:
+        - perl
+        - perl-parent
+
+
+    19: *depfedora18
+    20: *depfedora18
+
+  redhat:
+    18: *depfedora18
+    19: *depfedora18
+    20: *depfedora18
+
+  suse:
+    13.1: &depsuse13
+      build:
+        - make
+        - perl
+        - perl-Module-Build
+        - perl-Test-Simple
+
+
+      runtime:
+        - perl
+
+    13.2: &depsuse13_2
+      build:
+        - make
+        - perl
+        - perl-Module-Build
+        - perl-Test-Simple
+
+
+      runtime:
+        - perl
+
+  mageia:
+    3:
+      build:
+        - make
+        - perl
+        - perl-Module-Build
+        - perl-parent
+        - perl-Test-Simple
+        - perl-devel
+
+
+      runtime:
+        - perl
+        - perl-parent
+
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+  fedora:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
