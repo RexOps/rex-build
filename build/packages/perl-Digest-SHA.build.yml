@@ -205,16 +205,16 @@ files:
     doc:
       - %{_mandir}/*
     package:
-      - /usr/lib64/perl5/vendor_perl/5.8.8/x86_64-linux-thread-multi/auto/Digest/SHA/SHA.bs
-      - /usr/lib64/perl5/vendor_perl/5.8.8/x86_64-linux-thread-multi/auto/Digest/SHA/SHA.so
-      - /usr/lib64/perl5/vendor_perl/5.8.8/x86_64-linux-thread-multi/Digest/SHA.pm
+      - /usr/*/perl5/vendor_perl/5.8.8/*/auto/Digest/SHA/SHA.bs
+      - /usr/*/perl5/vendor_perl/5.8.8/*/auto/Digest/SHA/SHA.so
+      - /usr/*/perl5/vendor_perl/5.8.8/*/Digest/SHA.pm
       - /usr/bin/shasum
   centos:
     doc:
       - %{_mandir}/*
     package:
-      - /usr/lib64/perl5/vendor_perl/5.8.8/x86_64-linux-thread-multi/auto/Digest/SHA/SHA.bs
-      - /usr/lib64/perl5/vendor_perl/5.8.8/x86_64-linux-thread-multi/auto/Digest/SHA/SHA.so
-      - /usr/lib64/perl5/vendor_perl/5.8.8/x86_64-linux-thread-multi/Digest/SHA.pm
+      - /usr/*/perl5/vendor_perl/5.8.8/*/auto/Digest/SHA/SHA.bs
+      - /usr/*/perl5/vendor_perl/5.8.8/*/auto/Digest/SHA/SHA.so
+      - /usr/*/perl5/vendor_perl/5.8.8/*/Digest/SHA.pm
       - /usr/bin/shasum
 
