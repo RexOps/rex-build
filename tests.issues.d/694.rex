@@ -9,6 +9,7 @@ do 'auth.conf';
 task test => group => test => sub {
   run_task "foo", on => connection->server;
   ok(is_file($filename), 'foo ran on remote');
+  rm $filename;
 };
 
 task "foo" => sub {
