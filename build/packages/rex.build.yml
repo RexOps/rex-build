@@ -59,6 +59,7 @@ requires:
         - libipc-shareable-perl
         - libtext-glob-perl
         - libsort-naturally-perl
+        - libhash-merge-perl
       runtime:
         - perl
         - perl-modules
@@ -78,6 +79,7 @@ requires:
         - libipc-shareable-perl
         - libtext-glob-perl
         - libsort-naturally-perl
+        - libhash-merge-perl
 
 
     wheezy: &depwheezy
@@ -105,6 +107,7 @@ requires:
         - libipc-shareable-perl
         - libtext-glob-perl
         - libsort-naturally-perl
+        - libhash-merge-perl
 
       runtime:
         - perl
@@ -126,6 +129,7 @@ requires:
         - libipc-shareable-perl
         - libtext-glob-perl
         - libsort-naturally-perl
+        - libhash-merge-perl
 
 
   centos:
@@ -149,6 +153,7 @@ requires:
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
         - perl(Sort::Naturally): perl-Sort-Naturally
+        - perl(Hash::Merge): perl-Hash-Merge
       runtime:
         - perl
         - perl-Net-SSH2
@@ -167,6 +172,7 @@ requires:
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
         - perl(Sort::Naturally): perl-Sort-Naturally
+        - perl(Hash::Merge): perl-Hash-Merge
 
     6: &depcentos6
       build:
@@ -190,6 +196,7 @@ requires:
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
         - perl(Sort::Naturally): perl-Sort-Naturally
+        - perl(Hash::Merge): perl-Hash-Merge
 
 
       runtime:
@@ -211,6 +218,7 @@ requires:
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
         - perl(Sort::Naturally): perl-Sort-Naturally
+        - perl(Hash::Merge): perl-Hash-Merge
 
     7:
       build:
@@ -234,6 +242,7 @@ requires:
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
         - perl(Sort::Naturally): perl-Sort-Naturally
+        - perl(Hash::Merge): perl-Hash-Merge
 
 
       runtime:
@@ -255,6 +264,7 @@ requires:
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
         - perl(Sort::Naturally): perl-Sort-Naturally
+        - perl(Hash::Merge): perl-Hash-Merge
 
 
 
@@ -289,6 +299,7 @@ requires:
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
         - perl(Sort::Naturally): perl-Sort-Naturally
+        - perl(Hash::Merge): perl-Hash-Merge
 
 
       runtime:
@@ -309,6 +320,7 @@ requires:
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
         - perl(Sort::Naturally): perl-Sort-Naturally
+        - perl(Hash::Merge): perl-Hash-Merge
 
 
     19: *depfedora18
@@ -342,6 +354,7 @@ requires:
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
         - perl(Sort::Naturally): perl-Sort-Naturally
+        - perl(Hash::Merge): perl-Hash-Merge
 
       runtime:
         - perl
@@ -361,6 +374,7 @@ requires:
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
         - perl(Sort::Naturally): perl-Sort-Naturally
+        - perl(Hash::Merge): perl-Hash-Merge
 
     13.2: *depsuse13
 
@@ -385,6 +399,7 @@ requires:
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
         - perl(Sort::Naturally): perl-Sort-Naturally
+        - perl(Hash::Merge): perl-Hash-Merge
 
       runtime:
         - perl
@@ -404,6 +419,7 @@ requires:
         - perl(IPC::Shareable): perl-IPC-Shareable
         - perl(Text::Glob): perl-Text-Glob
         - perl(Sort::Naturally): perl-Sort-Naturally
+        - perl(Hash::Merge): perl-Hash-Merge
 
 # build instructions
 configure: |
