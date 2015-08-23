@@ -12,7 +12,6 @@ my $ua = Mojo::UserAgent->new;
 $ua->request_timeout(360);
 $ua->inactivity_timeout(360);
 
-
 $::QUIET = 1;
 
 my $yaml =
@@ -41,14 +40,14 @@ if ( !$build_file || !-f $build_file ) {
 my $branch      = $ENV{REX_BRANCH} || 'master';
 my $environment = $ENV{BUILD_ENV}  || 'nightly';
 
-my $time = time;
+my $time   = time;
 my $new_vm = "${base_vm}-build-$time-$$";
 
 @SIG{qw( INT TERM HUP )} = sub {
   remove_vm($new_vm);
 };
 
-my ($vm_id, $ip) = create_vm($new_vm, $base_vm);
+my ( $vm_id, $ip ) = create_vm( $new_vm, $base_vm );
 
 while ( !is_port_open( $ip, 22 ) ) {
   sleep 1;
@@ -75,8 +74,8 @@ exit $exit_code;
 
 sub create_vm {
 
-  my ($new_vm, $base_vm) = @_;
-  my ($ip, $vm_id);
+  my ( $new_vm, $base_vm ) = @_;
+  my ( $ip, $vm_id );
 
   if ( $ENV{use_docker} ) {
 
@@ -85,10 +84,12 @@ sub create_vm {
       json => {
         name => $new_vm,
         type => "docker",
-        parent => "3a7f1fc9e58a8492fc625d8a16e85e76_c5fd214cdd0d2b3b4272e73b022ba5c2",
+        parent =>
+          "3a7f1fc9e58a8492fc625d8a16e85e76_c5fd214cdd0d2b3b4272e73b022ba5c2",
         data => {
           image => $base_vm,
-          host => "3a7f1fc9e58a8492fc625d8a16e85e76_1b21b0d71706897b69f108572c444d40_b0da275520918e23dd615e2a747528f1",
+          host =>
+"3a7f1fc9e58a8492fc625d8a16e85e76_1b21b0d71706897b69f108572c444d40_b0da275520918e23dd615e2a747528f1",
           command => "/usr/sbin/sshd -D",
         }
       }
@@ -123,10 +124,12 @@ sub create_vm {
       json => {
         name => $new_vm,
         type => "kvm",
-        parent => "3a7f1fc9e58a8492fc625d8a16e85e76_c5fd214cdd0d2b3b4272e73b022ba5c2",
+        parent =>
+          "3a7f1fc9e58a8492fc625d8a16e85e76_c5fd214cdd0d2b3b4272e73b022ba5c2",
         data => {
           image => $base_vm,
-          host => "3a7f1fc9e58a8492fc625d8a16e85e76_1b21b0d71706897b69f108572c444d40_b0da275520918e23dd615e2a747528f1",
+          host =>
+"3a7f1fc9e58a8492fc625d8a16e85e76_1b21b0d71706897b69f108572c444d40_b0da275520918e23dd615e2a747528f1",
         }
       }
     );
@@ -155,7 +158,7 @@ sub create_vm {
 
   }
 
-  return ($vm_id, $ip);
+  return ( $vm_id, $ip );
 }
 
 sub remove_vm {
