@@ -24,6 +24,16 @@ description: |
 # requirements
 requires:
   centos:
+    5: &depcentos5
+      build:
+        - make
+        - perl
+        - perl-devel
+        - perl(Clone): perl-Clone
+
+      runtime:
+        - perl
+
     6: &depcentos6
       build:
         - make
