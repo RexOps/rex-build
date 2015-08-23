@@ -13,6 +13,7 @@ $ua->request_timeout(360);
 $ua->inactivity_timeout(360);
 
 $::QUIET = 1;
+$|       = 1;
 
 my $yaml =
   eval { local ( @ARGV, $/ ) = ( $ENV{HOME} . "/.build_config" ); <>; };
