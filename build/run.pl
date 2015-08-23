@@ -56,11 +56,13 @@ say $ip;
 
 say "Waiting for SSH port to be open...";
 
-while ( !is_port_open( $ip, 22 ) ) {
-  sleep 1;
-}
+say "skip wait - fix me in build/run.pl";
 
-say "SSH port is open";
+#while ( !is_port_open( $ip, 22 ) ) {
+#  sleep 1;
+#}
+
+#say "SSH port is open";
 
 my ( $user, $pass );
 
