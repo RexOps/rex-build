@@ -58,7 +58,7 @@ say "Waiting for SSH port to be open...";
 
 my $count;
 while ( !is_port_open( $ip, 22 ) ) {
-  die "Timed out waiting for SSH" if ++$count > 20;
+  die "Timed out waiting for SSH" if ++$count > 60;
   sleep 1;
 }
 
