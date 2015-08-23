@@ -28,7 +28,6 @@ requires:
       build:
         - make
         - perl
-        - perl-devel
         - perl(Clone): perl-Clone
 
       runtime:
