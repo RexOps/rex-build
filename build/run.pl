@@ -47,11 +47,19 @@ my $new_vm = "${base_vm}-build-$time-$$";
   remove_vm($new_vm);
 };
 
+say "Creating VM...";
 my ( $vm_id, $ip ) = create_vm( $new_vm, $base_vm );
+
+say $vm_id;
+say $ip;
+
+say "Waiting for SSH port to be open...";
 
 while ( !is_port_open( $ip, 22 ) ) {
   sleep 1;
 }
+
+say "SSH port is open";
 
 my ( $user, $pass );
 
