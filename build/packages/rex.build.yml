@@ -131,6 +131,8 @@ requires:
         - libsort-naturally-perl
         - libhash-merge-perl
 
+    jessie: *depwheezy
+
 
   centos:
     5:
