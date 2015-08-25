@@ -12,6 +12,12 @@ task test => group => test => sub {
   #
 
   transaction {    # make a transaction for not forking
+
+    on_rollback {
+        fail("Rollback triggered, please investigate");
+        done_testing();
+    };
+
     create_group "test692";
 
     account "test692",
