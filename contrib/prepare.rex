@@ -59,7 +59,7 @@ task prepare => group => test => sub {
 
   my $additional_packages = case operating_system, {
     qr{centos|redhat}i => [qw/openssh-clients dmidecode augeas augeas-libs/],
-      qr{freebsd}i     => [qw/dmidecode rsync/],
+      qr{freebsd}i     => [qw/dmidecode rsync sudo/],
       qr{openwrt}i     => [
       qw/block-mount coreutils-nohup perlbase-bytes perlbase-digest perlbase-essential perlbase-file perlbase-xsloader shadow-groupadd shadow-groupdel shadow-groupmod shadow-useradd shadow-userdel shadow-usermod swap-utils/
       ],
