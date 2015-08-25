@@ -6,6 +6,8 @@ use Test::More;
 
 do "auth.conf";
 
+$::QUIET = 1;
+
 user "nothing";
 password "nothing";
 key_auth;
