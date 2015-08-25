@@ -20,10 +20,13 @@ task test => group => test => sub {
 
     create_group "test692";
 
+    my $groups = ["test692"];
+    push @$groups, 'wheel' if is_freebsd();
+
     account "test692",
       home        => "/home/test692",
       uid         => 12000,
-      groups      => ["test692"],
+      groups      => $groups,
       password    => "test",
       ensure      => "present",
       create_home => TRUE;
