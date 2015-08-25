@@ -3,6 +3,8 @@ use Test::More;
 
 do 'auth.conf';
 
+$::QUIET = 1;
+
 use Rex::Transaction;
 
 task test => group => test => sub {
