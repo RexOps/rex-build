@@ -58,14 +58,14 @@ task prepare => group => test => sub {
   my @packages = qw/perl rsync sudo/;
 
   my $additional_packages = case operating_system, {
-    qr{centos|redhat}i => [qw/openssh-clients dmidecode augeas augeas-libs/],
+    qr{centos|redhat}i => [qw/perl-Digest-MD5 openssh-clients dmidecode augeas augeas-libs/],
       qr{freebsd}i     => [qw/dmidecode rsync sudo/],
       qr{openwrt}i     => [
       qw/block-mount coreutils-nohup perlbase-bytes perlbase-digest perlbase-essential perlbase-file perlbase-xsloader shadow-groupadd shadow-groupdel shadow-groupmod shadow-useradd shadow-userdel shadow-usermod swap-utils/
       ],
       qr{debian|ubuntu}i => [qw/rsync augeas-tools augeas-lenses/],
       qr{suse}i          => [qw/lsb-release augeas augeas-lenses/],
-      qr{fedora}i        => [qw/perl openssh-clients which augeas augeas-libs/],
+      qr{fedora}i        => [qw/perl perl-Digest-MD5 openssh-clients which augeas augeas-libs/],
       qr{gentoo}i        => [ 'sys-process/vixie-cron', 'app-admin/augeas' ],
       default            => [],
   };
