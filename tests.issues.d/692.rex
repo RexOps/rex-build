@@ -31,9 +31,11 @@ task test => group => test => sub {
       ensure      => "present",
       create_home => TRUE;
 
-    append_if_no_such_line "/etc/sudoers", "test692 ALL=(ALL:ALL) ALL";
-    delete_lines_matching "/etc/sudoers", "Defaults targetpw";
-    delete_lines_matching "/etc/sudoers", qr{Defaults\s+requiretty};
+    my $sudoers_file = is_freebsd() ? "/usr/local/etc/sudoers" : "/etc/sudoers";
+
+    append_if_no_such_line $sudoers_file, "test692 ALL=(ALL:ALL) ALL";
+    delete_lines_matching $sudoers_file, "Defaults targetpw";
+    delete_lines_matching $sudoers_file, qr{Defaults\s+requiretty};
 
     do_task "auth_test";
     done_testing();
