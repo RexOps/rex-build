@@ -5,6 +5,7 @@ use Rex::Commands::Run;
 use Rex::Helper::Path;
 use Rex::Commands::Pkg;
 use Rex::Commands::SCM;
+use Rex::Commands::Fs;
 
 do 'auth.conf';
 
@@ -14,22 +15,23 @@ set repository => "myrepo",
 task test => group => test => sub {
   
   my $test_dir = "/tmp/git-test-$$";
+  
   pkg "git";
   
   checkout "myrepo", path => $test_dir;
-  is(-d $test_dir, 1, "checkout path exists");
-  is(-d "$test_dir/lib", 1, "checkout successfull");
+  is(is_dir($test_dir), 1, "checkout path exists");
+  is(is_dir("$test_dir/lib"), 1, "checkout successfull");
   
-  my $branch = run "git status |  grep -i 'on branch' | awk ' { print \$3 } '", cwd => $test_dir;
+  my $branch = run "git status |  grep -i 'on branch'", cwd => $test_dir;
   chomp $branch;
-  is($branch, "master", "got master branch");
+  ok($branch =~ m/master/, "got master branch");
   
   run "rm -rf $test_dir";
   
   checkout "myrepo", path => $test_dir, branch => "2.0";
-  my $branch = run "git status |  grep -i 'on branch' | awk ' { print \$3 } '", cwd => $test_dir;
+  my $branch = run "git status |  grep -i 'on branch'", cwd => $test_dir;
   chomp $branch;
-  is($branch, "2.0", "got 2.0 branch");
+  ok($branch =~ m/2\.0/, "got 2.0 branch");
 
   run "rm -rf $test_dir";
 
