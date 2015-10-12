@@ -1,0 +1,62 @@
+# basic informations
+name:
+  centos: perl-PadWalker
+realname: PadWalker
+version: 2.1
+release: 1
+epoch: 1
+summary: PadWalker - play with other peoples' lexical variables
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/PadWalker
+source: https://cpan.metacpan.org/authors/id/R/RO/ROBIN/PadWalker-2.1.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  PadWalker - play with other peoples' lexical variables
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+
+      runtime:
+        - perl
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
