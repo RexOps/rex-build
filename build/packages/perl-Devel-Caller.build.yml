@@ -1,0 +1,64 @@
+# basic informations
+name:
+  centos: perl-Devel-Caller
+realname: Devel-Caller
+version: 2.06
+release: 1
+epoch: 1
+summary: Devel::Caller - meatier versions of caller
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/Devel::Caller
+source: https://cpan.metacpan.org/authors/id/R/RC/RCLAMP/Devel-Caller-2.06.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Devel::Caller - meatier versions of caller
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-PadWalker
+
+      runtime:
+        - perl
+        - perl-PadWalker
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
