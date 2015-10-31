@@ -15,8 +15,6 @@ chdir "qa";
 
 task test => group => test => sub {
 
-  my $perl_version = $ENV{perl_version};
-
   my $out = shell_block "/bin/bash", <<EOS;
 
 mkdir /tmp/test
@@ -26,7 +24,7 @@ cd test
 git checkout $ENV{branch}
 
 source /usr/local/perlbrew/etc/bashrc
-perlbrew use perl-$perl_version
+perlbrew use stable
 cpanm --quiet --notest --skip-satisfied Dist::Zilla Devel::Cover
 dzil authordeps --missing | cpanm --quiet --notest --skip-satisfied
 dzil listdeps --missing | cpanm --quiet --notest --skip-satisfied
