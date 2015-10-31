@@ -1,0 +1,85 @@
+# basic informations
+name:
+  centos: perl-Eval-Closure
+realname: Eval-Closure
+version: 0.13
+release: 1
+epoch: 1
+summary: Eval::Closure - safely and cleanly create closures via string eval
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/Eval::Closure
+source: https://cpan.metacpan.org/authors/id/D/DO/DOY/Eval-Closure-0.13.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Eval::Closure - safely and cleanly create closures via string eval
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-Try-Tiny
+      runtime:
+        - perl
+        - perl-Try-Tiny
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Try-Tiny
+      runtime:
+        - perl
+        - perl-Try-Tiny
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Try-Tiny
+      runtime:
+        - perl
+        - perl-Try-Tiny
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_libdir}/*

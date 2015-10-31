@@ -1,0 +1,91 @@
+# basic informations
+name:
+  centos: perl-Module-Implementation
+realname: Module-Implementation
+version: 0.09
+release: 1
+epoch: 1
+summary: Module::Implementation - Loads one of several alternate underlying implementations for a module
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/Module::Implementation
+source: https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Module-Implementation-0.09.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Module::Implementation - Loads one of several alternate underlying implementations for a module
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-Module-Runtime
+        - perl-Try-Tiny
+      runtime:
+        - perl
+        - perl-Module-Runtime
+        - perl-Try-Tiny
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Module-Runtime
+        - perl-Try-Tiny
+      runtime:
+        - perl
+        - perl-Module-Runtime
+        - perl-Try-Tiny
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Module-Runtime
+        - perl-Try-Tiny
+      runtime:
+        - perl
+        - perl-Module-Runtime
+        - perl-Try-Tiny
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_libdir}/*

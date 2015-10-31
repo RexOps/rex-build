@@ -1,0 +1,97 @@
+# basic informations
+name:
+  centos: perl-Devel-OverloadInfo
+realname: Devel-OverloadInfo
+version: 0.004
+release: 1
+epoch: 1
+summary: Devel::OverloadInfo - introspect overloaded operators
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/Devel::OverloadInfo
+source: https://cpan.metacpan.org/authors/id/I/IL/ILMARI/Devel-OverloadInfo-0.004.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Devel::OverloadInfo - introspect overloaded operators
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-MRO-Compat
+        - perl-Package-Stash
+        - perl-Sub-Identify
+      runtime:
+        - perl
+        - perl-MRO-Compat
+        - perl-Package-Stash
+        - perl-Sub-Identify
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-MRO-Compat
+        - perl-Package-Stash
+        - perl-Sub-Identify
+      runtime:
+        - perl
+        - perl-MRO-Compat
+        - perl-Package-Stash
+        - perl-Sub-Identify
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-MRO-Compat
+        - perl-Package-Stash
+        - perl-Sub-Identify
+      runtime:
+        - perl
+        - perl-MRO-Compat
+        - perl-Package-Stash
+        - perl-Sub-Identify
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_libdir}/*
