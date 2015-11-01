@@ -1,7 +1,7 @@
 # basic informations
 name:
   centos: perl-Try-Tiny
-realname: Clone
+realname: Try-Tiny
 version: 0.22
 release: 1
 epoch: 1
