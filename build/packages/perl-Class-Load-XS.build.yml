@@ -1,0 +1,85 @@
+# basic informations
+name:
+  centos: perl-Class-Load-XS
+realname: Class-Load-XS
+version: 0.09
+release: 1
+epoch: 1
+summary: Class::Load::XS - XS implementation of parts of Class::Load
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/Class::Load::XS
+source: https://cpan.metacpan.org/authors/id/E/ET/ETHER/Class-Load-XS-0.09.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Class::Load::XS - XS implementation of parts of Class::Load
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-Class-Load
+      runtime:
+        - perl
+        - perl-Class-Load
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Class-Load
+      runtime:
+        - perl
+        - perl-Class-Load
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Class-Load
+      runtime:
+        - perl
+        - perl-Class-Load
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_libdir}/*

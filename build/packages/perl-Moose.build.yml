@@ -1,0 +1,199 @@
+# basic informations
+name:
+  centos: perl-Moose
+realname: Moose
+version: 2.1603
+release: 1
+epoch: 1
+summary: Moose - A postmodern object system for Perl 5
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/Moose
+source: https://cpan.metacpan.org/authors/id/E/ET/ETHER/Moose-2.1603.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Moose - A postmodern object system for Perl 5
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-Class-Load
+        - perl-Class-Load-XS
+        - perl-Devel-GlobalDestruction
+        - perl-Devel-OverloadInfo
+        - perl-Devel-StackTrace
+        - perl-Dist-CheckConflicts
+        - perl-Eval-Closure
+        - perl-List-MoreUtils
+        - perl-Module-Runtime
+        - perl-Module-Runtime-Conflicts
+        - perl-MRO-Compat
+        - perl-Package-DeprecationManager
+        - perl-Package-Stash
+        - perl-Package-Stash-XS
+        - perl-Params-Util
+        - perl-Sub-Exporter
+        - perl-Sub-Identify
+        - perl-Sub-Name
+        - perl-Task-Weaken
+        - perl-Try-Tiny
+      runtime:
+        - perl
+        - perl-Class-Load
+        - perl-Class-Load-XS
+        - perl-Devel-GlobalDestruction
+        - perl-Devel-OverloadInfo
+        - perl-Devel-StackTrace
+        - perl-Dist-CheckConflicts
+        - perl-Eval-Closure
+        - perl-List-MoreUtils
+        - perl-Module-Runtime
+        - perl-Module-Runtime-Conflicts
+        - perl-MRO-Compat
+        - perl-Package-DeprecationManager
+        - perl-Package-Stash
+        - perl-Package-Stash-XS
+        - perl-Params-Util
+        - perl-Sub-Exporter
+        - perl-Sub-Identify
+        - perl-Sub-Name
+        - perl-Task-Weaken
+        - perl-Try-Tiny
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Class-Load
+        - perl-Class-Load-XS
+        - perl-Devel-GlobalDestruction
+        - perl-Devel-OverloadInfo
+        - perl-Devel-StackTrace
+        - perl-Dist-CheckConflicts
+        - perl-Eval-Closure
+        - perl-List-MoreUtils
+        - perl-Module-Runtime
+        - perl-Module-Runtime-Conflicts
+        - perl-MRO-Compat
+        - perl-Package-DeprecationManager
+        - perl-Package-Stash
+        - perl-Package-Stash-XS
+        - perl-Params-Util
+        - perl-Sub-Exporter
+        - perl-Sub-Identify
+        - perl-Sub-Name
+        - perl-Task-Weaken
+        - perl-Try-Tiny
+      runtime:
+        - perl
+        - perl-Class-Load
+        - perl-Class-Load-XS
+        - perl-Devel-GlobalDestruction
+        - perl-Devel-OverloadInfo
+        - perl-Devel-StackTrace
+        - perl-Dist-CheckConflicts
+        - perl-Eval-Closure
+        - perl-List-MoreUtils
+        - perl-Module-Runtime
+        - perl-Module-Runtime-Conflicts
+        - perl-MRO-Compat
+        - perl-Package-DeprecationManager
+        - perl-Package-Stash
+        - perl-Package-Stash-XS
+        - perl-Params-Util
+        - perl-Sub-Exporter
+        - perl-Sub-Identify
+        - perl-Sub-Name
+        - perl-Task-Weaken
+        - perl-Try-Tiny
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Class-Load
+        - perl-Class-Load-XS
+        - perl-Devel-GlobalDestruction
+        - perl-Devel-OverloadInfo
+        - perl-Devel-StackTrace
+        - perl-Dist-CheckConflicts
+        - perl-Eval-Closure
+        - perl-List-MoreUtils
+        - perl-Module-Runtime
+        - perl-Module-Runtime-Conflicts
+        - perl-MRO-Compat
+        - perl-Package-DeprecationManager
+        - perl-Package-Stash
+        - perl-Package-Stash-XS
+        - perl-Params-Util
+        - perl-Sub-Exporter
+        - perl-Sub-Identify
+        - perl-Sub-Name
+        - perl-Task-Weaken
+        - perl-Try-Tiny
+      runtime:
+        - perl
+        - perl-Class-Load
+        - perl-Class-Load-XS
+        - perl-Devel-GlobalDestruction
+        - perl-Devel-OverloadInfo
+        - perl-Devel-StackTrace
+        - perl-Dist-CheckConflicts
+        - perl-Eval-Closure
+        - perl-List-MoreUtils
+        - perl-Module-Runtime
+        - perl-Module-Runtime-Conflicts
+        - perl-MRO-Compat
+        - perl-Package-DeprecationManager
+        - perl-Package-Stash
+        - perl-Package-Stash-XS
+        - perl-Params-Util
+        - perl-Sub-Exporter
+        - perl-Sub-Identify
+        - perl-Sub-Name
+        - perl-Task-Weaken
+        - perl-Try-Tiny
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_libdir}/*
