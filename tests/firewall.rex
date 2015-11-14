@@ -16,8 +16,8 @@ task test => group => test => sub {
         is($type, "created", "created firewall rule for port 81");
       };
       
-    run "iptables-save | grep 'port 81'";
-    is($?, 0, "found port 81 rule inside iptables-save");
+    my $count = run "iptables-save | grep 'port 81' | wc -l";
+    is($count, 1, "found port 81 rule inside iptables-save");
 
     firewall "remove-open-port-81",
       ensure => "absent",
@@ -28,16 +28,16 @@ task test => group => test => sub {
         is($type, "removed", "removed firewall rule for port 81");
       };
 
-    run "iptables-save | grep 'port 81'";
-    is($?, 1, "NOT found port 81 rule inside iptables-save");
+    $count = run "iptables-save | grep 'port 81' | wc -l";
+    is($count, 0, "NOT found port 81 rule inside iptables-save");
 
     firewall "open-port-82-for-1.2.3.4",
       action => "accept",
       port   => 82,
       source => "1.2.3.4";
       
-    run "iptables-save | grep 'port 82' | grep 's 1.2.3.4'";
-    is($?, 0, "found port 82 and source 1.2.3.4 rule inside iptables-save");
+    $count = run "iptables-save | grep 'port 82' | grep 's 1.2.3.4' | wc -l";
+    is($count, 1, "found port 82 and source 1.2.3.4 rule inside iptables-save");
 
     firewall "open-port-82-for-1.2.3.4",
       ensure => "absent",
@@ -45,8 +45,8 @@ task test => group => test => sub {
       port   => 82,
       source => "1.2.3.4";
       
-    run "iptables-save | grep 'port 82' | grep 's 1.2.3.4'";
-    is($?, 1, "NOT found port 82 and source 1.2.3.4 rule inside iptables-save");
+    $count = run "iptables-save | grep 'port 82' | grep 's 1.2.3.4' | wc -l";
+    is($count, 0, "NOT found port 82 and source 1.2.3.4 rule inside iptables-save");
 
   }
   else {
