@@ -10,11 +10,12 @@ use lib "tests.issues.d/lib";
 use Foo788;
 use Server788;
 
-my $t_server = Server788->new(name => $ENV{HTEST}, auth => { user => "testu", password => "testu" });
+my $t_server = Server788->new(name => $ENV{HTEST}, auth => { user => "testu", password => "testu", sudo => FALSE });
 
 task test => group => test => sub {
   
   account "testu", password => "testu";
+  append_if_no_such_line "/etc/sudoers", "testu ALL=(ALL:ALL) ALL";
   
   my $o = Foo788->new(server => $t_server);
   my $u = $o->get_user;
