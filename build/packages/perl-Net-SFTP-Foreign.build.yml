@@ -27,10 +27,8 @@ requires:
         - make
         - gcc
         - perl
-        - perl-Time-HiRes
       runtime:
         - perl
-        - perl-Time-HiRes
 
     6:
       build:
