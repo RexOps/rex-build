@@ -1,0 +1,103 @@
+# basic informations
+name:
+  centos: perl-SQL-Abstract
+realname: SQL-Abstract
+version: 1.81
+release: 1
+epoch: 1
+summary: SQL::Abstract - Generate SQL from Perl data structures
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/SQL::Abstract
+source: https://cpan.metacpan.org/authors/id/R/RI/RIBASUSHI/SQL-Abstract-1.81.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  SQL::Abstract - Generate SQL from Perl data structures
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-Hash-Merge
+        - perl-Moo
+        - perl-MRO-Compat
+        - perl-Text-Balanced
+      runtime:
+        - perl
+        - perl-Hash-Merge
+        - perl-Moo
+        - perl-MRO-Compat
+        - perl-Text-Balanced
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Hash-Merge
+        - perl-Moo
+        - perl-MRO-Compat
+        - perl-Text-Balanced
+      runtime:
+        - perl
+        - perl-Hash-Merge
+        - perl-Moo
+        - perl-MRO-Compat
+        - perl-Text-Balanced
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Hash-Merge
+        - perl-Moo
+        - perl-MRO-Compat
+        - perl-Text-Balanced
+      runtime:
+        - perl
+        - perl-Hash-Merge
+        - perl-Moo
+        - perl-MRO-Compat
+        - perl-Text-Balanced
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_libdir}/*

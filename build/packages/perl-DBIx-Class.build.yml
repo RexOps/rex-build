@@ -1,0 +1,199 @@
+# basic informations
+name:
+  centos: perl-DBIx-Class
+realname: DBIx-Class
+version: 0.082820
+release: 1
+epoch: 1
+summary: DBIx::Class - Extensible and flexible object <-> relational mapper.
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/DBIx::Class
+source: https://cpan.metacpan.org/authors/id/R/RI/RIBASUSHI/DBIx-Class-0.082820.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  DBIx::Class - Extensible and flexible object <-> relational mapper.
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-Class-Accessor-Grouped
+        - perl-Class-C3-Componentised
+        - perl-Class-Inspector
+        - perl-Config-Any
+        - perl-Context-Preserve
+        - perl-Data-Dumper-Concise
+        - perl-Data-Page
+        - perl-DBI
+        - perl-Devel-GlobalDestruction
+        - perl-Hash-Merge
+        - perl-Module-Find
+        - perl-Moo
+        - perl-MRO-Compat
+        - perl-namespace-clean
+        - perl-Path-Class
+        - perl-Scope-Guard
+        - perl-SQL-Abstract
+        - perl-Sub-Name
+        - perl-Text-Balanced
+        - perl-Try-Tiny
+      runtime:
+        - perl
+        - perl-Class-Accessor-Grouped
+        - perl-Class-C3-Componentised
+        - perl-Class-Inspector
+        - perl-Config-Any
+        - perl-Context-Preserve
+        - perl-Data-Dumper-Concise
+        - perl-Data-Page
+        - perl-DBI
+        - perl-Devel-GlobalDestruction
+        - perl-Hash-Merge
+        - perl-Module-Find
+        - perl-Moo
+        - perl-MRO-Compat
+        - perl-namespace-clean
+        - perl-Path-Class
+        - perl-Scope-Guard
+        - perl-SQL-Abstract
+        - perl-Sub-Name
+        - perl-Text-Balanced
+        - perl-Try-Tiny
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Class-Accessor-Grouped
+        - perl-Class-C3-Componentised
+        - perl-Class-Inspector
+        - perl-Config-Any
+        - perl-Context-Preserve
+        - perl-Data-Dumper-Concise
+        - perl-Data-Page
+        - perl-DBI
+        - perl-Devel-GlobalDestruction
+        - perl-Hash-Merge
+        - perl-Module-Find
+        - perl-Moo
+        - perl-MRO-Compat
+        - perl-namespace-clean
+        - perl-Path-Class
+        - perl-Scope-Guard
+        - perl-SQL-Abstract
+        - perl-Sub-Name
+        - perl-Text-Balanced
+        - perl-Try-Tiny
+      runtime:
+        - perl
+        - perl-Class-Accessor-Grouped
+        - perl-Class-C3-Componentised
+        - perl-Class-Inspector
+        - perl-Config-Any
+        - perl-Context-Preserve
+        - perl-Data-Dumper-Concise
+        - perl-Data-Page
+        - perl-DBI
+        - perl-Devel-GlobalDestruction
+        - perl-Hash-Merge
+        - perl-Module-Find
+        - perl-Moo
+        - perl-MRO-Compat
+        - perl-namespace-clean
+        - perl-Path-Class
+        - perl-Scope-Guard
+        - perl-SQL-Abstract
+        - perl-Sub-Name
+        - perl-Text-Balanced
+        - perl-Try-Tiny
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Class-Accessor-Grouped
+        - perl-Class-C3-Componentised
+        - perl-Class-Inspector
+        - perl-Config-Any
+        - perl-Context-Preserve
+        - perl-Data-Dumper-Concise
+        - perl-Data-Page
+        - perl-DBI
+        - perl-Devel-GlobalDestruction
+        - perl-Hash-Merge
+        - perl-Module-Find
+        - perl-Moo
+        - perl-MRO-Compat
+        - perl-namespace-clean
+        - perl-Path-Class
+        - perl-Scope-Guard
+        - perl-SQL-Abstract
+        - perl-Sub-Name
+        - perl-Text-Balanced
+        - perl-Try-Tiny
+      runtime:
+        - perl
+        - perl-Class-Accessor-Grouped
+        - perl-Class-C3-Componentised
+        - perl-Class-Inspector
+        - perl-Config-Any
+        - perl-Context-Preserve
+        - perl-Data-Dumper-Concise
+        - perl-Data-Page
+        - perl-DBI
+        - perl-Devel-GlobalDestruction
+        - perl-Hash-Merge
+        - perl-Module-Find
+        - perl-Moo
+        - perl-MRO-Compat
+        - perl-namespace-clean
+        - perl-Path-Class
+        - perl-Scope-Guard
+        - perl-SQL-Abstract
+        - perl-Sub-Name
+        - perl-Text-Balanced
+        - perl-Try-Tiny
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_libdir}/*

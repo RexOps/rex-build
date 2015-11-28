@@ -1,0 +1,79 @@
+# basic informations
+name:
+  centos: perl-Context-Preserve
+realname: Context-Preserve
+version: 0.01
+release: 1
+epoch: 1
+summary: Context::Preserve - run code after a subroutine call, preserving the context the subroutine would have seen if it were the last statement in the caller
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/Context::Preserve
+source: https://cpan.metacpan.org/authors/id/J/JR/JROCKWAY/Context-Preserve-0.01.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Context::Preserve - run code after a subroutine call, preserving the context the subroutine would have seen if it were the last statement in the caller
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+      runtime:
+        - perl
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+      runtime:
+        - perl
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+      runtime:
+        - perl
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_libdir}/*

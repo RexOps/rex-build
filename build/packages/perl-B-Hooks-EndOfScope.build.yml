@@ -1,0 +1,91 @@
+# basic informations
+name:
+  centos: perl-B-Hooks-EndOfScope
+realname: B-Hooks-EndOfScope
+version: 0.15
+release: 1
+epoch: 1
+summary: B::Hooks::EndOfScope - Execute code after a scope finished compilation
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/B::Hooks::EndOfScope
+source: https://cpan.metacpan.org/authors/id/E/ET/ETHER/B-Hooks-EndOfScope-0.15.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  B::Hooks::EndOfScope - Execute code after a scope finished compilation
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-Module-Implementation
+        - perl-Sub-Exporter-Progressive
+      runtime:
+        - perl
+        - perl-Module-Implementation
+        - perl-Sub-Exporter-Progressive
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Module-Implementation
+        - perl-Sub-Exporter-Progressive
+      runtime:
+        - perl
+        - perl-Module-Implementation
+        - perl-Sub-Exporter-Progressive
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Module-Implementation
+        - perl-Sub-Exporter-Progressive
+      runtime:
+        - perl
+        - perl-Module-Implementation
+        - perl-Sub-Exporter-Progressive
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_libdir}/*

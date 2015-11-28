@@ -1,0 +1,85 @@
+# basic informations
+name:
+  centos: perl-Data-Page
+realname: Data-Page
+version: 2.02
+release: 1
+epoch: 1
+summary: Data::Page - help when paging through sets of results
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/Data::Page
+source: https://cpan.metacpan.org/authors/id/L/LB/LBROCARD/Data-Page-2.02.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Data::Page - help when paging through sets of results
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-Class-Accessor-Chained
+      runtime:
+        - perl
+        - perl-Class-Accessor-Chained
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Class-Accessor-Chained
+      runtime:
+        - perl
+        - perl-Class-Accessor-Chained
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Class-Accessor-Chained
+      runtime:
+        - perl
+        - perl-Class-Accessor-Chained
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_libdir}/*

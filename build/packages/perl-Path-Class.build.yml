@@ -1,0 +1,90 @@
+# basic informations
+name:
+  centos: perl-Path-Class
+realname: Path-Class
+version: 0.35
+release: 1
+epoch: 1
+summary: Path::Class - Cross-platform path specification manipulation.
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/Path::Class
+source: https://cpan.metacpan.org/authors/id/K/KW/KWILLIAMS/Path-Class-0.35.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Path::Class - Cross-platform path specification manipulation
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-Perl-OSType
+        
+      runtime:
+        - perl
+        - perl-Perl-OSType
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl
+        - perl-Perl-OSType
+      runtime:
+        - perl
+        - perl
+        - perl-Perl-OSType
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl
+        - perl-Perl-OSType
+      runtime:
+        - perl
+        - perl
+        - perl-Perl-OSType
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_libdir}/*

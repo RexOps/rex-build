@@ -1,0 +1,85 @@
+# basic informations
+name:
+  centos: perl-Config-Any
+realname: Config-Any
+version: 0.26
+release: 1
+epoch: 1
+summary: Config::Any - Load configuration from different file formats, transparently
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/Config::Any
+source: https://cpan.metacpan.org/authors/id/B/BR/BRICAS/Config-Any-0.26.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Config::Any - Load configuration from different file formats, transparently
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-Module-Pluggable
+      runtime:
+        - perl
+        - perl-Module-Pluggable
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Module-Pluggable
+      runtime:
+        - perl
+        - perl-Module-Pluggable
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Module-Pluggable
+      runtime:
+        - perl
+        - perl-Module-Pluggable
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_libdir}/*

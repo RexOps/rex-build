@@ -1,0 +1,79 @@
+# basic informations
+name:
+  centos: perl-Class-Inspector
+realname: Class-Inspector
+version: 1.28
+release: 1
+epoch: 1
+summary: Class::Inspector - Get information about a class and its structure
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/Class::Inspector
+source: https://cpan.metacpan.org/authors/id/A/AD/ADAMK/Class-Inspector-1.28.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Class::Inspector - Get information about a class and its structure
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+      runtime:
+        - perl
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+      runtime:
+        - perl
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+      runtime:
+        - perl
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_libdir}/*
