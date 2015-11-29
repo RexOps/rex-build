@@ -1,0 +1,85 @@
+# basic informations
+name:
+  centos: perl-Test-Deep
+realname: Test-Deep
+version: 1.120
+release: 1
+epoch: 1
+summary: Test::Deep - Extremely flexible deep comparison
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/Test::Deep
+source: https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Test-Deep-1.120.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Test::Deep - Extremely flexible deep comparison
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-Test-Simple
+      runtime:
+        - perl
+        - perl-Test-Simple
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Test-Simple
+      runtime:
+        - perl
+        - perl-Test-Simple
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Test-Simple
+      runtime:
+        - perl
+        - perl-Test-Simple
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
