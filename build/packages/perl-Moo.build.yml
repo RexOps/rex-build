@@ -2,7 +2,7 @@
 name:
   centos: perl-Moo
 realname: Moo
-version: 2.000001
+version: 2.000002
 release: 1
 epoch: 1
 summary: Moo - Minimalist Object Orientation (with Moose compatibility)
