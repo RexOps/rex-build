@@ -1,0 +1,97 @@
+# basic informations
+name:
+  centos: perl-Test-Exception
+realname: Test-Exception
+version: 0.40
+release: 1
+epoch: 1
+summary: Test::Exception - Test exception-based code
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/Test::Exception
+source: https://cpan.metacpan.org/authors/id/E/EX/EXODIST/Test-Exception-0.40.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Test::Exception - Test exception-based code
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-Test-Simple
+        - perl-Sub-Uplevel
+        - perl-Test-Harness
+      runtime:
+        - perl
+        - perl-Test-Simple
+        - perl-Sub-Uplevel
+        - perl-Test-Harness
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Test-Simple
+        - perl-Sub-Uplevel
+        - perl-Test-Harness
+      runtime:
+        - perl
+        - perl-Test-Simple
+        - perl-Sub-Uplevel
+        - perl-Test-Harness
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Test-Simple
+        - perl-Sub-Uplevel
+        - perl-Test-Harness
+      runtime:
+        - perl
+        - perl-Test-Simple
+        - perl-Sub-Uplevel
+        - perl-Test-Harness
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
