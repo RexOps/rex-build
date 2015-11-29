@@ -77,3 +77,4 @@ files:
       - %{_mandir}/*
     package:
       - %{perl_vendorlib}/*
+      - /usr/bin/prove
