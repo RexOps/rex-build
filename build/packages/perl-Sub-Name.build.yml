@@ -64,8 +64,6 @@ install: |
   cd <%= $realname %>-<%= $version %>
   make pure_install
   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
-  mkdir -p %{perl_vendorarch}
-  mv -v /usr/lib64/perl5/vendor_perl/* %{perl_vendorarch}/
 
 clean: |
   rm -rf <%= $buildroot %>
