@@ -29,13 +29,11 @@ requires:
         - perl-Hash-Merge
         - perl-Moo
         - perl-MRO-Compat
-        - perl-Text-Balanced
       runtime:
         - perl
         - perl-Hash-Merge
         - perl-Moo
         - perl-MRO-Compat
-        - perl-Text-Balanced
 
     6:
       build:
@@ -46,13 +44,11 @@ requires:
         - perl-Hash-Merge
         - perl-Moo
         - perl-MRO-Compat
-        - perl-Text-Balanced
       runtime:
         - perl
         - perl-Hash-Merge
         - perl-Moo
         - perl-MRO-Compat
-        - perl-Text-Balanced
 
     7:
       build:
@@ -63,13 +59,11 @@ requires:
         - perl-Hash-Merge
         - perl-Moo
         - perl-MRO-Compat
-        - perl-Text-Balanced
       runtime:
         - perl
         - perl-Hash-Merge
         - perl-Moo
         - perl-MRO-Compat
-        - perl-Text-Balanced
 
 # build instructions
 configure: |
