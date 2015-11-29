@@ -10,7 +10,7 @@ group:
   centos: System Environment/Libraries
 license: perl5
 homepage: https://metacpan.org/pod/Moo
-source: https://cpan.metacpan.org/authors/id/H/HA/HAARG/Moo-2.000001.tar.gz
+source: https://cpan.metacpan.org/authors/id/H/HA/HAARG/Moo-2.000002.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 arch:
