@@ -73,7 +73,7 @@ print "Running: REXUSER=$user REXPASS=$pass HTEST=$ip rex -f build/Rexfile "
   . "-c bundle --build=$build_file "
   . "--branch=$branch --environment=$environment --repo=$ENV{BUILD_REPO}\n";
 
-system "REXUSER=$user REXPASS=$pass HTEST=$ip rex -f build/Rexfile "
+system "REXUSER=$user REXPASS=$pass HTEST=$ip rex -d -f build/Rexfile "
   . "-c bundle --build=$build_file "
   . "--branch=$branch --environment=$environment --repo=$ENV{BUILD_REPO}";
 
