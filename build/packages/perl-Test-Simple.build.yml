@@ -64,6 +64,7 @@ install: |
   cd <%= $realname %>-<%= $version %>
   make pure_install
   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+  rm -rf <%= $buildroot %>/usr/share/man
 
 clean: |
   rm -rf <%= $buildroot %>
@@ -73,7 +74,5 @@ files:
     - /usr
 
   centos:
-    doc:
-      - %{_mandir}/*
     package:
       - %{perl_vendorlib}/*
