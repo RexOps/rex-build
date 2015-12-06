@@ -29,24 +29,6 @@ requires:
       runtime:
         - perl
 
-    6:
-      build:
-        - make
-        - gcc
-        - perl
-        - perl-devel
-      runtime:
-        - perl
-
-    7:
-      build:
-        - make
-        - gcc
-        - perl
-        - perl-devel
-      runtime:
-        - perl
-
 # build instructions
 configure: |
   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
@@ -65,8 +47,6 @@ install: |
   make pure_install
   rm -f <%= $buildroot %>/usr/bin/prove
   rm -rf <%= $buildroot %>/usr/share/man
-  rm -rf <%= $buildroot %>/usr/share/perl5/vendor_perl/App
-  rm -rf <%= $buildroot %>/usr/share/perl5/vendor_perl/TAP
   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
 
 clean: |
