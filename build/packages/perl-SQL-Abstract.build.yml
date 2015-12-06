@@ -29,11 +29,17 @@ requires:
         - perl-Hash-Merge
         - perl-Moo
         - perl-MRO-Compat
+        - perl-Text-Balanced
+        - perl-Test-Simple
+        - perl-Test-Exception
+        - perl-Test-Warn
+        - perl-Test-Deep
       runtime:
         - perl
         - perl-Hash-Merge
         - perl-Moo
         - perl-MRO-Compat
+        - perl-Text-Balanced
 
     6:
       build:
@@ -45,12 +51,17 @@ requires:
         - perl-Moo
         - perl-MRO-Compat
         - perl-CPAN
+        - perl-Text-Balanced
+        - perl-Test-Simple
+        - perl-Test-Exception
+        - perl-Test-Warn
+        - perl-Test-Deep
       runtime:
         - perl
         - perl-Hash-Merge
         - perl-Moo
         - perl-MRO-Compat
-        - perl-CPAN
+        - perl-Text-Balanced
 
     7:
       build:
@@ -62,12 +73,17 @@ requires:
         - perl-Moo
         - perl-MRO-Compat
         - perl-CPAN
+        - perl-Text-Balanced
+        - perl-Test-Simple
+        - perl-Test-Exception
+        - perl-Test-Warn
+        - perl-Test-Deep
       runtime:
         - perl
         - perl-Hash-Merge
         - perl-Moo
         - perl-MRO-Compat
-        - perl-CPAN
+        - perl-Text-Balanced
 
 # build instructions
 configure: |
