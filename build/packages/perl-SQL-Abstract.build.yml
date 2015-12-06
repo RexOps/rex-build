@@ -44,11 +44,13 @@ requires:
         - perl-Hash-Merge
         - perl-Moo
         - perl-MRO-Compat
+        - perl-CPAN
       runtime:
         - perl
         - perl-Hash-Merge
         - perl-Moo
         - perl-MRO-Compat
+        - perl-CPAN
 
     7:
       build:
@@ -59,11 +61,13 @@ requires:
         - perl-Hash-Merge
         - perl-Moo
         - perl-MRO-Compat
+        - perl-CPAN
       runtime:
         - perl
         - perl-Hash-Merge
         - perl-Moo
         - perl-MRO-Compat
+        - perl-CPAN
 
 # build instructions
 configure: |
