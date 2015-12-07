@@ -88,4 +88,5 @@ files:
     doc:
       - %{_mandir}/*
     package:
+      - /usr/bin/package-stash-conflicts
       - %{perl_vendorlib}/*
