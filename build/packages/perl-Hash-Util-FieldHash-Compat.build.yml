@@ -26,8 +26,10 @@ requires:
         - make
         - gcc
         - perl
+        - perl-Module-Metadata
       runtime:
         - perl
+        - perl-Module-Metadata
 
     6:
       build:
@@ -35,8 +37,10 @@ requires:
         - gcc
         - perl
         - perl-devel
+        - perl-Module-Metadata
       runtime:
         - perl
+        - perl-Module-Metadata
 
     7:
       build:
@@ -44,8 +48,10 @@ requires:
         - gcc
         - perl
         - perl-devel
+        - perl-Module-Metadata
       runtime:
         - perl
+        - perl-Module-Metadata
 
 # build instructions
 configure: |
