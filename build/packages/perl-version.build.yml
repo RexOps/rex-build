@@ -30,6 +30,15 @@ requires:
       runtime:
         - perl
         - perl-parent
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+      runtime:
+        - perl
+        - perl-devel
 
 # build instructions
 configure: |
