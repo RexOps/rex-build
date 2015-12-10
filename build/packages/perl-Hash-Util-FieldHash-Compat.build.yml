@@ -82,5 +82,5 @@ files:
     doc:
       - %{_mandir}/*
     package:
-      - %{perl_vendorarch}/*
+      - %{perl_vendorlib}/*
       
