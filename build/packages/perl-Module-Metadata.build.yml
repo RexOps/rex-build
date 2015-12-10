@@ -28,6 +28,22 @@ requires:
         - perl
       runtime:
         - perl
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+      runtime:
+        - perl
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+      runtime:
+        - perl
 
 # build instructions
 configure: |
