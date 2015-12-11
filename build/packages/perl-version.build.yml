@@ -4,7 +4,7 @@ name:
 realname: version
 version: 0.9904
 release: 1
-epoch: 1
+epoch: 3
 summary: version - Perl extension for Version Objects
 group:
   centos: System Environment/Libraries
