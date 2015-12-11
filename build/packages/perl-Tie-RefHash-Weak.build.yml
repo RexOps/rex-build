@@ -1,0 +1,97 @@
+# basic informations
+name:
+  centos: perl-Tie-RefHash-Weak
+realname: Tie-RefHash-Weak
+version: 0.09
+release: 1
+epoch: 1
+summary: Tie::RefHash::Weak - A Tie::RefHash subclass with weakened references in the keys.
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/Tie::RefHash::Weak
+source: https://cpan.metacpan.org/authors/id/N/NU/NUFFIN/Tie-RefHash-Weak-0.09.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Tie::RefHash::Weak - A Tie::RefHash subclass with weakened references in the keys.
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-Task-Weaken
+        - perl-Tie-RefHash
+        - perl-Variable-Magic
+      runtime:
+        - perl
+        - perl-Task-Weaken
+        - perl-Tie-RefHash
+        - perl-Variable-Magic
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Task-Weaken
+        - perl-Tie-RefHash
+        - perl-Variable-Magic
+      runtime:
+        - perl
+        - perl-Task-Weaken
+        - perl-Tie-RefHash
+        - perl-Variable-Magic
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl-Task-Weaken
+        - perl-Tie-RefHash
+        - perl-Variable-Magic
+      runtime:
+        - perl
+        - perl-Task-Weaken
+        - perl-Tie-RefHash
+        - perl-Variable-Magic
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
