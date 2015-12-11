@@ -28,10 +28,12 @@ requires:
         - perl
         - perl-Module-Implementation
         - perl-Sub-Exporter-Progressive
+        - perl-Hash-Util-FieldHash-Compat
       runtime:
         - perl
         - perl-Module-Implementation
         - perl-Sub-Exporter-Progressive
+        - perl-Hash-Util-FieldHash-Compat
 
     6:
       build:
@@ -41,10 +43,12 @@ requires:
         - perl-devel
         - perl-Module-Implementation
         - perl-Sub-Exporter-Progressive
+        - perl-Hash-Util-FieldHash-Compat
       runtime:
         - perl
         - perl-Module-Implementation
         - perl-Sub-Exporter-Progressive
+        - perl-Hash-Util-FieldHash-Compat
 
     7:
       build:
@@ -54,16 +58,19 @@ requires:
         - perl-devel
         - perl-Module-Implementation
         - perl-Sub-Exporter-Progressive
+        - perl-Hash-Util-FieldHash-Compat
       runtime:
         - perl
         - perl-Module-Implementation
         - perl-Sub-Exporter-Progressive
+        - perl-Hash-Util-FieldHash-Compat
 
 # build instructions
 configure: |
   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
   cd <%= $realname %>-<%= $version %>
 
+  sed -ie 's/Hash::Util::FieldHash/Hash::Util::FieldHash::Compat/' lib/B/Hooks/EndOfScope/PP/FieldHash.pm
   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
 
 make: |
