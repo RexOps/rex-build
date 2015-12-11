@@ -1,6 +1,7 @@
 Name:           <%= $data->{name}->{lc($os)} %>
 Version:        <%= $data->{pkgversion}->{lc($os)} || $data->{version} %>
 Release:        <%= $data->{release} %>
+Epoch:        <%= $data->{epoch} %>
 Summary:        <%= $data->{summary} %>
 
 Group:          <%= $data->{group}->{lc($os)} %>
