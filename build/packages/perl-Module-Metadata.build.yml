@@ -70,3 +70,9 @@ files:
   package:
     - /usr
 
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
+
