@@ -78,7 +78,7 @@ task test => group => test => sub {
   ok($t_env{key2} eq "my 2nd \"val\"", "got 2nd env variable");
 
   # test failed command
-  my $expected_error_code = is_freebsd ? 1 : 127;
+  my $expected_error_code = is_freebsd() ? 1 : 127;
   run "no-command";
   ok($? == $expected_error_code, "got proper error code for 'command not found'");
 
