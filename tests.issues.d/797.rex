@@ -28,10 +28,10 @@ task test => group => test => sub {
   
   run "rm -rf $test_dir";
   
-  checkout "myrepo", path => $test_dir, branch => "2.0";
+  checkout "myrepo", path => $test_dir, branch => "only_a_test_branch";
   my $branch = run "git status |  grep -i 'on branch'", cwd => $test_dir;
   chomp $branch;
-  ok($branch =~ m/2\.0/, "got 2.0 branch");
+  ok($branch =~ m/only_a_test_branch/, "got only_a_test_branch branch");
 
   run "rm -rf $test_dir";
 
