@@ -14,8 +14,8 @@ my $config = Load($yaml);
 my $user = $config->{box}->{sudo}->{user};
 my $pass = $config->{box}->{sudo}->{password};
 
-user( $ENV{REX_USER}     || $config->{box}->{default}->{user} );
-password( $ENV{REX_PASS} || $config->{box}->{default}->{password} );
+user( $ENV{REXUSER}     || $config->{box}->{default}->{user} );
+password( $ENV{REXPASS} || $config->{box}->{default}->{password} );
 pass_auth;
 
 group test => split( / /, $ENV{HTEST} );
@@ -63,7 +63,7 @@ task prepare => group => test => sub {
       qr{openwrt}i     => [
       qw/block-mount coreutils-nohup perlbase-bytes perlbase-digest perlbase-essential perlbase-file perlbase-xsloader shadow-groupadd shadow-groupdel shadow-groupmod shadow-useradd shadow-userdel shadow-usermod swap-utils/
       ],
-      qr{debian|ubuntu}i => [qw/rsync augeas-tools augeas-lenses/],
+      qr{debian|ubuntu}i => [qw/rsync augeas-tools augeas-lenses iptables/],
       qr{suse}i          => [qw/lsb-release augeas augeas-lenses/],
       qr{fedora}i        => [qw/perl perl-Digest-MD5 openssh-clients which augeas augeas-libs/],
       qr{gentoo}i        => [ 'sys-process/vixie-cron', 'app-admin/augeas' ],
