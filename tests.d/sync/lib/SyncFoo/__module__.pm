@@ -1,4 +1,4 @@
-package Foo;
+package SyncFoo;
 
 use Rex -base;
 use Test::More;

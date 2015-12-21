@@ -4,15 +4,18 @@ use Test::More;
 
 do "auth.conf";
 
-require Foo;
+use Cwd 'getcwd';
+
+require SyncFoo;
 
 task "test", group => "test", sub {
 
-  Foo::bar();
+  SyncFoo::bar();
 
-  mkdir "/tmp/etc";
+  my $ud = "/tmp/etc-$$";
+  mkdir $ud;
   my $on_changed_called = 0;
-  sync_up "files/etc/", "/tmp/etc",
+  sync_up "files/etc/", $ud,
         on_change => sub {
           my (@changed_files) = @_;
 
@@ -30,7 +33,7 @@ task "test", group => "test", sub {
   ok($on_changed_called, "on_change was called (sync_up)");
   $on_changed_called = 0;
 
-  sync_up "files/etc/", "/tmp/etc",
+  sync_up "files/etc/", $ud,
         on_change => sub {
           my (@changed_files) = @_;
           $on_changed_called = 1;
@@ -39,9 +42,9 @@ task "test", group => "test", sub {
   ok($on_changed_called == 0, "on_change was not called (sync_up)");
   $on_changed_called = 0;
 
-  my $ds = "/tmp/etc-$$";
+  my $ds = getcwd() . "/tmp/etc-$$";
   LOCAL { mkdir $ds; };
-  sync_down "/tmp/etc", $ds,
+  sync_down $ud, $ds,
     on_change => sub {
       my (@changed_files) = @_;
 
@@ -59,7 +62,7 @@ task "test", group => "test", sub {
   ok($on_changed_called, "on_change was called (sync_down)");
   $on_changed_called = 0;
 
-  sync_down "/tmp/etc", $ds,
+  sync_down $ud, $ds,
     on_change => sub {
       my (@changed_files) = @_;
       $on_changed_called = 1;
