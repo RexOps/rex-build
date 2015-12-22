@@ -16,6 +16,12 @@ task test => group => test => sub {
   
   my $test_dir = "/tmp/git-test-$$";
   
+  if(is_redhat() && operating_system_release() =~ m/^5\./) {
+    ok(1==1, "No test for Centos 5");
+    done_testing();
+    return;
+  }
+
   pkg "git";
   
   checkout "myrepo", path => $test_dir;
