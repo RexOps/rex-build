@@ -32,7 +32,7 @@ LOCAL {
 
   start_phase("Running prepare.rex on $ip");
   system
-    "HTEST='$ip' perl /tmp/workspace/$rnd/rex/Rex-$version/bin/rex -f contrib/prepare.rex prepare >>/var/log/rex/prepare-$$.log 2>&1";
+    "HTEST='$ip' perl /tmp/workspace/$rnd/rex/Rex-$version/bin/rex -d -f contrib/prepare.rex prepare >>/var/log/rex/prepare-$$.log 2>&1";
   &end_phase;
 
   if ( $ENV{use_sudo} ) {
