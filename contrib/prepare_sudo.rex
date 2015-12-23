@@ -12,6 +12,10 @@ my $config = Load($yaml);
 my $user = $config->{box}->{sudo}->{user};
 my $pass = $config->{box}->{sudo}->{password};
 
+if ( exists $ENV{libssh2} ) {
+  set connection => 'SSH';
+}
+
 user $config->{box}->{default}->{user};
 password $config->{box}->{default}->{password};
 pass_auth;
