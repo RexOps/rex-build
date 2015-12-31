@@ -14,8 +14,6 @@ my $t_server = Server788->new(name => $ENV{HTEST}, auth => { user => "testu", pa
 
 task test => group => test => sub {
   
-  pkg "sudo";
-  
   account "testu", password => "testu";
   append_if_no_such_line "/etc/sudoers", "testu ALL=(ALL:ALL) ALL";
   
