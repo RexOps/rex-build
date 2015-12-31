@@ -14,6 +14,16 @@ my $t_server = Server788->new(name => $ENV{HTEST}, auth => { user => "testu", pa
 
 task test => group => test => sub {
   
+  if(is_freebsd) {
+    install "sudo";
+  
+    file "/etc/sudoers",
+      content =>
+      "Defaults set_home, always_set_home\n\%$user	ALL=(ALL:ALL) ALL\nrsync_user	ALL=(ALL:ALL) ALL\nrsync_user ALL=(ALL:ALL) NOPASSWD: /usr/bin/rsync\n",
+      owner => "root",
+      mode  => 440;
+  }
+    
   account "testu", password => "testu";
   append_if_no_such_line "/etc/sudoers", "testu ALL=(ALL:ALL) ALL";
   
