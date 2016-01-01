@@ -18,8 +18,8 @@ if ( exists $ENV{libssh2} ) {
   set connection => 'SSH';
 }
 
-user( $ENV{REX_USER}     || $config->{box}->{default}->{user} );
-password( $ENV{REX_PASS} || $config->{box}->{default}->{password} );
+user( $config->{box}->{default}->{user} );
+password( $config->{box}->{default}->{password} );
 pass_auth;
 
 group test => split( / /, $ENV{HTEST} );
@@ -173,7 +173,7 @@ task prepare => group => test => sub {
   # this is done in prepare.rex and not in prepare_sudo.rex for issue #788
   my $sudoers_file = "/etc/sudoers";
   if(is_freebsd) {
-    $sudoers_file = "/usr/local/etc/sudoers.d/rex_test.conf";
+    $sudoers_file = "/usr/local/etc/sudoers";
   }
 
   file $sudoers_file,
