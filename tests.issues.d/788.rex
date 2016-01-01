@@ -12,32 +12,9 @@ use Server788;
 
 my $t_server = Server788->new(name => $ENV{HTEST}, auth => { user => "testu", password => "testu", sudo => FALSE });
 
-use YAML;
-
-my $yaml =
-  eval { local ( @ARGV, $/ ) = ( $ENV{HOME} . "/.build_config" ); <>; };
-$yaml .= "\n";
-my $config = Load($yaml);
-
-my $user = $config->{box}->{sudo}->{user};
-
 task test => group => test => sub {
   
   account "testu", password => "testu";
-
-  if(is_freebsd) {
-    install "sudo";
-  
-    file "/usr/local/etc/sudoers",
-      content =>
-          "Defaults set_home, always_set_home\n\%$user	ALL=(ALL:ALL) ALL\nrsync_user	ALL=(ALL:ALL) ALL\nrsync_user ALL=(ALL:ALL) NOPASSWD: /usr/bin/rsync\nrsync_user ALL=(ALL:ALL) NOPASSWD: /usr/local/bin/rsync\n",
-      owner => "root",
-      mode  => 440;
-    append_if_no_such_line "/usr/local/etc/sudoers", "testu ALL=(ALL:ALL) ALL";
-  }
-  else {
-    append_if_no_such_line "/etc/sudoers", "testu ALL=(ALL:ALL) ALL";
-  }
 
   my $o = Foo788->new(server => $t_server);
   my $u = $o->get_user;

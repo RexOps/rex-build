@@ -169,4 +169,18 @@ task prepare => group => test => sub {
     mkdir "/tmp/issue498";
   }
 
+  # need to set_home / always_set_home so that sudo find the right home directory
+  # this is done in prepare.rex and not in prepare_sudo.rex for issue #788
+  my $sudoers_file = "/etc/sudoers";
+  if(is_freebsd) {
+    $sudoers_file = "/usr/local/etc/sudoers";
+  }
+
+  file $sudoers_file,
+    content =>
+    "Defaults set_home, always_set_home\n\%$user	ALL=(ALL:ALL) ALL\nrsync_user	ALL=(ALL:ALL) ALL\nrsync_user ALL=(ALL:ALL) NOPASSWD: /usr/bin/rsync\nrsync_user ALL=(ALL:ALL) NOPASSWD: /usr/local/bin/rsync\ntestu ALL=(ALL:ALL) ALL\n",
+    owner => "root",
+    mode  => 440;
+
+
 };
