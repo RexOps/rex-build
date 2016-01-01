@@ -12,6 +12,15 @@ use Server788;
 
 my $t_server = Server788->new(name => $ENV{HTEST}, auth => { user => "testu", password => "testu", sudo => FALSE });
 
+use YAML;
+
+my $yaml =
+  eval { local ( @ARGV, $/ ) = ( $ENV{HOME} . "/.build_config" ); <>; };
+$yaml .= "\n";
+my $config = Load($yaml);
+
+my $user = $config->{box}->{sudo}->{user};
+
 task test => group => test => sub {
   
   account "testu", password => "testu";
