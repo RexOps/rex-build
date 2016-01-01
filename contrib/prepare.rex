@@ -18,8 +18,8 @@ if ( exists $ENV{libssh2} ) {
   set connection => 'SSH';
 }
 
-user( $ENV{REXUSER}     || $config->{box}->{default}->{user} );
-password( $ENV{REXPASS} || $config->{box}->{default}->{password} );
+user( $ENV{REX_USER}     || $config->{box}->{default}->{user} );
+password( $ENV{REX_PASS} || $config->{box}->{default}->{password} );
 pass_auth;
 
 group test => split( / /, $ENV{HTEST} );
