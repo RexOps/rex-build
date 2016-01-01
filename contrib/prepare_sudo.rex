@@ -55,7 +55,7 @@ task prepare => group => test => sub {
 
   file $sudoers_file,
     content =>
-    "Defaults set_home, always_set_home\n\%$user	ALL=(ALL:ALL) ALL\nrsync_user	ALL=(ALL:ALL) ALL\nrsync_user ALL=(ALL:ALL) NOPASSWD: /usr/bin/rsync\n",
+    "Defaults set_home, always_set_home\n\%$user	ALL=(ALL:ALL) ALL\nrsync_user	ALL=(ALL:ALL) ALL\nrsync_user ALL=(ALL:ALL) NOPASSWD: /usr/bin/rsync\nrsync_user ALL=(ALL:ALL) NOPASSWD: /usr/local/bin/rsync\n",
     owner => "root",
     mode  => 440;
 };

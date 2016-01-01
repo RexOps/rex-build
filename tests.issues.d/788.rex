@@ -30,7 +30,7 @@ task test => group => test => sub {
   
     file "/usr/local/etc/sudoers",
       content =>
-      "Defaults set_home, always_set_home\n\%$user	ALL=(ALL:ALL) ALL\nrsync_user	ALL=(ALL:ALL) ALL\nrsync_user ALL=(ALL:ALL) NOPASSWD: /usr/bin/rsync\n",
+          "Defaults set_home, always_set_home\n\%$user	ALL=(ALL:ALL) ALL\nrsync_user	ALL=(ALL:ALL) ALL\nrsync_user ALL=(ALL:ALL) NOPASSWD: /usr/bin/rsync\nrsync_user ALL=(ALL:ALL) NOPASSWD: /usr/local/bin/rsync\n",
       owner => "root",
       mode  => 440;
     append_if_no_such_line "/usr/local/etc/sudoers", "testu ALL=(ALL:ALL) ALL";
