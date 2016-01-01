@@ -173,7 +173,7 @@ task prepare => group => test => sub {
   # this is done in prepare.rex and not in prepare_sudo.rex for issue #788
   my $sudoers_file = "/etc/sudoers";
   if(is_freebsd) {
-    $sudoers_file = "/usr/local/etc/sudoers";
+    $sudoers_file = "/usr/local/etc/sudoers.d/rex_test.conf";
   }
 
   file $sudoers_file,
