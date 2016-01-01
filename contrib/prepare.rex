@@ -121,10 +121,10 @@ task prepare => group => test => sub {
   run "echo 127.0.2.1 `uname -n` >>/etc/hosts";
 
   file "/root/.profile",
-    content => "export MYFOO='MYBAR'\nexport PATH=/bin:/usr/bin\n";
+    content => "export MYFOO='MYBAR'\nexport PATH=/usr/local/bin:/bin:/usr/bin\n";
 
   # for csh
-  file "/root/.login", content => "set MYFOO='MYBAR'\nset PATH=/bin:/usr/bin\n";
+  file "/root/.login", content => "set MYFOO='MYBAR'\nset PATH=/usr/local/bin:/bin:/usr/bin\n";
 
   mkdir "/tmp2";
 
