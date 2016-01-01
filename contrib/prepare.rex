@@ -154,10 +154,15 @@ task prepare => group => test => sub {
   }
 
   {    # for issue: 473
+    my $group_name = "root";
+    
+    if(is_freebsd) {
+      $group_name = "wheel";
+    }
     if ( $ENV{use_sudo} ) {
       file "/root/issue473.txt",
         owner   => "root",
-        group   => "root",
+        group   => $group_name,
         content => "issue473",
         mode    => 600;
 
