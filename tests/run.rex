@@ -22,7 +22,7 @@ task test => group => test => sub {
   my ($cmd) = can_run "ifconfig", "ip";
   ok($cmd =~ m/ifconfig|ip/, "found ifconfig or ip command");
 
-  if(is_freebsd) {
+  if(is_freebsd && ! Rex::is_sudo) {
 
     my $desc1 = run 'set FOOV=blub ; echo "\'$FOOV\'"';
     ok($desc1 =~ m/'blub'/, "OK: Escape");
@@ -78,7 +78,7 @@ task test => group => test => sub {
   ok($t_env{key2} eq "my 2nd \"val\"", "got 2nd env variable");
 
   # test failed command
-  my $expected_error_code = is_freebsd() ? 1 : 127;
+  my $expected_error_code = is_freebsd() && ! Rex::is_sudo ? 1 : 127;
   run "no-command";
   ok($? == $expected_error_code, "got proper error code for 'command not found'");
 
