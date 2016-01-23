@@ -21,7 +21,7 @@ package Foo788 {
   
   
   Rex::Commands::task("t_user", sub {
-    my $s = run "whoami";
+    my $s = run "id -un";
     return $s;
   });
 

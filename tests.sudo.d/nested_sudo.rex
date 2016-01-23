@@ -11,7 +11,7 @@ timeout 15;
 task "test", group => "test", sub {
 
   my $out = sudo {
-    command => "whoami",
+    command => "id -un",
     user    => "mytest1",
   };
 
