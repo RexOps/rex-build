@@ -79,6 +79,7 @@ task "test",
       qr{OpenWrt}i => 'uhttpd',
       qr{Mageia}i  => 'apache',
       qr{Gentoo}i  => 'nginx',
+      qr{Arch}i    => 'nginx',
   };
 
   my $service = case operating_system, {
@@ -92,6 +93,7 @@ task "test",
       qr{OpenWrt}i => 'uhttpd',
       qr{Mageia}i  => 'httpd',
       qr{Gentoo}i  => 'nginx',
+      qr{Arch}i    => 'nginx',
   };
 
   pkg $package, ensure => "present";
