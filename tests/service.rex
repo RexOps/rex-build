@@ -15,7 +15,7 @@ desc "Get Hardware Information";
 task "test", group => "test", sub {
 
   my $package = case operating_system, {
-    qr{SuSE}i   => 'apache2',
+    qr{SuSE}i    => 'apache2',
     qr{CentOS}i  => 'httpd',
     qr{Fedora}i  => 'httpd',
     qr{Redhat}i  => 'httpd',
@@ -28,7 +28,7 @@ task "test", group => "test", sub {
   };
 
   my $service = case operating_system, {
-    qr{SuSE}i   => 'apache2',
+    qr{SuSE}i    => 'apache2',
     qr{CentOS}i  => 'httpd',
     qr{Fedora}i  => 'httpd',
     qr{Redhat}i  => 'httpd',
