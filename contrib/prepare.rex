@@ -71,7 +71,7 @@ task prepare => group => test => sub {
       qr{suse}i          => [qw/lsb-release augeas augeas-lenses/],
       qr{fedora}i        => [qw/perl perl-Digest-MD5 openssh-clients which augeas augeas-libs/],
       qr{gentoo}i        => [ 'sys-process/vixie-cron', 'app-admin/augeas' ],
-      qr{arch}i          => [ 'cronie', ],
+      qr{arch}i          => [ 'cronie', 'net-tools', ],
       default            => [],
   };
 
