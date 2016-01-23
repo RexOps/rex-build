@@ -10,7 +10,7 @@ use Rex::Commands::Fs;
 do 'auth.conf';
 
 set repository => "myrepo",
-  url => 'https://github.com/RexOps/Rex.git';
+  url => 'git://github.com/RexOps/Rex.git';
 
 task test => group => test => sub {
   
