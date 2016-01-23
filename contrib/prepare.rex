@@ -65,7 +65,7 @@ task prepare => group => test => sub {
     qr{centos|redhat}i => [qw/perl-Digest-MD5 openssh-clients dmidecode augeas augeas-libs/],
       qr{freebsd}i     => [qw/dmidecode rsync sudo/],
       qr{openwrt}i     => [
-      qw/block-mount coreutils-nohup perlbase-bytes perlbase-digest perlbase-essential perlbase-file perlbase-xsloader shadow-groupadd shadow-groupdel shadow-groupmod shadow-useradd shadow-userdel shadow-usermod swap-utils/
+      qw/block-mount coreutils-nohup perlbase-bytes perlbase-digest perlbase-essential perlbase-file perlbase-xsloader shadow-groupadd shadow-groupdel shadow-groupmod shadow-useradd shadow-userdel shadow-usermod sudo swap-utils/
       ],
       qr{debian|ubuntu}i => [qw/rsync augeas-tools augeas-lenses iptables/],
       qr{suse}i          => [qw/lsb-release augeas augeas-lenses/],
