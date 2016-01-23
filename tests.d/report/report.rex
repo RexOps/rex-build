@@ -115,6 +115,7 @@ task "test",
       qr{Debian}i => "vim",
       qr{Ubuntu}i => "vim",
       qr{Gentoo}i => "app-misc/screen",
+      qr{Arch}i   => "zsh",
       default     => "vim",
   };
 

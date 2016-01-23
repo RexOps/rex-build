@@ -24,6 +24,7 @@ task "test", group => "test", sub {
     qr{Mageia}i => "vim-enhanced",
     qr{Debian}i => "vim",
     qr{Ubuntu}i => "vim",
+    qr{Arch}i   => "zsh",
     default    => "vim",
   };
 
