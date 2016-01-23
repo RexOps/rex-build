@@ -41,6 +41,8 @@ task test => group => test => sub {
 
   run "rm -rf $test_dir";
 
+  $::QUIET = 1; # suppress expected warning for checking out a non-existing branch
+
   eval {
     checkout "myrepo", path => $test_dir, branch => "doesnt-exists";
     ok(1==2, "checkout of unknown branch successfull.");
