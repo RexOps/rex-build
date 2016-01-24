@@ -35,6 +35,7 @@ my $config;
 
 
 my %debian_version_map = (
+  "8" => "jessie",
   "7" => "wheezy",
   "6" => "squeeze",
 );
