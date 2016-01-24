@@ -60,6 +60,7 @@ requires:
         - libtext-glob-perl
         - libsort-naturally-perl
         - libhash-merge-perl
+        - libdevel-caller-perl
       runtime:
         - perl
         - perl-modules
@@ -80,6 +81,7 @@ requires:
         - libtext-glob-perl
         - libsort-naturally-perl
         - libhash-merge-perl
+        - libdevel-caller-perl
 
 
     wheezy: &depwheezy
@@ -108,6 +110,7 @@ requires:
         - libtext-glob-perl
         - libsort-naturally-perl
         - libhash-merge-perl
+        - libdevel-caller-perl
 
       runtime:
         - perl
@@ -130,6 +133,7 @@ requires:
         - libtext-glob-perl
         - libsort-naturally-perl
         - libhash-merge-perl
+        - libdevel-caller-perl
 
     jessie: *depwheezy
 
@@ -157,6 +161,7 @@ requires:
         - perl(Sort::Naturally): perl-Sort-Naturally
         - perl(Hash::Merge): perl-Hash-Merge
         - perl(IO::String): perl-IO-String
+        - perl(Devel::Caller): perl-Devel-Caller
 
       runtime:
         - perl
@@ -178,6 +183,7 @@ requires:
         - perl(Sort::Naturally): perl-Sort-Naturally
         - perl(Hash::Merge): perl-Hash-Merge
         - perl(IO::String): perl-IO-String
+        - perl(Devel::Caller): perl-Devel-Caller
 
     6: &depcentos6
       build:
@@ -203,6 +209,7 @@ requires:
         - perl(Sort::Naturally): perl-Sort-Naturally
         - perl(Hash::Merge): perl-Hash-Merge
         - perl(IO::String): perl-IO-String
+        - perl(Devel::Caller): perl-Devel-Caller
 
 
       runtime:
@@ -226,6 +233,7 @@ requires:
         - perl(Sort::Naturally): perl-Sort-Naturally
         - perl(Hash::Merge): perl-Hash-Merge
         - perl(IO::String): perl-IO-String
+        - perl(Devel::Caller): perl-Devel-Caller
 
     7:
       build:
@@ -251,6 +259,7 @@ requires:
         - perl(Sort::Naturally): perl-Sort-Naturally
         - perl(Hash::Merge): perl-Hash-Merge
         - perl(IO::String): perl-IO-String
+        - perl(Devel::Caller): perl-Devel-Caller
 
 
       runtime:
@@ -274,6 +283,7 @@ requires:
         - perl(Sort::Naturally): perl-Sort-Naturally
         - perl(Hash::Merge): perl-Hash-Merge
         - perl(IO::String): perl-IO-String
+        - perl(Devel::Caller): perl-Devel-Caller
 
 
 
@@ -310,6 +320,7 @@ requires:
         - perl(Sort::Naturally): perl-Sort-Naturally
         - perl(Hash::Merge): perl-Hash-Merge
         - perl(IO::String): perl-IO-String
+        - perl(Devel::Caller): perl-Devel-Caller
 
 
       runtime:
@@ -332,6 +343,7 @@ requires:
         - perl(Sort::Naturally): perl-Sort-Naturally
         - perl(Hash::Merge): perl-Hash-Merge
         - perl(IO::String): perl-IO-String
+        - perl(Devel::Caller): perl-Devel-Caller
 
 
     19: *depfedora18
@@ -367,6 +379,7 @@ requires:
         - perl(Sort::Naturally): perl-Sort-Naturally
         - perl(Hash::Merge): perl-Hash-Merge
         - perl(IO::String): perl-IO-String
+        - perl(Devel::Caller): perl-Devel-Caller
 
       runtime:
         - perl
@@ -388,6 +401,7 @@ requires:
         - perl(Sort::Naturally): perl-Sort-Naturally
         - perl(Hash::Merge): perl-Hash-Merge
         - perl(IO::String): perl-IO-String
+        - perl(Devel::Caller): perl-Devel-Caller
 
     13.2: *depsuse13
 
@@ -414,6 +428,7 @@ requires:
         - perl(Sort::Naturally): perl-Sort-Naturally
         - perl(Hash::Merge): perl-Hash-Merge
         - perl(IO::String): perl-IO-String
+        - perl(Devel::Caller): perl-Devel-Caller
 
       runtime:
         - perl
@@ -435,6 +450,7 @@ requires:
         - perl(Sort::Naturally): perl-Sort-Naturally
         - perl(Hash::Merge): perl-Hash-Merge
         - perl(IO::String): perl-IO-String
+        - perl(Devel::Caller): perl-Devel-Caller
 
 # build instructions
 configure: |
