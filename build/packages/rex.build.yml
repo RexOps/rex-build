@@ -406,9 +406,10 @@ requires:
         - perl(Devel::Caller): perl-Devel-Caller
 
     13.2: *depsuse13
+    42.1: *depsuse13
 
   mageia:
-    3:
+    3: &depmageia3
       build:
         - make
         - perl
@@ -453,6 +454,9 @@ requires:
         - perl(Hash::Merge): perl-Hash-Merge
         - perl(IO::String): perl-IO-String
         - perl(Devel::Caller): perl-Devel-Caller
+
+    5: *depsuse13
+
 
 # build instructions
 configure: |
