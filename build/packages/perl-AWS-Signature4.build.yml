@@ -302,8 +302,8 @@ make: |
 install: |
   rm -rf <%= $buildroot %>
   cd <%= $realname %>-<%= $version %>
-  mkdir -p %{perl_vendorlib}/AWS/
-  cp lib/AWS/Signature4.pm %{perl_vendorlib}/AWS/Signature4.pm
+  mkdir -p <%= $buildroot %>%{perl_vendorlib}/AWS/
+  cp lib/AWS/Signature4.pm <%= $buildroot %>%{perl_vendorlib}/AWS/Signature4.pm
 
 clean: |
   rm -rf <%= $buildroot %>
