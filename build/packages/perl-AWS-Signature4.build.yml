@@ -291,7 +291,9 @@ configure: |
   \$build->create_build_script;
   exit 0;
   EOF
+  rm -f META.*
   perl Build.PL
+
 
 make: |
   cd <%= $realname %>-<%= $version %>
