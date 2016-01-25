@@ -302,9 +302,8 @@ make: |
 install: |
   rm -rf <%= $buildroot %>
   cd <%= $realname %>-<%= $version %>
-  mkdir -p %{perl_sitelib}/AWS/
-  f=$(find . -name Signature4.pm)
-  cp $f %{perl_sitelib}/AWS/Signature4.pm
+  mkdir -p %{perl_vendorlib}/AWS/
+  cp lib/AWS/Signature4.pm %{perl_vendorlib}/AWS/Signature4.pm
 
 clean: |
   rm -rf <%= $buildroot %>
@@ -316,9 +315,9 @@ files:
     doc:
       - %{_mandir}/*
     package:
-      - %{perl_sitelib}/*
+      - %{perl_vendorlib}/*
   centos:
     doc:
       - %{_mandir}/*
     package:
-      - %{perl_sitelib}/*
+      - %{perl_vendorlib}/*
