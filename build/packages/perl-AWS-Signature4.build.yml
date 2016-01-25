@@ -302,8 +302,9 @@ make: |
 install: |
   rm -rf <%= $buildroot %>
   cd <%= $realname %>-<%= $version %>
-  ./Build install --destdir <%= $buildroot %>
-  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+  mkdir -p %{perl_sitelib}/AWS/
+  f=$(find . -name Signature4.pm)
+  cp $f %{perl_sitelib}/AWS/Signature4.pm
 
 clean: |
   rm -rf <%= $buildroot %>
