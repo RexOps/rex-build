@@ -312,12 +312,8 @@ files:
   package:
     - /usr
   fedora:
-    doc:
-      - %{_mandir}/*
     package:
       - %{perl_vendorlib}/*
   centos:
-    doc:
-      - %{_mandir}/*
     package:
       - %{perl_vendorlib}/*
