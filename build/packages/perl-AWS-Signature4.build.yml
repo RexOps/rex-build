@@ -315,9 +315,9 @@ files:
     doc:
       - %{_mandir}/*
     package:
-      - %{perl_vendorlib}/*
+      - %{perl_sitelib}/*
   centos:
     doc:
       - %{_mandir}/*
     package:
-      - %{perl_vendorlib}/*
+      - %{perl_sitelib}/*
