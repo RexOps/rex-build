@@ -276,7 +276,7 @@ configure: |
   use warnings;
   use Module::Build;
    
-  my $build = Module::Build->new(
+  my \$build = Module::Build->new(
       module_name       => 'AWS-Signature4',
       license           => 'perl',
       dist_version_from => 'lib/AWS/Signature4.pm',
@@ -288,7 +288,7 @@ configure: |
       );
    
    
-  $build->create_build_script;
+  \$build->create_build_script;
   exit 0;
   EOF
   perl Build.PL
