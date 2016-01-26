@@ -74,6 +74,8 @@ requires:
         - libtimedate-perl
         - libwww-perl
 
+    jessie: *depwheezy
+
 
   centos:
 
@@ -196,6 +198,8 @@ requires:
     19: *depfedora18
     20: *depfedora18
     21: *depfedora18
+    22: *depfedora18
+    23: *depfedora18
 
   redhat:
     18: *depfedora18
@@ -241,8 +245,11 @@ requires:
         - perl-URI
         - perl-libwww-perl
 
+    13.2: *depsuse13
+    42.1: *depsuse13
+
   mageia:
-    3:
+    3: &depmageia3
       build:
         - make
         - perl
@@ -263,6 +270,8 @@ requires:
         - perl-TimeDate
         - perl-URI
         - perl-libwww-perl
+
+    5: *depmageia3
 
 
 # build instructions

@@ -455,7 +455,7 @@ requires:
         - perl(IO::String): perl-IO-String
         - perl(Devel::Caller): perl-Devel-Caller
 
-    5: *depsuse13
+    5: *depmageia3
 
 
 # build instructions
