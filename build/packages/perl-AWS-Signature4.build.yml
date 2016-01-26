@@ -245,8 +245,7 @@ requires:
         - perl-URI
         - perl-libwww-perl
 
-    13.2: *depsuse13
-    42.1: *depsuse13
+    42.1: *depsuse132
 
   mageia:
     3: &depmageia3
