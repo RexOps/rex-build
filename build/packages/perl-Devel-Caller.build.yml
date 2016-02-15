@@ -32,6 +32,28 @@ requires:
         - perl
         - perl-PadWalker
 
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-PadWalker
+
+      runtime:
+        - perl
+        - perl-PadWalker
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-PadWalker
+
+      runtime:
+        - perl
+        - perl-PadWalker
+
 # build instructions
 configure: |
   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
