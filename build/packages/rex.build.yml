@@ -460,19 +460,24 @@ requires:
 
 # build instructions
 configure: |
-  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
-  cd <%= $realname %>-<%= $version %>
+  x=<%= $version %>
+  v=$(echo $x | sed 's/~/_/')
+  tar xzf <%= $sourceroot %>/<%= $realname %>-$v.tar.gz
+  cd <%= $realname %>-$v
 
   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
 
 make: |
-  cd <%= $realname %>-<%= $version %>
+  x=<%= $version %>
+  v=$(echo $x | sed 's/~/_/')
+  cd <%= $realname %>-$v
   make
 
 install: |
   rm -rf <%= $buildroot %>
-
-  cd <%= $realname %>-<%= $version %>
+  x=<%= $version %>
+  v=$(echo $x | sed 's/~/_/')
+  cd <%= $realname %>-$v
   make pure_install
   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
 
