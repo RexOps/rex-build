@@ -461,7 +461,15 @@ requires:
 # build instructions
 configure: |
   x=<%= $version %>
-  v=$(echo $x | sed 's/~/_/')
+  y=$(echo $x | awk -F. ' { print $4 } ')
+  z=$(echo $x | awk -F. ' { print $1.$2.$3 } ')
+  if [ "$y" != "" ]; then
+    r=$[ $y - 90 ]
+    r=$(printf "%02i" $r)
+    v="${z}_${r}"
+  else
+    v=$z
+  fi
   tar xzf <%= $sourceroot %>/<%= $realname %>-$v.tar.gz
   cd <%= $realname %>-$v
 
@@ -469,14 +477,30 @@ configure: |
 
 make: |
   x=<%= $version %>
-  v=$(echo $x | sed 's/~/_/')
+  y=$(echo $x | awk -F. ' { print $4 } ')
+  z=$(echo $x | awk -F. ' { print $1.$2.$3 } ')
+  if [ "$y" != "" ]; then
+    r=$[ $y - 90 ]
+    r=$(printf "%02i" $r)
+    v="${z}_${r}"
+  else
+    v=$z
+  fi
   cd <%= $realname %>-$v
   make
 
 install: |
   rm -rf <%= $buildroot %>
   x=<%= $version %>
-  v=$(echo $x | sed 's/~/_/')
+  y=$(echo $x | awk -F. ' { print $4 } ')
+  z=$(echo $x | awk -F. ' { print $1.$2.$3 } ')
+  if [ "$y" != "" ]; then
+    r=$[ $y - 90 ]
+    r=$(printf "%02i" $r)
+    v="${z}_${r}"
+  else
+    v=$z
+  fi
   cd <%= $realname %>-$v
   make pure_install
   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
