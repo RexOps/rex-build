@@ -462,7 +462,7 @@ requires:
 configure: |
   x=<%= $version %>
   y=$(echo $x | awk -F. ' { print $4 } ')
-  z=$(echo $x | awk -F. ' { print $1.$2.$3 } ')
+  z=$(echo $x | awk -F. ' { print $1"."$2"."$3 } ')
   if [ "$y" != "" ]; then
     r=$[ $y - 90 ]
     r=$(printf "%02i" $r)
@@ -478,7 +478,7 @@ configure: |
 make: |
   x=<%= $version %>
   y=$(echo $x | awk -F. ' { print $4 } ')
-  z=$(echo $x | awk -F. ' { print $1.$2.$3 } ')
+  z=$(echo $x | awk -F. ' { print $1"."$2"."$3 } ')
   if [ "$y" != "" ]; then
     r=$[ $y - 90 ]
     r=$(printf "%02i" $r)
@@ -493,7 +493,7 @@ install: |
   rm -rf <%= $buildroot %>
   x=<%= $version %>
   y=$(echo $x | awk -F. ' { print $4 } ')
-  z=$(echo $x | awk -F. ' { print $1.$2.$3 } ')
+  z=$(echo $x | awk -F. ' { print $1"."$2"."$3 } ')
   if [ "$y" != "" ]; then
     r=$[ $y - 90 ]
     r=$(printf "%02i" $r)
