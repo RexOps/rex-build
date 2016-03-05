@@ -6,6 +6,9 @@ use Cwd 'getcwd';
 
 use Data::Dumper;
 
+our $branch   = $ENV{REX_BRANCH} || "master";
+our $git_repo = $ENV{GIT_REPO}   || "git\@github.com:RexOps/Rex.git";
+
 my $cwd = getcwd();
 my $rnd = get_random(8, 'a' .. 'z');
 
@@ -13,7 +16,8 @@ mkdir "/tmp/workspace";
 mkdir "/tmp/workspace/$rnd";
 chdir "/tmp/workspace/$rnd";
 
-system 'git clone https://github.com/RexOps/Rex.git rex --branch master >/tmp/out.log 2>&1';
+system "git clone $git_repo rex --branch $branch >/var/log/rex/checkout-$$.log 2>&1";
+
 chdir $cwd;
 
 $ENV{"PATH"} = "/tmp/workspace/$rnd/rex/bin:" . $ENV{PATH};
