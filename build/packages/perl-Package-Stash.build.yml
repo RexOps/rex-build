@@ -17,8 +17,22 @@ arch:
   centos: x86_64
 description: |
   Package::Stash - routines for manipulating stashes
-
 no_auto_scan: true
+
+provides:
+  centos:
+    5:
+      - perl(Package::Stash)
+      - perl(Package::Stash::Conflicts)
+      - perl(Package::Stash::PP)
+    6:
+      - perl(Package::Stash)
+      - perl(Package::Stash::Conflicts)
+      - perl(Package::Stash::PP)
+    7:
+      - perl(Package::Stash)
+      - perl(Package::Stash::Conflicts)
+      - perl(Package::Stash::PP)
 
 # requirements
 requires:
