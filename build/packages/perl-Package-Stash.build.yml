@@ -3,7 +3,7 @@ name:
   centos: perl-Package-Stash
 realname: Package-Stash
 version: 0.37
-release: 2
+release: 3
 epoch: 1
 summary: Package::Stash - routines for manipulating stashes
 group:
