@@ -2,7 +2,7 @@
 name:
   centos: perl-parent
 realname: parent
-version: 0.228
+version: 0.234
 release: 1
 epoch: 1
 summary: parent - Establish an ISA relationship with base classes at compile time
@@ -10,7 +10,7 @@ group:
   centos: System Environment/Libraries
 license: unknown
 homepage: https://metacpan.org/pod/parent
-source: http://cpan.metacpan.org/authors/id/C/CO/CORION/parent-0.228.tar.gz
+source: http://cpan.metacpan.org/authors/id/C/CO/CORION/parent-0.234.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 arch:
@@ -53,4 +53,10 @@ clean: |
 files:
   package:
     - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
 
