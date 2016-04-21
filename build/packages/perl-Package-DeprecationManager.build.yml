@@ -104,9 +104,8 @@ clean: |
 files:
   package:
     - /usr
-
   centos:
     doc:
       - %{_mandir}/*
     package:
-      - %{_libdir}/*
+      - %{perl_vendorlib}/*
