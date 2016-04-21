@@ -26,14 +26,12 @@ requires:
         - make
         - gcc
         - perl
-        - perl(Tie::RefHash)
-        - perl(Task::Weaken)
-        - perl(Variable::Magic)
+        - perl(Task::Weaken): perl-Task-Weaken
+        - perl(Variable::Magic): perl-Variable-Magic
       runtime:
         - perl
-        - perl(Tie::RefHash)
-        - perl(Task::Weaken)
-        - perl(Variable::Magic)
+        - perl(Task::Weaken): perl-Task-Weaken
+        - perl(Variable::Magic): perl-Variable-Magic
 
     6:
       build:
@@ -41,14 +39,12 @@ requires:
         - gcc
         - perl
         - perl-devel
-        - perl(Task::Weaken)
-        - perl(Tie::RefHash)
-        - perl(Variable::Magic)
+        - perl(Task::Weaken): perl-Task-Weaken
+        - perl(Variable::Magic): perl-Variable-Magic
       runtime:
         - perl
-        - perl(Task::Weaken)
-        - perl(Tie::RefHash)
-        - perl(Variable::Magic)
+        - perl(Task::Weaken): perl-Task-Weaken
+        - perl(Variable::Magic): perl-Variable-Magic
 
     7:
       build:
@@ -56,14 +52,12 @@ requires:
         - gcc
         - perl
         - perl-devel
-        - perl(Task::Weaken)
-        - perl(Tie::RefHash)
-        - perl(Variable::Magic)
+        - perl(Task::Weaken): perl-Task-Weaken
+        - perl(Variable::Magic): perl-Variable-Magic
       runtime:
         - perl
-        - perl(Task::Weaken)
-        - perl(Tie::RefHash)
-        - perl(Variable::Magic)
+        - perl(Task::Weaken): perl-Task-Weaken
+        - perl(Variable::Magic): perl-Variable-Magic
 
 # build instructions
 configure: |
