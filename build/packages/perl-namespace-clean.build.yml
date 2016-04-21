@@ -3,7 +3,7 @@ name:
   centos: perl-namespace-clean
 realname: namespace-clean
 version: 0.26
-release: 1
+release: 2
 epoch: 1
 summary: namespace::clean - Keep imports and functions out of your namespace
 group:
@@ -18,6 +18,18 @@ arch:
 description: |
   namespace::clean - Keep imports and functions out of your namespace
 
+provides:
+  centos:
+    5:
+      - perl(namespace::clean)
+      - perl(namespace::clean::_Util)
+    6:
+      - perl(namespace::clean)
+      - perl(namespace::clean::_Util)
+    7:
+      - perl(namespace::clean)
+      - perl(namespace::clean::_Util)
+
 # requirements
 requires:
   centos:
@@ -26,12 +38,12 @@ requires:
         - make
         - gcc
         - perl
-        - perl-B-Hooks-EndOfScope
-        - perl-Package-Stash
+        - perl(B::Hooks::EndOfScope): perl-B-Hooks-EndOfScope
+        - perl(Package::Stash): perl-Package-Stash
       runtime:
         - perl
-        - perl-B-Hooks-EndOfScope
-        - perl-Package-Stash
+        - perl(B::Hooks::EndOfScope): perl-B-Hooks-EndOfScope
+        - perl(Package::Stash): perl-Package-Stash
 
     6:
       build:
@@ -39,12 +51,12 @@ requires:
         - gcc
         - perl
         - perl-devel
-        - perl-B-Hooks-EndOfScope
-        - perl-Package-Stash
+        - perl(B::Hooks::EndOfScope): perl-B-Hooks-EndOfScope
+        - perl(Package::Stash): perl-Package-Stash
       runtime:
         - perl
-        - perl-B-Hooks-EndOfScope
-        - perl-Package-Stash
+        - perl(B::Hooks::EndOfScope): perl-B-Hooks-EndOfScope
+        - perl(Package::Stash): perl-Package-Stash
 
     7:
       build:
@@ -52,12 +64,12 @@ requires:
         - gcc
         - perl
         - perl-devel
-        - perl-B-Hooks-EndOfScope
-        - perl-Package-Stash
+        - perl(B::Hooks::EndOfScope): perl-B-Hooks-EndOfScope
+        - perl(Package::Stash): perl-Package-Stash
       runtime:
         - perl
-        - perl-B-Hooks-EndOfScope
-        - perl-Package-Stash
+        - perl(B::Hooks::EndOfScope): perl-B-Hooks-EndOfScope
+        - perl(Package::Stash): perl-Package-Stash
 
 # build instructions
 configure: |
