@@ -26,12 +26,19 @@ requires:
         - make
         - gcc
         - perl
-        - perl-Sub-Install
-        - perl-Params-Util
+        - perl(Sub::Install): perl-Sub-Install
+        - perl(Params::Util): perl-Params-Util
+        - perl(Sub::Name): perl-Sub-Name
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(namespace::autoclean): perl-namespace-autoclean
+        - perl(Test::More): perl-Test-Simple
       runtime:
         - perl
-        - perl-Sub-Install
-        - perl-Params-Util
+        - perl(Sub::Install): perl-Sub-Install
+        - perl(Params::Util): perl-Params-Util
+        - perl(Sub::Name): perl-Sub-Name
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(namespace::autoclean): perl-namespace-autoclean
 
     6:
       build:
@@ -39,12 +46,19 @@ requires:
         - gcc
         - perl
         - perl-devel
-        - perl-Sub-Install
-        - perl-Params-Util
+        - perl(Sub::Install): perl-Sub-Install
+        - perl(Params::Util): perl-Params-Util
+        - perl(Sub::Name): perl-Sub-Name
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(namespace::autoclean): perl-namespace-autoclean
+        - perl(Test::More): perl-Test-Simple
       runtime:
         - perl
-        - perl-Sub-Install
-        - perl-Params-Util
+        - perl(Sub::Install): perl-Sub-Install
+        - perl(Params::Util): perl-Params-Util
+        - perl(Sub::Name): perl-Sub-Name
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(namespace::autoclean): perl-namespace-autoclean
 
     7:
       build:
@@ -52,12 +66,19 @@ requires:
         - gcc
         - perl
         - perl-devel
-        - perl-Sub-Install
-        - perl-Params-Util
+        - perl(Sub::Install): perl-Sub-Install
+        - perl(Params::Util): perl-Params-Util
+        - perl(Sub::Name): perl-Sub-Name
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(namespace::autoclean): perl-namespace-autoclean
+        - perl(Test::More): perl-Test-Simple
       runtime:
         - perl
-        - perl-Sub-Install
-        - perl-Params-Util
+        - perl(Sub::Install): perl-Sub-Install
+        - perl(Params::Util): perl-Params-Util
+        - perl(Sub::Name): perl-Sub-Name
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(namespace::autoclean): perl-namespace-autoclean
 
 # build instructions
 configure: |
