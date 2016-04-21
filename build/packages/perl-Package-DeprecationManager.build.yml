@@ -2,7 +2,7 @@
 name:
   centos: perl-Package-DeprecationManager
 realname: Package-DeprecationManager
-version: 0.14
+version: 0.16
 release: 1
 epoch: 1
 summary: Package::DeprecationManager - Manage deprecation warnings for your distribution
@@ -10,7 +10,7 @@ group:
   centos: System Environment/Libraries
 license: perl5
 homepage: https://metacpan.org/pod/Package::DeprecationManager
-source: https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Package-DeprecationManager-0.14.tar.gz
+source: https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Package-DeprecationManager-0.16.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 arch:
