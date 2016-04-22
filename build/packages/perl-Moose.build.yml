@@ -3,7 +3,7 @@ name:
   centos: perl-Moose
 realname: Moose
 version: 2.1605
-release: 2
+release: 3
 epoch: 1
 summary: Moose - A postmodern object system for Perl 5
 group:
@@ -186,7 +186,7 @@ configure: |
 
 make: |
   cd <%= $realname %>-<%= $version %>
-  find lib -name '*.pm' -exec sed -ie "s|use warnings;|use warnings;\nuse lib '%{perl_vendorlib}/.override';\n|" '{}' ';'
+  find lib -name '*.pm' -exec sed -ie "s|use warnings;|use warnings;\nuse lib '%{perl_vendorlib}/.overrides';\n|" '{}' ';'
   make
 
 install: |

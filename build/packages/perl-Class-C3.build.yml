@@ -62,6 +62,7 @@ configure: |
 
 make: |
   cd <%= $realname %>-<%= $version %>
+  find lib -name '*.pm' -exec sed -ie "s|use warnings;|use warnings;\nuse lib '%{perl_vendorlib}/.overrides';\n|" '{}' ';'
   make
 
 install: |
