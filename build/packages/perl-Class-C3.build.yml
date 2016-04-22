@@ -3,7 +3,7 @@ name:
   centos: perl-Class-C3
 realname: Class-C3
 version: 0.30
-release: 1
+release: 2
 epoch: 1
 summary: Class::C3 - A pragma to use the C3 method resolution order algorithm
 group:
@@ -27,9 +27,11 @@ requires:
         - gcc
         - perl
         - perl(Algorithm::C3): perl-Algorithm-C3
+        - perl(Scalar::Util): perl-Scalar-List-Utils
       runtime:
         - perl
         - perl(Algorithm::C3): perl-Algorithm-C3
+        - perl(Scalar::Util): perl-Scalar-List-Utils
 
     6:
       build:
@@ -38,9 +40,11 @@ requires:
         - perl
         - perl-devel
         - perl(Algorithm::C3): perl-Algorithm-C3
+        - perl(Scalar::Util): perl-Scalar-List-Utils
       runtime:
         - perl
         - perl(Algorithm::C3): perl-Algorithm-C3
+        - perl(Scalar::Util): perl-Scalar-List-Utils
 
     7:
       build:
@@ -49,9 +53,11 @@ requires:
         - perl
         - perl-devel
         - perl(Algorithm::C3): perl-Algorithm-C3
+        - perl(Scalar::Util): perl-Scalar-List-Utils
       runtime:
         - perl
         - perl(Algorithm::C3): perl-Algorithm-C3
+        - perl(Scalar::Util): perl-Scalar-List-Utils
 
 # build instructions
 configure: |
