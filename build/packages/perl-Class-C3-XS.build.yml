@@ -1,0 +1,86 @@
+# basic informations
+name:
+  centos: perl-Class-C3-XS
+realname: Class-C3-XS
+version: 0.13
+release: 1
+epoch: 1
+summary: Class::C3::XS - XS speedups for Class::C3
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/Class::C3::XS
+source: https://cpan.metacpan.org/authors/id/F/FL/FLORA/Class-C3-XS-0.13.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Class::C3::XS - XS speedups for Class::C3
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl(Class::C3): perl-Class-C3
+      runtime:
+        - perl
+        - perl(Class::C3): perl-Class-C3
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl(Class::C3): perl-Class-C3
+      runtime:
+        - perl
+        - perl(Class::C3): perl-Class-C3
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl(Class::C3): perl-Class-C3
+      runtime:
+        - perl
+        - perl(Class::C3): perl-Class-C3
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  find lib -name '*.pm' -exec sed -ie "s|use warnings;|use warnings;\nuse lib '%{perl_vendorlib}/.overrides';\n|" '{}' ';'
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
