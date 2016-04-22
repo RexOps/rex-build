@@ -26,14 +26,14 @@ requires:
         - make
         - gcc
         - perl
-        - perl-MRO-Compat
-        - perl-Package-Stash
-        - perl-Sub-Identify
+        - perl(MRO::Compat): perl-MRO-Compat
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(Sub::Identify): perl-Sub-Identify
       runtime:
         - perl
-        - perl-MRO-Compat
-        - perl-Package-Stash
-        - perl-Sub-Identify
+        - perl(MRO::Compat): perl-MRO-Compat
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(Sub::Identify): perl-Sub-Identify
 
     6:
       build:
@@ -41,14 +41,14 @@ requires:
         - gcc
         - perl
         - perl-devel
-        - perl-MRO-Compat
-        - perl-Package-Stash
-        - perl-Sub-Identify
+        - perl(MRO::Compat): perl-MRO-Compat
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(Sub::Identify): perl-Sub-Identify
       runtime:
         - perl
-        - perl-MRO-Compat
-        - perl-Package-Stash
-        - perl-Sub-Identify
+        - perl(MRO::Compat): perl-MRO-Compat
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(Sub::Identify): perl-Sub-Identify
 
     7:
       build:
@@ -56,14 +56,14 @@ requires:
         - gcc
         - perl
         - perl-devel
-        - perl-MRO-Compat
-        - perl-Package-Stash
-        - perl-Sub-Identify
+        - perl(MRO::Compat): perl-MRO-Compat
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(Sub::Identify): perl-Sub-Identify
       runtime:
         - perl
-        - perl-MRO-Compat
-        - perl-Package-Stash
-        - perl-Sub-Identify
+        - perl(MRO::Compat): perl-MRO-Compat
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(Sub::Identify): perl-Sub-Identify
 
 # build instructions
 configure: |
@@ -89,9 +89,13 @@ clean: |
 files:
   package:
     - /usr
-
+  fedora:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
   centos:
     doc:
       - %{_mandir}/*
     package:
-      - %{_libdir}/*
+      - %{perl_vendorlib}/*

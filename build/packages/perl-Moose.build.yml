@@ -2,7 +2,7 @@
 name:
   centos: perl-Moose
 realname: Moose
-version: 2.1603
+version: 2.1605
 release: 1
 epoch: 1
 summary: Moose - A postmodern object system for Perl 5
@@ -10,7 +10,7 @@ group:
   centos: System Environment/Libraries
 license: perl5
 homepage: https://metacpan.org/pod/Moose
-source: https://cpan.metacpan.org/authors/id/E/ET/ETHER/Moose-2.1603.tar.gz
+source: https://cpan.metacpan.org/authors/id/E/ET/ETHER/Moose-2.1605.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 arch:
@@ -26,48 +26,48 @@ requires:
         - make
         - gcc
         - perl
-        - perl-Class-Load
-        - perl-Class-Load-XS
-        - perl-Devel-GlobalDestruction
-        - perl-Devel-OverloadInfo
-        - perl-Devel-StackTrace
-        - perl-Dist-CheckConflicts
-        - perl-Eval-Closure
-        - perl-List-MoreUtils
-        - perl-Module-Runtime
-        - perl-Module-Runtime-Conflicts
-        - perl-MRO-Compat
-        - perl-Package-DeprecationManager
-        - perl-Package-Stash
-        - perl-Package-Stash-XS
-        - perl-Params-Util
-        - perl-Sub-Exporter
-        - perl-Sub-Identify
-        - perl-Sub-Name
-        - perl-Task-Weaken
-        - perl-Try-Tiny
+        - perl(Class::Load): perl-Class-Load
+        - perl(Class::Load::XS): perl-Class-Load-XS
+        - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
+        - perl(Devel::OverloadInfo): perl-Devel-OverloadInfo
+        - perl(Devel::StackTrace): perl-Devel-StackTrace
+        - perl(Dist::CheckConflicts): perl-Dist-CheckConflicts
+        - perl(Eval::Closure): perl-Eval-Closure
+        - perl(List::MoreUtils): perl-List-MoreUtils
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(Module::Runtime::Conflicts): perl-Module-Runtime-Conflicts
+        - perl(MRO::Compat): perl-MRO-Compat
+        - perl(Package::DeprecationManager): perl-Package-DeprecationManager
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(Package::Stash::XS): perl-Package-Stash-XS
+        - perl(Params::Util): perl-Params-Util
+        - perl(Sub::Exporter): perl-Sub-Exporter
+        - perl(Sub::Identify): perl-Sub-Identify
+        - perl(Sub::Name): perl-Sub-Name
+        - perl(Task::Weaken): perl-Task-Weaken
+        - perl(Try::Tiny): perl-Try-Tiny
       runtime:
         - perl
-        - perl-Class-Load
-        - perl-Class-Load-XS
-        - perl-Devel-GlobalDestruction
-        - perl-Devel-OverloadInfo
-        - perl-Devel-StackTrace
-        - perl-Dist-CheckConflicts
-        - perl-Eval-Closure
-        - perl-List-MoreUtils
-        - perl-Module-Runtime
-        - perl-Module-Runtime-Conflicts
-        - perl-MRO-Compat
-        - perl-Package-DeprecationManager
-        - perl-Package-Stash
-        - perl-Package-Stash-XS
-        - perl-Params-Util
-        - perl-Sub-Exporter
-        - perl-Sub-Identify
-        - perl-Sub-Name
-        - perl-Task-Weaken
-        - perl-Try-Tiny
+        - perl(Class::Load): perl-Class-Load
+        - perl(Class::Load::XS): perl-Class-Load-XS
+        - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
+        - perl(Devel::OverloadInfo): perl-Devel-OverloadInfo
+        - perl(Devel::StackTrace): perl-Devel-StackTrace
+        - perl(Dist::CheckConflicts): perl-Dist-CheckConflicts
+        - perl(Eval::Closure): perl-Eval-Closure
+        - perl(List::MoreUtils): perl-List-MoreUtils
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(Module::Runtime::Conflicts): perl-Module-Runtime-Conflicts
+        - perl(MRO::Compat): perl-MRO-Compat
+        - perl(Package::DeprecationManager): perl-Package-DeprecationManager
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(Package::Stash::XS): perl-Package-Stash-XS
+        - perl(Params::Util): perl-Params-Util
+        - perl(Sub::Exporter): perl-Sub-Exporter
+        - perl(Sub::Identify): perl-Sub-Identify
+        - perl(Sub::Name): perl-Sub-Name
+        - perl(Task::Weaken): perl-Task-Weaken
+        - perl(Try::Tiny): perl-Try-Tiny
 
     6:
       build:
@@ -75,48 +75,48 @@ requires:
         - gcc
         - perl
         - perl-devel
-        - perl-Class-Load
-        - perl-Class-Load-XS
-        - perl-Devel-GlobalDestruction
-        - perl-Devel-OverloadInfo
-        - perl-Devel-StackTrace
-        - perl-Dist-CheckConflicts
-        - perl-Eval-Closure
-        - perl-List-MoreUtils
-        - perl-Module-Runtime
-        - perl-Module-Runtime-Conflicts
-        - perl-MRO-Compat
-        - perl-Package-DeprecationManager
-        - perl-Package-Stash
-        - perl-Package-Stash-XS
-        - perl-Params-Util
-        - perl-Sub-Exporter
-        - perl-Sub-Identify
-        - perl-Sub-Name
-        - perl-Task-Weaken
-        - perl-Try-Tiny
+        - perl(Class::Load): perl-Class-Load
+        - perl(Class::Load::XS): perl-Class-Load-XS
+        - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
+        - perl(Devel::OverloadInfo): perl-Devel-OverloadInfo
+        - perl(Devel::StackTrace): perl-Devel-StackTrace
+        - perl(Dist::CheckConflicts): perl-Dist-CheckConflicts
+        - perl(Eval::Closure): perl-Eval-Closure
+        - perl(List::MoreUtils): perl-List-MoreUtils
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(Module::Runtime::Conflicts): perl-Module-Runtime-Conflicts
+        - perl(MRO::Compat): perl-MRO-Compat
+        - perl(Package::DeprecationManager): perl-Package-DeprecationManager
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(Package::Stash::XS): perl-Package-Stash-XS
+        - perl(Params::Util): perl-Params-Util
+        - perl(Sub::Exporter): perl-Sub-Exporter
+        - perl(Sub::Identify): perl-Sub-Identify
+        - perl(Sub::Name): perl-Sub-Name
+        - perl(Task::Weaken): perl-Task-Weaken
+        - perl(Try::Tiny): perl-Try-Tiny
       runtime:
         - perl
-        - perl-Class-Load
-        - perl-Class-Load-XS
-        - perl-Devel-GlobalDestruction
-        - perl-Devel-OverloadInfo
-        - perl-Devel-StackTrace
-        - perl-Dist-CheckConflicts
-        - perl-Eval-Closure
-        - perl-List-MoreUtils
-        - perl-Module-Runtime
-        - perl-Module-Runtime-Conflicts
-        - perl-MRO-Compat
-        - perl-Package-DeprecationManager
-        - perl-Package-Stash
-        - perl-Package-Stash-XS
-        - perl-Params-Util
-        - perl-Sub-Exporter
-        - perl-Sub-Identify
-        - perl-Sub-Name
-        - perl-Task-Weaken
-        - perl-Try-Tiny
+        - perl(Class::Load): perl-Class-Load
+        - perl(Class::Load::XS): perl-Class-Load-XS
+        - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
+        - perl(Devel::OverloadInfo): perl-Devel-OverloadInfo
+        - perl(Devel::StackTrace): perl-Devel-StackTrace
+        - perl(Dist::CheckConflicts): perl-Dist-CheckConflicts
+        - perl(Eval::Closure): perl-Eval-Closure
+        - perl(List::MoreUtils): perl-List-MoreUtils
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(Module::Runtime::Conflicts): perl-Module-Runtime-Conflicts
+        - perl(MRO::Compat): perl-MRO-Compat
+        - perl(Package::DeprecationManager): perl-Package-DeprecationManager
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(Package::Stash::XS): perl-Package-Stash-XS
+        - perl(Params::Util): perl-Params-Util
+        - perl(Sub::Exporter): perl-Sub-Exporter
+        - perl(Sub::Identify): perl-Sub-Identify
+        - perl(Sub::Name): perl-Sub-Name
+        - perl(Task::Weaken): perl-Task-Weaken
+        - perl(Try::Tiny): perl-Try-Tiny
 
     7:
       build:
@@ -124,48 +124,48 @@ requires:
         - gcc
         - perl
         - perl-devel
-        - perl-Class-Load
-        - perl-Class-Load-XS
-        - perl-Devel-GlobalDestruction
-        - perl-Devel-OverloadInfo
-        - perl-Devel-StackTrace
-        - perl-Dist-CheckConflicts
-        - perl-Eval-Closure
-        - perl-List-MoreUtils
-        - perl-Module-Runtime
-        - perl-Module-Runtime-Conflicts
-        - perl-MRO-Compat
-        - perl-Package-DeprecationManager
-        - perl-Package-Stash
-        - perl-Package-Stash-XS
-        - perl-Params-Util
-        - perl-Sub-Exporter
-        - perl-Sub-Identify
-        - perl-Sub-Name
-        - perl-Task-Weaken
-        - perl-Try-Tiny
+        - perl(Class::Load): perl-Class-Load
+        - perl(Class::Load::XS): perl-Class-Load-XS
+        - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
+        - perl(Devel::OverloadInfo): perl-Devel-OverloadInfo
+        - perl(Devel::StackTrace): perl-Devel-StackTrace
+        - perl(Dist::CheckConflicts): perl-Dist-CheckConflicts
+        - perl(Eval::Closure): perl-Eval-Closure
+        - perl(List::MoreUtils): perl-List-MoreUtils
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(Module::Runtime::Conflicts): perl-Module-Runtime-Conflicts
+        - perl(MRO::Compat): perl-MRO-Compat
+        - perl(Package::DeprecationManager): perl-Package-DeprecationManager
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(Package::Stash::XS): perl-Package-Stash-XS
+        - perl(Params::Util): perl-Params-Util
+        - perl(Sub::Exporter): perl-Sub-Exporter
+        - perl(Sub::Identify): perl-Sub-Identify
+        - perl(Sub::Name): perl-Sub-Name
+        - perl(Task::Weaken): perl-Task-Weaken
+        - perl(Try::Tiny): perl-Try-Tiny
       runtime:
         - perl
-        - perl-Class-Load
-        - perl-Class-Load-XS
-        - perl-Devel-GlobalDestruction
-        - perl-Devel-OverloadInfo
-        - perl-Devel-StackTrace
-        - perl-Dist-CheckConflicts
-        - perl-Eval-Closure
-        - perl-List-MoreUtils
-        - perl-Module-Runtime
-        - perl-Module-Runtime-Conflicts
-        - perl-MRO-Compat
-        - perl-Package-DeprecationManager
-        - perl-Package-Stash
-        - perl-Package-Stash-XS
-        - perl-Params-Util
-        - perl-Sub-Exporter
-        - perl-Sub-Identify
-        - perl-Sub-Name
-        - perl-Task-Weaken
-        - perl-Try-Tiny
+        - perl(Class::Load): perl-Class-Load
+        - perl(Class::Load::XS): perl-Class-Load-XS
+        - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
+        - perl(Devel::OverloadInfo): perl-Devel-OverloadInfo
+        - perl(Devel::StackTrace): perl-Devel-StackTrace
+        - perl(Dist::CheckConflicts): perl-Dist-CheckConflicts
+        - perl(Eval::Closure): perl-Eval-Closure
+        - perl(List::MoreUtils): perl-List-MoreUtils
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(Module::Runtime::Conflicts): perl-Module-Runtime-Conflicts
+        - perl(MRO::Compat): perl-MRO-Compat
+        - perl(Package::DeprecationManager): perl-Package-DeprecationManager
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(Package::Stash::XS): perl-Package-Stash-XS
+        - perl(Params::Util): perl-Params-Util
+        - perl(Sub::Exporter): perl-Sub-Exporter
+        - perl(Sub::Identify): perl-Sub-Identify
+        - perl(Sub::Name): perl-Sub-Name
+        - perl(Task::Weaken): perl-Task-Weaken
+        - perl(Try::Tiny): perl-Try-Tiny
 
 # build instructions
 configure: |
@@ -191,7 +191,11 @@ clean: |
 files:
   package:
     - /usr
-
+  fedora:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
   centos:
     doc:
       - %{_mandir}/*

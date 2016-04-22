@@ -2,7 +2,7 @@
 name:
   centos: perl-Devel-StackTrace
 realname: Devel-StackTrace
-version: 2.00
+version: 2.01
 release: 1
 epoch: 1
 summary: Devel::StackTrace - An object representing a stack trace
@@ -10,7 +10,7 @@ group:
   centos: System Environment/Libraries
 license: perl5
 homepage: https://metacpan.org/pod/Devel::StackTrace
-source: https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Devel-StackTrace-2.00.tar.gz
+source: https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Devel-StackTrace-2.01.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 arch:
@@ -71,9 +71,13 @@ clean: |
 files:
   package:
     - /usr
-
+  fedora:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
   centos:
     doc:
       - %{_mandir}/*
     package:
-      - %{_libdir}/*
+      - %{perl_vendorlib}/*

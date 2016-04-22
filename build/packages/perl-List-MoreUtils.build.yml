@@ -2,7 +2,7 @@
 name:
   centos: perl-List-MoreUtils
 realname: List-MoreUtils
-version: 0.33
+version: 0.413
 release: 1
 epoch: 1
 summary: List::MoreUtils - Provide the stuff missing in List::Util
@@ -10,7 +10,7 @@ group:
   centos: System Environment/Libraries
 license: Artistic 1
 homepage: https://metacpan.org/pod/List::MoreUtils
-source: http://cpan.metacpan.org/authors/id/A/AD/ADAMK/List-MoreUtils-0.33.tar.gz
+source: https://cpan.metacpan.org/authors/id/R/RE/REHSACK/List-MoreUtils-0.413.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
 arch:
@@ -26,8 +26,33 @@ requires:
         - make
         - gcc
         - perl
+        - perl(Exporter::Tiny): perl-Exporter-Tiny
       runtime:
         - perl
+        - perl(Exporter::Tiny): perl-Exporter-Tiny
+
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl(Exporter::Tiny): perl-Exporter-Tiny
+      runtime:
+        - perl
+        - perl(Exporter::Tiny): perl-Exporter-Tiny
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl(Exporter::Tiny): perl-Exporter-Tiny
+      runtime:
+        - perl
+        - perl(Exporter::Tiny): perl-Exporter-Tiny
 
 
 # build instructions
@@ -54,4 +79,13 @@ clean: |
 files:
   package:
     - /usr
-
+  fedora:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*

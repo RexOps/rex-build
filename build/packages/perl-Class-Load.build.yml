@@ -26,18 +26,18 @@ requires:
         - make
         - gcc
         - perl
-        - perl-Data-OptList
-        - perl-Module-Implementation
-        - perl-Module-Runtime
-        - perl-Package-Stash
-        - perl-Try-Tiny
+        - perl(Data::OptList): perl-Data-OptList
+        - perl(Module::Implementation): perl-Module-Implementation
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(Try::Tiny): perl-Try-Tiny
       runtime:
         - perl
-        - perl-Data-OptList
-        - perl-Module-Implementation
-        - perl-Module-Runtime
-        - perl-Package-Stash
-        - perl-Try-Tiny
+        - perl(Data::OptList): perl-Data-OptList
+        - perl(Module::Implementation): perl-Module-Implementation
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(Try::Tiny): perl-Try-Tiny
 
     6:
       build:
@@ -45,18 +45,18 @@ requires:
         - gcc
         - perl
         - perl-devel
-        - perl-Data-OptList
-        - perl-Module-Implementation
-        - perl-Module-Runtime
-        - perl-Package-Stash
-        - perl-Try-Tiny
+        - perl(Data::OptList): perl-Data-OptList
+        - perl(Module::Implementation): perl-Module-Implementation
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(Try::Tiny): perl-Try-Tiny
       runtime:
         - perl
-        - perl-Data-OptList
-        - perl-Module-Implementation
-        - perl-Module-Runtime
-        - perl-Package-Stash
-        - perl-Try-Tiny
+        - perl(Data::OptList): perl-Data-OptList
+        - perl(Module::Implementation): perl-Module-Implementation
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(Try::Tiny): perl-Try-Tiny
 
     7:
       build:
@@ -64,18 +64,18 @@ requires:
         - gcc
         - perl
         - perl-devel
-        - perl-Data-OptList
-        - perl-Module-Implementation
-        - perl-Module-Runtime
-        - perl-Package-Stash
-        - perl-Try-Tiny
+        - perl(Data::OptList): perl-Data-OptList
+        - perl(Module::Implementation): perl-Module-Implementation
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(Try::Tiny): perl-Try-Tiny
       runtime:
         - perl
-        - perl-Data-OptList
-        - perl-Module-Implementation
-        - perl-Module-Runtime
-        - perl-Package-Stash
-        - perl-Try-Tiny
+        - perl(Data::OptList): perl-Data-OptList
+        - perl(Module::Implementation): perl-Module-Implementation
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(Package::Stash): perl-Package-Stash
+        - perl(Try::Tiny): perl-Try-Tiny
 
 # build instructions
 configure: |
@@ -101,9 +101,13 @@ clean: |
 files:
   package:
     - /usr
-
+  fedora:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
   centos:
     doc:
       - %{_mandir}/*
     package:
-      - %{_libdir}/*
+      - %{perl_vendorlib}/*

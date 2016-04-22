@@ -26,10 +26,10 @@ requires:
         - make
         - gcc
         - perl
-        - perl-Sub-Exporter-Progressive
+        - perl(Sub::Exporter::Progressive): perl-Sub-Exporter-Progressive
       runtime:
         - perl
-        - perl-Sub-Exporter-Progressive
+        - perl(Sub::Exporter::Progressive): perl-Sub-Exporter-Progressive
 
     6:
       build:
@@ -37,10 +37,10 @@ requires:
         - gcc
         - perl
         - perl-devel
-        - perl-Sub-Exporter-Progressive
+        - perl(Sub::Exporter::Progressive): perl-Sub-Exporter-Progressive
       runtime:
         - perl
-        - perl-Sub-Exporter-Progressive
+        - perl(Sub::Exporter::Progressive): perl-Sub-Exporter-Progressive
 
     7:
       build:
@@ -48,12 +48,12 @@ requires:
         - gcc
         - perl
         - perl-devel
-        - perl-autodie
-        - perl-Sub-Exporter-Progressive
+        - perl(autodie): perl-autodie
+        - perl(Sub::Exporter::Progressive): perl-Sub-Exporter-Progressive
       runtime:
         - perl
-        - perl-autodie
-        - perl-Sub-Exporter-Progressive
+        - perl(autodie): perl-autodie
+        - perl(Sub::Exporter::Progressive): perl-Sub-Exporter-Progressive
 
 # build instructions
 configure: |
@@ -79,7 +79,11 @@ clean: |
 files:
   package:
     - /usr
-
+  fedora:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
   centos:
     doc:
       - %{_mandir}/*

@@ -26,10 +26,10 @@ requires:
         - make
         - gcc
         - perl
-        - perl-Class-Load
+        - perl(Class::Load): perl-Class-Load
       runtime:
         - perl
-        - perl-Class-Load
+        - perl(Class::Load): perl-Class-Load
 
     6:
       build:
@@ -37,10 +37,10 @@ requires:
         - gcc
         - perl
         - perl-devel
-        - perl-Class-Load
+        - perl(Class::Load): perl-Class-Load
       runtime:
         - perl
-        - perl-Class-Load
+        - perl(Class::Load): perl-Class-Load
 
     7:
       build:
@@ -48,10 +48,10 @@ requires:
         - gcc
         - perl
         - perl-devel
-        - perl-Class-Load
+        - perl(Class::Load): perl-Class-Load
       runtime:
         - perl
-        - perl-Class-Load
+        - perl(Class::Load): perl-Class-Load
 
 # build instructions
 configure: |
@@ -77,9 +77,13 @@ clean: |
 files:
   package:
     - /usr
-
+  fedora:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
   centos:
     doc:
       - %{_mandir}/*
     package:
-      - %{_libdir}/*
+      - %{perl_vendorlib}/*
