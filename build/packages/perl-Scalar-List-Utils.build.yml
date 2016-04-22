@@ -93,12 +93,8 @@ files:
   package:
     - /usr
   fedora:
-    doc:
-      - %{_mandir}/*
     package:
       - %{perl_vendorlib}/.overrides/*
   centos:
-    doc:
-      - %{_mandir}/*
     package:
       - %{perl_vendorlib}/.overrides/*
