@@ -18,6 +18,16 @@ arch:
 description: |
   Moose - A postmodern object system for Perl 5
 
+provides:
+  centos:
+    5:
+      - perl(Moose::Conflicts)
+    6:
+      - perl(Moose::Conflicts)
+    7:
+      - perl(Moose::Conflicts)
+
+
 # requirements
 requires:
   centos:
@@ -176,6 +186,7 @@ configure: |
 
 make: |
   cd <%= $realname %>-<%= $version %>
+  find lib -name '*.pm' -exec sed -ie "s|use warnings;|use warnings;\nuse lib '%{perl_vendorlib}/.override';\n|" '{}' ';'
   make
 
 install: |

@@ -110,3 +110,8 @@ Obsoletes:  <%= $obs %><% } %>
 %post
 <%= $data->{post} %>
 <% } %>
+
+<% if(exists $data->{postun}) { %>
+%postun
+<%= $data->{postun} %>
+<% } %>

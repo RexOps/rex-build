@@ -1,0 +1,104 @@
+# basic informations
+name:
+  centos: perl-Scalar-List-Utils
+realname: List-Scalar-Utils
+version: 1.45
+release: 1
+epoch: 1
+summary: Utility functions for scalars and lists
+group:
+  centos: System Environment/Libraries
+license: Artistic 1
+homepage: https://metacpan.org/pod/Scalar::Util
+source: https://cpan.metacpan.org/authors/id/P/PE/PEVANS/Scalar-List-Utils-1.45.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Utility functions for scalars and lists
+
+provides:
+  centos:
+    5:
+      - perl(Scalar::Util)
+      - perl(List::Util)
+      - perl(List::Util::XS)
+      - perl(Sub::Util)
+    6:
+      - perl(Scalar::Util)
+      - perl(List::Util)
+      - perl(List::Util::XS)
+      - perl(Sub::Util)
+    7:
+      - perl(Scalar::Util)
+      - perl(List::Util)
+      - perl(List::Util::XS)
+      - perl(Sub::Util)
+
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+      runtime:
+        - perl
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+      runtime:
+        - perl
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+      runtime:
+        - perl
+
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+    
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+    
+  cd <%= $realname %>-<%= $version %>
+  mkdir -p <%= $buildroot %>%{perl_vendorlib}/.overrides
+  cp -R lib/* <%= $buildroot %>%{perl_vendorlib}/.overrides
+  
+clean: |
+  rm -rf <%= $buildroot %>
+
+
+files:
+  package:
+    - /usr
+  fedora:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/.overrides/*
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/.overrides/*
