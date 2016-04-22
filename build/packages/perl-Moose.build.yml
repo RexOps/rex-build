@@ -3,7 +3,7 @@ name:
   centos: perl-Moose
 realname: Moose
 version: 2.1605
-release: 1
+release: 2
 epoch: 1
 summary: Moose - A postmodern object system for Perl 5
 group:
