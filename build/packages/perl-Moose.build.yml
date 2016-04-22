@@ -195,9 +195,11 @@ files:
     doc:
       - %{_mandir}/*
     package:
-      - %{perl_vendorlib}/*
+      - /usr/bin/moose-outdated
+      - %{perl_vendorarch}/*
   centos:
     doc:
       - %{_mandir}/*
     package:
-      - %{perl_vendorlib}/*
+      - /usr/bin/moose-outdated
+      - %{perl_vendorarch}/*
