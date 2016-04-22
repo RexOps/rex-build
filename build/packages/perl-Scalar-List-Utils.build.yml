@@ -1,7 +1,7 @@
 # basic informations
 name:
   centos: perl-Scalar-List-Utils
-realname: List-Scalar-Utils
+realname: Scalar-List-Utils
 version: 1.45
 release: 1
 epoch: 1
