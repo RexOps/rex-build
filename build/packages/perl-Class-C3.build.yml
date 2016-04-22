@@ -26,10 +26,10 @@ requires:
         - make
         - gcc
         - perl
-        - perl-Algorithm-C3
+        - perl(Algorithm::C3): perl-Algorithm-C3
       runtime:
         - perl
-        - perl-Algorithm-C3
+        - perl(Algorithm::C3): perl-Algorithm-C3
 
     6:
       build:
@@ -37,10 +37,10 @@ requires:
         - gcc
         - perl
         - perl-devel
-        - perl-Algorithm-C3
+        - perl(Algorithm::C3): perl-Algorithm-C3
       runtime:
         - perl
-        - perl-Algorithm-C3
+        - perl(Algorithm::C3): perl-Algorithm-C3
 
     7:
       build:
@@ -48,10 +48,10 @@ requires:
         - gcc
         - perl
         - perl-devel
-        - perl-Algorithm-C3
+        - perl(Algorithm::C3): perl-Algorithm-C3
       runtime:
         - perl
-        - perl-Algorithm-C3
+        - perl(Algorithm::C3): perl-Algorithm-C3
 
 # build instructions
 configure: |
