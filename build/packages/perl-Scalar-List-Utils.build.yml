@@ -84,9 +84,8 @@ install: |
   cd <%= $realname %>-<%= $version %>
   mkdir -p <%= $buildroot %>%{perl_vendorlib}/.overrides
   cp -R lib/* <%= $buildroot %>%{perl_vendorlib}/.overrides
-  mkdir -p <%= $buildroot %>%{perl_vendorlib}/.overrides/$(basename %{perl_vendorarch})/auto/List/Util
-  cp Util.bs <%= $buildroot %>%{perl_vendorlib}/.overrides/$(basename %{perl_vendorarch})/auto/List/Util/
-  cp Util.so <%= $buildroot %>%{perl_vendorlib}/.overrides/$(basename %{perl_vendorarch})/auto/List/Util/
+  mkdir -p <%= $buildroot %>%{perl_vendorlib}/.overrides/$(basename %{perl_vendorarch})/
+  cp -R blib/arch/auto <%= $buildroot %>%{perl_vendorlib}/.overrides/$(basename %{perl_vendorarch})/
   
 clean: |
   rm -rf <%= $buildroot %>
