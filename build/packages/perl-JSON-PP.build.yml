@@ -75,9 +75,11 @@ files:
     doc:
       - %{_mandir}/*
     package:
-      - %{perl_vendorarch}/*
+      - /usr/bin/json_pp
+      - %{perl_vendorlib}/*
   centos:
     doc:
       - %{_mandir}/*
     package:
-      - %{perl_vendorarch}/*
+      - /usr/bin/json_pp
+      - %{perl_vendorlib}/*
