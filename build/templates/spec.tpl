@@ -96,6 +96,12 @@ Obsoletes:  <%= $obs %><% } %>
 <%= $file %><% } %>
 <% } else { %>
 
+<% if(! exists $data->{files}->{lc($os)}->{$rel}) { %>
+<% for my $file (@{ $data->{files}->{lc($os)}->{$rel}->{package} }) { %>
+<%= $file %><% } %>
+
+<% } else { %>
+
 <% for my $file (@{ $data->{files}->{lc($os)}->{package} }) { %>
 <%= $file %><% } %>
 
