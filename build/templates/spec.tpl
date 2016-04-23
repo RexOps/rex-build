@@ -106,6 +106,7 @@ Obsoletes:  <%= $obs %><% } %>
 <%= $file %><% } %>
 
 <% } %>
+<% } %>
 
 <% if(exists $data->{pre}) { %>
 %pre
