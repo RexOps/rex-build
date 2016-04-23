@@ -73,7 +73,11 @@ Obsoletes:  <%= $obs %><% } %>
 <%= $data->{make} %>
 
 %install
+<% if( ref $data->{install} eq "HASH" && exists $data->{install}->{lc($os)}->{$rel} ) { %>
+<%= $data->{install}->{lc($os)}->{$rel} %>
+<% } else { %>
 <%= $data->{install} %>
+<% } %>
 
 
 %clean
