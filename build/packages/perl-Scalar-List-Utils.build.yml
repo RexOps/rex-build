@@ -82,10 +82,16 @@ install: |
   rm -rf <%= $buildroot %>
     
   cd <%= $realname %>-<%= $version %>
-  mkdir -p <%= $buildroot %>%{perl_vendorlib}/.overrides
-  cp -R lib/* <%= $buildroot %>%{perl_vendorlib}/.overrides
-  mkdir -p <%= $buildroot %>%{perl_vendorlib}/.overrides/$(basename %{perl_vendorarch})/
-  cp -R blib/arch/auto <%= $buildroot %>%{perl_vendorlib}/.overrides/$(basename %{perl_vendorarch})/
+  grep " 7." /etc/redhat-release
+  if [ "$?" != "0" ]; then
+    mkdir -p <%= $buildroot %>%{perl_vendorlib}/.overrides
+    cp -R lib/* <%= $buildroot %>%{perl_vendorlib}/.overrides
+    mkdir -p <%= $buildroot %>%{perl_vendorlib}/.overrides/$(basename %{perl_vendorarch})/
+    cp -R blib/arch/auto <%= $buildroot %>%{perl_vendorlib}/.overrides/$(basename %{perl_vendorarch})/
+  else
+    make pure_install
+    find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+  fi
   
 clean: |
   rm -rf <%= $buildroot %>
@@ -98,5 +104,12 @@ files:
     package:
       - %{perl_vendorlib}/.overrides/*
   centos:
-    package:
-      - %{perl_vendorlib}/.overrides/*
+    5:
+      package:
+        - %{perl_vendorlib}/.overrides/*
+    6:
+      package:
+        - %{perl_vendorlib}/.overrides/*
+    7:
+      package:
+        - %{perl_vendorlib}
