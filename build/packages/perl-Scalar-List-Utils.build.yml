@@ -3,7 +3,7 @@ name:
   centos: perl-Scalar-List-Utils
 realname: Scalar-List-Utils
 version: 1.45
-release: 2
+release: 3
 epoch: 1
 summary: Utility functions for scalars and lists
 group:
