@@ -3,7 +3,7 @@ name:
   centos: perl-Moose
 realname: Moose
 version: 2.1605
-release: 3
+release: 4
 epoch: 1
 summary: Moose - A postmodern object system for Perl 5
 group:
@@ -38,6 +38,7 @@ requires:
         - perl
         - perl(Class::Load): perl-Class-Load
         - perl(Class::Load::XS): perl-Class-Load-XS
+        - perl(Class::C3::XS): perl-Class-C3-XS
         - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
         - perl(Devel::OverloadInfo): perl-Devel-OverloadInfo
         - perl(Devel::StackTrace): perl-Devel-StackTrace
@@ -60,6 +61,7 @@ requires:
         - perl
         - perl(Class::Load): perl-Class-Load
         - perl(Class::Load::XS): perl-Class-Load-XS
+        - perl(Class::C3::XS): perl-Class-C3-XS
         - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
         - perl(Devel::OverloadInfo): perl-Devel-OverloadInfo
         - perl(Devel::StackTrace): perl-Devel-StackTrace
@@ -87,6 +89,7 @@ requires:
         - perl-devel
         - perl(Class::Load): perl-Class-Load
         - perl(Class::Load::XS): perl-Class-Load-XS
+        - perl(Class::C3::XS): perl-Class-C3-XS
         - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
         - perl(Devel::OverloadInfo): perl-Devel-OverloadInfo
         - perl(Devel::StackTrace): perl-Devel-StackTrace
@@ -109,6 +112,7 @@ requires:
         - perl
         - perl(Class::Load): perl-Class-Load
         - perl(Class::Load::XS): perl-Class-Load-XS
+        - perl(Class::C3::XS): perl-Class-C3-XS
         - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
         - perl(Devel::OverloadInfo): perl-Devel-OverloadInfo
         - perl(Devel::StackTrace): perl-Devel-StackTrace
@@ -136,6 +140,7 @@ requires:
         - perl-devel
         - perl(Class::Load): perl-Class-Load
         - perl(Class::Load::XS): perl-Class-Load-XS
+        - perl(Class::C3::XS): perl-Class-C3-XS
         - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
         - perl(Devel::OverloadInfo): perl-Devel-OverloadInfo
         - perl(Devel::StackTrace): perl-Devel-StackTrace
@@ -157,6 +162,7 @@ requires:
       runtime:
         - perl
         - perl(Class::Load): perl-Class-Load
+        - perl(Class::C3::XS): perl-Class-C3-XS
         - perl(Class::Load::XS): perl-Class-Load-XS
         - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
         - perl(Devel::OverloadInfo): perl-Devel-OverloadInfo
