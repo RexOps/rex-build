@@ -95,22 +95,28 @@ Obsoletes:  <%= $obs %><% } %>
 
 <% } %>
 
-<% if(! exists $data->{files}->{lc($os)}) { %>
-<% for my $file (@{ $data->{files}->{package} }) { %>
-<%= $file %><% } %>
-<% } else { %>
 
-<% if(! exists $data->{files}->{lc($os)}->{$rel}) { %>
+<% if( exists $data->{files}->{lc($os)} && exists $data->{files}->{lc($os)}->{$rel} ) { %>
+
 <% for my $file (@{ $data->{files}->{lc($os)}->{$rel}->{package} }) { %>
 <%= $file %><% } %>
 
-<% } else { %>
+<% } %>
+
+<% elsif( exists $data->{files}->{lc($os)} ) { %>
 
 <% for my $file (@{ $data->{files}->{lc($os)}->{package} }) { %>
 <%= $file %><% } %>
 
 <% } %>
+
+<% else { %>
+
+<% for my $file (@{ $data->{files}->{package} }) { %>
+<%= $file %><% } %>
+
 <% } %>
+
 
 <% if(exists $data->{pre}) { %>
 %pre
