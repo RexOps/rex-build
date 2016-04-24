@@ -124,4 +124,4 @@ files:
         - %{perl_vendorlib}/.overrides/*
     7:
       package:
-        - %{perl_vendorlib}
+        - %{perl_vendorarch}
