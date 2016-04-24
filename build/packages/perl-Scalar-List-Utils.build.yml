@@ -3,7 +3,7 @@ name:
   centos: perl-Scalar-List-Utils
 realname: Scalar-List-Utils
 version: 1.45
-release: 3
+release: 4
 epoch: 1
 summary: Utility functions for scalars and lists
 group:
@@ -86,8 +86,7 @@ install:
       cd <%= $realname %>-<%= $version %>
       mkdir -p <%= $buildroot %>%{perl_vendorlib}/.overrides
       cp -R lib/* <%= $buildroot %>%{perl_vendorlib}/.overrides
-      mkdir -p <%= $buildroot %>%{perl_vendorlib}/.overrides/$(basename %{perl_vendorarch})/
-      cp -R blib/arch/auto <%= $buildroot %>%{perl_vendorlib}/.overrides/$(basename %{perl_vendorarch})/
+      cp -R blib/arch/auto <%= $buildroot %>%{perl_vendorlib}/.overrides/
     
     6: |
       rm -rf <%= $buildroot %>
@@ -95,8 +94,7 @@ install:
       cd <%= $realname %>-<%= $version %>
       mkdir -p <%= $buildroot %>%{perl_vendorlib}/.overrides
       cp -R lib/* <%= $buildroot %>%{perl_vendorlib}/.overrides
-      mkdir -p <%= $buildroot %>%{perl_vendorlib}/.overrides/$(basename %{perl_vendorarch})/
-      cp -R blib/arch/auto <%= $buildroot %>%{perl_vendorlib}/.overrides/$(basename %{perl_vendorarch})/
+      cp -R blib/arch/auto <%= $buildroot %>%{perl_vendorlib}/.overrides/
 
     7: |
       rm -rf <%= $buildroot %>
