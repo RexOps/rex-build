@@ -101,16 +101,12 @@ Obsoletes:  <%= $obs %><% } %>
 <% for my $file (@{ $data->{files}->{lc($os)}->{$rel}->{package} }) { %>
 <%= $file %><% } %>
 
-<% } %>
-
-<% elsif( exists $data->{files}->{lc($os)} ) { %>
+<% } elsif( exists $data->{files}->{lc($os)} ) { %>
 
 <% for my $file (@{ $data->{files}->{lc($os)}->{package} }) { %>
 <%= $file %><% } %>
 
-<% } %>
-
-<% else { %>
+<% } else { %>
 
 <% for my $file (@{ $data->{files}->{package} }) { %>
 <%= $file %><% } %>
