@@ -85,15 +85,23 @@ Obsoletes:  <%= $obs %><% } %>
 
 %files
 %defattr(-,root,root,-)
-<% if(! exists $data->{files}->{lc($os)}) { %>
-<% for my $doc (@{ $data->{files}->{doc} }) { %>
-%doc <%= $doc %><% } %>
+<% if( exists $data->{files}->{lc($os)} && exists $data->{files}->{lc($os)}->{$rel} ) { %>
+
+<% for my $file (@{ $data->{files}->{lc($os)}->{$rel}->{doc} }) { %>
+%doc <%= $file %><% } %>
+
+<% } elsif( exists $data->{files}->{lc($os)} ) { %>
+
+<% for my $file (@{ $data->{files}->{lc($os)}->{doc} }) { %>
+%doc <%= $file %><% } %>
+
 <% } else { %>
 
-<% for my $doc (@{ $data->{files}->{lc($os)}->{doc} }) { %>
-%doc <%= $doc %><% } %>
+<% for my $file (@{ $data->{files}->{doc} }) { %>
+%doc <%= $file %><% } %>
 
 <% } %>
+
 
 
 <% if( exists $data->{files}->{lc($os)} && exists $data->{files}->{lc($os)}->{$rel} ) { %>

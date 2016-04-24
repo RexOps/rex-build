@@ -123,5 +123,7 @@ files:
       package:
         - %{perl_vendorlib}/.overrides/*
     7:
+      doc:
+        - %{_mandir}/*
       package:
         - %{perl_vendorarch}
