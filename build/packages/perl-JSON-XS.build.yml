@@ -77,9 +77,9 @@ clean: |
 files:
   package:
     - /usr
+
   centos:
     doc:
       - %{_mandir}/*
     package:
-      - %{_bindir}/*
-      - %{_libdir}/*
+      - %{perl_vendorarch}/*
