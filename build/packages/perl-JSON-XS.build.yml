@@ -3,7 +3,7 @@ name:
   centos: perl-JSON-XS
 realname: JSON-XS
 version: 3.01
-release: 1
+release: 2
 epoch: 1
 summary: JSON::XS - JSON serialising/deserialising, done correctly and fast
 group:
