@@ -1,0 +1,113 @@
+# basic informations
+name:
+  centos: perl-Log-Dispatch
+realname: Log-Dispatch
+version: 2.54
+release: 1
+epoch: 1
+summary: Log::Dispatch - Dispatches messages to one or more outputs
+group:
+  centos: System Environment/Libraries
+license: unknown
+homepage: https://metacpan.org/pod/Log::Dispatch
+source: https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Log-Dispatch-2.54.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  Log::Dispatch - Dispatches messages to one or more outputs
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl(Params::Validate): perl-Params-Validate
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(JSON::PP): perl-JSON-PP
+        - perl(Dist::CheckConflicts): perl-Dist-CheckConflicts
+        - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
+      runtime:
+        - perl
+        - perl(Params::Validate): perl-Params-Validate
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(JSON::PP): perl-JSON-PP
+        - perl(Dist::CheckConflicts): perl-Dist-CheckConflicts
+        - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl(Params::Validate): perl-Params-Validate
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(JSON::PP): perl-JSON-PP
+        - perl(Dist::CheckConflicts): perl-Dist-CheckConflicts
+        - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
+      runtime:
+        - perl
+        - perl(Params::Validate): perl-Params-Validate
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(JSON::PP): perl-JSON-PP
+        - perl(Dist::CheckConflicts): perl-Dist-CheckConflicts
+        - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl(Params::Validate): perl-Params-Validate
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(JSON::PP): perl-JSON-PP
+        - perl(Dist::CheckConflicts): perl-Dist-CheckConflicts
+        - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
+      runtime:
+        - perl
+        - perl(Params::Validate): perl-Params-Validate
+        - perl(Module::Runtime): perl-Module-Runtime
+        - perl(JSON::PP): perl-JSON-PP
+        - perl(Dist::CheckConflicts): perl-Dist-CheckConflicts
+        - perl(Devel::GlobalDestruction): perl-Devel-GlobalDestruction
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+  fedora:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
