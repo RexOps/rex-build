@@ -58,17 +58,17 @@ configure: |
   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
   cd <%= $realname %>-<%= $version %>
 
-  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+  perl Build.PL --installdirs vendor --destdir <%= $buildroot %>
 
 make: |
   cd <%= $realname %>-<%= $version %>
-  make
+  ./Build
 
 install: |
   rm -rf <%= $buildroot %>
 
   cd <%= $realname %>-<%= $version %>
-  make pure_install
+  ./Build pure_install
   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
 
 clean: |
@@ -81,9 +81,9 @@ files:
     doc:
       - %{_mandir}/*
     package:
-      - %{perl_vendorlib}/*
+      - %{perl_vendorarch}/*
   centos:
     doc:
       - %{_mandir}/*
     package:
-      - %{perl_vendorlib}/*
+      - %{perl_vendorarch}/*
