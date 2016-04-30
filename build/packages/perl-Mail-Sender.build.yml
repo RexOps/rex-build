@@ -3,7 +3,7 @@ name:
   centos: perl-Mail-Sender
 realname: Mail-Sender
 version: 0.8.23
-release: 1
+release: 2
 epoch: 1
 summary: Mail::Sender - module for sending mails with attachments through an SMTP server
 group:
@@ -17,6 +17,21 @@ arch:
   centos: x86_64
 description: |
   Mail::Sender - module for sending mails with attachments through an SMTP server
+
+no_auto_scan: true
+
+provides:
+  centos:
+    5:
+      - perl(Mail::Sender)
+      - perl(Mail::Sender::Ctype::Ext)
+    6:
+      - perl(Mail::Sender)
+      - perl(Mail::Sender::Ctype::Ext)
+    7:
+      - perl(Mail::Sender)
+      - perl(Mail::Sender::Ctype::Ext)
+
 
 # requirements
 requires:
