@@ -49,17 +49,19 @@ requires:
 configure: |
   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
   cd <%= $realname %>-<%= $version %>
-  export PERL_MM_USE_DEFAULT=1  
+  export PERL_MM_USE_DEFAULT=1
   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
 
 make: |
   cd <%= $realname %>-<%= $version %>
+  export PERL_MM_USE_DEFAULT=1
   make
 
 install: |
   rm -rf <%= $buildroot %>
     
   cd <%= $realname %>-<%= $version %>
+  export PERL_MM_USE_DEFAULT=1
   make pure_install
   find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
 
