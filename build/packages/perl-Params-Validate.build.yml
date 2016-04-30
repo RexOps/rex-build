@@ -3,7 +3,7 @@ name:
   centos: perl-Params-Validate
 realname: Params-Validate
 version: 1.23
-release: 1
+release: 2
 epoch: 1
 summary: Params::Validate - Validate method/function parameters
 group:
@@ -17,6 +17,31 @@ arch:
   centos: x86_64
 description: |
   Params::Validate - Validate method/function parameters
+
+provides:
+  centos:
+    5:
+      - perl(Params::Validate)
+      - perl(Params::ValidatePP)
+      - perl(Params::ValidateXS)
+      - perl(Params::Validate::Constants)
+      - perl(Params::Validate::PP)
+      - perl(Params::Validate::XS)
+    6:
+      - perl(Params::Validate)
+      - perl(Params::ValidatePP)
+      - perl(Params::ValidateXS)
+      - perl(Params::Validate::Constants)
+      - perl(Params::Validate::PP)
+      - perl(Params::Validate::XS)
+    7:
+      - perl(Params::Validate)
+      - perl(Params::ValidatePP)
+      - perl(Params::ValidateXS)
+      - perl(Params::Validate::Constants)
+      - perl(Params::Validate::PP)
+      - perl(Params::Validate::XS)
+
 
 # requirements
 requires:
