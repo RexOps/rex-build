@@ -3,7 +3,7 @@ name:
   centos: perl-Log-Dispatch
 realname: Log-Dispatch
 version: 2.54
-release: 1
+release: 2
 epoch: 1
 summary: Log::Dispatch - Dispatches messages to one or more outputs
 group:
@@ -86,6 +86,7 @@ configure: |
 
 make: |
   cd <%= $realname %>-<%= $version %>
+  find lib -name '*.pm' -exec sed -ie "s|use warnings;|use warnings;\nuse lib '%{perl_vendorlib}/.overrides';\n|" '{}' ';'
   make
 
 install: |
