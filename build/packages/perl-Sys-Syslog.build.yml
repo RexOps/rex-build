@@ -76,7 +76,7 @@ install:
         
       cd <%= $realname %>-<%= $version %>
       mkdir -p <%= $buildroot %>%{perl_vendorlib}/.overrides
-      cp -R lib/* <%= $buildroot %>%{perl_vendorlib}/.overrides
+      cp -R blib/lib/* <%= $buildroot %>%{perl_vendorlib}/.overrides/
       cp -R blib/arch/auto <%= $buildroot %>%{perl_vendorlib}/.overrides/
     
     6: |
@@ -84,7 +84,7 @@ install:
         
       cd <%= $realname %>-<%= $version %>
       mkdir -p <%= $buildroot %>%{perl_vendorlib}/.overrides
-      cp -R lib/* <%= $buildroot %>%{perl_vendorlib}/.overrides
+      cp -R blib/lib/* <%= $buildroot %>%{perl_vendorlib}/.overrides/
       cp -R blib/arch/auto <%= $buildroot %>%{perl_vendorlib}/.overrides/
 
     7: |
