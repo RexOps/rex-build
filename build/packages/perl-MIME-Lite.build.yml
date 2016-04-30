@@ -26,10 +26,10 @@ requires:
         - make
         - gcc
         - perl
-        - perl(Email::Date::Format)
+        - perl(Email::Date::Format): perl-Email-Date-Format
       runtime:
         - perl
-        - perl(Email::Date::Format)
+        - perl(Email::Date::Format): perl-Email-Date-Format
 
     6:
       build:
@@ -37,10 +37,10 @@ requires:
         - gcc
         - perl
         - perl-devel
-        - perl(Email::Date::Format)
+        - perl(Email::Date::Format): perl-Email-Date-Format
       runtime:
         - perl
-        - perl(Email::Date::Format)
+        - perl(Email::Date::Format): perl-Email-Date-Format
 
     7:
       build:
@@ -48,10 +48,10 @@ requires:
         - gcc
         - perl
         - perl-devel
-        - perl(Email::Date::Format)
+        - perl(Email::Date::Format): perl-Email-Date-Format
       runtime:
         - perl
-        - perl(Email::Date::Format)
+        - perl(Email::Date::Format): perl-Email-Date-Format
 
 # build instructions
 configure: |
