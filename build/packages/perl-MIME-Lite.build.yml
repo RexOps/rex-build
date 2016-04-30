@@ -3,7 +3,7 @@ name:
   centos: perl-MIME-Lite
 realname: MIME-Lite
 version: 3.030
-release: 1
+release: 2
 epoch: 1
 summary: MIME::Lite - low-calorie MIME generator
 group:
@@ -17,6 +17,17 @@ arch:
   centos: x86_64
 description: |
   MIME::Lite - low-calorie MIME generator
+
+provides:
+  centos:
+    5:
+      - perl(MIME::Lite)
+    6:
+      - perl(MIME::Lite)
+    7:
+      - perl(MIME::Lite)
+
+
 
 # requirements
 requires:
