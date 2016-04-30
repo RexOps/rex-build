@@ -1,0 +1,86 @@
+# basic informations
+name:
+  centos: perl-MIME-Lite
+realname: MIME-Lite
+version: 3.030
+release: 1
+epoch: 1
+summary: MIME::Lite - low-calorie MIME generator
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/MIME::Lite
+source: https://cpan.metacpan.org/authors/id/R/RJ/RJBS/MIME-Lite-3.030.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  MIME::Lite - low-calorie MIME generator
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl(Email::Date::Format)
+      runtime:
+        - perl
+        - perl(Email::Date::Format)
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl(Email::Date::Format)
+      runtime:
+        - perl
+        - perl(Email::Date::Format)
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl(Email::Date::Format)
+      runtime:
+        - perl
+        - perl(Email::Date::Format)
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
+      
