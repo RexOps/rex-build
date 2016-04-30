@@ -18,6 +18,16 @@ arch:
 description: |
   Sys::Syslog - Perl interface to the UNIX syslog(3) calls
 
+provides:
+  centos:
+    5:
+      - perl(Sys::Syslog)
+    6:
+      - perl(Sys::Syslog)
+    7:
+      - perl(Sys::Syslog)
+
+
 # requirements
 requires:
   centos:
@@ -47,33 +57,62 @@ requires:
       runtime:
         - perl
 
+
 # build instructions
 configure: |
   tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
   cd <%= $realname %>-<%= $version %>
-
+    
   perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
 
 make: |
   cd <%= $realname %>-<%= $version %>
   make
 
-install: |
-  rm -rf <%= $buildroot %>
+install:
+  centos:
+    5: |
+      rm -rf <%= $buildroot %>
+        
+      cd <%= $realname %>-<%= $version %>
+      mkdir -p <%= $buildroot %>%{perl_vendorlib}/.overrides
+      cp -R lib/* <%= $buildroot %>%{perl_vendorlib}/.overrides
+      cp -R blib/arch/auto <%= $buildroot %>%{perl_vendorlib}/.overrides/
+    
+    6: |
+      rm -rf <%= $buildroot %>
+        
+      cd <%= $realname %>-<%= $version %>
+      mkdir -p <%= $buildroot %>%{perl_vendorlib}/.overrides
+      cp -R lib/* <%= $buildroot %>%{perl_vendorlib}/.overrides
+      cp -R blib/arch/auto <%= $buildroot %>%{perl_vendorlib}/.overrides/
 
-  cd <%= $realname %>-<%= $version %>
-  make pure_install
-  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
-
+    7: |
+      rm -rf <%= $buildroot %>
+        
+      cd <%= $realname %>-<%= $version %>
+      make pure_install
+      find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+  
 clean: |
   rm -rf <%= $buildroot %>
+
 
 files:
   package:
     - /usr
-
-  centos:
-    doc:
-      - %{_mandir}/*
+  fedora:
     package:
-      - %{perl_vendorlib}/*
+      - %{perl_vendorlib}/.overrides/*
+  centos:
+    5:
+      package:
+        - %{perl_vendorlib}/.overrides/*
+    6:
+      package:
+        - %{perl_vendorlib}/.overrides/*
+    7:
+      doc:
+        - %{_mandir}/*
+      package:
+        - %{perl_vendorarch}
