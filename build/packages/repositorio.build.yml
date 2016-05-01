@@ -1,0 +1,321 @@
+# basic informations
+name:
+  centos: repositorio
+  debian: repositorio
+  ubuntu: repositorio
+  fedora: repositorio
+  redhat: repositorio
+  suse: repositorio
+realname: Rex-Repositorio
+version: 1.0
+release: 1
+epoch: 1
+summary: repositor.io is a tool to create and manage linux repositories.
+group:
+  centos: Utilities/System
+  debian: admin
+  ubuntu: admin
+  redhat: admin
+  fedora: admin
+  suse: admin
+  mageia: admin
+license: Apache 2
+homepage: http://rexify.org/
+source: http://nightly.rex.linux-files.org/source/Rex-Repositorio-1.0.0.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+no_auto_scan: true
+description: |
+  repositor.io is a tool to create and manage linux repositories. You can
+  mirror online repositories so that you don't need to download the package
+  every time you set up a new server.
+
+# requirements
+requires:
+  debian:
+    wheezy: &depwheezy
+      build:
+        - build-essential
+        - debhelper
+        - perl
+        - libperl-dev
+        - perl-modules
+        - make
+        - createrepo 
+        - libconfig-general-perl
+        - liblog-dispatch-perl
+        - libxml-libxml-perl
+        - libcommon-sense-perl
+        - libmoose-perl 
+        - libwww-perl
+        - libtry-tiny-perl
+        - libxml-simple-perl
+        - libparams-validate-perl
+        - libio-all-perl
+        - libperl-dev
+        - libtest-simple-perl
+        - libterm-readkey-perl
+        - libmojolicious-perl
+        - libjson-xs-perl
+      runtime:
+        - perl
+        - perl-modules
+        - createrepo 
+        - libconfig-general-perl
+        - liblog-dispatch-perl
+        - libxml-libxml-perl
+        - libcommon-sense-perl
+        - libmoose-perl 
+        - libwww-perl
+        - libtry-tiny-perl
+        - libxml-simple-perl
+        - libparams-validate-perl
+        - libio-all-perl
+        - libperl-dev
+        - libtest-simple-perl
+        - libterm-readkey-perl
+        - libmojolicious-perl
+        - libjson-xs-perl
+
+    jessie: *depwheezy
+
+
+  centos:
+
+    6: &depcentos6
+      build:
+        - make
+        - tar
+        - perl-devel
+        - wget
+        - createrepo
+        - perl
+        - perl(Config::General): perl-Config-General
+        - perl(Log::Dispatch): perl-Log-Dispatch
+        - perl(XML::LibXML): perl-XML-LibXML
+        - perl(Compress::Zlib): perl-Compress-Zlib
+        - perl(common::sense): perl-common-sense
+        - perl(Moose): perl-Moose
+        - perl-libwww-perl
+        - perl(Try::Tiny): perl-Try-Tiny
+        - perl(Params::Validate): perl-Params-Validate
+        - perl(IO::All): perl-IO-All
+        - perl(ExtUtils::MakeMaker): perl-ExtUtils-MakeMaker
+        - perl(Test::Simple): perl-Test-Simple
+        - perl(Digest::SHA): perl-Digest-SHA
+        - perl(XML::Simple): perl-XML-Simple
+        - perl(Term::ReadKey): perl-TermReadKey
+        - perl(Mojolicious): perl-Mojolicious
+        - perl(JSON::XS): perl-JSON-XS
+      runtime:
+        - perl
+        - createrepo
+        - perl
+        - perl(Config::General): perl-Config-General
+        - perl(Log::Dispatch): perl-Log-Dispatch
+        - perl(XML::LibXML): perl-XML-LibXML
+        - perl(Compress::Zlib): perl-Compress-Zlib
+        - perl(common::sense): perl-common-sense
+        - perl(Moose): perl-Moose
+        - perl-libwww-perl
+        - perl(Try::Tiny): perl-Try-Tiny
+        - perl(Params::Validate): perl-Params-Validate
+        - perl(IO::All): perl-IO-All
+        - perl(ExtUtils::MakeMaker): perl-ExtUtils-MakeMaker
+        - perl(Test::Simple): perl-Test-Simple
+        - perl(Digest::SHA): perl-Digest-SHA
+        - perl(XML::Simple): perl-XML-Simple
+        - perl(Term::ReadKey): perl-TermReadKey
+        - perl(Mojolicious): perl-Mojolicious
+        - perl(JSON::XS): perl-JSON-XS
+
+    7:
+      build:
+        - make
+        - perl
+        - perl-devel
+        - createrepo
+        - perl(Config::General): perl-Config-General
+        - perl(Log::Dispatch): perl-Log-Dispatch
+        - perl(XML::LibXML): perl-XML-LibXML
+        - perl(Compress::Zlib): perl-Compress-Zlib
+        - perl(common::sense): perl-common-sense
+        - perl(Moose): perl-Moose
+        - perl-libwww-perl
+        - perl(Try::Tiny): perl-Try-Tiny
+        - perl(Params::Validate): perl-Params-Validate
+        - perl(IO::All): perl-IO-All
+        - perl(ExtUtils::MakeMaker): perl-ExtUtils-MakeMaker
+        - perl(Test::Simple): perl-Test-Simple
+        - perl(Digest::SHA): perl-Digest-SHA
+        - perl(XML::Simple): perl-XML-Simple
+        - perl(Term::ReadKey): perl-TermReadKey
+        - perl(Mojolicious): perl-Mojolicious
+        - perl(JSON::XS): perl-JSON-XS
+
+      runtime:
+        - perl
+        - createrepo
+        - perl(Config::General): perl-Config-General
+        - perl(Log::Dispatch): perl-Log-Dispatch
+        - perl(XML::LibXML): perl-XML-LibXML
+        - perl(Compress::Zlib): perl-Compress-Zlib
+        - perl(common::sense): perl-common-sense
+        - perl(Moose): perl-Moose
+        - perl-libwww-perl
+        - perl(Try::Tiny): perl-Try-Tiny
+        - perl(Params::Validate): perl-Params-Validate
+        - perl(IO::All): perl-IO-All
+        - perl(ExtUtils::MakeMaker): perl-ExtUtils-MakeMaker
+        - perl(Test::Simple): perl-Test-Simple
+        - perl(Digest::SHA): perl-Digest-SHA
+        - perl(XML::Simple): perl-XML-Simple
+        - perl(Term::ReadKey): perl-TermReadKey
+        - perl(Mojolicious): perl-Mojolicious
+        - perl(JSON::XS): perl-JSON-XS
+
+  ubuntu:
+    lucid: *depsqueeze
+    precise: *depwheezy
+    quantal: *depwheezy
+    raring: *depwheezy
+    saucy: *depwheezy
+    trusty: *depwheezy
+
+  fedora:
+    18: &depfedora18
+      build:
+        - make
+        - perl
+        - perl-devel
+
+      runtime:
+        - perl
+
+    19: *depfedora18
+    20: *depfedora18
+    21: *depfedora18
+    22: *depfedora18
+    23: *depfedora18
+
+  redhat:
+    18: *depfedora18
+    19: *depfedora18
+    20: *depfedora18
+    21: *depfedora18
+
+  suse:
+    13.1: &depsuse13
+      build:
+        - make
+        - perl
+        - perl-devel
+        - createrepo
+        - perl(Config::General): perl-Config-General
+        - perl(Log::Dispatch): perl-Log-Dispatch
+        - perl(XML::LibXML): perl-XML-LibXML
+        - perl(Compress::Zlib): perl-Compress-Zlib
+        - perl(common::sense): perl-common-sense
+        - perl(Moose): perl-Moose
+        - perl-libwww-perl
+        - perl(Try::Tiny): perl-Try-Tiny
+        - perl(Params::Validate): perl-Params-Validate
+        - perl(IO::All): perl-IO-All
+        - perl(ExtUtils::MakeMaker): perl-ExtUtils-MakeMaker
+        - perl(Test::Simple): perl-Test-Simple
+        - perl(Digest::SHA): perl-Digest-SHA
+        - perl(XML::Simple): perl-XML-Simple
+        - perl(Term::ReadKey): perl-TermReadKey
+        - perl(Mojolicious): perl-Mojolicious
+        - perl(JSON::XS): perl-JSON-XS
+
+      runtime:
+        - perl
+        - createrepo
+        - perl(Config::General): perl-Config-General
+        - perl(Log::Dispatch): perl-Log-Dispatch
+        - perl(XML::LibXML): perl-XML-LibXML
+        - perl(Compress::Zlib): perl-Compress-Zlib
+        - perl(common::sense): perl-common-sense
+        - perl(Moose): perl-Moose
+        - perl-libwww-perl
+        - perl(Try::Tiny): perl-Try-Tiny
+        - perl(Params::Validate): perl-Params-Validate
+        - perl(IO::All): perl-IO-All
+        - perl(ExtUtils::MakeMaker): perl-ExtUtils-MakeMaker
+        - perl(Test::Simple): perl-Test-Simple
+        - perl(Digest::SHA): perl-Digest-SHA
+        - perl(XML::Simple): perl-XML-Simple
+        - perl(Term::ReadKey): perl-TermReadKey
+        - perl(Mojolicious): perl-Mojolicious
+        - perl(JSON::XS): perl-JSON-XS
+
+    13.2: *depsuse13
+    42.1: *depsuse13
+
+
+# build instructions
+configure: |
+  x=<%= $version %>
+  y=$(echo $x | awk -F. ' { print $4 } ')
+  z=$(echo $x | awk -F. ' { print $1"."$2"."$3 } ')
+  if [ "$y" != "" ]; then
+    r=$[ $y - 90 ]
+    r=$(printf "%02i" $r)
+    v="${z}_${r}"
+  else
+    v=$z
+  fi
+  tar xzf <%= $sourceroot %>/<%= $realname %>-$v.tar.gz
+  cd <%= $realname %>-$v
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  x=<%= $version %>
+  y=$(echo $x | awk -F. ' { print $4 } ')
+  z=$(echo $x | awk -F. ' { print $1"."$2"."$3 } ')
+  if [ "$y" != "" ]; then
+    r=$[ $y - 90 ]
+    r=$(printf "%02i" $r)
+    v="${z}_${r}"
+  else
+    v=$z
+  fi
+  cd <%= $realname %>-$v
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+  x=<%= $version %>
+  y=$(echo $x | awk -F. ' { print $4 } ')
+  z=$(echo $x | awk -F. ' { print $1"."$2"."$3 } ')
+  if [ "$y" != "" ]; then
+    r=$[ $y - 90 ]
+    r=$(printf "%02i" $r)
+    v="${z}_${r}"
+  else
+    v=$z
+  fi
+  cd <%= $realname %>-$v
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+  fedora:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_bindir}/*
+      - %{perl_vendorlib}/*
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{_bindir}/*
+      - %{perl_vendorlib}/*
