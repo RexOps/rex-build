@@ -767,7 +767,17 @@ task archive => config->{repo}->{server} => sub {
     run "git clone $build_repo $build_dir --branch $branch >/tmp/out.log 2>&1";
     #run "cd $build_dir; perl Makefile.PL && make && make dist && cd ..";
     #run "cd $build_dir; dzil test && dzil build";
-    run "cd $build_dir; dzil build";
+    Rex::Logger::info("Installing missing build dependencies with cpanm");
+    my $out_d = run "cd $build_dir; dzil authordeps --missing | cpanm 2>&1";
+    if($? != 0 ) {
+      Rex::Logger::info("Error installing build dependencies.");
+      print $out_d . "\n";
+    }
+    my $out_b = run "cd $build_dir; dzil build";
+    if($? != 0 ) {
+      Rex::Logger::info("Error build package.");
+      print $out_b . "\n";
+    }
     ($pkg) = glob("$build_dir/*.tar.gz");
 
     Rex::Logger::info("Found package file: $pkg");
