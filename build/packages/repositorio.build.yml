@@ -175,7 +175,6 @@ requires:
         - perl(JSON::XS): perl-JSON-XS
 
   ubuntu:
-    lucid: *depsqueeze
     precise: *depwheezy
     quantal: *depwheezy
     raring: *depwheezy
