@@ -221,7 +221,6 @@ requires:
         - perl(IO::All): perl-IO-All
         - perl(ExtUtils::MakeMaker): perl-ExtUtils-MakeMaker
         - perl(Test::Simple): perl-Test-Simple
-        - perl(Digest::SHA): perl-Digest-SHA
         - perl(XML::Simple): perl-XML-Simple
         - perl(Term::ReadKey): perl-TermReadKey
         - perl(Mojolicious): perl-Mojolicious
@@ -242,7 +241,6 @@ requires:
         - perl(IO::All): perl-IO-All
         - perl(ExtUtils::MakeMaker): perl-ExtUtils-MakeMaker
         - perl(Test::Simple): perl-Test-Simple
-        - perl(Digest::SHA): perl-Digest-SHA
         - perl(XML::Simple): perl-XML-Simple
         - perl(Term::ReadKey): perl-TermReadKey
         - perl(Mojolicious): perl-Mojolicious
