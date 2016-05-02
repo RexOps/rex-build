@@ -208,7 +208,6 @@ requires:
       build:
         - make
         - perl
-        - perl-devel
         - createrepo
         - perl(Config::General): perl-Config-General
         - perl(Log::Dispatch): perl-Log-Dispatch
