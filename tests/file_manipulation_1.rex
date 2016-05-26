@@ -1,8 +1,6 @@
 # vim: set syn=perl:
 
 use Rex -feature => '0.42';
-use Rex::Commands::File;
-use Rex::Commands::Fs;
 use Rex::Commands::User;
 use Test::More;
 
@@ -15,7 +13,7 @@ task "test", group => "test", sub {
     content => "this is
 \tsome content
 bazz dada
-foobar";
+foobar\n";
 
   my $content = cat "/tmp/foo-file.txt";
   ok($content eq "this is\n\tsome content\nbazz dada\nfoobar\n", "file written");
