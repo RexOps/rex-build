@@ -19,11 +19,6 @@ sub _backup_file {
   _backup($file);
 }
 
-sub _backup_upload {
-  my ($local, $remote) = @_;
-  _backup($remote);
-}
-
 sub _backup {
   my ($file) = @_;
   my $server = connection->server;
@@ -72,8 +67,7 @@ sub _get_backup_location {
 
 register_function_hooks {
   before_change => {
-    file  => \&_backup_file,
-    upload => \&_backup_upload,
+    'Rex::Resource::file::file'  => \&_backup_file,
   },
 };
 
