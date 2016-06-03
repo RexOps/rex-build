@@ -51,7 +51,7 @@ LOCAL {
       "tests.d/$entry/lib:" . ( exists $ENV{PERL5LIB} ? $ENV{PERL5LIB} : "" );
 
 my $debug = $ENV{debug} ? " -d " : "";
-system "perl $ENV{WORK_DIR}/rex/Rex-$version/bin/rex $debug -cqw -Ff tests.d/$entry/$entry.rex test";
+system "REXUSER=$user REXPASS=$pass HTEST='$ip' perl $ENV{WORK_DIR}/rex/Rex-$version/bin/rex $debug -cqw -Ff tests.d/$entry/$entry.rex test";
 
 #    start_phase("Running tests.d/$entry");
 #    system
