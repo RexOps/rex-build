@@ -46,7 +46,7 @@ LOCAL {
     &end_phase;
   }
 
-my $entry = "rsync";
+    my $entry = "rsync";
     $ENV{PERL5LIB} =
       "tests.d/$entry/lib:" . ( exists $ENV{PERL5LIB} ? $ENV{PERL5LIB} : "" );
     start_phase("Running tests.d/$entry");
@@ -145,7 +145,7 @@ my $entry = "rsync";
 
   #   &end_phase;
   #   closedir($dh);
-  }
+  # }
 
   system "rm -rf /tmp/workspace/$rnd";
 };
