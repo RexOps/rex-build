@@ -49,9 +49,13 @@ LOCAL {
     my $entry = "rsync";
     $ENV{PERL5LIB} =
       "tests.d/$entry/lib:" . ( exists $ENV{PERL5LIB} ? $ENV{PERL5LIB} : "" );
+
+my $debug = $ENV{debug} ? " -d " : "";
+system "perl $ENV{WORK_DIR}/rex/Rex-$version/bin/rex $debug -cqw -Ff tests.d/$entry/$entry.rex test";
+
 #    start_phase("Running tests.d/$entry");
-    system
-      "REX_VERSION=$version WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.d/$entry 2>&1";
+#    system
+#      "REX_VERSION=$version WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.d/$entry 2>&1";
 #      "REX_VERSION=$version WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.d/$entry >junit_output_testsd_$entry.xml";
 #    &end_phase;
 
