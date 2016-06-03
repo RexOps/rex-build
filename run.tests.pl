@@ -49,10 +49,11 @@ LOCAL {
     my $entry = "rsync";
     $ENV{PERL5LIB} =
       "tests.d/$entry/lib:" . ( exists $ENV{PERL5LIB} ? $ENV{PERL5LIB} : "" );
-    start_phase("Running tests.d/$entry");
+#    start_phase("Running tests.d/$entry");
     system
-      "REX_VERSION=$version WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.d/$entry >junit_output_testsd_$entry.xml";
-    &end_phase;
+      "REX_VERSION=$version WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.d/$entry 2>&1";
+#      "REX_VERSION=$version WORK_DIR=$ENV{WORK_DIR} REXUSER=$user REXPASS=$pass HTEST='$ip' prove --timer --formatter TAP::Formatter::JUnit --ext rex -e rex-test tests.d/$entry >junit_output_testsd_$entry.xml";
+#    &end_phase;
 
   # # run tests from tests directory
   # $ENV{PATH} = getcwd() . ":" . $ENV{PATH};
