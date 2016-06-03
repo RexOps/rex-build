@@ -68,9 +68,10 @@ sub _get_backup_location {
 register_function_hooks {
   before_change => {
     'Rex::Resource::file::file'  => \&_backup_file,
+    file  => \&_backup_file,
+    upload => \&_backup_upload,
   },
 };
-
 
 1;
 
