@@ -21,7 +21,7 @@ task test => group => test => sub {
     say "hello world";
   };
 
-  my $time_stamp = Rex::Commands::Say::_get_timestamp();
+  my $time_stamp = Rex::Commands::_get_timestamp();
 
   $test_string = "[$time_stamp]($$) " . connection->server . ": hello world\n";
   ok($stdout eq $test_string, 'sayformat [%D](%p) %h: %s');
