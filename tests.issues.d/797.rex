@@ -30,7 +30,7 @@ task test => group => test => sub {
   
   my $branch = run "git status |  grep -i 'on branch'", cwd => $test_dir;
   chomp $branch;
-  ok($branch =~ m/master/, "got master branch");
+  ok($branch =~ m/development/, "got master(development) branch");
   
   run "rm -rf $test_dir";
   
