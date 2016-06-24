@@ -13,7 +13,7 @@ task "test", group => "test", sub {
 
   my %hw = Rex::Hardware->get(qw/ Host Kernel Memory Network Swap /);
   my ($dev) = grep { m/(eth0|em0|e1000g0|enp0s3)/ } @{$hw{Network}->{networkdevices}};
-
+print Dumper \%hw;
   ok($dev, "Found network device ($dev)");
   ok($hw{Network}->{networkconfiguration}->{"$dev"}->{"ip"} =~ m/^(\d+)\./, "Got IP for $dev");
   ok($hw{Network}->{networkconfiguration}->{"$dev"}->{"netmask"} =~ m/\d+\.|ff/, "Got Netmask for $dev");
