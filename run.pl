@@ -60,6 +60,8 @@ start_phase("Waiting for VM SSH port wakeup on $ip");
 while ( !is_port_open( $ip, 22 ) ) {
   sleep 1;
 }
+
+sleep 5;
 &end_phase;
 
 my $RETVAL = 1;
