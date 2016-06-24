@@ -68,6 +68,8 @@ eval {
   do "run.tests.pl";
   $RETVAL = 0;
   1;
+} or do {
+  print "\nERROR: $@\n";
 };
 
 start_phase('Cleaning up VM');
