@@ -1,5 +1,4 @@
 use IO::All;
-use Rex -base;
 
 print "\n1\n";
 LOCAL {
