@@ -16,8 +16,10 @@ $ENV{"PERL5LIB"} =
 
 my $debug = $ENV{debug} ? " -d " : "";
 
+my $rexopts = $debug ? $debug : "qw";
+
 for my $file (@ARGV) {
-  my @out = `perl $ENV{WORK_DIR}/rex/Rex-$version/bin/rex $debug -cqw -Ff $file test`;
+  my @out = `perl $ENV{WORK_DIR}/rex/Rex-$version/bin/rex -c$rexopts -Ff $file test`;
   my @test_line;
   my $found_end = 0;
   my $p_count   = 0;
