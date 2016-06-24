@@ -31,10 +31,17 @@ LOCAL {
   $ENV{"PERL5LIB"} = "/tmp/workspace/$rnd/rex/Rex-$version/lib:"
     . ( exists $ENV{PERL5LIB} ? $ENV{PERL5LIB} : "" );
 
-  start_phase("Running prepare.rex on $ip");
-  system
-    "HTEST='$ip' perl /tmp/workspace/$rnd/rex/Rex-$version/bin/rex -d -f contrib/prepare.rex prepare >>/var/log/rex/prepare-$$.log 2>&1";
-  &end_phase;
+  my $prep_ok = 0;
+  
+  while($prep_ok == 0) {
+    start_phase("Running prepare.rex on $ip");
+    system
+      "HTEST='$ip' perl /tmp/workspace/$rnd/rex/Rex-$version/bin/rex -d -f contrib/prepare.rex prepare >>/var/log/rex/prepare-$$.log 2>&1";
+    if($? == 0) {
+      $prep_ok = 1;
+    }
+    &end_phase;
+  }
 
   if ( $ENV{use_sudo} ) {
     start_phase('Running prepare_sudo.rex');
