@@ -1,1 +1,0 @@
-myrsync/bar.txt

@@ -1,1 +1,0 @@
-mytempl.sh

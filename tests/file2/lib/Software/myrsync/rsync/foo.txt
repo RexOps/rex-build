@@ -1,1 +1,0 @@
-myrsync/foo.txt
