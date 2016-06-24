@@ -48,7 +48,7 @@ else {
 
 start_phase('Creating test VM');
 
-my ( $vm_id, $ip ) = start_amazon($base_vm);
+our ( $vm_id, $ip ) = start_amazon($base_vm);
 
 &end_phase;
 
