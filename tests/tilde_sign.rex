@@ -59,6 +59,8 @@ task "test", group => "test", sub {
     ok(! is_file("~/test.file.$s"), "local test.file.$s removed, test with tilde");
   };
 
+  is(Rex::Helper::Path::resolv_path("~rsync_user/foo"), "/home/rsync_user/foo", "got path for rsync_user/hoo");
+
   mkdir "~rsync_user/foo";
   ok(is_dir("/home/rsync_user/foo"), "created foo folder inside rsync_user \$HOME");
 
