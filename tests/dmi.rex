@@ -41,22 +41,23 @@ task test => group => test => sub {
   if($bios->get_vendor eq "Bochs") {
     is($bios->get_vendor, "Bochs", "got bios vendor bochs");
   }
+  elsif($bios->get_vendor eq "Xen") {
+    my @mema = $dmi->get_memory_arrays;
+    my $sysinfo = $dmi->get_system_information;
+
+    like($bios->get_vendor, qr/Xen/, "bios get vendor");
+    like($bios->get_version, qr/\d\./, "bios version");
+    like($bios->get_release_date, qr/\d+\/\d+/, "bios release date");
+    like($mema[0]->get_maximum_capacity, qr/^\d/, "memory array max capacity");
+    like($sysinfo->get_manufacturer, qr/Xen/, "system information manucafturer");
+    like($sysinfo->get_product_name, qr/HVM domU/, "system information product name");
+  }
   else {
 
     my $bb = $dmi->get_base_board;
-    #
-    #say "bb manuf: " . $bb->get_manufacturer;
     like($bb->get_manufacturer, qr/(Parallels Software International Inc.|Intel Corporation)/, "base board get manufacturer");
 
-    #say "sn: " . $bb->get_serial_number;
-    #say "version: " . $bb->get_version;
-    #say "product name: " . $bb->get_product_name;
     like($bb->get_product_name, qr/(Parallels Virtual Platform|440BX Desktop Reference Platform)/, "base board get product name");
-  #
-  #
-  #say "bios vendor: " . $bios->get_vendor;
-  #  say "bios version: " . $bios->get_version;
-  #  say "bios release: " . $bios->get_release_date;
 
     like($bios->get_vendor, qr/(Parallels Software International Inc|Phoenix Technologies LTD)/, "bios get vendor");
     like($bios->get_version, qr/(\d\.0\.|6\.0)/, "bios version");
@@ -73,9 +74,6 @@ task test => group => test => sub {
     like($mema[0]->get_maximum_capacity, qr/(8 GB|256 GB|8589934592 bytes)/, "memory array max capacity");
 
     my $sysinfo = $dmi->get_system_information;
-    #  say $sysinfo->get_manufacturer;
-    #say $sysinfo->get_product_name;
-
     like($sysinfo->get_manufacturer, qr/(Parallels Software International Inc|VMware, Inc\.)/, "system information manucafturer");
     like($sysinfo->get_product_name, qr/(Parallels Virtual Platform|VMware Virtual Platform)/, "system information product name");
 
