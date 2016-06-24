@@ -1,7 +1,11 @@
 use IO::All;
+use Rex -base;
+
 print "\n1\n";
 LOCAL {
+print "\n1.1\n";
   my $cwd = getcwd();
+print "\n1.2\n"; 
   my $rnd = get_random( 8, 'a' .. 'z' );
 
   $ENV{"WORK_DIR"} = "/tmp/workspace/$rnd";
