@@ -10,8 +10,8 @@ use Rex::Commands::Cloud;
 my $starttime;
 my $phase;
 
-our $branch   = $ENV{GIT_BRANCH} || "master";
-our $git_repo = $ENV{GIT_REPO}   || "https://github.com/RexOps/Rex.git";
+our $branch   = $ENV{REX_BRANCH} || "master";
+our $git_repo = $ENV{REX_REPO}   || "https://github.com/RexOps/Rex.git";
 
 start_phase('Initializing');
 
