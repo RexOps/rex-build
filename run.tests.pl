@@ -1,5 +1,5 @@
 use IO::All;
-
+print "\n1\n";
 LOCAL {
   my $cwd = getcwd();
   my $rnd = get_random( 8, 'a' .. 'z' );
@@ -9,13 +9,16 @@ LOCAL {
   mkdir "/tmp/workspace";
   mkdir "/tmp/workspace/$rnd";
   chdir "/tmp/workspace/$rnd";
+print "\n2\n";
 
   start_phase("Cloning git repo: $git_repo with refspec: $branch");
   system
     "git clone $git_repo rex --branch $branch >/var/log/rex/checkout-$$.log 2>&1";
   &end_phase;
+print "\n3\n";
 
   system "cd rex ; dzil authordeps --missing | cpanm; dzil build";
+print "\n4\n";
 
   my ($version_line) = grep { m/^version/ } io("rex/dist.ini")->slurp;
   my ($t1, $version) = split(/ = /, $version_line);
