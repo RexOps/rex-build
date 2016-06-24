@@ -20,6 +20,12 @@ user $config->{box}->{default}->{user};
 password $config->{box}->{default}->{password};
 pass_auth;
 
+Rex::Config->set_openssh_opt(
+  StrictHostKeyChecking => "no",
+  UserKnownHostsFile    => "/dev/null",
+  LogLevel              => "QUIET"
+);
+
 group test => $ENV{HTEST};
 
 task prepare => group => test => sub {

@@ -18,6 +18,12 @@ if ( exists $ENV{libssh2} ) {
   set connection => 'SSH';
 }
 
+Rex::Config->set_openssh_opt(
+  StrictHostKeyChecking => "no",
+  UserKnownHostsFile    => "/dev/null",
+  LogLevel              => "QUIET"
+);
+
 user( $config->{box}->{default}->{user} );
 password( $config->{box}->{default}->{password} );
 pass_auth;
