@@ -1,10 +1,8 @@
 use IO::All;
+use Cwd 'getcwd';
 
-print "\n1\n";
 LOCAL {
-print "\n1.1\n";
   my $cwd = getcwd();
-print "\n1.2\n"; 
   my $rnd = get_random( 8, 'a' .. 'z' );
 
   $ENV{"WORK_DIR"} = "/tmp/workspace/$rnd";
@@ -12,16 +10,13 @@ print "\n1.2\n";
   mkdir "/tmp/workspace";
   mkdir "/tmp/workspace/$rnd";
   chdir "/tmp/workspace/$rnd";
-print "\n2\n";
 
   start_phase("Cloning git repo: $git_repo with refspec: $branch");
   system
     "git clone $git_repo rex --branch $branch >/var/log/rex/checkout-$$.log 2>&1";
   &end_phase;
-print "\n3\n";
 
   system "cd rex ; dzil authordeps --missing | cpanm; dzil build";
-print "\n4\n";
 
   my ($version_line) = grep { m/^version/ } io("rex/dist.ini")->slurp;
   my ($t1, $version) = split(/ = /, $version_line);
