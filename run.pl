@@ -108,7 +108,7 @@ sub start_amazon {
   my $image_id = shift;
   my $vm = cloud_instance create => {
     image_id       => $image_id,
-    name           => "rhel01",
+    name           => "test-$$",
     key            => "integration-tests",
     type           => 't2.micro',
     security_group => 'default',
