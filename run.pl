@@ -110,7 +110,7 @@ sub start_amazon {
     image_id       => $image_id,
     name           => "test-$$",
     key            => "integration-tests",
-    type           => 't2.micro',
+    type           => $ENV{instance_type},
     security_group => 'default',
     options        => {
       SubnetId => 'subnet-0ac1f97d',
