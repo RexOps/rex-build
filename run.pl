@@ -24,6 +24,7 @@ $yaml .= "\n";
 our $config = Load($yaml);
 
 my $base_vm = $ARGV[0];
+my $instance_type = $ARGV[1];
 my $time    = time;
 
 my $access_key        = $config->{amazon}->{auth}->{access_key};
@@ -110,7 +111,7 @@ sub start_amazon {
     image_id       => $image_id,
     name           => "test-$$",
     key            => "integration-tests",
-    type           => $ENV{instance_type},
+    type           => $instance_type,
     security_group => 'default',
     options        => {
       SubnetId => 'subnet-0ac1f97d',
