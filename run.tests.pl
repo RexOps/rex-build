@@ -54,6 +54,7 @@ LOCAL {
     next if ( $entry =~ m/^\./ );
     next if ( !-f "tests/$entry" );
     next if ( $entry !~ m/\.rex$/ );
+    next if ( $ENV{ONLY_TEST} && $ENV{ONLY_TEST} ne "tests/$entry" );
 
     start_phase("Running tests/$entry on $ip");
     system
@@ -67,6 +68,7 @@ LOCAL {
   while ( my $entry = readdir($dh) ) {
     next if ( $entry =~ m/^\./ );
     next if ( !-d "tests.d/$entry" );
+    next if ( $ENV{ONLY_TEST} && $ENV{ONLY_TEST} ne "tests.d/$entry" );
 
     $ENV{PERL5LIB} =
       "tests.d/$entry/lib:" . ( exists $ENV{PERL5LIB} ? $ENV{PERL5LIB} : "" );
@@ -82,6 +84,7 @@ LOCAL {
       next if ( $entry =~ m/^\./ );
       next if ( !-f "tests.sudo.d/$entry" );
       next if ( $entry !~ m/\.rex$/ );
+      next if ( $ENV{ONLY_TEST} && $ENV{ONLY_TEST} ne "tests.sudo.d/$entry" );
 
       start_phase("Running tests.sudo.d/$entry on $ip");
  
@@ -98,6 +101,7 @@ LOCAL {
     next if ( $entry =~ m/^\./ );
     next if ( !-f "tests.issues.d/$entry" );
     next if ( $entry !~ m/\.rex$/ );
+    next if ( $ENV{ONLY_TEST} && $ENV{ONLY_TEST} ne "tests.issues.d/$entry" );
 
     start_phase("Running tests.issues.d/$entry on $ip");
  
@@ -114,6 +118,7 @@ LOCAL {
       next if ( $entry =~ m/^\./ );
       next if ( !-f "tests.issues.d/sudo.d/$entry" );
       next if ( $entry !~ m/\.rex$/ );
+      next if ( $ENV{ONLY_TEST} && $ENV{ONLY_TEST} ne "tests.issues.d/sudo.d/$entry" );
 
       start_phase("Running tests.issues.d/sudo.d/$entry on $ip");
    
@@ -130,6 +135,7 @@ LOCAL {
     next if ( $entry =~ m/^\./ );
     next if ( !-f "tests.post.d/$entry" );
     next if ( $entry !~ m/\.rex$/ );
+    next if ( $ENV{ONLY_TEST} && $ENV{ONLY_TEST} ne "tests.post.d/$entry" );
 
     start_phase("Running tests.post.d/$entry on $ip");
  

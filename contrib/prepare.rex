@@ -74,7 +74,7 @@ task prepare => group => test => sub {
       qw/block-mount coreutils-nohup perlbase-bytes perlbase-digest perlbase-essential perlbase-file perlbase-xsloader shadow-groupadd shadow-groupdel shadow-groupmod shadow-useradd shadow-userdel shadow-usermod sudo swap-utils/
       ],
       qr{debian|ubuntu}i => [qw/rsync augeas-tools augeas-lenses iptables/],
-      qr{suse}i          => [qw/lsb-release augeas augeas-lenses/],
+      qr{suse}i          => [qw/lsb-release augeas augeas-lenses iptables/],
       qr{fedora}i        => [qw/perl perl-Digest-MD5 openssh-clients which augeas augeas-libs/],
       qr{gentoo}i        => [ 'sys-process/vixie-cron', 'app-admin/augeas' ],
       qr{arch}i          => [ 'cronie', 'net-tools', ],
