@@ -106,6 +106,7 @@ sub end_phase {
 }
 
 sub start_amazon {
+  sleep (int(rand(10)) + 10);
   my $image_id = shift;
   my $vm = cloud_instance create => {
     image_id       => $image_id,
