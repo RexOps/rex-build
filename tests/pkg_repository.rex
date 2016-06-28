@@ -16,9 +16,9 @@ task test => group => test => sub {
       url    => 'http://rex.linux-files.org/CentOS/$releasever/rex/$basearch/',
       gpgcheck => 0,
     },
-    SuSE => {
-      url    => 'http://rex.linux-files.org/OpenSuSE/' . operating_system_release . '/x86_64/',
-    },
+    #SuSE => {
+    #  url    => 'http://rex.linux-files.org/OpenSuSE/' . operating_system_release . '/x86_64/',
+    #},
     #Debian => {
     #},
     #Mageia => {
