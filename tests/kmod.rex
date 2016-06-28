@@ -29,7 +29,14 @@ task "test", group => "test", sub {
   }
 
   if($res_kernel) {
+    my $os = lc operating_system;
     my $kernel_mod = "fat";
+    if($os =~ m/Gentoo/i) {
+      $kernel_mod = "ntfs";
+    }
+    if($os =~ m/Ubuntu/i) {
+      $kernel_mod = "ufs";
+    }
     
     my $mods_loaded = sub { die "Can't test this OS."; };
     my $mods_on_boot = sub { die "Can't test this OS."; };
@@ -167,6 +174,9 @@ task "test", group => "test", sub {
       my $kmod = "fat";
       if($os =~ m/Gentoo/i) {
         $kmod = "ntfs";
+      }
+      if($os =~ m/Ubuntu/i) {
+        $kmod = "ufs";
       }
   
       #kmod load => "ipmi_msghandler";

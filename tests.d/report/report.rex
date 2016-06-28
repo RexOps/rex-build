@@ -107,7 +107,7 @@ task "test",
     name   => $service;
 
   my $to_install = case operating_system, {
-    qr{SuSE}i     => "pico",
+    qr{SuSE}i     => "joe",
       qr{CentOS}i => "vim-enhanced",
       qr{Redhat}i => "vim-enhanced",
       qr{Fedora}i => "nano",
