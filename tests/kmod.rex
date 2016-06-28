@@ -29,7 +29,7 @@ task "test", group => "test", sub {
   }
 
   if($res_kernel) {
-    my $kernel_mod = "ntfs";
+    my $kernel_mod = "fat";
     
     my $mods_loaded = sub { die "Can't test this OS."; };
     my $mods_on_boot = sub { die "Can't test this OS."; };
@@ -164,7 +164,7 @@ task "test", group => "test", sub {
       }
   
       my $os = lc operating_system;
-      my $kmod = "ntfs";
+      my $kmod = "fat";
       if($os =~ m/Gentoo/i) {
         $kmod = "ntfs";
       }
