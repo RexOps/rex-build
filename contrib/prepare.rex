@@ -145,7 +145,7 @@ task prepare => group => test => sub {
   my $net = Rex::Hardware::Network->get;
 
   my @devs = @{ $net->{networkdevices} };
-  my $dev = first { $_ =~ m/(eth0|em0|e1000g0|enp0s3)/ } @{ $net->{networkdevices} };
+  my $dev = first { $_ =~ m/(eth0|em0|e1000g0|enp0s3|xn0)/ } @{ $net->{networkdevices} };
 
   Rex::Logger::info("Creating alias: $dev:1");
 
