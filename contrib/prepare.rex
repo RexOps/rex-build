@@ -69,7 +69,7 @@ task prepare => group => test => sub {
 
   my $additional_packages = case operating_system, {
     qr{centos|redhat}i => [qw/perl-Digest-MD5 openssh-clients dmidecode augeas augeas-libs/],
-      qr{freebsd}i     => [qw/dmidecode rsync sudo/],
+      qr{freebsd}i     => [qw/dmidecode rsync sudo perl5/],
       qr{openwrt}i     => [
       qw/block-mount coreutils-nohup perlbase-bytes perlbase-digest perlbase-essential perlbase-file perlbase-xsloader shadow-groupadd shadow-groupdel shadow-groupmod shadow-useradd shadow-userdel shadow-usermod sudo swap-utils/
       ],
@@ -140,6 +140,11 @@ task prepare => group => test => sub {
   if ( $? == 0 ) {
     run "mkswap /swap.img ; chmod 600 /swap.img";
     run "swapon /swap.img";
+  }
+
+  if (is_freebsd) {
+    append_if_no_such_line "/etc/fstab", "md99 none swap sw,file=/swap.img,late 0 0";
+    run "swapon -aL";
   }
 
   my $net = Rex::Hardware::Network->get;

@@ -14,10 +14,10 @@ task "test", group => "test", sub {
   my $net = Rex::Hardware::Network->get;
 
   my @devs = @{ $net->{networkdevices} };
-  my ($dev) = first { $_ =~ m/^(eth0|em0|e1000g0)$/ } @{$net->{networkdevices}};
+  my ($dev) = first { $_ =~ m/^(eth0|em0|e1000g0|xn0)$/ } @{$net->{networkdevices}};
   ok($dev, "Found $dev");
 
-  ok(scalar (grep { m/eth|em|e1000/ } @devs) >= 1, "count of devs ok");
+  ok(scalar (grep { m/eth|em|e1000|xn0/ } @devs) >= 1, "count of devs ok");
 
   ok($net->{networkconfiguration}->{$dev}->{ip} =~ m/^\d+\.\d+\.\d+\./, "found ip of $dev");
   ok($net->{networkconfiguration}->{$dev}->{netmask} =~ m/^\d+\.\d+\.\d+\./, "found netmask of $dev");
