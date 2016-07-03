@@ -5,7 +5,7 @@ use Rex::Commands::User;
 use YAML;
 
 my $yaml =
-  eval { local ( @ARGV, $/ ) = ( $ENV{HOME} . "/.build_config" ); <>; };
+  eval { local ( @ARGV, $/ ) = ( ($ENV{HOME} || $ENV{USERPROFILE}) . "/.build_config" ); <>; };
 $yaml .= "\n";
 my $config = Load($yaml);
 
