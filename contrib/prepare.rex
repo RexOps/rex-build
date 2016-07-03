@@ -75,7 +75,7 @@ task prepare => group => test => sub {
       ],
       qr{debian|ubuntu}i => [qw/rsync augeas-tools augeas-lenses iptables/],
       qr{suse}i          => [qw/lsb-release augeas augeas-lenses iptables/],
-      qr{fedora}i        => [qw/perl perl-Digest-MD5 openssh-clients which augeas augeas-libs/],
+      qr{fedora}i        => [qw/perl perl-Digest-MD5 openssh-clients which augeas augeas-libs redhat-lsb/],
       qr{gentoo}i        => [ 'sys-process/vixie-cron', 'app-admin/augeas' ],
       qr{arch}i          => [ 'cronie', 'net-tools', ],
       default            => [],
