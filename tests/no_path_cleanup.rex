@@ -10,7 +10,7 @@ do "auth.conf";
 task "test", group => "test", sub {
 
   my $in = run 'echo $PATH';
-  ok($in eq "/usr/local/bin:/bin:/usr/bin", "path modified through .profile");
+  ok($in eq "/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/blub", "path modified through .profile");
 
   done_testing();
 };

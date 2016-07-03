@@ -68,7 +68,7 @@ task prepare => group => test => sub {
   my @packages = qw/perl rsync sudo/;
 
   my $additional_packages = case operating_system, {
-    qr{centos|redhat}i => [qw/perl-Digest-MD5 openssh-clients dmidecode augeas augeas-libs/],
+    qr{centos|redhat}i => [qw/perl-Digest-MD5 openssh-clients dmidecode augeas augeas-libs redhat-lsb/],
       qr{freebsd}i     => [qw/dmidecode rsync sudo perl5/],
       qr{openwrt}i     => [
       qw/block-mount coreutils-nohup perlbase-bytes perlbase-digest perlbase-essential perlbase-file perlbase-xsloader shadow-groupadd shadow-groupdel shadow-groupmod shadow-useradd shadow-userdel shadow-usermod sudo swap-utils/
