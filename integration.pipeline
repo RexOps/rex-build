@@ -7,19 +7,19 @@
       "rex_version": 0.42
     },
     "nodes": [
-      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" },
-      { "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" },
-      { "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" },
-      { "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" },
-      { "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" },
-      { "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" },
-      { "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" },
-      { "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" },
-      { "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" },
-      { "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" },
-      { "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" },
-      { "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" },
-      { "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" },
+      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" }
+      ,{ "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" }
+      ,{ "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" }
+      ,{ "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" }
+      ,{ "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" }
+      ,{ "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" }
+      ,{ "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" }
+      ,{ "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" }
+      ,{ "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" }
+      ,{ "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" }
+      ,{ "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" }
+      ,{ "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" }
+      ,{ "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" }
     ]
   },
   "Root Tests 0.51": {
@@ -27,19 +27,19 @@
       "rex_version": 0.51
     },
     "nodes": [
-      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" },
-      { "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" },
-      { "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" },
-      { "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" },
-      { "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" },
-      { "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" },
-      { "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" },
-      { "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" },
-      { "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" },
-      { "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" },
-      { "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" },
-      { "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" },
-      { "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" },
+      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" }
+      ,{ "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" }
+      ,{ "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" }
+      ,{ "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" }
+      ,{ "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" }
+      ,{ "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" }
+      ,{ "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" }
+      ,{ "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" }
+      ,{ "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" }
+      ,{ "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" }
+      ,{ "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" }
+      ,{ "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" }
+      ,{ "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" }
     ]
   },
   "Root Tests 0.53": {
@@ -47,19 +47,19 @@
       "rex_version": 0.53
     },
     "nodes": [
-      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" },
-      { "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" },
-      { "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" },
-      { "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" },
-      { "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" },
-      { "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" },
-      { "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" },
-      { "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" },
-      { "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" },
-      { "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" },
-      { "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" },
-      { "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" },
-      { "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" },
+      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" }
+      ,{ "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" }
+      ,{ "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" }
+      ,{ "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" }
+      ,{ "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" }
+      ,{ "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" }
+      ,{ "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" }
+      ,{ "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" }
+      ,{ "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" }
+      ,{ "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" }
+      ,{ "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" }
+      ,{ "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" }
+      ,{ "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" }
     ]
   },
   "Root Tests 0.54": {
@@ -67,19 +67,19 @@
       "rex_version": 0.54
     },
     "nodes": [
-      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" },
-      { "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" },
-      { "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" },
-      { "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" },
-      { "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" },
-      { "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" },
-      { "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" },
-      { "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" },
-      { "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" },
-      { "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" },
-      { "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" },
-      { "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" },
-      { "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" },
+      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" }
+      ,{ "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" }
+      ,{ "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" }
+      ,{ "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" }
+      ,{ "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" }
+      ,{ "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" }
+      ,{ "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" }
+      ,{ "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" }
+      ,{ "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" }
+      ,{ "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" }
+      ,{ "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" }
+      ,{ "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" }
+      ,{ "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" }
     ]
   },
   "Root Tests 0.55": {
@@ -87,19 +87,19 @@
       "rex_version": 0.55
     },
     "nodes": [
-      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" },
-      { "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" },
-      { "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" },
-      { "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" },
-      { "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" },
-      { "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" },
-      { "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" },
-      { "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" },
-      { "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" },
-      { "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" },
-      { "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" },
-      { "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" },
-      { "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" },
+      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" }
+      ,{ "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" }
+      ,{ "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" }
+      ,{ "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" }
+      ,{ "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" }
+      ,{ "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" }
+      ,{ "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" }
+      ,{ "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" }
+      ,{ "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" }
+      ,{ "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" }
+      ,{ "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" }
+      ,{ "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" }
+      ,{ "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" }
     ]
   },
   "Root Tests 1.0": {
@@ -107,19 +107,19 @@
       "rex_version": 1.0
     },
     "nodes": [
-      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" },
-      { "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" },
-      { "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" },
-      { "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" },
-      { "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" },
-      { "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" },
-      { "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" },
-      { "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" },
-      { "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" },
-      { "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" },
-      { "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" },
-      { "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" },
-      { "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" },
+      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" }
+      ,{ "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" }
+      ,{ "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" }
+      ,{ "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" }
+      ,{ "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" }
+      ,{ "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" }
+      ,{ "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" }
+      ,{ "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" }
+      ,{ "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" }
+      ,{ "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" }
+      ,{ "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" }
+      ,{ "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" }
+      ,{ "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" }
     ]
   },
   "Root Tests 1.3": {
@@ -127,19 +127,19 @@
       "rex_version": 1.3
     },
     "nodes": [
-      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" },
-      { "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" },
-      { "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" },
-      { "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" },
-      { "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" },
-      { "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" },
-      { "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" },
-      { "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" },
-      { "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" },
-      { "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" },
-      { "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" },
-      { "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" },
-      { "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" },
+      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" }
+      ,{ "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" }
+      ,{ "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" }
+      ,{ "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" }
+      ,{ "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" }
+      ,{ "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" }
+      ,{ "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" }
+      ,{ "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" }
+      ,{ "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" }
+      ,{ "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" }
+      ,{ "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" }
+      ,{ "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" }
+      ,{ "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" }
     ]
   },
   "Root Tests 1.4": {
@@ -147,19 +147,19 @@
       "rex_version": 1.4
     },
     "nodes": [
-      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" },
-      { "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" },
-      { "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" },
-      { "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" },
-      { "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" },
-      { "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" },
-      { "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" },
-      { "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" },
-      { "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" },
-      { "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" },
-      { "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" },
-      { "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" },
-      { "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" },
+      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" }
+      ,{ "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" }
+      ,{ "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" }
+      ,{ "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" }
+      ,{ "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" }
+      ,{ "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" }
+      ,{ "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" }
+      ,{ "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" }
+      ,{ "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" }
+      ,{ "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" }
+      ,{ "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" }
+      ,{ "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" }
+      ,{ "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" }
     ]
   },
 
@@ -173,19 +173,19 @@
       ,"use_sudo": 1
     },
     "nodes": [
-      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" },
-      { "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" },
-      { "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" },
-      { "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" },
-      { "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" },
-      { "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" },
-      { "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" },
-      { "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" },
-      { "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" },
-      { "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" },
-      { "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" },
-      { "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" },
-      { "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" },
+      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" }
+      ,{ "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" }
+      ,{ "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" }
+      ,{ "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" }
+      ,{ "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" }
+      ,{ "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" }
+      ,{ "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" }
+      ,{ "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" }
+      ,{ "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" }
+      ,{ "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" }
+      ,{ "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" }
+      ,{ "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" }
+      ,{ "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" }
     ]
   },
   "Sudo Tests 0.51": {
@@ -194,19 +194,19 @@
       ,"use_sudo": 1
     },
     "nodes": [
-      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" },
-      { "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" },
-      { "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" },
-      { "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" },
-      { "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" },
-      { "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" },
-      { "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" },
-      { "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" },
-      { "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" },
-      { "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" },
-      { "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" },
-      { "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" },
-      { "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" },
+      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" }
+      ,{ "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" }
+      ,{ "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" }
+      ,{ "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" }
+      ,{ "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" }
+      ,{ "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" }
+      ,{ "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" }
+      ,{ "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" }
+      ,{ "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" }
+      ,{ "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" }
+      ,{ "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" }
+      ,{ "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" }
+      ,{ "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" }
     ]
   },
   "Sudo Tests 0.53": {
@@ -215,19 +215,19 @@
       ,"use_sudo": 1
     },
     "nodes": [
-      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" },
-      { "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" },
-      { "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" },
-      { "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" },
-      { "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" },
-      { "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" },
-      { "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" },
-      { "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" },
-      { "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" },
-      { "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" },
-      { "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" },
-      { "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" },
-      { "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" },
+      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" }
+      ,{ "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" }
+      ,{ "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" }
+      ,{ "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" }
+      ,{ "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" }
+      ,{ "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" }
+      ,{ "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" }
+      ,{ "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" }
+      ,{ "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" }
+      ,{ "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" }
+      ,{ "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" }
+      ,{ "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" }
+      ,{ "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" }
     ]
   },
   "Sudo Tests 0.54": {
@@ -236,19 +236,19 @@
       ,"use_sudo": 1
     },
     "nodes": [
-      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" },
-      { "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" },
-      { "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" },
-      { "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" },
-      { "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" },
-      { "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" },
-      { "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" },
-      { "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" },
-      { "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" },
-      { "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" },
-      { "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" },
-      { "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" },
-      { "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" },
+      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" }
+      ,{ "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" }
+      ,{ "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" }
+      ,{ "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" }
+      ,{ "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" }
+      ,{ "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" }
+      ,{ "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" }
+      ,{ "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" }
+      ,{ "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" }
+      ,{ "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" }
+      ,{ "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" }
+      ,{ "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" }
+      ,{ "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" }
     ]
   },
   "Sudo Tests 0.55": {
@@ -257,19 +257,19 @@
       ,"use_sudo": 1
     },
     "nodes": [
-      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" },
-      { "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" },
-      { "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" },
-      { "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" },
-      { "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" },
-      { "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" },
-      { "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" },
-      { "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" },
-      { "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" },
-      { "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" },
-      { "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" },
-      { "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" },
-      { "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" },
+      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" }
+      ,{ "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" }
+      ,{ "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" }
+      ,{ "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" }
+      ,{ "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" }
+      ,{ "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" }
+      ,{ "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" }
+      ,{ "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" }
+      ,{ "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" }
+      ,{ "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" }
+      ,{ "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" }
+      ,{ "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" }
+      ,{ "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" }
     ]
   },
   "Sudo Tests 1.0": {
@@ -278,19 +278,19 @@
       ,"use_sudo": 1
     },
     "nodes": [
-      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" },
-      { "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" },
-      { "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" },
-      { "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" },
-      { "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" },
-      { "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" },
-      { "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" },
-      { "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" },
-      { "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" },
-      { "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" },
-      { "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" },
-      { "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" },
-      { "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" },
+      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" }
+      ,{ "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" }
+      ,{ "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" }
+      ,{ "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" }
+      ,{ "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" }
+      ,{ "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" }
+      ,{ "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" }
+      ,{ "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" }
+      ,{ "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" }
+      ,{ "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" }
+      ,{ "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" }
+      ,{ "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" }
+      ,{ "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" }
     ]
   },
   "Sudo Tests 1.3": {
@@ -299,19 +299,19 @@
       ,"use_sudo": 1
     },
     "nodes": [
-      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" },
-      { "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" },
-      { "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" },
-      { "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" },
-      { "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" },
-      { "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" },
-      { "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" },
-      { "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" },
-      { "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" },
-      { "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" },
-      { "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" },
-      { "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" },
-      { "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" },
+      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" }
+      ,{ "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" }
+      ,{ "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" }
+      ,{ "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" }
+      ,{ "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" }
+      ,{ "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" }
+      ,{ "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" }
+      ,{ "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" }
+      ,{ "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" }
+      ,{ "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" }
+      ,{ "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" }
+      ,{ "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" }
+      ,{ "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" }
     ]
   },
   "Sudo Tests 1.4": {
@@ -320,20 +320,20 @@
       ,"use_sudo": 1
     },
     "nodes": [
-      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" },
-      { "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" },
-      { "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" },
-      { "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" },
-      { "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" },
-      { "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" },
-      { "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" },
-      { "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" },
-      { "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" },
-      { "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" },
-      { "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" },
-      { "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" },
-      { "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" },
+      { "name": "CentOS 5", "instance": "t1.micro", "ami": "ami-b4cd56c7" }
+      ,{ "name": "CentOS 6", "instance": "t2.micro", "ami": "ami-37ce5544" }
+      ,{ "name": "CentOS 7", "instance": "t2.micro", "ami": "ami-cfca51bc" }
+      ,{ "name": "RHEL 7", "instance": "t2.micro", "ami": "ami-04950b77" }
+      ,{ "name": "Debian 8", "instance": "t1.micro", "ami": "ami-41c85332" }
+      ,{ "name": "Ubuntu 12.04", "instance": "t1.micro", "ami": "ami-d3ca51a0" }
+      ,{ "name": "Ubuntu 14.04", "instance": "t2.micro", "ami": "ami-49cb503a" }
+      ,{ "name": "Fedora 24", "instance": "t1.micro", "ami": "ami-e2ca5191" }
+      ,{ "name": "SLES 12.1", "instance": "t2.micro", "ami": "ami-eacb5099" }
+      ,{ "name": "OpenSuSE 13.2", "instance": "t2.micro", "ami": "ami-aace55d9" }
+      ,{ "name": "OpenSuSE Leap 24", "instance": "t2.micro", "ami": "ami-3dc2594e" }
+      ,{ "name": "FreeBSD 10.3", "instance": "t2.micro", "ami": "ami-91c853e2" }
+      ,{ "name": "Gentoo", "instance": "t2.micro", "ami": "ami-f497f287" }
     ]
-  },
+  }
 
 }
