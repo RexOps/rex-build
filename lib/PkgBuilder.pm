@@ -47,6 +47,7 @@ my %ubuntu_version_map = (
   "1304" => "raring",
   "1310" => "saucy",
   "1404" => "trusty",
+  "1604" => "xenial",
 );
 
 sub config {
