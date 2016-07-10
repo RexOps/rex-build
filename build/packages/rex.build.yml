@@ -294,6 +294,7 @@ requires:
     raring: *depwheezy
     saucy: *depwheezy
     trusty: *depwheezy
+    xenial: *depwheezy
 
   fedora:
     18: &depfedora18
@@ -351,12 +352,16 @@ requires:
     21: *depfedora18
     22: *depfedora18
     23: *depfedora18
+    24: *depfedora18
 
   redhat:
     18: *depfedora18
     19: *depfedora18
     20: *depfedora18
     21: *depfedora18
+    22: *depfedora18
+    23: *depfedora18
+    24: *depfedora18
 
   suse:
     13.1: &depsuse13
