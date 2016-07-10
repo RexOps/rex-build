@@ -5,7 +5,8 @@ use warnings;
 
 use XML::Simple;
 
-my $os = join(" ", @ARGV);
+my $os = $ARGV[0];
+my $rex_version = $ARGV[1];
 
 opendir(my $dh, ".") or die($!);
 while(my $entry = readdir($dh)) {
@@ -22,7 +23,7 @@ while(my $entry = readdir($dh)) {
   my $new_testcase = {};
   
   for my $tc (keys %{ $ref->{testsuites}->{testsuite}->{testcase} }) {
-    $new_testcase->{"$os-$tc"} = $ref->{testsuites}->{testsuite}->{testcase}->{$tc};
+    $new_testcase->{"$os-$rex_version-$tc"} = $ref->{testsuites}->{testsuite}->{testcase}->{$tc};
   }
   
   $ref->{testsuites}->{testsuite}->{testcase} = $new_testcase;
