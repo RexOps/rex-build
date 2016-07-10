@@ -386,7 +386,7 @@ task prepare => group => test => sub {
     qr{centos|redhat|fedora}i => [
       "ntp",  "rpm-build", "expect",   "gcc",
       "make", "automake",  "autoconf", "bison",
-      "flex", "m4",        "openssh-clients", "tar",
+      "flex", "m4",        "openssh-clients", "tar", "gnupg",
       ],
       qr{mageia}i => [
       "ntp",  "rpm-build", "expect",          "gcc",
