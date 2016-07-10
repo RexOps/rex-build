@@ -518,7 +518,7 @@ task build => group => test => sub {
   }
 
   @files =
-    grep { m/^dpkg-deb: building package `.*?' in `(.*?)'.$/ && ( $_ = $1 ); }
+    grep { m/^dpkg-deb: building package [`'].*?' in ['`](.*?)'.$/ && ( $_ = $1 ); }
     @out;
   if (@files) {
     $pkg_file = "/root/build/$files[0]";
