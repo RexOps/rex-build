@@ -2,6 +2,6 @@
 set timeout 360
 set SPEC [lindex $argv 0]
 spawn rpmbuild --buildroot <%= $buildroot %> --sign -ba $SPEC
-expect "Passphrase:"
+expect "Passphrase: "
 send "<%= $pass %>\r"
 expect eof
