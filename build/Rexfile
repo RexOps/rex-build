@@ -15,7 +15,7 @@
 # ------------------------------------------------------------------------------
 # vim: set syn=perl:
 
-use Rex -feature => [ '1.0', 'exit_status', 'empty_groups' ];
+use Rex -feature => [ '1.0', 'exit_status', 'empty_groups', 'tty' ];
 
 set connection => "OpenSSH";
 
