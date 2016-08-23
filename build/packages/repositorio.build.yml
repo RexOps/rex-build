@@ -20,7 +20,7 @@ group:
   suse: admin
   mageia: admin
 license: Apache 2
-homepage: http://rexify.org/
+homepage: http://repositor.io/
 source: http://nightly.rex.linux-files.org/source/Rex-Repositorio-1.0.0.tar.gz
 maintainer: jan gehring <jan.gehring@gmail.com>
 priority: optional
@@ -57,6 +57,7 @@ requires:
         - libterm-readkey-perl
         - libmojolicious-perl
         - libjson-xs-perl
+        - libexpect-perl
       runtime:
         - perl
         - perl-modules
@@ -76,6 +77,7 @@ requires:
         - libterm-readkey-perl
         - libmojolicious-perl
         - libjson-xs-perl
+        - libexpect-perl
 
     jessie: *depwheezy
 
@@ -107,6 +109,7 @@ requires:
         - perl(Term::ReadKey): perl-TermReadKey
         - perl(Mojolicious): perl-Mojolicious
         - perl(JSON::XS): perl-JSON-XS
+        - perl(Expect): perl-Expect
       runtime:
         - perl
         - createrepo
@@ -128,6 +131,7 @@ requires:
         - perl(Term::ReadKey): perl-TermReadKey
         - perl(Mojolicious): perl-Mojolicious
         - perl(JSON::XS): perl-JSON-XS
+        - perl(Expect): perl-Expect
 
     7:
       build:
@@ -152,6 +156,7 @@ requires:
         - perl(Term::ReadKey): perl-TermReadKey
         - perl(Mojolicious): perl-Mojolicious
         - perl(JSON::XS): perl-JSON-XS
+        - perl(Expect): perl-Expect
 
       runtime:
         - perl
@@ -173,6 +178,7 @@ requires:
         - perl(Term::ReadKey): perl-TermReadKey
         - perl(Mojolicious): perl-Mojolicious
         - perl(JSON::XS): perl-JSON-XS
+        - perl(Expect): perl-Expect
 
   ubuntu:
     precise: *depwheezy
@@ -225,6 +231,7 @@ requires:
         - perl(Term::ReadKey): perl-TermReadKey
         - perl(Mojolicious): perl-Mojolicious
         - perl(JSON::XS): perl-JSON-XS
+        - perl(Expect): perl-Expect
 
       runtime:
         - perl
@@ -245,6 +252,7 @@ requires:
         - perl(Term::ReadKey): perl-TermReadKey
         - perl(Mojolicious): perl-Mojolicious
         - perl(JSON::XS): perl-JSON-XS
+        - perl(Expect): perl-Expect
 
     13.2: *depsuse13
     42.1: *depsuse13
