@@ -186,6 +186,7 @@ requires:
     raring: *depwheezy
     saucy: *depwheezy
     trusty: *depwheezy
+    xenial: *depwheezy
 
   fedora:
     18: &depfedora18
