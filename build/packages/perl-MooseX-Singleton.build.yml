@@ -82,9 +82,9 @@ files:
     doc:
       - %{_mandir}/*
     package:
-      - %{perl_vendorarch}/*
+      - %{perl_vendorlib}/*
   centos:
     doc:
       - %{_mandir}/*
     package:
-      - %{perl_vendorarch}/*
+      - %{perl_vendorlib}/*
