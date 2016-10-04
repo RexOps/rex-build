@@ -16,6 +16,7 @@ task "test", group => "test", sub {
   mkdir $ud;
   my $on_changed_called = 0;
   sync_up "files/etc/", $ud,
+        exclude => [ 'exclude-file.*', 'exclude/' ],
         on_change => sub {
           my (@changed_files) = @_;
 
@@ -32,6 +33,9 @@ task "test", group => "test", sub {
 
   ok($on_changed_called, "on_change was called (sync_up)");
   $on_changed_called = 0;
+
+  ok(!is_file("$ud/exclude-file.txt"), "excluded exclude-file.txt");
+  ok(!is_dir("$ud/exclude"), "excluded exclude directory");
 
   sync_up "files/etc/", $ud,
         on_change => sub {
