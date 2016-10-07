@@ -1,0 +1,90 @@
+# basic informations
+name:
+  centos: perl-MooseX-Singleton
+realname: MooseX-Singleton
+version: 0.29
+release: 1
+epoch: 1
+summary: MooseX::Singleton - turn your Moose class into a singleton
+group:
+  centos: System Environment/Libraries
+license: perl5
+homepage: https://metacpan.org/pod/MooseX::Singleton
+source: https://cpan.metacpan.org/authors/id/K/KA/KAARE/MooseX-Singleton-0.29.tar.gz
+maintainer: jan gehring <jan.gehring@gmail.com>
+priority: optional
+arch:
+  centos: x86_64
+description: |
+  MooseX::Singleton - turn your Moose class into a singleton
+
+# requirements
+requires:
+  centos:
+    5:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl(Moose): perl-Moose
+      runtime:
+        - perl
+        - perl(Moose): perl-Moose
+
+    6:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl(Moose): perl-Moose
+      runtime:
+        - perl
+        - perl(Moose): perl-Moose
+
+    7:
+      build:
+        - make
+        - gcc
+        - perl
+        - perl-devel
+        - perl(Moose): perl-Moose
+      runtime:
+        - perl
+        - perl(Moose): perl-Moose
+
+# build instructions
+configure: |
+  tar xzf <%= $sourceroot %>/<%= $realname %>-<%= $version %>.tar.gz
+  cd <%= $realname %>-<%= $version %>
+
+  perl Makefile.PL INSTALLDIRS="vendor" PREFIX=<%= $buildroot %>/usr
+
+make: |
+  cd <%= $realname %>-<%= $version %>
+  find lib -name '*.pm' -exec sed -ie "s|use warnings;|use warnings;\nuse lib '%{perl_vendorlib}/.overrides';\n|" '{}' ';'
+  make
+
+install: |
+  rm -rf <%= $buildroot %>
+
+  cd <%= $realname %>-<%= $version %>
+  make pure_install
+  find <%= $buildroot %> -name .packlist -exec /bin/rm '{}' ';'
+
+clean: |
+  rm -rf <%= $buildroot %>
+
+files:
+  package:
+    - /usr
+  fedora:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
+  centos:
+    doc:
+      - %{_mandir}/*
+    package:
+      - %{perl_vendorlib}/*
