@@ -18,13 +18,13 @@ task test => group => test => sub {
 task "run_test", group => "itest", sub {
   sudo -on;
   my $userid = run "id -u";
-  is($userid, 0, "got root id in same task.");
+  is($userid, 0, "got root id ($userid) in same task.");
 
   sudo_test();
 };
 
 task "sudo_test", sub {
   my $userid = run "id -u";
-  is($userid, 0, "got root id in next task");
+  is($userid, 0, "got root id ($userid) in next task");
 };
 
