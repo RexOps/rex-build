@@ -7,7 +7,7 @@ use List::Util qw/first/;
 use YAML;
 
 my $yaml =
-  eval { local ( @ARGV, $/ ) = ( $ENV{HOME} . "/.build_config" ); <>; };
+  eval { local ( @ARGV, $/ ) = ( ($ENV{HOME} || $ENV{USERPROFILE}) . "/.build_config" ); <>; };
 $yaml .= "\n";
 my $config = Load($yaml);
 
@@ -184,7 +184,12 @@ task prepare => group => test => sub {
 
   file $sudoers_file,
     content =>
-    "Defaults set_home, always_set_home\n\%$user	ALL=(ALL:ALL) ALL\nrsync_user	ALL=(ALL:ALL) ALL\nrsync_user ALL=(ALL:ALL) NOPASSWD: /usr/bin/rsync\nrsync_user ALL=(ALL:ALL) NOPASSWD: /usr/local/bin/rsync\ntestu ALL=(ALL:ALL) ALL\n",
+    "Defaults lecture = never\n"
+      . "Defaults set_home, always_set_home\n"
+      . "\%$user	ALL=(ALL:ALL) ALL\nrsync_user	ALL=(ALL:ALL) ALL\n"
+      . "rsync_user ALL=(ALL:ALL) NOPASSWD: /usr/bin/rsync\n"
+      . "rsync_user ALL=(ALL:ALL) NOPASSWD: /usr/local/bin/rsync\n"
+      . "testu ALL=(ALL:ALL) ALL\n",
     owner => "root",
     mode  => 440;
 
