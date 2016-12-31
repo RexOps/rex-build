@@ -13,7 +13,9 @@ do "auth.conf";
 desc "Prepare System";
 task "test", group => "test", sub {
   
-  if(is_linux) {
+  my $osver = operating_system_release;
+  if(is_redhat && $osver =~ m/^7/) {
+    pkg ["parted", "lvm2"], ensure => "installed";
     my $testimg = "/parttest.img";
 
     run "dd if=/dev/zero of=$testimg bs=1 count=0 seek=1G";
