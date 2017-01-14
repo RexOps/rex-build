@@ -47,6 +47,8 @@ else {
 
 &end_phase;
 
+START_VM:
+
 start_phase('Creating test VM');
 
 our ( $vm_id, $ip ) = start_amazon($base_vm);
@@ -58,8 +60,15 @@ if ( !$ip ) {
 }
 
 start_phase("Waiting for VM SSH port wakeup on $ip");
+my $port_count = 0;
 while ( !is_port_open( $ip, 22 ) ) {
   sleep 1;
+  $port_count += 1;
+
+  if ($port_count >= 300) {
+    &end_phase;
+    goto START_VM;
+  }
 }
 &end_phase;
 
@@ -106,7 +115,9 @@ sub end_phase {
 }
 
 sub start_amazon {
+  # wait to not run into rate limit
   sleep (int(rand(10)) + 10);
+
   my $image_id = shift;
   my $vm = cloud_instance create => {
     image_id       => $image_id,
