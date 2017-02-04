@@ -27,6 +27,7 @@ task "real_test", sub {
 task test => group => test => sub {
   my $out = real_test();
   is($out, "test.txt", "issue 1132 fixed");
+  done_testing();
 };
 
 
