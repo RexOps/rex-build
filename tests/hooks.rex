@@ -20,10 +20,10 @@ task test => sub {
 
   print "\n\n>>>> $count_before / $count_after / $count_before_task / $count_after_task\n\n";
 
-  ok($count_before == 2, "before hook runs 2 times");
-  ok($count_after == 2, "after hook runs 2 times");
-  ok($count_before_task == 1, "before_task_start hook runs 1 time");
-  ok($count_after_task == 1, "after_task_finished hook runs 1 time");
+  ok($count_before == 2, "before hook runs 2 ($count_before) times");
+  ok($count_after == 2, "after hook runs 2 ($count_after) times");
+  ok($count_before_task == 1, "before_task_start hook runs 1 ($count_before_task) time");
+  ok($count_after_task == 1, "after_task_finished hook runs 1 ($count_after_task) time");
 
   done_testing();
 
