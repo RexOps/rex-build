@@ -21,5 +21,11 @@ doc/html
 *.rex.lock
 junit*.xml
 *.lock
+*.lock.*
 *~
 *.project
+vars.db*
+*.cnt
+log
+test.*
+file*.txt
