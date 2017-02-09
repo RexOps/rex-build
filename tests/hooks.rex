@@ -9,6 +9,8 @@ do "auth.conf";
 parallelism 1;
 
 task test => sub {
+  run "rm *.cnt";
+
   do_task [qw/test2/];
 
   my $count_before < io "before.cnt";
