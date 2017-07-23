@@ -71,7 +71,7 @@ before_task_start "hooktask", sub {
   eval { @content = io("$path/before_task_start.cnt")->slurp; };
   my $count = $content[0] || 0;
   $count++;
-  $count > io "before_task_start.cnt";
+  $count > io "$path/before_task_start.cnt";
 };
 
 after_task_finished "hooktask", sub {
