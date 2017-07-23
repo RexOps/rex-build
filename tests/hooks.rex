@@ -5,6 +5,8 @@ use Rex -feature => '0.42';
 use Test::More;
 
 do "auth.conf";
+my $path = "/tmp/h-$$";
+CORE::mkdir($path);
 
 parallelism 1;
 
@@ -12,19 +14,19 @@ task test => sub {
   my $zero = "0";
   LOCAL {
     eval {
-      $zero > io "before.cnt";
-      $zero > io "after.cnt";
-      $zero > io "before_task_start.cnt";
-      $zero > io "after_task_finished.cnt";
+      $zero > io "$path/before.cnt";
+      $zero > io "$path/after.cnt";
+      $zero > io "$path/before_task_start.cnt";
+      $zero > io "$path/after_task_finished.cnt";
     };
   };
 
   do_task [qw/hooktask/];
 
-  my $count_before < io "before.cnt";
-  my $count_after  < io "after.cnt";
-  my $count_before_task < io "before_task_start.cnt";
-  my $count_after_task  < io "after_task_finished.cnt";
+  my $count_before < io "$path/before.cnt";
+  my $count_after  < io "$path/after.cnt";
+  my $count_before_task < io "$path/before_task_start.cnt";
+  my $count_after_task  < io "$path/after_task_finished.cnt";
 
   print "\n\n>>>> $count_before / $count_after / $count_before_task / $count_after_task\n\n";
 
@@ -37,10 +39,10 @@ task test => sub {
 
   LOCAL {
     eval {
-      CORE::unlink("before.cnt");
-      CORE::unlink("after.cnt");
-      CORE::unlink("before_task_start.cnt");
-      CORE::unlink("after_task_finished.cnt");
+      CORE::unlink("$path/before.cnt");
+      CORE::unlink("$path/after.cnt");
+      CORE::unlink("$path/before_task_start.cnt");
+      CORE::unlink("$path/after_task_finished.cnt");
     };
   };
 };
@@ -50,23 +52,23 @@ task hooktask => group => ["test", "test"] => sub {
 
 before hooktask => sub {
   my @content;
-  eval { @content = io("before.cnt")->slurp; };
+  eval { @content = io("$path/before.cnt")->slurp; };
   my $count = $content[0] || 0;
   $count++;
-  $count > io "before.cnt";
+  $count > io "$path/before.cnt";
 };
 
 after hooktask => sub {
   my @content;
-  eval { @content = io("after.cnt")->slurp; };
+  eval { @content = io("$path/after.cnt")->slurp; };
   my $count = $content[0] || 0;
   $count++;
-  $count > io "after.cnt";
+  $count > io "$path/after.cnt";
 };
 
 before_task_start "hooktask", sub {
   my @content;
-  eval { @content = io("before_task_start.cnt")->slurp; };
+  eval { @content = io("$path/before_task_start.cnt")->slurp; };
   my $count = $content[0] || 0;
   $count++;
   $count > io "before_task_start.cnt";
@@ -74,10 +76,10 @@ before_task_start "hooktask", sub {
 
 after_task_finished "hooktask", sub {
   my @content;
-  eval { @content = io("after_task_finished.cnt")->slurp; };
+  eval { @content = io("$path/after_task_finished.cnt")->slurp; };
   my $count = $content[0] || 0;
   $count++;
-  $count > io "after_task_finished.cnt";
+  $count > io "$path/after_task_finished.cnt";
 };
 
 1;
