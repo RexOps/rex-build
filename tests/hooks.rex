@@ -9,12 +9,13 @@ do "auth.conf";
 parallelism 1;
 
 task test => sub {
+  my $zero = "0";
   LOCAL {
     eval {
-      CORE::unlink("before.cnt");
-      CORE::unlink("after.cnt");
-      CORE::unlink("before_task_start.cnt");
-      CORE::unlink("after_task_finished.cnt");
+      $zero > io "before.cnt";
+      $zero > io "after.cnt";
+      $zero > io "before_task_start.cnt";
+      $zero > io "after_task_finished.cnt";
     };
   };
 
