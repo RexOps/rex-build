@@ -9,7 +9,7 @@ do "auth.conf";
 parallelism 1;
 
 task test => sub {
-  do_task [qw/test2/];
+  do_task [qw/hooktask/];
 
   my $count_before < io "before.cnt";
   my $count_after  < io "after.cnt";
@@ -28,10 +28,10 @@ task test => sub {
   run "rm *.cnt";
 };
 
-task test2 => group => ["test", "test"] => sub {
+task hooktask => group => ["test", "test"] => sub {
 };
 
-before test2 => sub {
+before hooktask => sub {
   my @content;
   eval { @content = io("before.cnt")->slurp; };
   my $count = $content[0] || 0;
@@ -39,7 +39,7 @@ before test2 => sub {
   $count > io "before.cnt";
 };
 
-after test2 => sub {
+after hooktask => sub {
   my @content;
   eval { @content = io("after.cnt")->slurp; };
   my $count = $content[0] || 0;
@@ -47,7 +47,7 @@ after test2 => sub {
   $count > io "after.cnt";
 };
 
-before_task_start "test2", sub {
+before_task_start "hooktask", sub {
   my @content;
   eval { @content = io("before_task_start.cnt")->slurp; };
   my $count = $content[0] || 0;
@@ -55,7 +55,7 @@ before_task_start "test2", sub {
   $count > io "before_task_start.cnt";
 };
 
-after_task_finished "test2", sub {
+after_task_finished "hooktask", sub {
   my @content;
   eval { @content = io("after_task_finished.cnt")->slurp; };
   my $count = $content[0] || 0;
