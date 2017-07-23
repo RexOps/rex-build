@@ -9,6 +9,15 @@ do "auth.conf";
 parallelism 1;
 
 task test => sub {
+  LOCAL {
+    eval {
+      CORE::unlink("before.cnt");
+      CORE::unlink("after.cnt");
+      CORE::unlink("before_task_start.cnt");
+      CORE::unlink("after_task_finished.cnt");
+    };
+  };
+
   do_task [qw/hooktask/];
 
   my $count_before < io "before.cnt";
@@ -25,7 +34,14 @@ task test => sub {
 
   done_testing();
 
-  run "rm *.cnt";
+  LOCAL {
+    eval {
+      CORE::unlink("before.cnt");
+      CORE::unlink("after.cnt");
+      CORE::unlink("before_task_start.cnt");
+      CORE::unlink("after_task_finished.cnt");
+    };
+  };
 };
 
 task hooktask => group => ["test", "test"] => sub {
