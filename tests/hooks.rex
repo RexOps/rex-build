@@ -9,13 +9,19 @@ do "auth.conf";
 parallelism 1;
 
 task test => sub {
-<<<<<<< HEAD
   run "rm *.cnt";
 
   do_task [qw/test2/];
-=======
+  LOCAL {
+    eval {
+      CORE::unlink("before.cnt");
+      CORE::unlink("after.cnt");
+      CORE::unlink("before_task_start.cnt");
+      CORE::unlink("after_task_finished.cnt");
+    };
+  };
+
   do_task [qw/hooktask/];
->>>>>>> 6c7e814... try different task name
 
   my $count_before < io "before.cnt";
   my $count_after  < io "after.cnt";
@@ -31,7 +37,14 @@ task test => sub {
 
   done_testing();
 
-  run "rm *.cnt";
+  LOCAL {
+    eval {
+      CORE::unlink("before.cnt");
+      CORE::unlink("after.cnt");
+      CORE::unlink("before_task_start.cnt");
+      CORE::unlink("after_task_finished.cnt");
+    };
+  };
 };
 
 task hooktask => group => ["test", "test"] => sub {
